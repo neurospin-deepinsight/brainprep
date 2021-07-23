@@ -1,0 +1,3 @@
+git+https://github.com/AGrigis/pysphinxdoc.git
+ipython
+sphinx==3.5.4
