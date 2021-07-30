@@ -1,3 +1,4 @@
 git+https://github.com/AGrigis/pysphinxdoc.git
 ipython
+git+https://github.com/neurospin-deepinsight/brainrise.git
 sphinx==3.5.4
