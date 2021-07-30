@@ -126,7 +126,7 @@ def write_matlabbatch(template, nii_file, tpm_file, darteltpm_file, outfile):
 
 def ungzip_file(zfile, prefix="u", outdir=None):
     """ Copy and ungzip the input file.
-    
+
     Parameters
     ----------
     zfile: str
