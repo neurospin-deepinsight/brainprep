@@ -15,6 +15,7 @@ Module that contains some utility functions.
 import os
 import re
 import sys
+import gzip
 import shutil
 import tempfile
 import subprocess
@@ -96,41 +97,75 @@ def check_version(package_name, check_pkg_version):
     print("{0} - {1}".format(package_name, version))
 
 
-def write_matlabbatch(template, nii_files, outfile):
+def write_matlabbatch(template, nii_file, tpm_file, darteltpm_file, outfile):
     """ Complete matlab batch from template.
 
     Parameters
     ----------
     template: str
         path to template batch to be completed.
-    nii_files: list of str
-        the list of Nifti image to be processed.
+    nii_files: str
+        the Nifti image to be processed.
+    tpm_file: str
+        path to the SPM TPM file.
+    darteltpm_file: str
+        path to the CAT12 tempalte file.
     outfile: str
         path to the generated matlab batch file that can be used to launch
         CAT12 VBM preprocessing.
     """
     index = []
+    nii_file = ungzip_file(nii_file, outdir=os.path.dirname(outfile))
     with open(template, "r") as of:
-        liste = of.readlines()
+        stream = of.read()
+    stream = stream.format(anat_file=nii_file, tpm_file=tpm_file,
+                           darteltpm_file=darteltpm_file)
+    with open(outfile, "w") as of:
+        of.write(stream)
 
-    for c, i in enumerate(liste):
-        if re.search("matlabbatch\{1\}.spm.tools.cat.estwrite.data_wmh", i):
-            index.append(c)
-    index.append(index[0]-2)
-    index[0] = 7
 
-    index_liste = range(index[0], index[1])
+def ungzip_file(zfile, prefix="u", outdir=None):
+    """ Copy and ungzip the input file.
+    
+    Parameters
+    ----------
+    zfile: str
+        input file to ungzip.
+    prefix: str, default 'u'
+        the prefix of the result file.
+    outdir: str, default None)
+        the output directory where ungzip file is saved. If not set use the
+        input image directory.
 
-    with open(output_path, "w") as of:
-        for c, i in enumerate(liste):
-            if c not in index_liste:
-                of.write(i)
-            else:
-                if type(list_nii_files) == list:
-                    for k in list_nii_files:
-                        of.write("                                           "
-                                 "   \'{0},1\'\n".format(k))
-                else:
-                    of.write("                                              "
-                             "\'{0},1\'\n".format(list_nii_files))
-        of.truncate()
+    Returns
+    -------
+    unzfile: str
+        the ungzip file.
+    """
+    # Checks
+    if not os.path.isfile(zfile):
+        raise ValueError("'{0}' is not a valid filename.".format(zfile))
+    if outdir is not None:
+        if not os.path.isdir(outdir):
+            raise ValueError("'{0}' is not a valid directory.".format(outdir))
+    else:
+        outdir = os.path.dirname(zfile)
+
+    # Get the file descriptors
+    base, extension = os.path.splitext(zfile)
+    basename = os.path.basename(base)
+
+    # Ungzip only known extension
+    if extension in [".gz"]:
+        basename = prefix + basename
+        unzfile = os.path.join(outdir, basename)
+        with gzip.open(zfile, "rb") as gzfobj:
+            data = gzfobj.read()
+        with open(unzfile, "wb") as openfile:
+            openfile.write(data)
+
+    # Default, unknown compression extension: the input file is returned
+    else:
+        unzfile = zfile
+
+    return unzfile

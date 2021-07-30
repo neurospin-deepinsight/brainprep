@@ -75,6 +75,11 @@ def get_cmd_line_args():
         metavar="<path>",
         help="a custom target image for the registration.")
     parser.add_argument(
+        "-B", "--no-bids",
+        action="store_true",
+        help="set this option if the input files are not named following the "
+             "BIDS hierarchy.")
+    parser.add_argument(
         "-V", "--verbose",
         type=int, choices=[0, 1, 2], default=0,
         help="increase the verbosity level: 0 silent, [1, 2] verbose.")
@@ -115,11 +120,14 @@ imfile = inputs["anatomical"]
 maskfile = inputs["mask"]
 targetfile = inputs["target"]
 outdir = inputs["outdir"]
-basename = (
-    os.path.basename(imfile).split(".")[0].replace("_T1w", "_desc-{0}_T1w"))
+if inputs["no_bids"]:
+    basename = "desc-{0}_" + os.path.basename(imfile).split(".")[0]
+else:
+    basename = os.path.basename(imfile).split(".")[0].replace(
+        "_T1w", "_desc-{0}_T1w")
 basefile = os.path.join(outdir, basename + ".nii.gz")
 stdfile = basefile.format("1std")
-stdmaskfile = braiainfilebasefile.format("1maskstd")
+stdmaskfile = basefile.format("1maskstd")
 brainfile = basefile.format("2brain")
 scaledfile = basefile.format("3scaled")
 bfcfile = basefile.format("4bfc")
@@ -130,7 +138,7 @@ applyfile = basefile.format("6apply")
 brainprep.reorient2std(imfile, stdfile)
 brainprep.reorient2std(maskfile, stdmaskfile)
 brainprep.apply_mask(stdfile, stdmaskfile, brainfile)
-brainprep.scale(brainfiles, scaledfile, scale=1)
+brainprep.scale(brainfile, scaledfile, scale=1)
 brainprep.biasfield(scaledfile, bfcfile)
 _, trffile = brainprep.register_affine(bfcfile, targetfile, regfile)
 brainprep.apply_affine(stdmaskfile, regfile, regmaskfile, trffile,

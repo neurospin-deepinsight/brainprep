@@ -21,10 +21,6 @@ import brainprep
 # Script documentation
 DOC = """
 The CAT12 VBM preprocessing script.
-
--c /i2bm/local/cat12-standalone/standalone/cat_standalone.sh
--s /i2bm/local/cat12-standalone
--m /i2bm/local/cat12-standalone/mcr/v93
 """
 
 
@@ -59,27 +55,35 @@ def get_cmd_line_args():
     # Required arguments
     required = parser.add_argument_group("required arguments")
     required.add_argument(
-        "-c", "--cat12",
-        required=True, metavar="<path>", type=is_file,
-        help="path to the CAT12 standalone executable")
-    required.add_argument(
-        "-s", "--spm12",
-        required=True, metavar="<path>", type=is_directory,
-        help="the SPM12 folder of standalone version")
-    required.add_argument(
-        "-m", "--matlab",
-        required=True, metavar="<path>", type=is_directory,
-        help="Matlab Compiler Runtime (MCR) folder.")
-    required.add_argument(
         "-a", "--anatomical",
-        required=True, metavar="<path>", type=is_file, nargs="+",
-        help="path to the anatomical T1w Nifti file(s).")
+        required=True, metavar="<path>", type=is_file,
+        help="path to the anatomical T1w Nifti file.")
     required.add_argument(
-        "-o", "--working_dir",
+        "-o", "--outdir",
         required=True, metavar="<path>", type=is_directory,
-        help="A working directory.")
+        help="the destination folder.")
 
     # Optional arguments
+    parser.add_argument(
+        "-C", "--cat12",
+        metavar="<path>",
+        help="path to the CAT12 standalone executable")
+    parser.add_argument(
+        "-S", "--spm12",
+        metavar="<path>",
+        help="the SPM12 folder of standalone version")
+    parser.add_argument(
+        "-M", "--matlab",
+        metavar="<path>",
+        help="Matlab Compiler Runtime (MCR) folder.")
+    parser.add_argument(
+        "-T", "--tpm",
+        metavar="<path>",
+        help="path to the SPM TPM file.")
+    parser.add_argument(
+        "-D", "--darteltpm",
+        metavar="<path>",
+        help="path to the CAT12 template file.")
     parser.add_argument(
         "-V", "--verbose",
         type=int, choices=[0, 1, 2], default=0,
@@ -92,6 +96,19 @@ def get_cmd_line_args():
         brainprep.__file__), "resources")
     kwargs["template_batch"] = os.path.join(
         resource_dir, "cat12vbm_matlabbatch.m")
+    if kwargs["cat12"] is None:
+        kwargs["cat12"] = "/opt/spm/standalone/cat_standalone.sh"
+    if kwargs["spm12"] is None:
+        kwargs["spm12"] = "/opt/spm"
+    if kwargs["matlab"] is None:
+        kwargs["matlab"] = "/opt/mcr/v93"
+    if kwargs["tpm"] is None:
+        kwargs["tpm"] = (
+            "/opt/spm/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii")
+    if kwargs["darteltpm"] is None:
+        kwargs["darteltpm"] = (
+            "/opt/spm/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/"
+            "templates_volumes/Template_1_IXI555_MNI152.nii")
     verbose = kwargs.pop("verbose")
 
     return kwargs, verbose
@@ -117,7 +134,9 @@ if verbose > 0:
 Complete matlab batch.
 """
 batch_file = os.path.join(inputs["outdir"], "cat12vbm_matlabbatch.m")
-write_matlabbatch(inputs["template_batch"], inputs["anatomical"], batch_file)
+brainprep.write_matlabbatch(
+    inputs["template_batch"], inputs["anatomical"], inputs["tpm"],
+    inputs["darteltpm"], batch_file)
 
 
 """

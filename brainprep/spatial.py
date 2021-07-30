@@ -18,7 +18,7 @@ import numpy as np
 from .utils import check_version, check_command, execute_command
 
 
-def scale(imfile, scaledfile, scale, check_pkg_version=True):
+def scale(imfile, scaledfile, scale, check_pkg_version=False):
     """ Scale the MRI image.
 
     .. note:: This function is based on FSL.
@@ -31,8 +31,8 @@ def scale(imfile, scaledfile, scale, check_pkg_version=True):
         the path to the scaled input image.
     scale: int
         the scale factor in all directions.
-    check_pkg_version: boolean, default True
-        put to 1 if the package is not installed with the source repository.
+    check_pkg_version: bool, default False
+        optionally check the package version using dpkg.
 
     Returns
     -------
@@ -48,7 +48,7 @@ def scale(imfile, scaledfile, scale, check_pkg_version=True):
     return scaledfile, trffile
 
 
-def bet2(imfile, brainfile, frac=0.5, cleanup=True, check_pkg_version=True):
+def bet2(imfile, brainfile, frac=0.5, cleanup=True, check_pkg_version=False):
     """ Skull stripped the MRI image.
 
     .. note:: This function is based on FSL.
@@ -64,8 +64,8 @@ def bet2(imfile, brainfile, frac=0.5, cleanup=True, check_pkg_version=True):
          outline estimates
     cleanup: bool, default True
         optionnally add bias field & neck cleanup.
-    check_pkg_version: boolean, default True
-        put to 1 if the package is not installed with the source repository.
+    check_pkg_version: bool, default False
+        optionally check the package version using dpkg.
 
     Returns
     -------
@@ -82,7 +82,7 @@ def bet2(imfile, brainfile, frac=0.5, cleanup=True, check_pkg_version=True):
     return brainfile, maskfile
 
 
-def reorient2std(imfile, stdfile, check_pkg_version=True):
+def reorient2std(imfile, stdfile, check_pkg_version=False):
     """ Reorient the MRI image to match the approximate orientation of the
     standard template images (MNI152).
 
@@ -94,8 +94,8 @@ def reorient2std(imfile, stdfile, check_pkg_version=True):
         the input image.
     stdfile: str
         the reoriented image file.
-    check_pkg_version: boolean, default True
-        put to 1 if the package is not installed with the source repository.
+    check_pkg_version: bool, default False
+        optionally check the package version using dpkg.
 
     Returns
     -------
@@ -112,7 +112,7 @@ def reorient2std(imfile, stdfile, check_pkg_version=True):
 def biasfield(imfile, bfcfile, maskfile=None, nb_iterations=50,
               convergence_threshold=0.001, bspline_grid=(1, 1, 1),
               shrink_factor=1, bspline_order=3,
-              histogram_sharpening=(0.15, 0.01, 200), check_pkg_version=True):
+              histogram_sharpening=(0.15, 0.01, 200), check_pkg_version=False):
     """ Perform MRI bias field correction using N4 algorithm.
 
     .. note:: This function is based on ANTS.
@@ -153,8 +153,8 @@ def biasfield(imfile, bfcfile, maskfile=None, nb_iterations=50,
         A vector of up to three values. Non-zero values correspond to Bias
         Field Full Width at Half Maximum, Wiener filter noise, and Number of
         histogram bins.
-    check_pkg_version: boolean, default True
-        put to 1 if the package is not installed with the source repository.
+    check_pkg_version: bool, default False
+        optionally check the package version using dpkg.
 
     Returns
     -------
@@ -185,7 +185,7 @@ def biasfield(imfile, bfcfile, maskfile=None, nb_iterations=50,
 
 
 def register_affine(imfile, targetfile, regfile, mask=None, cost="normmi",
-                    bins=256, interp="spline", dof=9, check_pkg_version=True):
+                    bins=256, interp="spline", dof=9, check_pkg_version=False):
     """ Register the MRI image to a target image using an affine transform
     with 9 dofs.
 
@@ -211,8 +211,8 @@ def register_affine(imfile, targetfile, regfile, mask=None, cost="normmi",
         'nearestneighbour', 'sinc', 'spline'.
     dof: int, default 9
         Number of affine transform dofs.
-    check_pkg_version: boolean, default True
-        put to 1 if the package is not installed with the source repository.
+    check_pkg_version: bool, default False
+        optionally check the package version using dpkg.
 
     Returns
     -------
@@ -239,11 +239,12 @@ def register_affine(imfile, targetfile, regfile, mask=None, cost="normmi",
             raise ValueError("A white matter mask image is needed by the "
                              "bbr cost function.")
         cmd += ["-wmseg", mask]
+    execute_command(cmd)
     return regfile, trffile
 
 
 def apply_affine(imfile, targetfile, regfile, affines, interp="spline",
-                 check_pkg_version=True):
+                 check_pkg_version=False):
     """ Apply affine transformations to an image.
 
     .. note:: This function is based on FSL.
@@ -262,8 +263,8 @@ def apply_affine(imfile, targetfile, regfile, affines, interp="spline",
     interp: str, default 'spline'
         Choose the most appropriate interpolation method: 'trilinear',
         'nearestneighbour', 'sinc', 'spline'.
-    check_pkg_version: boolean, default True
-        put to 1 if the package is not installed with the source repository.
+    check_pkg_version: bool, default False
+        optionally check the package version using dpkg.
 
     Returns
     -------
@@ -273,23 +274,23 @@ def apply_affine(imfile, targetfile, regfile, affines, interp="spline",
     check_version("fsl", check_pkg_version)
     check_command("flirt")
     if not isinstance(affines, list):
-        trffile = affines
+        affines = [affines]
     elif len(affines) == 0:
         raise ValueError("No transform specified.")
-    else:
-        trffile = regfile.split(".")[0] + ".txt"
-        affines = [np.loadtxt(path) for path in affines][::-1]
-        affine = affines[0]
-        for matrix in affines[1:]:
-            affine = np.dot(matrix, affine)
-        np.savetxt(trffile, affine)
-        cmd = ["flirt",
-               "-in", imfile,
-               "-ref", targetfile,
-               "-init", trffile,
-               "-interp", interp,
-               "-applyxfm",
-               "-out", regfile]
+    trffile = regfile.split(".")[0] + ".txt"
+    affines = [np.loadtxt(path) for path in affines][::-1]
+    affine = affines[0]
+    for matrix in affines[1:]:
+        affine = np.dot(matrix, affine)
+    np.savetxt(trffile, affine)
+    cmd = ["flirt",
+           "-in", imfile,
+           "-ref", targetfile,
+           "-init", trffile,
+           "-interp", interp,
+           "-applyxfm",
+           "-out", regfile]
+    execute_command(cmd)
     return regfile, trffile
 
 
