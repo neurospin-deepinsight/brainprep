@@ -16,7 +16,7 @@
 .. |Doc| image:: https://readthedocs.org/projects/brainprep/badge/?version=latest
 .. _Doc: https://brainprep.readthedocs.io/en/latest/?badge=latest
 
-.. |Docker| image:: https://img.shields.io/docker/pulls/neurospin/brainprep
+.. |Docker| image:: https://img.shields.io/docker/stars/neurospin/brainprep
 .. _Docker: https://hub.docker.com/r/neurospin/brainprep
 
 
