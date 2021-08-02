@@ -1,5 +1,5 @@
 
-|PythonVersion|_ |Coveralls|_ |Travis|_ |PyPi|_ |Doc|_
+|PythonVersion|_ |Coveralls|_ |Travis|_ |PyPi|_ |Doc|_ |Docker|_
 
 .. |PythonVersion| image:: https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8-blue
 .. _PythonVersion: https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8-blue
@@ -15,6 +15,11 @@
 
 .. |Doc| image:: https://readthedocs.org/projects/brainprep/badge/?version=latest
 .. _Doc: https://brainprep.readthedocs.io/en/latest/?badge=latest
+
+.. |Docker| image:: https://img.shields.io/docker/pulls/neurospin/brainprep
+.. _Docker: https://hub.docker.com/repository/docker/neurospin/brainprep
+
+
 
 
 brainprep: Package that provides tools for brain MRI Deep Leanring PreProcessing
