@@ -8,6 +8,7 @@ Credit: A Grigis
 Example on how to run the CAT12 VBM preprocessing using the brainprep
 Singularity container.
 """
+# sphinx_gallery_thumbnail_path = '_static/carousel/cat12.png'
 
 import os
 import subprocess

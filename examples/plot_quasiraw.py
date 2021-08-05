@@ -8,6 +8,7 @@ Credit: A Grigis
 Example on how to run the quasi RAW preprocessing using the brainprep
 Singularity container.
 """
+# sphinx_gallery_thumbnail_path = '_static/carousel/quasiraw.jpg'
 
 import os
 import subprocess

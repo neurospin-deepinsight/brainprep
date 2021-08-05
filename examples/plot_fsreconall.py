@@ -8,6 +8,7 @@ Credit: A Grigis
 Example on how to run the FreeSurfer preprocessing using the brainprep
 Singularity container.
 """
+# sphinx_gallery_thumbnail_path = '_static/carousel/freesurfer.png'
 
 import os
 import subprocess

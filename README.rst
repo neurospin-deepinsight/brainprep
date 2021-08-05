@@ -16,13 +16,13 @@
 .. |Doc| image:: https://readthedocs.org/projects/brainprep/badge/?version=latest
 .. _Doc: https://brainprep.readthedocs.io/en/latest/?badge=latest
 
-.. |Docker| image:: https://img.shields.io/docker/stars/neurospin/brainprep
+.. |Docker| image:: https://img.shields.io/docker/pulls/neurospin/brainprep
 .. _Docker: https://hub.docker.com/r/neurospin/brainprep
 
 
 
 
-brainprep: Package that provides tools for brain MRI Deep Leanring PreProcessing
+brainprep: package that provides tools for brain MRI Deep Learning PreProcessing
 ================================================================================
 
 \:+1: If you are using the code please add a star to the repository :+1:
