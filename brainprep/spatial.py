@@ -61,7 +61,7 @@ def bet2(imfile, brainfile, frac=0.5, cleanup=True, check_pkg_version=False):
         the path to the brain image file.
     frac: float, default 0.5
         fractional intensity threshold (0->1);smaller values give larger brain
-         outline estimates
+        outline estimates
     cleanup: bool, default True
         optionnally add bias field & neck cleanup.
     check_pkg_version: bool, default False
