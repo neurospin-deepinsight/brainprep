@@ -104,7 +104,7 @@ def write_matlabbatch(template, nii_file, tpm_file, darteltpm_file, outfile):
     ----------
     template: str
         path to template batch to be completed.
-    nii_files: str
+    nii_files: list
         the Nifti image to be processed.
     tpm_file: str
         path to the SPM TPM file.
@@ -114,12 +114,14 @@ def write_matlabbatch(template, nii_file, tpm_file, darteltpm_file, outfile):
         path to the generated matlab batch file that can be used to launch
         CAT12 VBM preprocessing.
     """
-    index = []
-    nii_file = ungzip_file(nii_file, outdir=os.path.dirname(outfile))
+    nii_file_str=""
+    for i in nii_file:
+        nii_file_str += "'{0}' \n".format(ungzip_file(i, 
+                                        outdir=os.path.dirname(outfile)))
     with open(template, "r") as of:
         stream = of.read()
-    stream = stream.format(anat_file=nii_file, tpm_file=tpm_file,
-                           darteltpm_file=darteltpm_file)
+    stream = stream.format(anat_file=nii_file_str, tpm_file=tpm_file,
+                        darteltpm_file=darteltpm_file)
     with open(outfile, "w") as of:
         of.write(stream)
 

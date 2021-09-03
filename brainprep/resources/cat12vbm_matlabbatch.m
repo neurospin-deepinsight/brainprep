@@ -14,7 +14,7 @@ fprintf('SPM version: %s Release: %s\n',name, version);
 fprintf('SPM path: %s\n', which('spm'));
 
 matlabbatch{{1}}.spm.tools.cat.estwrite.data = {{
-    '{anat_file}'
+    {anat_file}
 }};
 %%
 matlabbatch{{1}}.spm.tools.cat.estwrite.data_wmh = {{''}};
