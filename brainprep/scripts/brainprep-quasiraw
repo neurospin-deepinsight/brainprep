@@ -121,7 +121,7 @@ maskfile = inputs["mask"]
 targetfile = inputs["target"]
 outdir = inputs["outdir"]
 if inputs["no_bids"]:
-    basename = "desc-{0}_" + os.path.basename(imfile).split(".")[0]
+    basename =  os.path.basename(imfile).split(".")[0] + "_desc-{0}_T1w"
 else:
     basename = os.path.basename(imfile).split(".")[0].replace(
         "_T1w", "_desc-{0}_T1w")

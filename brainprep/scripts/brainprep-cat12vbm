@@ -56,14 +56,20 @@ def get_cmd_line_args():
     required = parser.add_argument_group("required arguments")
     required.add_argument(
         "-a", "--anatomical",
-        required=True, metavar="<path>", type=is_file,
-        help="path to the anatomical T1w Nifti file.")
+        required=True, metavar="<path>", nargs="+", type=is_file,
+        help="path to the anatomical T1w Nifti file(s)."
+             "Or path to anatomical T1w Nifti files of one"
+             " subject if longitudinal data")
     required.add_argument(
         "-o", "--outdir",
         required=True, metavar="<path>", type=is_directory,
         help="the destination folder.")
 
     # Optional arguments
+    parser.add_argument(
+        "-L", "--longitudinal",
+        action="store_true",
+        help="optionally perform longitudinal cat12vbm process")
     parser.add_argument(
         "-C", "--cat12",
         metavar="<path>",
@@ -96,6 +102,8 @@ def get_cmd_line_args():
         brainprep.__file__), "resources")
     kwargs["template_batch"] = os.path.join(
         resource_dir, "cat12vbm_matlabbatch.m")
+    kwargs["template_batch_longitudinal"] = os.path.join(
+        resource_dir, "cat12vbm_matlabbatch_longitudinal.m")
     if kwargs["cat12"] is None:
         kwargs["cat12"] = "/opt/spm/standalone/cat_standalone.sh"
     if kwargs["spm12"] is None:
@@ -134,9 +142,14 @@ if verbose > 0:
 Complete matlab batch.
 """
 batch_file = os.path.join(inputs["outdir"], "cat12vbm_matlabbatch.m")
-brainprep.write_matlabbatch(
-    inputs["template_batch"], inputs["anatomical"], inputs["tpm"],
+if inputs["longitudinal"]:
+    brainprep.write_matlabbatch(
+    inputs["template_batch_longitudinal"], inputs["anatomical"], inputs["tpm"],
     inputs["darteltpm"], batch_file)
+else:
+    brainprep.write_matlabbatch(
+        inputs["template_batch"], inputs["anatomical"], inputs["tpm"],
+        inputs["darteltpm"], batch_file)
 
 
 """
