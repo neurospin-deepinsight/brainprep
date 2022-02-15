@@ -168,7 +168,7 @@ if options.verbose > 0:
     pprint("[info] Runtime:")
     pprint(runtime)
     pprint("[info] Inputs:")
-    pprint(options)
+    pprint(vars(options))
 
 # inputs
 img_filenames = options.input
