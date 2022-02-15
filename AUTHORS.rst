@@ -15,6 +15,7 @@ The core developers are:
 
 * Antoine Grigis
 * Julie Victor
+* Loïc Dorval
 
 Other contributors
 ..................
