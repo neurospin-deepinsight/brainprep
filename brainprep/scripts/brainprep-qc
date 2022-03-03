@@ -84,20 +84,6 @@ def get_cmd_line_args():
                               default=None,
                               nargs='+',
                               type=str)
-    parser_cat12.add_argument('--output_nii_pdf',
-                              help='The output path to the .pdf file',
-                              nargs=1,
-                              default='nii_plottings.pdf',
-                              type=str)
-    parser_cat12.add_argument('--output_pdf',
-                              help='The output path to the .pdf file',
-                              nargs=1,
-                              default='cat12vbm_reports.pdf',
-                              type=str)
-    parser_cat12.add_argument('--limit',
-                              help="The x number of slice to plot",
-                              default=None,
-                              type=int)
     parser_cat12.add_argument("-V", "--verbose",
                               type=int,
                               choices=[0, 1, 2],
@@ -128,20 +114,6 @@ def get_cmd_line_args():
                            default=None,
                            nargs='+',
                            type=str)
-    parser_qr.add_argument('--output_nii_pdf',
-                           help='The output path to the pdf file',
-                           nargs=1,
-                           default='nii_plottings.pdf',
-                           type=str)
-    parser_qr.add_argument('--output_pdf',
-                           help='The output path to the .pdf file',
-                           nargs=1,
-                           default='cat12vbm_reports.pdf',
-                           type=str)
-    parser_qr.add_argument('--limit',
-                           help='The max number of slice to plot',
-                           default=None,
-                           type=int)
     parser_qr.add_argument("-V", "--verbose",
                            type=int,
                            choices=[0, 1, 2],
