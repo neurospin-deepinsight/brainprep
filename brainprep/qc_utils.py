@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 ##########################################################################
 # NSAp - Copyright (C) CEA, 2021
@@ -9,7 +8,7 @@
 # for details.
 ##########################################################################
 
-"""usefull functions for cat12vbm correlation based automatic QC.
+"" Usefull functions for cat12vbm correlation based automatic QC.
 
 @author: benoit.dufumier
 @author: julie.victor
