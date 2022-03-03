@@ -8,12 +8,7 @@
 # for details.
 ##########################################################################
 
-"" Usefull functions for cat12vbm correlation based automatic QC.
-
-@author: benoit.dufumier
-@author: julie.victor
-
-
+"""Usefull functions for cat12vbm correlation based automatic QC.
 """
 
 import re
@@ -593,7 +588,8 @@ def concat_tsv(mean_corr, score):
     res = mean_corr.merge(score,
                           how='outer',
                           on=['participant_id', 'session', 'run'])
-    print(mean_corr.shape, res.shape)
+    print("Merged mean correlation:", mean_corr.shape)
+    print("Merged scores:", res.shape)
     assert mean_corr.shape[0] == res.shape[0]
 
     return res
@@ -617,7 +613,7 @@ def reconstruct_ordored_list(img_filenames, qc_filename):
 
     """
     ordored_list = [0 for i in range(len(img_filenames))]
-    qc = pd.read_csv(qc_filename, sep='\t')
+    qc = pd.read_csv(qc_filename, sep='\t', dtype=str)
     for index, row in qc.iterrows():
         sub = str(row['participant_id'])
         ses = str(row['session'])
