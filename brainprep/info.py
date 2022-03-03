@@ -66,7 +66,17 @@ VERSION = __version__
 PROVIDES = ["brainprep"]
 REQUIRES = [
     "numpy>=1.17.1",
-    "nibabel>=2.4.0"
+    "nibabel>=2.4.0",
+    "re>=2.2.1",
+    "argparse>=1.1",
+    "click>=7.0",
+    "sklearn>=1.0.2",
+    "matplotlib>=3.5.1",
+    "seaborn>=0.11.2",
+    "pandas>=1.4.0",
+    "nibabel>=3.2.1",
+    "nilearn>=0.8.1",
+    "scipy>=1.7.3",
 ]
 SCRIPTS = [
     "brainprep/scripts/brainprep-cat12vbm",

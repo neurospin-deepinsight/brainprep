@@ -11,6 +11,7 @@
 import os
 import argparse
 import textwrap
+import subprocess
 from pprint import pprint
 from datetime import datetime
 from argparse import RawTextHelpFormatter
@@ -62,11 +63,6 @@ def get_cmd_line_args():
                               required=True,
                               nargs=1,
                               type=str)
-    parser_cat12.add_argument('--study',
-                              help='study path',
-                              required=True,
-                              nargs=1,
-                              type=str)
     parser_cat12.add_argument('--cat12vbm_root',
                               help='cat12vbm root',
                               required=True,
@@ -100,11 +96,6 @@ def get_cmd_line_args():
                            type=str)
     parser_qr.add_argument('--output',
                            help='outputdir',
-                           required=True,
-                           nargs=1,
-                           type=str)
-    parser_qr.add_argument('--study',
-                           help='study path',
                            required=True,
                            nargs=1,
                            type=str)
@@ -148,8 +139,7 @@ mask_filenames = options.mask
 
 # paths
 output_dir = options.output[0]
-study_path = options.study[0]
-
+subprocess.check_call(["mkdir", "-p", output_dir])
 # Which QC to launch
 if options.command == 'cat12':
     input_qcscores = options.input_qcscores
