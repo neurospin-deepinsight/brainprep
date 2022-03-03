@@ -722,8 +722,6 @@ def compute_brain_mask(imgs,
     -------
          nii image:
              In referencial of target_img or the first imgs
-
-    Example
     -------
     Parameters
     ----------
@@ -819,8 +817,8 @@ def img_to_array(img_filenames,
             With column: 'participant_id', 'session', 'run', 'path'
 
         ref_img : nii image
-            The first image used to store referential and all information
-            relative to the images.
+             The first image used to store referential and all information
+             relative to the images.
 
     Example
     -------
