@@ -9,7 +9,7 @@
 # for details.
 ##########################################################################
 
-"""usefull functions for cat12vbm correlation based automatic QC.
+"" Usefull functions for cat12vbm correlation based automatic QC.
 
 @author: benoit.dufumier
 @author: julie.victor
