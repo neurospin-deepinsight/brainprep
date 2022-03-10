@@ -13,7 +13,6 @@
 
 import re
 import xml.etree.ElementTree as ET
-# import csv
 import traceback
 from collections import OrderedDict
 from click import FileError
@@ -644,7 +643,7 @@ def parse_xml_files_scoresQC(xml_filenames):
     # organized as /participant_id/sess_id/[TIV, GM, WM, CSF, ROIs]
     output = dict()
     for xml_file in xml_filenames:
-
+        print(xml_file)
         xml_file_keys = get_keys(xml_file, default="1")
         participant_id = xml_file_keys['participant_id']
         session = xml_file_keys['session'] or 'V1'
@@ -658,7 +657,8 @@ def parse_xml_files_scoresQC(xml_filenames):
                 ICR = float(tree.find('qualityratings').find('ICR').text)
                 IQR = float(tree.find('qualityratings').find('IQR').text)
 
-            except ValueError:
+            except Exception as e:
+                print(e)
                 print('Parsing error for %s:\n%s' %
                       (xml_file, traceback.format_exc()))
             else:
