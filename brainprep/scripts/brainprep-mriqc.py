@@ -68,6 +68,14 @@ def get_cmd_line_args():
                           required=True,
                           type=str,
                           help="The sub key without sub-")
+    required.add_argument("-sock",
+                          required=True,
+                          type=str,
+                          help="docker sock, usually /var/run/docker.sock")
+    required.add_argument("-bin",
+                          required=True,
+                          type=str,
+                          help="docker root, usually /usr/bin/docker")
 
     # Optional arguments
     parser.add_argument("-V",
@@ -108,10 +116,11 @@ if options.verbose > 0:
 input = options.a
 output_dir = options.o
 sub = options.sub
-
-
+sock = options.sock
+root_container = options.bin
 subprocess.check_call(["mkdir", "-p", output_dir])
 
+-v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker
 # Which QC to launch
 if options.container == 'docker':
     input_qcscores = options.input_qcscores
@@ -119,9 +128,14 @@ if options.container == 'docker':
     comandline = "docker run -it --rm "\
                  "-v {BIND1}:/data:ro "\
                  "-v {BIND2}:/out "\
+                 "-v {SOCK}:/var/run/docker.sock "\
+                 "-v {EXEC}:/usr/bin/docker "\
                  "nipreps/mriqc:21.0.0rc2 /data /out participant "\
                  "--participant_label {SUB}".format(BIND1=input,
                                                     BIND2=output_dir,
-                                                    SUB=sub)
+                                                    SUB=sub,
+                                                    EXEC=root_container,
+                                                    SOCK=sock)
+    subprocess.check_call(comandline.split(" "))
 elif options.command == 'singularity':
     pass
