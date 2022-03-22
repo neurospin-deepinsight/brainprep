@@ -81,5 +81,7 @@ REQUIRES = [
 SCRIPTS = [
     "brainprep/scripts/brainprep-cat12vbm",
     "brainprep/scripts/brainprep-fsreconall",
-    "brainprep/scripts/brainprep-quasiraw"
+    "brainprep/scripts/brainprep-quasiraw",
+    "brainprep/scripts/brainprep-qc",
+    "brainprep/scripts/brainprep-mriqc",
 ]

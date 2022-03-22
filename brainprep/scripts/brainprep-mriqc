@@ -108,12 +108,12 @@ def get_cmd_line_args():
         formatter_class=RawTextHelpFormatter)
     # parser if cat12
     subparsers = parser.add_subparsers(dest='command')
-    parser_docker = subparsers.add_parser('cat12', help='cat12 quality check')
+    parser_docker = subparsers.add_parser('docker', help='cat12 quality check')
     parser_docker.add_argument("-a",
                                required=True,
                                metavar="<path>",
                                nargs="+",
-                               type=is_file,
+                               type=is_directory,
                                help="path to the rawdata directory.")
     parser_docker.add_argument("-o",
                                required=True,
@@ -152,12 +152,11 @@ def get_cmd_line_args():
                                     required=True,
                                     metavar="<path>",
                                     nargs="+",
-                                    type=is_file,
+                                    type=is_directory,
                                     help="path to the rawdata directory.")
     parser_singularity.add_argument("-o",
                                     required=True,
                                     metavar="<path>",
-                                    type=is_directory,
                                     help="the destination folder.")
     parser_singularity.add_argument("-sub",
                                     required=True,
@@ -206,16 +205,22 @@ if options.verbose > 0:
     pprint(vars(options))
 
 # inputs
-input = options.a
+input = options.a[0]
 output_dir = options.o
 sub = options.sub
-sock = options.sock
-root_container = options.bin
 img_path = options.img_path
+
+print('command : ', options.command)
+print('input : ', input)
+print('output_dir : ', output_dir)
+print("sub : ", sub)
+print("img_path :", img_path)
 subprocess.check_call(["mkdir", "-p", output_dir])
 
 # Which container to launch
 if options.command == 'docker':
+    sock = options.sock
+    root_container = options.bin
     comandline = "docker run -it --rm "\
                  "-v {BIND1}:/data:ro "\
                  "-v {BIND2}:/out "\
@@ -231,8 +236,8 @@ if options.command == 'docker':
     subprocess.check_call(comandline.split(" "))
 elif options.command == 'singularity':
     comandline = "singularity run "\
-                 "-v {BIND1}:/data:ro "\
-                 "-v {BIND2}:/out "\
+                 "--bind {BIND1}:/data:ro "\
+                 "--bind {BIND2}:/out "\
                  "--cleanenv "\
                  "{IMG} /data /out participant "\
                  "--participant_label {SUB}".format(BIND1=input,
