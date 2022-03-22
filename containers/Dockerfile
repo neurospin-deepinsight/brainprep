@@ -33,8 +33,13 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     LC_ALL=C
 
 
+<<<<<<< HEAD
 # Installing brainprep  https://github.com/neurospin-deepinsight/brainprep.git
 RUN pip install --no-cache-dir git+https://github.com/LoicDorval/brainprep.git
+=======
+# Installing brainprep
+RUN pip install --no-cache-dir git+https://github.com/LoicDorval/brainprep.git@qc_LD
+>>>>>>> 26d6f5efd1cb67266ca8efa5f872966948d647fa
 
 
 # FSL 5.0.11 (neurodocker build)
