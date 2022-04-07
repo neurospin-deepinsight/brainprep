@@ -45,8 +45,7 @@ def brainprep_cat12vbm(
         Matlab Compiler Runtime (MCR) folder.
     tpm: str
         path to the SPM TPM file.
-    darteltmp: str, default '/opt/spm/spm12_mcr/home/gaser/gaser/spm/spm12/
-               toolbox/cat12/templates_volumes/Template_1_IXI555_MNI152.nii'
+    darteltmp: str
         path to the CAT12 template file.
     verbose: int
         control the verbosity level: 0 silent, [1, 2] verbose.
