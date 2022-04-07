@@ -67,7 +67,7 @@ PROVIDES = ["brainprep"]
 REQUIRES = [
     "numpy>=1.17.1",
     "nibabel>=2.4.0",
-    "re>=2.2.1",
+    "re",
     "argparse>=1.1",
     "click>=7.0",
     "sklearn>=1.0.2",
