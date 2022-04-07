@@ -69,11 +69,10 @@ REQUIRES = [
     "nibabel>=2.4.0",
     "argparse>=1.1",
     "click>=7.0",
-    "sklearn>=1.0.2",
+    "sklearn",
     "matplotlib>=3.5.1",
     "seaborn>=0.11.2",
     "pandas>=1.4.0",
-    "nibabel>=3.2.1",
     "nilearn>=0.8.1",
     "scipy>=1.7.3",
 ]
