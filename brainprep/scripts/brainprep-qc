@@ -1,0 +1,151 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+##########################################################################
+# NSAp - Copyright (C) CEA, 2021
+# Distributed under the terms of the CeCILL-B license, as published by
+# the CEA-CNRS-INRIA. Refer to the LICENSE file or to
+# http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html
+# for details.
+##########################################################################
+
+import os
+import argparse
+import textwrap
+import subprocess
+from pprint import pprint
+from datetime import datetime
+from argparse import RawTextHelpFormatter
+import brainprep
+
+# Script documentation
+DOC = """
+The CAT12 VBM and quasi-raw quality check
+"""
+
+
+def is_file(filearg):
+    """ Type for argparse - checks that file exists but does not open.
+    """
+    if not os.path.isfile(filearg):
+        raise argparse.ArgumentError(
+            "The file '{0}' does not exist!".format(filearg))
+    return filearg
+
+
+def is_directory(dirarg):
+    """ Type for argparse - checks that directory exists.
+    """
+    if not os.path.isdir(dirarg):
+        raise argparse.ArgumentError(
+            "The directory '{0}' does not exist!".format(dirarg))
+    return dirarg
+
+
+def get_cmd_line_args():
+    """
+    Create a command line argument parser and return a dict mapping
+    <argument name> -> <argument value>.
+    """
+    parser = argparse.ArgumentParser(
+        prog="brainprep-qc",
+        description=textwrap.dedent(DOC),
+        formatter_class=RawTextHelpFormatter)
+    # parser if cat12
+    subparsers = parser.add_subparsers(dest='command')
+    parser_cat12 = subparsers.add_parser('cat12', help='cat12 quality check')
+    parser_cat12.add_argument('--input',
+                              help='A list of .nii files',
+                              required=True,
+                              nargs='+',
+                              type=str)
+    parser_cat12.add_argument('--output',
+                              help='outputdir',
+                              required=True,
+                              nargs=1,
+                              type=str)
+    parser_cat12.add_argument('--cat12vbm_root',
+                              help='cat12vbm root',
+                              required=True,
+                              nargs=1,
+                              type=str)
+    parser_cat12.add_argument('--input_qcscores',
+                              help='A list of .xml files',
+                              required=True,
+                              nargs='+',
+                              type=str)
+    # optionnal
+    parser_cat12.add_argument('--mask',
+                              help='A list of .nii masks or a single .nii\
+                              mask',
+                              default=None,
+                              nargs='+',
+                              type=str)
+    parser_cat12.add_argument("-V", "--verbose",
+                              type=int,
+                              choices=[0, 1, 2],
+                              default=0,
+                              help="increase the verbosity level: 0 silent, \
+                                    [1, 2] verbose.")
+
+    # parser if quasi-raws
+    parser_qr = subparsers.add_parser('qr', help='quasi-raw quality check')
+    parser_qr.add_argument('--input',
+                           help='A list of .nii files',
+                           required=True,
+                           nargs='+',
+                           type=str)
+    parser_qr.add_argument('--output',
+                           help='outputdir',
+                           required=True,
+                           nargs=1,
+                           type=str)
+    # optionnal
+    parser_qr.add_argument('--mask',
+                           help='A list of .nii masks or a single .nii mask',
+                           default=None,
+                           nargs='+',
+                           type=str)
+    parser_qr.add_argument("-V", "--verbose",
+                           type=int,
+                           choices=[0, 1, 2],
+                           default=0,
+                           help="increase the verbosity level: 0 silent, "
+                                "[1, 2] verbose.")
+
+    args = parser.parse_args()
+    return args
+
+
+"""
+Parse the command line.
+"""
+options = get_cmd_line_args()
+
+
+runtime = {
+    "tool": "brainprep-qc",
+    "timestamp": datetime.now().isoformat(),
+    "tool_version": brainprep.__version__}
+if options.verbose > 0:
+    pprint("[info] Starting QC...")
+    pprint("[info] Runtime:")
+    pprint(runtime)
+    pprint("[info] Inputs:")
+    pprint(vars(options))
+
+# inputs
+img_filenames = options.input
+mask_filenames = options.mask
+
+# paths
+output_dir = options.output[0]
+subprocess.check_call(["mkdir", "-p", output_dir])
+# Which QC to launch
+if options.command == 'cat12':
+    input_qcscores = options.input_qcscores
+    root_cat12vbm = options.cat12vbm_root[0]
+    brainprep.qc_utils.launch_cat12_qc(img_filenames, mask_filenames,
+                                       root_cat12vbm, output_dir,
+                                       input_qcscores)
+elif options.command == 'qr':
+    brainprep.qc_utils.launch_qr_qc(img_filenames, mask_filenames, output_dir)

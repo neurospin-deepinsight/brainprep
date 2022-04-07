@@ -66,10 +66,20 @@ VERSION = __version__
 PROVIDES = ["brainprep"]
 REQUIRES = [
     "numpy>=1.17.1",
-    "nibabel>=2.4.0"
+    "nibabel>=2.4.0",
+    "argparse>=1.1",
+    "click>=7.0",
+    "sklearn",
+    "matplotlib>=3.5.1",
+    "seaborn>=0.11.2",
+    "pandas>=1.4.0",
+    "nilearn>=0.8.1",
+    "scipy>=1.7.3",
 ]
 SCRIPTS = [
     "brainprep/scripts/brainprep-cat12vbm",
     "brainprep/scripts/brainprep-fsreconall",
-    "brainprep/scripts/brainprep-quasiraw"
+    "brainprep/scripts/brainprep-quasiraw",
+    "brainprep/scripts/brainprep-qc",
+    "brainprep/scripts/brainprep-mriqc",
 ]
