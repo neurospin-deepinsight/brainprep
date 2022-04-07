@@ -22,24 +22,28 @@
 
 
 
-brainprep: package that provides tools for brain MRI Deep Learning PreProcessing
-================================================================================
+brainprep: tools for brain MRI Deep Learning pre-processing
+===========================================================
 
 \:+1: If you are using the code please add a star to the repository :+1:
 
 `brainprep` is a toolbox that provides common Deep Learning brain
-MRI PreProcessing scripts:
+MRI pre-processing scripts as well as Quality Control (QC) routines:
 
-* brainprep-cat12vbm
-* brainprep-fsreconall
-* brainprep-quasiraw
+* brainprep --help
+* brainprep cat12vbm --help
+* brainprep fsreconall --help
+* brainprep quasiraw --help
+
+The general idea is to provide containers to execute these scripts in order to
+enforce reproducible research.
 
 This work is made available by a `community of people
-<https://github.com/neurospin-deepinsight/brainprep/blob/master/AUTHORS.rst>`_, amoung which the
-CEA Neurospin BAOBAB laboratory.
+<https://github.com/neurospin-deepinsight/brainprep/blob/master/AUTHORS.rst>`_,
+amoung which the CEA Neurospin BAOBAB laboratory.
 
 .. image:: ./doc/source/_static/carousel/cat12.png
-    :width: 400px
+    :width: 800px
     :align: center
 
     
@@ -55,9 +59,10 @@ Where to start
 ==============
 
 Examples are available in the
-`gallery <https://brainprep.readthedocs.io/en/latest/auto_gallery/gallery.html>`_.
-All datasets are described in the
+`gallery <https://brainprep.readthedocs.io/en/latest/auto_gallery/index.html>`_.
+The module is described in the
 `API documentation <https://brainprep.readthedocs.io/en/latest/generated/documentation.html>`_.
+All scripts are documentated in the `Scripts documentation <https://brainprep.readthedocs.io/en/latest/generated/documentation.html>`_.
 
 Install
 =======

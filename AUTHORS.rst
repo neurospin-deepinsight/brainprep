@@ -1,5 +1,3 @@
-﻿.. -*- mode: rst -*-
-
 People
 ------
 
@@ -15,6 +13,7 @@ The core developers are:
 
 * Antoine Grigis
 * Julie Victor
+* Loic Dorval
 
 Other contributors
 ..................

@@ -26,20 +26,17 @@ CLASSIFIERS = ["Development Status :: 5 - Production/Stable",
 
 # Project descriptions
 description = """
-Package that provides tools for brain MRI Deep Leanring PreProcessing.
+Package that provides tools for brain MRI Deep Learning pre-processing.
 """
 SUMMARY = """
 .. container:: summary-carousel
 
     `brainprep` is a toolbox that provides common Deep Learning brain
-    MRI PreProcessing scripts:
-
-    * brainprep-cat12vbm
-    * brainprep-fsreconall
-    * brainprep-quasiraw
+    MRI pre-processing workflows.
 """
 long_description = (
-    "Package that provides tools for brain MRI Deep Leanring PreProcessing.\n")
+    "Package that provides tools for brain MRI Deep Learning "
+    "pre-processing.\n")
 
 # Main setup parameters
 NAME = "brainprep"
@@ -66,10 +63,9 @@ VERSION = __version__
 PROVIDES = ["brainprep"]
 REQUIRES = [
     "numpy>=1.17.1",
-    "nibabel>=2.4.0"
+    "nibabel>=2.4.0",
+    "fire"
 ]
 SCRIPTS = [
-    "brainprep/scripts/brainprep-cat12vbm",
-    "brainprep/scripts/brainprep-fsreconall",
-    "brainprep/scripts/brainprep-quasiraw"
+    "brainprep/scripts/brainprep"
 ]

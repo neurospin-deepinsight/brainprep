@@ -115,9 +115,9 @@ def write_matlabbatch(template, nii_file, tpm_file, darteltpm_file, outfile):
         CAT12 VBM preprocessing.
     """
     nii_file_str = ""
-    for i in nii_file:
-        nii_file_str += "'{0}' \n".format(ungzip_file(i,
-                                          outdir=os.path.dirname(outfile)))
+    for path in nii_files:
+        nii_files_str += "'{0}' \n".format(
+            ungzip_file(path, outdir=os.path.dirname(outfile)))
     with open(template, "r") as of:
         stream = of.read()
     stream = stream.format(anat_file=nii_file_str, tpm_file=tpm_file,
