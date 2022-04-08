@@ -13,14 +13,12 @@ Interface for mriqc.
 
 # System import
 import os
-import glob
-import json
-import shutil
-import subprocess
+import brainprep
+from brainprep.color_utils import print_title
 
 
 def brainprep_mriqc(rawdir, subjid, outdir="/out", workdir="/work",
-                    mriqc="/opt/conda/bin/mriqc"):
+                    mriqc="mriqc"):
     """ Define the mriqc pre-processing workflow.
 
     Parameters
@@ -36,6 +34,7 @@ def brainprep_mriqc(rawdir, subjid, outdir="/out", workdir="/work",
     mriqc: str
         path to the mriqc binary.
     """
+    print_title("Launch mriqc...")
     status = os.path.join(outdir, subjid, "ok")
     if not os.path.isfile(status):
         cmd = [
@@ -46,6 +45,5 @@ def brainprep_mriqc(rawdir, subjid, outdir="/out", workdir="/work",
             "-w", workdir,
             "--no-sub",
             "--participant-label", subjid]
-        print(" ".join(cmd))
-        subprocess.check_call(cmd)
+        brainprep.execute_command(cmd)
         open(status, "a").close()

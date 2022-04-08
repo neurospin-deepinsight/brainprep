@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##########################################################################
-# NSAp - Copyright (C) CEA, 2021
+# NSAp - Copyright (C) CEA, 2021 - 2022
 # Distributed under the terms of the CeCILL-B license, as published by
 # the CEA-CNRS-INRIA. Refer to the LICENSE file or to
 # http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html
@@ -19,6 +19,7 @@ import gzip
 import shutil
 import tempfile
 import subprocess
+from .color_utils import print_command, print_error
 
 
 def execute_command(command):
@@ -29,7 +30,7 @@ def execute_command(command):
     command: list of str
         the command to be executed.
     """
-    print(" ".join(command))
+    print_command(" ".join(command))
     proc = subprocess.Popen(
         command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output, error = proc.communicate()
@@ -58,7 +59,7 @@ def check_command(command):
     stderr = stderr.decode("utf8")
     exitcode = process.returncode
     if exitcode != 0:
-        print("Command {0}: {1}".format(command, stderr))
+        print_error("Command {0}: {1}".format(command, stderr))
         raise ValueError("Impossible to locate command '{0}'.".format(command))
 
 
@@ -79,12 +80,11 @@ def check_version(package_name, check_pkg_version):
     stdout = stdout.decode("utf8")
     stderr = stderr.decode("utf8")
     exitcode = process.returncode
-
     if check_pkg_version:
         # local computer installation
         if exitcode != 0:
             version = None
-            print("Version {0}: {1}".format(package_name, stderr))
+            print_error("Version {0}: {1}".format(package_name, stderr))
             raise ValueError(
                 "Impossible to check package '{0}' version."
                 .format(package_name))
@@ -97,7 +97,7 @@ def check_version(package_name, check_pkg_version):
     print("{0} - {1}".format(package_name, version))
 
 
-def write_matlabbatch(template, nii_file, tpm_file, darteltpm_file, outfile):
+def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file, outfile):
     """ Complete matlab batch from template.
 
     Parameters
@@ -114,13 +114,13 @@ def write_matlabbatch(template, nii_file, tpm_file, darteltpm_file, outfile):
         path to the generated matlab batch file that can be used to launch
         CAT12 VBM preprocessing.
     """
-    nii_file_str = ""
+    nii_files_str = ""
     for path in nii_files:
         nii_files_str += "'{0}' \n".format(
             ungzip_file(path, outdir=os.path.dirname(outfile)))
     with open(template, "r") as of:
         stream = of.read()
-    stream = stream.format(anat_file=nii_file_str, tpm_file=tpm_file,
+    stream = stream.format(anat_file=nii_files_str, tpm_file=tpm_file,
                            darteltpm_file=darteltpm_file)
     with open(outfile, "w") as of:
         of.write(stream)

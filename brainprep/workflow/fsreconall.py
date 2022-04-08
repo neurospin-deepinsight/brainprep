@@ -14,6 +14,7 @@ Interface for FreeSurfer recon-all.
 # System import
 import os
 import brainprep
+from brainprep.color_utils import print_title
 
 
 def brainprep_fsreconall(subjid, anatomical, outdir, do_lgi=False, verbose=0):
@@ -33,8 +34,11 @@ def brainprep_fsreconall(subjid, anatomical, outdir, do_lgi=False, verbose=0):
     verbose: int
         control the verbosity level: 0 silent, [1, 2] verbose.
     """
+    print_title("Launch FreeSurfer reconall...")
     brainprep.recon_all(
         fsdir=outdir, anatfile=anatomical, sid=subjid,
         reconstruction_stage="all", resume=False, t2file=None, flairfile=None)
+
     if do_lgi:
+        print_title("Launch FreeSurfer LGI computation...")
         brainprep.localgi(fsdir=outdir, sid=subjid)

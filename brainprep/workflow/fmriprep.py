@@ -15,11 +15,11 @@ Interface for fmriprep.
 import os
 import tempfile
 import subprocess
+from brainprep.color_utils import print_title, print_command
 
 
 def brainprep_fmriprep(anatomical, functionals, subjid, descfile,
-                       outdir="/out", workdir="/work",
-                       fmriprep="/opt/conda/bin/fmriprep"):
+                       outdir="/out", workdir="/work", fmriprep="fmriprep"):
     """ Define the fmriprep pre-processing workflow.
 
     Parameters
@@ -37,6 +37,9 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile,
     fmriprep: str
         path to the fmriprep binary.
     """
+    print_title("Launch fmriprep...")
+    if not isinstance(functionals, list):
+        functionals = functionals.split(",")
     destdir = os.path.join(outdir, "fmriprep_{0}".format(subjid))
     status = os.path.join(destdir, "fmriprep", subjid, "ok")
     if not os.path.isfile(status):
@@ -73,7 +76,7 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile,
                 "--cifti-output", "91k",
                 "--ignore", "slicetiming",
                 "--participant_label", subjid]
-            print(" ".join(cmd))
+            print_command(" ".join(cmd))
             subprocess.check_call(cmd, env=os.environ, cwd=tmpdir)
             subprocess.check_call(["cp", "-r", resdir, destdir])
             open(status, "a").close()

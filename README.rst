@@ -61,8 +61,8 @@ Where to start
 Examples are available in the
 `gallery <https://brainprep.readthedocs.io/en/latest/auto_gallery/index.html>`_.
 The module is described in the
-`API documentation <https://brainprep.readthedocs.io/en/latest/generated/documentation.html>`_.
-All scripts are documentated in the `Scripts documentation <https://brainprep.readthedocs.io/en/latest/generated/documentation.html>`_.
+`API documentation <https://brainprep.readthedocs.io/en/latest/generated/brainprep.html>`_.
+All scripts are documentated in the `Scripts documentation <https://brainprep.readthedocs.io/en/latest/generated/brainprep.workflow.html>`_.
 
 Install
 =======

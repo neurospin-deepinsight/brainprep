@@ -14,6 +14,7 @@ Interface for quasi-raw.
 # System import
 import os
 import brainprep
+from brainprep.color_utils import print_title
 
 
 def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False,
@@ -36,12 +37,13 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False,
     verbose: int
         control the verbosity level: 0 silent, [1, 2] verbose.
     """
-    # Set target if necessary and other outputs
+    print_title("Set outputs and default target if applicable...")
     if target is None:
         resource_dir = os.path.join(
             os.path.dirname(brainprep.__file__), "resources")
         target = os.path.join(
             resource_dir, "MNI152_T1_1mm_brain.nii.gz")
+        print("set target:", target)
     imfile = anatomical
     maskfile = mask
     targetfile = target
@@ -51,6 +53,7 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False,
         basename = os.path.basename(imfile).split(".")[0].replace(
             "_T1w", "_desc-{0}_T1w")
     basefile = os.path.join(outdir, basename + ".nii.gz")
+    print("use base file name:", basefile)
     stdfile = basefile.format("1std")
     stdmaskfile = basefile.format("1maskstd")
     brainfile = basefile.format("2brain")
@@ -60,7 +63,7 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False,
     regmaskfile = basefile.format("5maskreg")
     applyfile = basefile.format("6apply")
 
-    # Launch quasi-raw preprocessing
+    print_title("Launch quasi-raw pre-processing...")
     brainprep.reorient2std(imfile, stdfile)
     brainprep.reorient2std(maskfile, stdmaskfile)
     brainprep.apply_mask(stdfile, stdmaskfile, brainfile)

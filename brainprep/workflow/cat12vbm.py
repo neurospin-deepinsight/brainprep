@@ -14,6 +14,7 @@ Interface for CAT12 VBM.
 # System import
 import os
 import brainprep
+from brainprep.color_utils import print_title
 
 
 def brainprep_cat12vbm(
@@ -50,18 +51,21 @@ def brainprep_cat12vbm(
     verbose: int
         control the verbosity level: 0 silent, [1, 2] verbose.
     """
-    # Complete matlab batch
+    print_title("Complete matlab batch...")
+    if not isinstance(anatomical, list):
+        anatomical = anatomical.split(",")
     resource_dir = os.path.join(
         os.path.dirname(brainprep.__file__), "resources")
-    batch_file = os.path.join(inputs["outdir"], "cat12vbm_matlabbatch.m")
-    if longitudinal:
+    batch_file = os.path.join(outdir, "cat12vbm_matlabbatch.m")
+    if not longitudinal:
         template_batch = os.path.join(resource_dir, "cat12vbm_matlabbatch.m")
     else:
         template_batch = os.path.join(
             resource_dir, "cat12vbm_matlabbatch_longitudinal.m")
+    print("use matlab batch:", template_batch)
     brainprep.write_matlabbatch(
         template_batch, anatomical, tpm, darteltpm, batch_file)
 
-    # Launch matlab batch
+    print_title("Launch CAT12 VBM matlab batch...")
     cmd = [cat12, "-s", spm12, "-m", matlab, "-b", batch_file]
     brainprep.execute_command(cmd)
