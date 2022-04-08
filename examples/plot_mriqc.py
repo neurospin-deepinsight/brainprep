@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-CAT12 VBM preprocessing use case
-================================
+mriqc quality control use case
+==============================
 
 Credit: A Grigis
 
-Example on how to run the CAT12 VBM pre-processing using the brainprep
+Example on how to run the mriqc quality control using the brainprep
 Singularity container.
 """
 # sphinx_gallery_thumbnail_path = '_static/carousel/mriqc.png'

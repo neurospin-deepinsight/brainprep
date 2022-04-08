@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Quasi RAW preprocessing use case
-================================
+Quasi RAW pre-processing use case
+=================================
 
 Credit: A Grigis
 

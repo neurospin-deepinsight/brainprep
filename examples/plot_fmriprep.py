@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-CAT12 VBM preprocessing use case
+fmriprep pre-processing use case
 ================================
 
 Credit: A Grigis
 
-Example on how to run the CAT12 VBM pre-processing using the brainprep
+Example on how to run thefmriprep pre-processing using the brainprep
 Singularity container.
 """
 # sphinx_gallery_thumbnail_path = '_static/carousel/fmriprep.png'

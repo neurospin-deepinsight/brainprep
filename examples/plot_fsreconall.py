@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-FreeSurfer preprocessing use case
-=================================
+FreeSurfer pre-processing use case
+==================================
 
 Credit: A Grigis
 

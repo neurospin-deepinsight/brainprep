@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-CAT12 VBM preprocessing use case
-================================
+CAT12 VBM pre-processing use case
+=================================
 
 Credit: A Grigis
 
