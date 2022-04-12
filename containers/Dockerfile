@@ -34,7 +34,6 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 
 # Installing brainprep  https://github.com/neurospin-deepinsight/brainprep.git
-RUN pip install regex
 RUN pip install --no-cache-dir git+https://github.com/LoicDorval/brainprep.git@qc_LD
 
 

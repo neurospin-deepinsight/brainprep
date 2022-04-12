@@ -760,7 +760,8 @@ def compute_brain_mask(imgs,
     # template
     # gray matter mask onto the target image
     # In reality in is a brain mask
-    mask_img = nilearn.masking.compute_gray_matter_mask(target_img)
+    # mask_img = nilearn.masking.compute_gray_matter_mask(target_img)
+    mask_img = nilearn.masking.compute_brain_mask(target_img)
 
     # (3) mask = Implicit mask & brain mask
     mask_arr = (mask_img.get_fdata() == 1) & mask_arr

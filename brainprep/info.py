@@ -75,6 +75,7 @@ REQUIRES = [
     "pandas>=1.4.0",
     "nilearn>=0.8.1",
     "scipy>=1.7.3",
+    "PyPDF2"
 ]
 SCRIPTS = [
     "brainprep/scripts/brainprep-cat12vbm",
