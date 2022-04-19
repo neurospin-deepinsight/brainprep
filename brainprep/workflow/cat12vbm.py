@@ -13,8 +13,17 @@ Interface for CAT12 VBM.
 
 # System import
 import os
+import glob
+import nibabel
+import numpy as np
+from html import unescape
 import brainprep
-from brainprep.color_utils import print_title
+from brainprep.utils import load_images, create_clickable
+from brainprep.color_utils import print_title, print_result
+from brainprep.qc import (
+    parse_cat12vbm_qc, plot_pca, compute_mean_correlation,
+    parse_cat12vbm_report, check_files)
+from brainprep.plotting import plot_images, plot_hists
 
 
 def brainprep_cat12vbm(
@@ -27,7 +36,7 @@ def brainprep_cat12vbm(
         darteltpm=("/opt/spm/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/"
                    "cat12/templates_volumes/Template_1_IXI555_MNI152.nii"),
         verbose=0):
-    """ Define the CAT12 VBM pre-processing workflow.
+    """ Define CAT12 VBM pre-processing workflow.
 
     Parameters
     ----------
@@ -69,3 +78,143 @@ def brainprep_cat12vbm(
     print_title("Launch CAT12 VBM matlab batch...")
     cmd = [cat12, "-s", spm12, "-m", matlab, "-b", batch_file]
     brainprep.execute_command(cmd)
+
+
+def brainprep_cat12vbmqc(
+        img_regex, qc_regex, report_root, outdir, brainmask_regex=None,
+        extra_img_regex=None, ncr_thr=4.5, iqr_thr=4.5, corr_thr=0.5):
+    """ Define the CAT12 VBM quality control workflow.
+
+    Parameters
+    ----------
+    img_regex: str
+        regex to the CAT12 VBM image files for all subjects.
+    qc_regex: str
+        regex to the CAT12 VBM quality control xml files for all subjects.
+    report_root: str
+        the root path of the CAT12VBM report files.
+    outdir: str
+        the destination folder.
+    brainmask_regex: str, default None
+        regex to the brain mask files for all subjects. If one file is
+        provided, we assume subjects are in the same referential.
+    extra_img_regex: list of str, default None
+        list of regex to extra image to diplay in quality control.
+    ncr_thr: float, default 4.5
+        control the quality control threshold on the NCR score.
+    iqr_thr: float, default 4.5
+        control the quality control threshold on the IQR score.
+    corr_thr: float, default 0.5
+        control the quality control threshold on the correlation score.
+    """
+    print_title("Parse data...")
+    if not os.path.isdir(outdir):
+        raise ValueError("Please specify a valid output directory.")
+    img_files = sorted(glob.glob(img_regex))
+    if brainmask_regex is None:
+        brainmask_files = []
+    else:
+        brainmask_files = sorted(glob.glob(brainmask_regex))
+    qc_files = sorted(glob.glob(qc_regex))
+    if extra_img_regex is None:
+        extra_img_files = []
+    else:
+        if not isinstance(extra_img_regex, list):
+            extra_img_regex = extra_img_regex.split(",")
+        extra_img_files = [sorted(glob.glob(item)) for item in extra_img_regex]
+    print("  images:", len(img_files))
+    print("  brain masks:", len(brainmask_files))
+    print("  quality controls:", len(qc_files))
+    print("  extra images:", [len(item) for item in extra_img_files])
+    if len(brainmask_files) > 1:
+        check_files([img_files, brainmask_files, qc_files])
+    else:
+        check_files([img_files, qc_files])
+    if len(extra_img_files) > 0:
+        check_files([img_files] + extra_img_files)
+
+    print_title("Parse quality control scores...")
+    df_scores = parse_cat12vbm_qc(qc_files)
+
+    print_title("Load images...")
+    imgs_arr, df = load_images(img_files)
+    imgs_arr = imgs_arr.squeeze()
+    imgs_size = list(imgs_arr.shape)[1:]
+    if len(brainmask_files) == 1:
+        mask_img = nibabel.load(brainmask_files[0])
+        mask_glob = (mask_img.get_fdata() > 0)
+    elif len(brainmask_files) > 1:
+        if len(brainmask_files) != len(imgs_arr):
+            raise ValueError("The list of images and masks must have the same "
+                             "length.")
+        masks_arr = [nibabel.load(path).get_fdata() > 0
+                     for path in brainmask_files]
+        mask_glob = masks_arr[0]
+        for arr in masks_arr[1:]:
+            mask_glob = np.logical_and(mask_glob, arr)
+    else:
+        mask_glob = np.ones(imgs_size).astype(bool)
+    imgs_arr = imgs_arr[:, mask_glob]
+    print(df)
+    print("  flat masked images:", imgs_arr.shape)
+
+    print_title("Compute PCA analysis...")
+    pca_path = plot_pca(imgs_arr, df, outdir)
+    print_result(pca_path)
+
+    print_title("Compute correlation comparision...")
+    df_corr, corr_path = compute_mean_correlation(imgs_arr, df, outdir)
+    print_result(corr_path)
+
+    print_title("Save quality control scores...")
+    df_qc = df_corr.merge(df_scores, how="outer",
+                          on=["participant_id", "session", "run"])
+    df_qc["qc"] = ((df_qc["NCR"] < ncr_thr) & (df_qc["IQR"] < iqr_thr) &
+                   (df_qc["corr_mean"] > corr_thr)).astype(int)
+    qc_path = os.path.join(outdir, "qc.tsv")
+    df_qc.sort_values(by=["IQR"], inplace=True)
+    df_qc.to_csv(qc_path, index=False, sep="\t")
+    print(df_qc)
+    print_result(qc_path)
+
+    print_title("Save scores histograms...")
+    data = {
+        "NCR": {"data": df_qc["NCR"].values, "bar": ncr_thr},
+        "IQR": {"data": df_qc["IQR"].values, "bar": iqr_thr},
+        "corr": {"data": df_qc["corr_mean"].values, "bar": corr_thr},
+    }
+    snap = plot_hists(data, outdir)
+    print_result(snap)
+
+    print_title("Save brain images ordered by IQR...")
+    sorted_indices = [
+        df.index[(df.participant_id == row.participant_id) &
+                 (df.session == row.session) &
+                 (df.run == row.run)].item()
+        for _, row in df_qc.iterrows()]
+    img_files_sorted = np.asarray(img_files)[sorted_indices]
+    img_files_cat = (
+        [img_files_sorted] +
+        [np.asarray(item)[sorted_indices] for item in extra_img_files])
+    img_files_cat = [item for item in zip(*img_files_cat)]
+    cut_coords = [(1, 1, 1)] * (len(extra_img_files) + 1)
+    snaps, snapdir = plot_images(img_files_cat, cut_coords, outdir)
+    df_report = df_qc.copy()
+    df_report["snap_path"] = snaps
+    df_report["snap_path"] = df_report["snap_path"].apply(
+        create_clickable)
+    print_result(snapdir)
+
+    print_title("Parse reports ordered by IQR...")
+    reports = parse_cat12vbm_report(img_files_sorted, report_root)
+    df_report["report_path"] = reports
+    df_report["report_path"] = df_report["report_path"].apply(
+        create_clickable)
+
+    print_title("Save quality check ordered by IQR...")
+    report_path = os.path.join(outdir, "qc.html")
+    html_report = df_report.to_html(index=False, table_id="table-brainprep")
+    html_report = unescape(html_report)
+    with open(report_path, "wt") as of:
+        of.write(html_report)
+    print_result(report_path)

@@ -19,6 +19,9 @@ import gzip
 import shutil
 import tempfile
 import subprocess
+import numpy as np
+import pandas as pd
+import nibabel
 from .color_utils import print_command, print_error
 
 
@@ -171,3 +174,101 @@ def ungzip_file(zfile, prefix="u", outdir=None):
         unzfile = zfile
 
     return unzfile
+
+
+def get_bids_keys(filename):
+    """ Extract BIDS 'participant_id', 'session' and 'run' keys from a
+    filename.
+
+    Parameters
+    ----------
+    filename: str
+        a bids path.
+
+    Returns
+    -------
+    keys: dict
+        the retrieved BIDS keys/values, no key if no match. Add the file name
+        in 'ni_path'.
+    """
+    keys = {}
+    participant_re = re.compile("sub-([^_/]+)")
+    session_re = re.compile("ses-([^_/]+)")
+    run_re = re.compile("run-([a-zA-Z0-9]+)")
+    for name, regex in (("participant_id", participant_re),
+                        ("session", session_re),
+                        ("run", run_re)):
+        match = regex.findall(filename)
+        if len(set(match)) != 1:
+            if name == "participant_id":
+                raise ValueError(
+                    "Found several or no '{}' in path '{}'.".format(
+                        name, filename))
+        else:
+            keys[name] = match[0]
+    if "run" not in keys:
+        keys["run"] = "1"
+    if "session" not in keys:
+        keys["session"] = "V1"
+    keys["ni_path"] = filename
+    return keys
+
+
+def load_images(img_files, check_same_referential=True):
+    """ Load a list of images in a BIDS organisation: check that all images
+    are in the same referential.
+
+    Parameters
+    ----------
+    img_files: list of str (n_subjects, )
+        path to images.
+
+    Returns
+    -------
+    imgs_arr: array (n_subjects, 1, image_axis0, image_axis1, ...)
+        the generated array.
+    df: pandas DataFrame
+        description of the array with columns 'participant_id',
+        'session', 'run', 'ni_path'.
+    """
+    ref_affine = None
+    ref_shape = None
+    data = []
+    info = {}
+    for path in img_files:
+        keys = get_bids_keys(path)
+        participant_id = keys["participant_id"]
+        session = keys.get("session", "V1")
+        run = keys.get("run", "1")
+        img = nibabel.load(path)
+        if ref_affine is None:
+            ref_affine = img.affine
+            ref_shape = img.shape
+        else:
+            assert np.allclose(ref_affine, img.affine), "Different affine."
+            assert ref_shape == img.shape, "Different shape."
+        data.append(np.expand_dims(img.get_fdata(), axis=0))
+        info.setdefault("participant_id", []).append(participant_id)
+        info.setdefault("session", []).append(session)
+        info.setdefault("run", []).append(run)
+        info.setdefault("ni_path", []).append(path)
+    df = pd.DataFrame.from_dict(info)
+    imgs_arr = np.asarray(data)
+    return imgs_arr, df
+
+
+def create_clickable(path_or_url):
+    """ Foramt a path or a URL as a HTML href.
+
+    Parameters
+    ----------
+    path_or_url: str
+        a path or a URL.
+
+    Returns
+    -------
+    url: str
+        a href formated URL.
+    """
+    url = "<a href='{}' target='_blank'>&plus;</a>".format(path_or_url)
+    return url

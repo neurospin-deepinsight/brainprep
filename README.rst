@@ -32,8 +32,11 @@ MRI pre-processing scripts as well as Quality Control (QC) routines:
 
 * brainprep --help
 * brainprep cat12vbm --help
+* brainprep cat12vbmqc --help
 * brainprep fsreconall --help
+* brainprep fsreconallqc --help
 * brainprep quasiraw --help
+* brainprep quasirawqc --help
 
 The general idea is to provide containers to execute these scripts in order to
 enforce reproducible research.

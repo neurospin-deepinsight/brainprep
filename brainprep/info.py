@@ -62,8 +62,14 @@ ISRELEASE = True
 VERSION = __version__
 PROVIDES = ["brainprep"]
 REQUIRES = [
-    "numpy>=1.17.1",
-    "nibabel>=2.4.0",
+    "numpy",
+    "nibabel",
+    "pandas",
+    "scikit-learn",
+    "nilearn",
+    "matplotlib",
+    "seaborn",
+    "progressbar2",
     "fire"
 ]
 SCRIPTS = [

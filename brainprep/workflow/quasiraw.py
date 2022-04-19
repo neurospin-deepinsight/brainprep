@@ -13,8 +13,15 @@ Interface for quasi-raw.
 
 # System import
 import os
+import glob
+import nibabel
+import numpy as np
+from html import unescape
 import brainprep
-from brainprep.color_utils import print_title
+from brainprep.utils import load_images, create_clickable
+from brainprep.color_utils import print_title, print_result
+from brainprep.qc import plot_pca, compute_mean_correlation, check_files
+from brainprep.plotting import plot_images, plot_hists
 
 
 def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False,
@@ -73,3 +80,114 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False,
     brainprep.apply_affine(stdmaskfile, regfile, regmaskfile, trffile,
                            interp="nearestneighbour")
     brainprep.apply_mask(regfile, regmaskfile, applyfile)
+
+
+def brainprep_quasirawqc(img_regex, outdir, brainmask_regex=None,
+                         extra_img_regex=None, corr_thr=0.5):
+    """ Define the quasi-raw quality control workflow.
+
+    Parameters
+    ----------
+    img_regex: str
+        regex to the quasi raw image files for all subjects.
+    outdir: str
+        the destination folder.
+    brainmask_regex: str, default None
+        regex to the brain mask files for all subjects. If one file is
+        provided, we assume subjects are in the same referential.
+    extra_img_regex: list of str, default None
+        list of regex to extra image to diplay in quality control.
+    corr_thr: float, default 0.5
+        control the quality control threshold on the correlation score.
+    """
+    print_title("Parse data...")
+    if not os.path.isdir(outdir):
+        raise ValueError("Please specify a valid output directory.")
+    img_files = sorted(glob.glob(img_regex))
+    if brainmask_regex is None:
+        brainmask_files = []
+    else:
+        brainmask_files = sorted(glob.glob(brainmask_regex))
+    if extra_img_regex is None:
+        extra_img_files = []
+    else:
+        if not isinstance(extra_img_regex, list):
+            extra_img_regex = extra_img_regex.split(",")
+        extra_img_files = [sorted(glob.glob(item)) for item in extra_img_regex]
+    print("  images:", len(img_files))
+    print("  brain masks:", len(brainmask_files))
+    print("  extra images:", [len(item) for item in extra_img_files])
+    if len(brainmask_files) > 1:
+        check_files([img_files, brainmask_files])
+    if len(extra_img_files) > 0:
+        check_files([img_files] + extra_img_files)
+
+    print_title("Load images...")
+    imgs_arr, df = load_images(img_files)
+    imgs_arr = imgs_arr.squeeze()
+    imgs_size = list(imgs_arr.shape)[1:]
+    if len(brainmask_files) == 1:
+        mask_img = nibabel.load(brainmask_files[0])
+        mask_glob = (mask_img.get_fdata() > 0)
+    elif len(brainmask_files) > 1:
+        if len(brainmask_files) != len(imgs_arr):
+            raise ValueError("The list of images and masks must have the same "
+                             "length.")
+        masks_arr = [nibabel.load(path).get_fdata() > 0
+                     for path in brainmask_files]
+        mask_glob = masks_arr[0]
+        for arr in masks_arr[1:]:
+            mask_glob = np.logical_and(mask_glob, arr)
+    else:
+        mask_glob = np.ones(imgs_size).astype(bool)
+    imgs_arr = imgs_arr[:, mask_glob]
+    print(df)
+    print("  flat masked images:", imgs_arr.shape)
+
+    print_title("Compute PCA analysis...")
+    pca_path = plot_pca(imgs_arr, df, outdir)
+    print_result(pca_path)
+
+    print_title("Compute correlation comparision...")
+    df_corr, corr_path = compute_mean_correlation(imgs_arr, df, outdir)
+    print_result(corr_path)
+
+    print_title("Save quality control scores...")
+    df_qc = df_corr
+    df_qc["qc"] = (df_qc["corr_mean"] > corr_thr).astype(int)
+    qc_path = os.path.join(outdir, "qc.tsv")
+    df_qc.sort_values(by=["corr_mean"], inplace=True)
+    df_qc.to_csv(qc_path, index=False, sep="\t")
+    print(df_qc)
+    print_result(qc_path)
+
+    print_title("Save scores histograms...")
+    data = {"corr": {"data": df_qc["corr_mean"].values, "bar": corr_thr}}
+    snap = plot_hists(data, outdir)
+    print_result(snap)
+
+    print_title("Save brain images ordered by mean correlation...")
+    sorted_indices = [
+        df.index[(df.participant_id == row.participant_id) &
+                 (df.session == row.session) &
+                 (df.run == row.run)].item()
+        for _, row in df_qc.iterrows()]
+    img_files_cat = (
+        [np.asarray(img_files)[sorted_indices]] +
+        [np.asarray(item)[sorted_indices] for item in extra_img_files])
+    img_files_cat = [item for item in zip(*img_files_cat)]
+    cut_coords = [(1, 1, 1)] * (len(extra_img_files) + 1)
+    snaps, snapdir = plot_images(img_files_cat, cut_coords, outdir)
+    df_report = df_qc.copy()
+    df_report["snap_path"] = snaps
+    df_report["snap_path"] = df_report["snap_path"].apply(
+        create_clickable)
+    print_result(snapdir)
+
+    print_title("Save quality check ordered by mean correlation...")
+    report_path = os.path.join(outdir, "qc.html")
+    html_report = df_report.to_html(index=False, table_id="table-brainprep")
+    html_report = unescape(html_report)
+    with open(report_path, "wt") as of:
+        of.write(html_report)
+    print_result(report_path)

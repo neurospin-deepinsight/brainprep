@@ -15,8 +15,11 @@ import brainprep.workflow as wf
 
 fire.Fire({
     "fsreconall": wf.brainprep_fsreconall,
+    "fsreconallqc": wf.brainprep_fsreconallqc,
     "cat12vbm": wf.brainprep_cat12vbm,
+    "cat12vbmqc": wf.brainprep_cat12vbmqc,
     "quasiraw": wf.brainprep_quasiraw,
+    "quasirawqc": wf.brainprep_quasirawqc,
     "fmriprep": wf.brainprep_fmriprep,
     "mriqc": wf.brainprep_mriqc
 })
