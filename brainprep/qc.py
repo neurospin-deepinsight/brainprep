@@ -117,38 +117,31 @@ def compute_mean_correlation(X, df_description, outdir):
             raise ValueError(
                 "'df_description' must contains a '{}' column.".format(key))
 
-    # Compute the correlation matrix: if nan because of variance 0, put corr
-    # to 0 (problem encountered with runs of the same session probably)
-    corr = np.corrcoef(X.reshape(len(X), -1))
-    for idx in range(len(corr)):
-        if np.isnan(corr[idx]).any():
-            corr[idx] = np.nan_to_num(corr[idx])
-            print("nan in correlation:", df_description["ni_path"][idx])
+    # Compute the correlation matrix
+    X = X.reshape(len(X), -1)
+    X[np.isnan(X)] = 0
+    X[np.isinf(X)] = 0
+    corr = np.corrcoef(X, dtype=np.single)
 
-    # Compute the Z-transformation of the correlation: if inf because of
-    # corr=1 (except diag), replace inf by a big value
-    zcorr = 0.5 * np.log((1. + corr) / (1. - corr))
-    np.fill_diagonal(zcorr, 0)
-    for idx in range(len(zcorr)):
-        if np.isinf(zcorr[idx]).any():
-            zcorr[idx] = np.nan_to_num(zcorr[idx])
-            print("inf in Z-correlation:", df_description["ni_path"][idx])
-    zcorr_mean = zcorr.sum(axis=1) / (len(zcorr) - 1)
-    if np.isnan(zcorr_mean).any() or np.isnan(zcorr).any():
-        raise ValueError("Mean Z-correlation contains nan.")
-    np.fill_diagonal(zcorr, 1)
+    # Compute the Z-transformation of the correlation
+    den = 1. - corr
+    den[den == 0] = 1e-8
+    zcorr = 0.5 * np.log((1. + corr) / den)
+    zcorr[np.isnan(zcorr)] = 0
+    zcorr[np.isinf(zcorr)] = 0
+    zcorr_mean = (zcorr.sum(axis=1) - 1) / (len(zcorr) - 1)
 
     # Get the index sorted by descending Z-corrected mean correlation values
     sort_idx = np.argsort(zcorr_mean)
     participant_ids = df_description["participant_id"][sort_idx]
     sessions_ids = df_description["session"][sort_idx]
     run_ids = df_description["run"][sort_idx]
-    zcorr_reorder = zcorr[np.ix_(sort_idx, sort_idx)]
+    corr_reorder = corr[np.ix_(sort_idx, sort_idx)]
 
     # Plot heatmap of mean correlation
     plt.subplots(figsize=(10, 10))
     cmap = sns.color_palette("RdBu_r", 110)
-    sns.heatmap(zcorr_reorder, mask=None, cmap=cmap, vmin=-1, vmax=1, center=0)
+    sns.heatmap(corr_reorder, mask=None, cmap=cmap, vmin=-1, vmax=1, center=0)
     corr_path = os.path.join(outdir, "correlation.png")
     plt.savefig(corr_path)
 

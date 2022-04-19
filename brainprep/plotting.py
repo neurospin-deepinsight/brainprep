@@ -90,7 +90,6 @@ def plot_hists(data, outdir):
         arr = item["data"].astype(np.single)
         arr = arr[~np.isnan(arr)]
         arr = arr[~np.isinf(arr)]
-        print(arr)
         sns.histplot(arr, color="gray", alpha=0.6, ax=axs[cnt],
                      kde=True, stat="density", label=name)
         coord = item.get("bar")
