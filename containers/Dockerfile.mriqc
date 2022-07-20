@@ -29,7 +29,7 @@ WORKDIR /home/brainprep
 ENV HOME="/home/brainprep"
 
 # Define entrypoint
-# ENTRYPOINT ["python3"]
+ENTRYPOINT []
 
 # Define labels
 MAINTAINER Antoine Grigis <antoine.grigis@cea.fr>
