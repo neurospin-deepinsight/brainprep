@@ -49,10 +49,12 @@ def brainprep_fsreconall(subjid, anatomical, outdir, template_dir,
         reconstruction_stage="all", resume=False, t2file=None, flairfile=None)
 
     print_title("Launch FreeSurfer xhemi...")
-    brainprep.interhemi_surfreg(fsdir=outdir, sid=subjid, template_dir)
+    brainprep.interhemi_surfreg(
+        fsdir=outdir, sid=subjid, template_dir=template_dir)
 
     print_title("Launch FreeSurfer xhemi projection...")
-    brainprep.interhemi_projection(fsdir=outdir, sid=subjid, template_dir)
+    brainprep.interhemi_projection(
+        fsdir=outdir, sid=subjid, template_dir=template_dir)
 
     if do_lgi:
         print_title("Launch FreeSurfer LGI computation...")
