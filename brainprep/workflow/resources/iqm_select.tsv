@@ -1,0 +1,30 @@
+APPLIES_TO	ALIAS	NAME	DESCRIPTION	MAXIMIZE
+structural	cjv	Coefficient of joint variation 	Coefficient of joint variation between white matter and gray matter. Higher values indicate more head motion and/or intensity non-uniformity artifacts.	0
+structural	cnr	Contrast-to-noise ratio 	Contrast-to-noise ratio, reflecting separation between GM & WM. Higher values indicate higher quality.	1
+structural	wm2max	White matter-to-maximum intensity ratio 	Captures skewed distributions within the WM mask, caused by fat and vascular-related hyperintensities. Ideal values fall within the interval [0.6, 0.8]	0
+structural	fwhm_avg	Full-width half-maximum smoothness 	Image blurriness (full-width half-maximum). Higher values indicate a blurrier image.	0
+structural	rpve_wm	Residual partial voluming error 	Residual partial volume error. Higher values indicate lower quality.	0
+structural	rpve_gm	Residual partial voluming error 	Residual partial volume error. Higher values indicate lower quality.	0
+structural	rpve_csf	Residual partial voluming error 	Residual partial volume error. Higher values indicate lower quality.	0
+structural	tpm_overlap_wm	Overlap of tissue probabilities 	How well the image tissue probability maps overlap with those from the MNI ICBM 2009 template. Higher values indicate better spatial normalization.	1
+structural	tpm_overlap_gm	Overlap of tissue probabilities 	How well the image tissue probability maps overlap with those from the MNI ICBM 2009 template. Higher values indicate better spatial normalization.	1
+structural	tpm_overlap_csf	Overlap of tissue probabilities 	How well the image tissue probability maps overlap with those from the MNI ICBM 2009 template. Higher values indicate better spatial normalization.	1
+structural,functional	efc	Entropy-focus criterion 	Shannon entropy criterion. Higher values indicate more ghosting and/or head motion blurring. 	0
+structural,functional	fber	Foreground-background energy ratio 	The variance of voxels inside the brain divided by the variance of voxels outside the brain. Higher values indicate higher quality.	1
+structural,functional	inu_med	Intensity non-uniformity 	Intensity non-uniformity (bias field) summary statistics. Values closer to 1 indicate higher quality; further from zero indicate greater RF field inhomogeneity.	1
+structural	snr_total	Signal-to-noise ratio 	Signal-to-noise ratio within the tissue mask. Higher values indicate higher quality.	1
+structural	snr_wm	Signal-to-noise ratio 	Signal-to-noise ratio within the tissue mask. Higher values indicate higher quality.	1
+structural	snr_gm	Signal-to-noise ratio 	Signal-to-noise ratio within the tissue mask. Higher values indicate higher quality.	1
+structural	snr_csf	Signal-to-noise ratio 	Signal-to-noise ratio within the tissue mask. Higher values indicate higher quality.	1
+functional	snr	Signal-to-noise ratio 	Signal-to-noise ratio within the tissue mask. Higher values indicate higher quality.	1
+functional	dvars_std	Derivatives of variance 	The average change in mean intensity between each pair of fMRI volumes in a series. Higher values indicate more dramatic changes (e.g., due to motion or spiking).	0
+functional	gcor	Global correlation 	Average correlation of all pairs of voxel time series inside of the brain. Illustrates differences between data due to motion/physiological noise/imaging artifacts. Values closer to zero are better.	0
+functional	tsnr	Temporal signal-to-noise ratio 	Temporal signal-to-noise ratio taking into account mean signal over time. Higher values indicate higher quality.	1
+functional	fd_mean	Framewise displacement - mean 	A measure of subject head motion, which compares the motion between the current and previous volumes. Higher values indicate lower quality.	0
+functional	fd_num	Framewise displacement - number 	Number of timepoints with framewise displacement >0.2mm. Higher values indicate lower quality.	0
+functional	fd_perc	Framewise displacement - percent 	Percent of timepoints with framewise displacement >0.2mm. Higher values indicate lower quality.	0
+functional	gsr_x	Ghost-to-signal ratio 	Ghost-to-signal ratio along the x or y encoding axes. Higher values indicate lower quality.	0
+functional	gsr_y	Ghost-to-signal ratio 	Ghost-to-signal ratio along the x or y encoding axes. Higher values indicate lower quality.	0
+functional	aor	AFNI’S outlier ratio 	Mean fraction of outliers per fMRI volume, from AFNI’s 3dToutcount. Higher values indicate lower quality.	0
+functional	aqi	AFNI’s quality index 	Mean quality index, from AFNI’s 3dTqual. Values close to 0 indicate higher quality.	0
+functional	dummy_trs	Dummy scans 	Number of volumes in the beginning of the fMRI timeseries identified as non-steady state. 	0
