@@ -14,6 +14,7 @@ Common cortical functions.
 
 # Imports
 import os
+import warnings
 from .utils import check_version, check_command, execute_command
 
 
@@ -74,6 +75,132 @@ def recon_all(fsdir, anatfile, sid, reconstruction_stage="all", resume=False,
     return subjfsdir
 
 
+def interhemi_surfreg(fsdir, sid, template_dir):
+    """ Surface-based interhemispheric registration by applying an existing
+    atlas, the 'fsaverage_sym'.
+
+    References
+    ----------
+    Greve, Douglas N., Lise Van der Haegen, Qing Cai, Steven Stufflebeam,
+    Mert R. Sabuncu, Bruce Fischl, and Marc Bysbaert, A surface-based analysis
+    of language lateralization and cortical asymmetry, Journal of Cognitive
+    Neuroscience 25.9: 1477-1492 2013.
+
+    Parameters
+    ----------
+    fsdir: str
+        the FreeSurfer subjects directory 'SUBJECTS_DIR'.
+    sid: str
+        the subject identifier.
+    template_dir: str
+        path to the 'fsaverage_sym' template.
+
+    Returns
+    -------
+    xhemidir: str
+        the symetrized hemispheres.
+    spherefile: str
+        the registration file to the template.
+    """
+    # Check input parameters
+    hemi = "lh"
+    subjfsdir = os.path.join(fsdir, sid)
+    if not os.path.isdir(subjfsdir):
+        raise ValueError("'{0}' is not a valid directory.".format(subjfsdir))
+
+    # Symlink input data in destination foler
+    dest_template_dir = os.path.join(fsdir, "fsaverage_sym")
+    if not os.path.islink(dest_template_dir):
+        os.symlink(template_dir, dest_template_dir)
+
+    # Create the commands
+    os.environ["SUBJECTS_DIR"] = fsdir
+    sym_template_file = os.path.join(
+        subjfsdir, "surf", "{0}.fsaverage_sym.sphere.reg".format(hemi))
+    if os.path.isfile(sym_template_file):
+        os.remove(sym_template_file)
+    cmds = [
+        ["surfreg", "--s", sid, "--t", "fsaverage_sym",
+         "--{0}".format(hemi)],
+        ["xhemireg", "--s", sid],
+        ["surfreg", "--s", sid, "--t", "fsaverage_sym",
+         "--{0}".format(hemi), "--xhemi"]]
+
+    # Call FreeSurfer xhemi
+    check_command("surfreg")
+    check_command("xhemireg")
+    for cmd in cmds:
+        execute_command(cmd)
+
+    # Remove symliks
+    for path in symlinks:
+        os.unlink(path)
+
+    # Get outputs
+    xhemidir = os.path.join(subjfsdir, "xhemi")
+    spherefile = os.path.join(
+        subjfsdir, "surf", "{0}.fsaverage_sym.sphere.reg".format(hemi))
+
+    return xhemidir, spherefile
+
+
+def interhemi_projection(fsdir, sid, template_dir):
+    """ Surface-based features projection to the 'fsaverage_sym' atlas.
+
+    Parameters
+    ----------
+    fsdir: str
+        the FreeSurfer subjects directory 'SUBJECTS_DIR'.
+    sid: str
+        the subject identifier
+    template_dir: str
+        path to the 'fsaverage_sym' template.
+
+    Returns
+    -------
+    xhemi_features: dict
+        the different features projected to the common symmetric atlas.
+    """
+    textures = ("thickness", "curv", "area", "pial_lgi", "sulc")
+    subjfsdir = os.path.join(fsdir, sid)
+    reg_xhemi_file = os.path.join(
+        subjfsdir, "xhemi", "surf", "lh.fsaverage_sym.sphere.reg")
+    reg_sub_file = os.path.join(
+        subjfsdir, "surf", "lh.fsaverage_sym.sphere.reg")
+    target_reg = os.path.join(template_dir, "surf", "lh.sphere.reg")
+    check_command("mris_apply_reg")
+    xhemi_features = {}
+    for name in textures:
+        xhemi_features[name] = {}
+        for hemi in ("lh", "rh"):
+            texture_file = os.path.join(
+                subjfsdir, "surf", "{0}.{1}".format(hemi, name))
+            if not os.path.isfile(texture_file):
+                warnings.warn(
+                    "Texture file not found: {}".format(texture_file),
+                    UserWarning)
+                continue
+            if hemi == "lh":
+                reg_file = reg_sub_file
+            else:
+                reg_file = reg_xhemi_file
+            dest_texture_file = os.path.join(
+                subjfsdir, "surf", texture, "{0}.{1}.xhemi.mgh".format(
+                    hemi, name))
+            cmd = ["mris_apply_reg", "--src", texture_file,
+                   "--trg", dest_texture_file, "--streg", reg_file,
+                   target_reg]
+            if os.path.isfile(dest_texture_file):
+                warnings.warn(
+                    "Projected texture file already creatred: {}. Remove it "
+                    "for regeneration.".format(dest_texture_file),
+                    UserWarning)
+            else:
+                execute_command(cmd)
+            xhemi_features[name][hemi] = dest_texture_file
+    return xhemi_features
+
+
 def localgi(fsdir, sid):
     """ Computes local measurements of pial-surface gyrification at thousands
     of points over the cortical surface.
@@ -103,3 +230,69 @@ def localgi(fsdir, sid):
     execute_command(cmd)
 
     return subjfsdir
+
+
+def stats2table(fsdir, outdir):
+    """ Generate text/ascii tables of freesurfer parcellation stats data
+    '?h.aparc.stats' for both templates (Desikan & Destrieux) and
+    'aseg.stats'.
+
+    Parameters
+    ----------
+    fsdir: str
+        the FreeSurfer working directory with all the subjects.
+    outdir: str
+        the destination folder.
+
+    Return
+    ------
+    statfiles: list of str
+        The FreeSurfer summary stats.
+    """
+    # Check input parameters
+    for path in (fsdir, outdir):
+        if not os.path.isdir(path):
+            raise ValueError("'{0}' is not a valid directory.".format(path))
+
+    # Fist find all the subjects with a stat dir
+    statdirs = glob.glob(os.path.join(fsdir, "*", "stats"))
+    subjects = [item.lstrip(os.sep).split(os.sep)[-2] for item in statdirs]
+    os.environ["SUBJECTS_DIR"] = fsdir
+    statfiles = []
+    measures = ["area", "volume", "thickness", "thicknessstd",
+                "meancurv", "gauscurv", "foldind", "curvind"]
+    check_command("aparcstats2table")
+    check_command("asegstats2table")
+
+    # Call FreeSurfer aparcstats2table: Desikan template
+    for hemi in ["lh", "rh"]:
+        for meas in measures:
+            statfile = os.path.join(
+                outdir, "aparc_stats_{0}_{1}.csv".format(hemi, meas))
+            statfiles.append(statfile)
+            cmd = ["aparcstats2table", "--subjects"] + subjects + [
+                "--hemi", hemi, "--meas", meas, "--tablefile", statfile,
+                "--delimiter", "comma", "--parcid-only"]
+            execute_command(cmd)
+
+    # Call FreeSurfer aparcstats2table: Destrieux template
+    for hemi in ["lh", "rh"]:
+        for meas in measures:
+            statfile = os.path.join(
+                outdir, "aparc2009s_stats_{0}_{1}.csv".format(hemi, meas))
+            statfiles.append(statfile)
+            cmd = ["aparcstats2table", "--subjects"] + subjects + [
+                "--parc", "aparc.a2009s", "--hemi", hemi, "--meas", meas,
+                "--tablefile", statfile, "--delimiter", "comma",
+                "--parcid-only"]
+            execute_command(cmd)
+
+    # Call FreeSurfer asegstats2table
+    statfile = os.path.join(outdir, "aseg_stats.csv")
+    statfiles.append(statfile)
+    cmd = ["asegstats2table", "--subjects"] + subjects + [
+        "--meas", "volume", "--tablefile", statfile, "--delimiter", "comma"]
+    execute_command(cmd)
+    statfiles.append(statfile)
+
+    return statfiles
