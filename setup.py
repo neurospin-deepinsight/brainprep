@@ -18,7 +18,8 @@ infopath = os.path.join(os.path.dirname(__file__), "brainprep", "info.py")
 with open(infopath) as open_file:
     exec(open_file.read(), release_info)
 pkgdata = {
-    "brainprep": ["tests/*.py", "resources/*.nii.gz", "resources/*.m"]
+    "brainprep": ["tests/*.py", "resources/*.nii.gz", "resources/*.m",
+                  "workflow/resources/*.csv", "workflow/resources/*.tsv"]
 }
 
 
