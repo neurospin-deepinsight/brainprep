@@ -18,4 +18,5 @@ from .utils import (
 from .spatial import (
     scale, bet2, reorient2std, biasfield, register_affine, apply_affine,
     apply_mask)
-from .cortical import recon_all, localgi
+from .cortical import (
+    recon_all, localgi, stats2table, interhemi_surfreg, interhemi_projection)

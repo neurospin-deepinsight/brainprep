@@ -82,8 +82,8 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False,
     brainprep.apply_mask(regfile, regmaskfile, applyfile)
 
 
-def brainprep_quasirawqc(img_regex, outdir, brainmask_regex=None,
-                         extra_img_regex=None, corr_thr=0.5):
+def brainprep_quasiraw_qc(img_regex, outdir, brainmask_regex=None,
+                          extra_img_regex=None, corr_thr=0.5):
     """ Define the quasi-raw quality control workflow.
 
     Parameters

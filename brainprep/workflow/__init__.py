@@ -12,8 +12,10 @@ Module that implements all user workflows.
 """
 
 # Imports
-from .fsreconall import brainprep_fsreconall, brainprep_fsreconallqc
-from .cat12vbm import brainprep_cat12vbm, brainprep_cat12vbmqc
-from .quasiraw import brainprep_quasiraw, brainprep_quasirawqc
+from .fsreconall import (
+    brainprep_fsreconall, brainprep_fsreconall_summary,
+    brainprep_fsreconall_qc)
+from .cat12vbm import brainprep_cat12vbm, brainprep_cat12vbm_qc
+from .quasiraw import brainprep_quasiraw, brainprep_quasiraw_qc
 from .fmriprep import brainprep_fmriprep
-from .mriqc import brainprep_mriqc
+from .mriqc import brainprep_mriqc, brainprep_mriqc_summary

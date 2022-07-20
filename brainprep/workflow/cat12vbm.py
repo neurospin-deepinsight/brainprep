@@ -80,7 +80,7 @@ def brainprep_cat12vbm(
     brainprep.execute_command(cmd)
 
 
-def brainprep_cat12vbmqc(
+def brainprep_cat12vbm_qc(
         img_regex, qc_regex, report_root, outdir, brainmask_regex=None,
         extra_img_regex=None, ncr_thr=4.5, iqr_thr=4.5, corr_thr=0.5):
     """ Define the CAT12 VBM quality control workflow.

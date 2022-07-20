@@ -31,12 +31,16 @@ brainprep: tools for brain MRI Deep Learning pre-processing
 MRI pre-processing scripts as well as Quality Control (QC) routines:
 
 * brainprep --help
-* brainprep cat12vbm --help
-* brainprep cat12vbmqc --help
 * brainprep fsreconall --help
-* brainprep fsreconallqc --help
+* brainprep fsreconall-summary --help
+* brainprep fsreconall-qc --help
+* brainprep cat12vbm --help
+* brainprep cat12vbm-qc --help
 * brainprep quasiraw --help
-* brainprep quasirawqc --help
+* brainprep quasiraw-qc --help
+* brainprep fmriprep --help
+* brainprep mriqc --help
+* brainprep mriqc-summary --help
 
 The general idea is to provide containers to execute these scripts in order to
 enforce reproducible research.

@@ -23,7 +23,8 @@ from brainprep.qc import parse_fsreconall_stats
 from brainprep.plotting import plot_fsreconall, plot_hists
 
 
-def brainprep_fsreconall(subjid, anatomical, outdir, do_lgi=False, verbose=0):
+def brainprep_fsreconall(subjid, anatomical, outdir, template_dir,
+                         do_lgi=False, verbose=0):
     """ Define the FreeSurfer recon-all pre-processing workflow.
 
     Parameters
@@ -34,6 +35,8 @@ def brainprep_fsreconall(subjid, anatomical, outdir, do_lgi=False, verbose=0):
         path to the anatomical T1w Nifti file.
     outdir: str
         the destination folder.
+    template_dir: str
+        path to the 'fsaverage_sym' template.
     do_lgi: bool
         optionally perform the Local Gyrification Index (LGI) "
         computation (requires Matlab).
@@ -45,12 +48,34 @@ def brainprep_fsreconall(subjid, anatomical, outdir, do_lgi=False, verbose=0):
         fsdir=outdir, anatfile=anatomical, sid=subjid,
         reconstruction_stage="all", resume=False, t2file=None, flairfile=None)
 
+    print_title("Launch FreeSurfer xhemi...")
+    brainprep.interhemi_surfreg(fsdir=outdir, sid=subjid, template_dir)
+
+    print_title("Launch FreeSurfer xhemi projection...")
+    brainprep.interhemi_projection(fsdir=outdir, sid=subjid, template_dir)
+
     if do_lgi:
         print_title("Launch FreeSurfer LGI computation...")
         brainprep.localgi(fsdir=outdir, sid=subjid)
 
 
-def brainprep_fsreconallqc(fs_regex, outdir, euler_thr=-217):
+def brainprep_fsreconall_summary(fsdir, outdir):
+    """ Generate text/ascii tables of freesurfer parcellation stats data
+    '?h.aparc.stats' for both templates (Desikan & Destrieux) and
+    'aseg.stats'.
+
+    Parameters
+    ----------
+    fsdir: str
+        the FreeSurfer working directory with all the subjects.
+    outdir: str
+        the destination folder.
+    """
+    print_title("Launch FreeSurfer reconall summary...")
+    brainprep.stats2table(fsdir, outdir)
+
+
+def brainprep_fsreconall_qc(fs_regex, outdir, euler_thr=-217):
     """ Define the FreeSurfer recon-all quality control workflow.
 
     Parameters

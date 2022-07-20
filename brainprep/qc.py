@@ -147,9 +147,9 @@ def compute_mean_correlation(X, df_description, outdir):
 
     # Generate data frame with results
     df_corr = pd.DataFrame(dict(participant_id=participant_ids,
-                           session=sessions_ids,
-                           run=run_ids,
-                           corr_mean=zcorr_mean[sort_idx]))
+                                session=sessions_ids,
+                                run=run_ids,
+                                corr_mean=zcorr_mean[sort_idx]))
     df_corr = df_corr.reindex(
         ["participant_id", "session", "run", "corr_mean"], axis="columns")
 
@@ -157,7 +157,7 @@ def compute_mean_correlation(X, df_description, outdir):
 
 
 def parse_fsreconall_stats(fs_dirs):
-    """ Parse the CAT12 VBM generated quality control files for all
+    """ Parse the FreeSurfer reconall generated quality control files for all
     subjects.
 
     Parameters
