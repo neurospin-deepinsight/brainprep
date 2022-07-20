@@ -69,6 +69,7 @@ REQUIRES = [
     "nilearn",
     "matplotlib",
     "seaborn",
+    "requests",
     "progressbar2",
     "fire"
 ]
