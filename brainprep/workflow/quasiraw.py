@@ -24,8 +24,7 @@ from brainprep.qc import plot_pca, compute_mean_correlation, check_files
 from brainprep.plotting import plot_images, plot_hists
 
 
-def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False,
-                       verbose=0):
+def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
     """ Define quasi-raw pre-processing workflow.
 
     Parameters
@@ -41,8 +40,6 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False,
     no_bids: bool
         set this option if the input files are not named following the
         BIDS hierarchy.
-    verbose: int
-        control the verbosity level: 0 silent, [1, 2] verbose.
     """
     print_title("Set outputs and default target if applicable...")
     if target is None:

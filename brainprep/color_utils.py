@@ -28,6 +28,7 @@ IS_COLOR_TERM = "TERM" in os.environ and (
 # Dictionary of term colors used for printing to terminal
 fg_colors = {
     "title": "gold_3b",
+    "subtitle": "orange_4b",
     "command": "grey_46",
     "result": "pink_3",
     "error": "red"}
@@ -655,6 +656,12 @@ def attr(color):
 def print_title(title):
     if IS_COLOR_TERM:
         title = stylize(title, fg(fg_colors["title"]) + attr("bold"))
+    print(title)
+
+
+def print_subtitle(title):
+    if IS_COLOR_TERM:
+        title = stylize(title, fg(fg_colors["subtitle"]))
     print(title)
 
 

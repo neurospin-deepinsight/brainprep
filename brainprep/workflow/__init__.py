@@ -17,5 +17,6 @@ from .fsreconall import (
     brainprep_fsreconall_qc)
 from .cat12vbm import brainprep_cat12vbm, brainprep_cat12vbm_qc
 from .quasiraw import brainprep_quasiraw, brainprep_quasiraw_qc
-from .fmriprep import brainprep_fmriprep
+from .fmriprep import brainprep_fmriprep, brainprep_fmriprep_conn
 from .mriqc import brainprep_mriqc, brainprep_mriqc_summary
+from .deface import brainprep_deface

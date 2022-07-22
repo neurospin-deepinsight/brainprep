@@ -22,6 +22,8 @@ fire.Fire({
     "quasiraw": wf.brainprep_quasiraw,
     "quasiraw-qc": wf.brainprep_quasiraw_qc,
     "fmriprep": wf.brainprep_fmriprep,
+    "fmriprep-conn": wf.brainprep_fmriprep_conn,
     "mriqc": wf.brainprep_mriqc,
-    "mriqc-summary": wf.brainprep_mriqc_summary
+    "mriqc-summary": wf.brainprep_mriqc_summary,
+    "deface": wf.brainprep_deface
 })
