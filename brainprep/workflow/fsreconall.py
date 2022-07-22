@@ -14,7 +14,10 @@ Interface for FreeSurfer recon-all.
 # System import
 import os
 import glob
+import nibabel
+import warnings
 import numpy as np
+import pandas as pd
 from html import unescape
 import brainprep
 from brainprep.utils import create_clickable
@@ -24,7 +27,7 @@ from brainprep.plotting import plot_fsreconall, plot_hists
 
 
 def brainprep_fsreconall(subjid, anatomical, outdir, template_dir,
-                         do_lgi=False, verbose=0):
+                         do_lgi=False):
     """ Define the FreeSurfer recon-all pre-processing workflow.
 
     Parameters
@@ -40,13 +43,15 @@ def brainprep_fsreconall(subjid, anatomical, outdir, template_dir,
     do_lgi: bool
         optionally perform the Local Gyrification Index (LGI) "
         computation (requires Matlab).
-    verbose: int
-        control the verbosity level: 0 silent, [1, 2] verbose.
     """
     print_title("Launch FreeSurfer reconall...")
     brainprep.recon_all(
         fsdir=outdir, anatfile=anatomical, sid=subjid,
         reconstruction_stage="all", resume=False, t2file=None, flairfile=None)
+
+    if do_lgi:
+        print_title("Launch FreeSurfer LGI computation...")
+        brainprep.localgi(fsdir=outdir, sid=subjid)
 
     print_title("Launch FreeSurfer xhemi...")
     brainprep.interhemi_surfreg(
@@ -56,9 +61,33 @@ def brainprep_fsreconall(subjid, anatomical, outdir, template_dir,
     brainprep.interhemi_projection(
         fsdir=outdir, sid=subjid, template_dir=template_dir)
 
-    if do_lgi:
-        print_title("Launch FreeSurfer LGI computation...")
-        brainprep.localgi(fsdir=outdir, sid=subjid)
+    print_title("Launch FreeSurfer MRI conversions...")
+    brainprep.mri_conversion(fsdir=outdir, sid=subjid)
+
+    print_title("Make datasets...")
+    regex = os.path.join(outdir, subjid, "surf", "{0}.{1}.xhemi.mgh")
+    data, labels = [], []
+    for hemi in ("lh", "rh"):
+        for name in ("thickness", "curv", "area", "pial_lgi", "sulc"):
+            texture_file = regex.format(hemi, name)
+            if not os.path.isfile(texture_file):
+                warnings.warn(
+                    "Texture file not found: {}".format(texture_file),
+                    UserWarning)
+                continue
+            values = nibabel.load(texture_file).get_fdata().transpose(1, 2, 0)
+            key = "hemi-{}_texture-{}".format(hemi, name)
+            print("- {}: {}".format(key, values.shape))
+            data.append(values)
+            labels.append(key)
+    data = np.concatenate(data, axis=1)
+    print("- textures:", data.shape)
+    destfile = os.path.join(outdir, subjid, "channels.txt")
+    np.savetxt(destfile, labels, fmt="%s")
+    print_result(destfile)
+    destfile = os.path.join(outdir, subjid, "xhemi-textures.npy")
+    np.save(destfile, data)
+    print_result(destfile)
 
 
 def brainprep_fsreconall_summary(fsdir, outdir):
@@ -75,6 +104,60 @@ def brainprep_fsreconall_summary(fsdir, outdir):
     """
     print_title("Launch FreeSurfer reconall summary...")
     brainprep.stats2table(fsdir, outdir)
+
+    print_title("Make datasets...")
+    regex = os.path.join(outdir, "{0}_stats_{1}_{2}.csv")
+    for template in ("aparc", "aparc2009s"):
+        data, labels = [], []
+        subjects, columns = None, None
+        for hemi in ("lh", "rh"):
+            for meas in ("area", "volume", "thickness", "thicknessstd",
+                         "meancurv", "gauscurv", "foldind", "curvind"):
+                table_file = regex.format(template, hemi, meas)
+                if not os.path.isfile(table_file):
+                    warnings.warn(
+                        "Table file not found: {}".format(table_file),
+                        UserWarning)
+                    continue
+                df = pd.read_csv(table_file, sep=",")
+                todrop = []
+                for name in (
+                        "MeanThickness", "WhiteSurfArea", "BrainSegVolNotVent",
+                        "eTIV"):
+                    if name in df:
+                        todrop.append(name)
+                df.drop(columns=todrop, inplace=True)
+                values = df.values
+                if subjects is None:
+                    subjects = values[:, 0]
+                else:
+                    assert subjects == values[:, 0], (
+                        "Inconsistent subjects list.")
+                if columns is None:
+                    columns = df.columns[1:]
+                else:
+                    assert all(columns == df.columns[1:]), (
+                        "Inconsistent regions list.")
+                values = values[:, 1:]
+                values = np.expand_dims(values, axis=1)
+                key = "hemi-{}_measure-{}".format(hemi, meas)
+                print("- {}: {}".format(key, values.shape))
+                data.append(values)
+                labels.append(key)
+        data = np.concatenate(data, axis=1)
+        print("- data:", data.shape)
+        destfile = os.path.join(outdir, "channels-{}.txt".format(template))
+        np.savetxt(destfile, labels, fmt="%s")
+        print_result(destfile)
+        destfile = os.path.join(outdir, "subjects-{}.txt".format(template))
+        np.savetxt(destfile, subjects, fmt="%s")
+        print_result(destfile)
+        destfile = os.path.join(outdir, "rois-{}.txt".format(template))
+        np.savetxt(destfile, columns, fmt="%s")
+        print_result(destfile)
+        destfile = os.path.join(outdir, "roi-{}.npy".format(template))
+        np.save(destfile, data)
+        print_result(destfile)
 
 
 def brainprep_fsreconall_qc(fs_regex, outdir, euler_thr=-217):

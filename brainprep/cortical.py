@@ -14,6 +14,7 @@ Common cortical functions.
 
 # Imports
 import os
+import glob
 import warnings
 from .utils import check_version, check_command, execute_command
 
@@ -132,10 +133,6 @@ def interhemi_surfreg(fsdir, sid, template_dir):
     for cmd in cmds:
         execute_command(cmd)
 
-    # Remove symliks
-    for path in symlinks:
-        os.unlink(path)
-
     # Get outputs
     xhemidir = os.path.join(subjfsdir, "xhemi")
     spherefile = os.path.join(
@@ -185,7 +182,7 @@ def interhemi_projection(fsdir, sid, template_dir):
             else:
                 reg_file = reg_xhemi_file
             dest_texture_file = os.path.join(
-                subjfsdir, "surf", texture, "{0}.{1}.xhemi.mgh".format(
+                subjfsdir, "surf", "{0}.{1}.xhemi.mgh".format(
                     hemi, name))
             cmd = ["mris_apply_reg", "--src", texture_file,
                    "--trg", dest_texture_file, "--streg", reg_file,
@@ -199,6 +196,37 @@ def interhemi_projection(fsdir, sid, template_dir):
                 execute_command(cmd)
             xhemi_features[name][hemi] = dest_texture_file
     return xhemi_features
+
+
+def mri_conversion(fsdir, sid):
+    """ Convert some modality in NiFTI format.
+
+    Parameters
+    ----------
+    fsdir: str
+        the FreeSurfer subjects directory 'SUBJECTS_DIR'.
+    sid: str
+        the subject identifier
+
+    Returns
+    -------
+    niifiles: dict
+        the converted modalities.
+    """
+    niifiles = {}
+    regex = os.path.join(fsdir, sid, "mri", "{0}.mgz")
+    reference_file = os.path.join(fsdir, sid, "mri", "rawavg.mgz")
+    check_command("mri_convert")
+    for modality in ["aparc+aseg", "aparc.a2009s+aseg", "aseg", "wm", "rawavg",
+                     "ribbon", "brain"]:
+        srcfile = regex.format(modality)
+        destfile = os.path.join(
+            fsdir, sid, "mri", "{}.nii.gz".format(modality))
+        cmd = ["mri_convert", "--resample_type", "nearest",
+               "--reslice_like", reference_file, srcfile, destfile]
+        execute_command(cmd)
+        niifiles[modality] = destfile
+    return niifiles
 
 
 def localgi(fsdir, sid):
@@ -257,6 +285,8 @@ def stats2table(fsdir, outdir):
     # Fist find all the subjects with a stat dir
     statdirs = glob.glob(os.path.join(fsdir, "*", "stats"))
     subjects = [item.lstrip(os.sep).split(os.sep)[-2] for item in statdirs]
+    subjects = [item for item in subjects
+                if item not in ("fsaverage", "fsaverage_sym")]
     os.environ["SUBJECTS_DIR"] = fsdir
     statfiles = []
     measures = ["area", "volume", "thickness", "thicknessstd",
