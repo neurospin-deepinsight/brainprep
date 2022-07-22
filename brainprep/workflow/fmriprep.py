@@ -86,8 +86,7 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile,
 def brainprep_fmriprep_conn(fmri_file, counfounds_file, mask_file, tr,
                             outdir="/work", low_pass=0.1, high_pass=0.01,
                             scrub=5, fd_threshold=0.2, std_dvars_threshold=3,
-                            detrend=True, standardize=True,
-                            remove_volumes=False, fwhm=0.):
+                            fwhm=0.):
     """ Compute ROI-based functional connectivity from fMRIPrep pre-processing.
 
     Parameters
@@ -124,14 +123,6 @@ def brainprep_fmriprep_conn(fmri_file, counfounds_file, mask_file, tr,
         squared intensity difference of volume N to volume N + 1. D refers
         to temporal derivative of timecourses, VARS referring to root mean
         squared variance over voxels.
-    detrend: bool, default True
-        detrend data prior to confound removal.
-    standardize: default True
-        set this flag if you want to standardize the output signal between
-        [0 1].
-    remove_volumes: bool, default False
-        this flag determines whether contaminated volumes should be removed
-        from the output data.
     fwhm: float or list, default 0.
         smoothing strength, expressed as as Full-Width at Half Maximum
         (fwhm), in millimeters. Can be a single number `fwhm=8`, the width
@@ -143,5 +134,5 @@ def brainprep_fmriprep_conn(fmri_file, counfounds_file, mask_file, tr,
     brainprep.func_connectivity(
         fmri_file, counfounds_file, mask_file, tr, outdir, low_pass=low_pass,
         high_pass=high_pass, scrub=scrub, fd_threshold=fd_threshold,
-        std_dvars_threshold=std_dvars_threshold, detrend=detrend,
-        standardize=standardize, remove_volumes=remove_volumes, fwhm=fwhm)
+        std_dvars_threshold=std_dvars_threshold, detrend=True,
+        standardize=True, remove_volumes=True, fwhm=fwhm)
