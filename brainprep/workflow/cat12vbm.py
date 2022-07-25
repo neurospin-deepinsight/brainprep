@@ -62,9 +62,7 @@ def brainprep_cat12vbm(
     """
     print_title("Complete matlab batch...")
     if not isinstance(anatomical, list):
-        print(anatomical)
         anatomical = anatomical.split(",")
-        print(anatomical)
     resource_dir = os.path.join(
         os.path.dirname(brainprep.__file__), "resources")
     batch_file = os.path.join(outdir, "cat12vbm_matlabbatch.m")
