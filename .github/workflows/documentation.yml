@@ -1,4 +1,4 @@
-name: "PEP8"
+name: "DOCUMENTATION"
 
 on:
   push:
@@ -27,11 +27,26 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install Latex
+      run: |
+        sudo apt install texlive-latex-extra
+        sudo apt install dvipng
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install nose nose-exclude coverage coveralls pycodestyle
         pip install --progress-bar off .
-    - name: Check Python syntax
+        pip install -r doc/requirements.txt
+    - name: Compute documentation
       run: |
-        pycodestyle brainprep --ignore="E121,E123,E126,E226,E24,E704,E402,E731,E722,E741,W503,W504,W605"
+        mkdir -p tmp/doc
+        sphinxdoc -v 2 -p . -n brainprep -o tmp/doc
+        cd tmp/doc
+        make raw-html
+        cd ../..
+    - name: Upload Adocumentation as an artifact
+      uses: actions/upload-artifact@v2
+      with: 
+        name: html-documentation
+        retention-days: 15
+        path: |
+            tmp/doc/build/html
