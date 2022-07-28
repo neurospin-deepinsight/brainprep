@@ -100,7 +100,8 @@ def check_version(package_name, check_pkg_version):
     print("{0} - {1}".format(package_name, version))
 
 
-def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file, outfile):
+def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file, outfile,
+                      longitudinal=False):
     """ Complete matlab batch from template.
 
     Parameters
@@ -119,8 +120,14 @@ def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file, outfile):
     """
     nii_files_str = ""
     for path in nii_files:
-        nii_files_str += "'{0}' \n".format(
-            ungzip_file(path, outdir=os.path.dirname(outfile)))
+        if longitudinal:
+            ses = path.split(os.sep)[-3]
+            outdir = os.path.join(os.path.dirname(outfile), ses, "anat")
+            nii_files_str += "'{0}' \n".format(
+                ungzip_file(path, outdir=outdir))
+        else:
+            nii_files_str += "'{0}' \n".format(
+                ungzip_file(path, outdir=os.path.dirname(outfile)))
     with open(template, "r") as of:
         stream = of.read()
     stream = stream.format(anat_file=nii_files_str, tpm_file=tpm_file,
