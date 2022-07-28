@@ -20,3 +20,4 @@ from .quasiraw import brainprep_quasiraw, brainprep_quasiraw_qc
 from .fmriprep import brainprep_fmriprep, brainprep_fmriprep_conn
 from .mriqc import brainprep_mriqc, brainprep_mriqc_summary
 from .deface import brainprep_deface
+from .tbss import brainprep_tbss_preproc, brainprep_tbss

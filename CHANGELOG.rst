@@ -34,6 +34,8 @@ The following workflows are released:
 * mriqc
 * mriqc-summary
 * deface
+* tbss-preproc
+* tbss
 
 Bug fixes
 ---------

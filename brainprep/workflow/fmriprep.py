@@ -16,7 +16,7 @@ import os
 import tempfile
 import subprocess
 import brainprep
-from brainprep.color_utils import print_title, print_command
+from brainprep.color_utils import print_subtitle, print_command
 
 
 def brainprep_fmriprep(anatomical, functionals, subjid, descfile,
@@ -38,7 +38,7 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile,
     fmriprep: str
         path to the fmriprep binary.
     """
-    print_title("Launch fmriprep...")
+    print_subtitle("Launch fmriprep...")
     if not isinstance(functionals, list):
         functionals = functionals.split(",")
     destdir = os.path.join(outdir, "fmriprep_{0}".format(subjid))
@@ -131,7 +131,7 @@ def brainprep_fmriprep_conn(fmri_file, counfounds_file, mask_file, tr,
         Can be three consecutive numbers, ``fwhm=[1,1.5,2.5]``, giving the fwhm
         along each axis.
     """
-    print_title("Launch fmriprep connectivity...")
+    print_subtitle("Launch fmriprep connectivity...")
     brainprep.func_connectivity(
         fmri_file, counfounds_file, mask_file, tr, outdir, low_pass=low_pass,
         high_pass=high_pass, scrub=scrub, fd_threshold=fd_threshold,
