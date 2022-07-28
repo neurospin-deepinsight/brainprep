@@ -43,7 +43,7 @@ jobs:
         cd tmp/doc
         make raw-html
         cd ../..
-    - name: Upload Adocumentation as an artifact
+    - name: Upload documentation as an artifact
       uses: actions/upload-artifact@v2
       with: 
         name: html-documentation

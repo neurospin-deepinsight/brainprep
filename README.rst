@@ -17,11 +17,11 @@
 .. |Coveralls| image:: https://coveralls.io/repos/neurospin-deepinsight/brainprep/badge.svg?branch=master&service=github
 .. _Coveralls: https://coveralls.io/github/neurospin-deepinsight/brainprep
 
-.. |Travis| image:: https://travis-ci.com/neurospin-deepinsight/brainprep.svg?branch=master
-.. _Travis: https://travis-ci.com/neurospin/brainprep
+.. |ExtraTesting| image:: https://travis-ci.com/neurospin-deepinsight/brainprep.svg?branch=master
+.. _ExtraTesting: https://travis-ci.com/neurospin/brainprep
 
-.. |ExtraTesting| image:: https://github.com/neurospin-deepinsight/brainprep/actions/workflows/testing.yml/badge.svg
-.. _ExtraTesting: https://github.com/neurospin-deepinsight/brainprep/actions
+.. |Testing| image:: https://github.com/neurospin-deepinsight/brainprep/actions/workflows/testing.yml/badge.svg
+.. _Testing: https://github.com/neurospin-deepinsight/brainprep/actions
 
 .. |Pep8| image:: https://github.com/neurospin-deepinsight/brainprep/actions/workflows/pep8.yml/badge.svg
 .. _Pep8: https://github.com/neurospin-deepinsight/brainprep/actions
