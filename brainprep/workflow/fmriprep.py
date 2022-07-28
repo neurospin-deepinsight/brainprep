@@ -92,22 +92,23 @@ def brainprep_fmriprep_conn(fmri_file, counfounds_file, mask_file, tr,
     Parameters
     ----------
     fmri_file: str
-        the fMRIPrep pre-processing file: '*desc-preproc_bold.nii.gz'.
+        the fMRIPrep pre-processing file: **\*desc-preproc_bold.nii.gz**.
     counfounds_file: str
         the path to the fMRIPrep counfounds file:
-        '*desc-confounds_regressors.tsv'.
+        **\*desc-confounds_regressors.tsv**.
     mask_file: str
         signal is only cleaned from voxels inside the mask. It should have the
-        same shape and affine as the `fmri_file`: '*desc-brain_mask.nii.gz'.
+        same shape and affine as the ``fmri_file``:
+        **\*desc-brain_mask.nii.gz**.
     tr: float
         the repetition time (TR) in seconds.
     outdir: str
         the destination folder.
     low_pass: float, default 0.1
-        the low-pass filter cutoff frequency in Hz. Set it to `None` if you
+        the low-pass filter cutoff frequency in Hz. Set it to ``None`` if you
         dont want low-pass filtering.
     high_pass: float, default 0.01
-        the high-pass filter cutoff frequency in Hz. Set it to `None` if you
+        the high-pass filter cutoff frequency in Hz. Set it to ``None`` if you
         dont want high-pass filtering.
     scrub: int, default 5
         after accounting for time frames with excessive motion, further remove
@@ -125,9 +126,9 @@ def brainprep_fmriprep_conn(fmri_file, counfounds_file, mask_file, tr,
         squared variance over voxels.
     fwhm: float or list, default 0.
         smoothing strength, expressed as as Full-Width at Half Maximum
-        (fwhm), in millimeters. Can be a single number `fwhm=8`, the width
-        is identical along x, y and z or `fwhm=0`, no smoothing is peformed.
-        Can be three consecutive numbers, `fwhm=[1,1.5,2.5]`, giving the fwhm
+        (fwhm), in millimeters. Can be a single number ``fwhm=8``, the width
+        is identical along x, y and z or ``fwhm=0``, no smoothing is peformed.
+        Can be three consecutive numbers, ``fwhm=[1,1.5,2.5]``, giving the fwhm
         along each axis.
     """
     print_title("Launch fmriprep connectivity...")

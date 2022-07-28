@@ -240,8 +240,8 @@ def localgi(fsdir, sid):
     sid: str
         Identifier of subject.
 
-    Return
-    ------
+    Returns
+    -------
     subjfsdir: str
         the FreeSurfer results for the subject.
     """
@@ -272,8 +272,8 @@ def stats2table(fsdir, outdir):
     outdir: str
         the destination folder.
 
-    Return
-    ------
+    Returns
+    -------
     statfiles: list of str
         The FreeSurfer summary stats.
     """

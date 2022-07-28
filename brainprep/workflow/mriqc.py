@@ -212,8 +212,12 @@ def filter_iqms(apidf, filters):
     """ Filters the API table based on user-provided parameters. Filter
     parameters should be a list of strings and string formats should
     be "(VAR) (Operator) (Value)".
+
     Example: ['TR == 3.0'] or ['TR > 1.0','FD < .3']
-    Note: Each element is SPACE separated!
+
+    Notes
+    -----
+    Each filter element is SPACE separated!
 
     Parameters
     ----------

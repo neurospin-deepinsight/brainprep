@@ -39,26 +39,26 @@ def func_connectivity(fmri_file, counfounds_file, mask_file,
     This function applies the Yeo et al. (2011) timeseries pre-processing
     schema:
 
-    - detrend.
-    - low- and high-pass filters.
-    - remove confounds.
-    - standardize.
+    * detrend.
+    * low- and high-pass filters.
+    * remove confounds.
+    * standardize.
 
     The filtering stage is composed of:
 
-    - low pass filter out high frequency signals from the data (upper than
-    0.1 Hz by default). fMRI signals are slow evolving processes, any high
-    frequency signals are likely due to noise.
-    - high pass filter out any very low frequency signals (below 0.001 Hz by
-    default), which may be due to intrinsic scanner instabilities.
+    * low pass filter out high frequency signals from the data (upper than
+      0.1 Hz by default). fMRI signals are slow evolving processes, any high
+      frequency signals are likely due to noise.
+    * high pass filter out any very low frequency signals (below 0.001 Hz by
+      default), which may be due to intrinsic scanner instabilities.
 
     The confound regressors are composed of:
 
-    - 1 global signal.
-    - 12 motion parameters + derivatives.
-    - 8 discrete cosines transformation basis regressors to handle
+    * 1 global signal.
+    * 12 motion parameters + derivatives.
+    * 8 discrete cosines transformation basis regressors to handle
       low-frequency signal drifts.
-    - 2 confounds derived from white matter and cerebrospinal fluid.
+    * 2 confounds derived from white matter and cerebrospinal fluid.
 
     This is a total of 23 base confound regressor variables.
 
@@ -66,30 +66,31 @@ def func_connectivity(fmri_file, counfounds_file, mask_file,
     orthogonally to temporal filters (low- and/or high-pass filters), if both
     are specified.
 
-    Note
-    ----
+    Notes
+    -----
     Connectivity extraction parameters can be changed by setting the following
     module global parameters: CONNECTIVITIES, ATLASES.
 
     Parameters
     ----------
     fmri_file: str
-        the fMRIPrep pre-processing file: '*desc-preproc_bold.nii.gz'.
+        the fMRIPrep pre-processing file: **\*desc-preproc_bold.nii.gz**.
     counfounds_file: str
         the path to the fMRIPrep counfounds file:
-        '*desc-confounds_regressors.tsv'.
+        **\*desc-confounds_regressors.tsv**.
     mask_file: str
         signal is only cleaned from voxels inside the mask. It should have the
-        same shape and affine as the `fmri_file`: '*desc-brain_mask.nii.gz'.
+        same shape and affine as the ``fmri_file``:
+        **\*desc-brain_mask.nii.gz**.
     tr: float
         the repetition time (TR) in seconds.
     outdir: str
         the destination folder.
     low_pass: float, default 0.1
-        the low-pass filter cutoff frequency in Hz. Set it to `None` if you
+        the low-pass filter cutoff frequency in Hz. Set it to ``None`` if you
         dont want low-pass filtering.
     high_pass: float, default 0.01
-        the high-pass filter cutoff frequency in Hz. Set it to `None` if you
+        the high-pass filter cutoff frequency in Hz. Set it to ``None`` if you
         dont want high-pass filtering.
     scrub: int, default 5
         after accounting for time frames with excessive motion, further remove
@@ -115,9 +116,9 @@ def func_connectivity(fmri_file, counfounds_file, mask_file,
         from the output data.
     fwhm: float or list, default 0.
         smoothing strength, expressed as as Full-Width at Half Maximum
-        (fwhm), in millimeters. Can be a single number `fwhm=8`, the width
-        is identical along x, y and z or `fwhm=0`, no smoothing is peformed.
-        Can be three consecutive numbers, `fwhm=[1,1.5,2.5]`, giving the fwhm
+        (fwhm), in millimeters. Can be a single number ``fwhm=8``, the width
+        is identical along x, y and z or ``fwhm=0``, no smoothing is peformed.
+        Can be three consecutive numbers, ``fwhm=[1,1.5,2.5]``, giving the fwhm
         along each axis.
 
     Returns

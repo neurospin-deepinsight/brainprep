@@ -4,7 +4,7 @@
 
 **Development**
 
-|Coveralls|_ |Testing|_ |Pep8|_ |Travis|_ |Doc|_ |ExtraDoc|_
+|Coveralls|_ |Testing|_ |Pep8|_ |Doc|_ |ExtraTesting|_ |ExtraDoc|_
 
 **Release**
 
@@ -20,8 +20,8 @@
 .. |Travis| image:: https://travis-ci.com/neurospin-deepinsight/brainprep.svg?branch=master
 .. _Travis: https://travis-ci.com/neurospin/brainprep
 
-.. |Testing| image:: https://github.com/neurospin-deepinsight/brainprep/actions/workflows/testing.yml/badge.svg
-.. _Testing: https://github.com/neurospin-deepinsight/brainprep/actions
+.. |ExtraTesting| image:: https://github.com/neurospin-deepinsight/brainprep/actions/workflows/testing.yml/badge.svg
+.. _ExtraTesting: https://github.com/neurospin-deepinsight/brainprep/actions
 
 .. |Pep8| image:: https://github.com/neurospin-deepinsight/brainprep/actions/workflows/pep8.yml/badge.svg
 .. _Pep8: https://github.com/neurospin-deepinsight/brainprep/actions
@@ -71,9 +71,9 @@ amoung which the CEA Neurospin BAOBAB laboratory.
 Important links
 ===============
 
-- Official source code repo: https://github.com/neurospin-deepinsight/brainprep
-- HTML documentation (stable release): https://brainprep.readthedocs.io/en/latest
-- Release notes: https://github.com/neurospin-deepinsight/brainprep/blob/master/CHANGELOG.rst
+* Official source code repo: https://github.com/neurospin-deepinsight/brainprep
+* HTML documentation (stable release): https://brainprep.readthedocs.io/en/latest
+* Release notes: https://github.com/neurospin-deepinsight/brainprep/blob/master/CHANGELOG.rst
 
 
 Dependencies
@@ -101,11 +101,11 @@ More detailed instructions are available at https://brainprep.readthedocs.io/en/
 Where to start
 ==============
 
-Examples are available in the
-`gallery <https://brainprep.readthedocs.io/en/latest/auto_gallery/index.html>`_.
-The module is described in the
-`API documentation <https://brainprep.readthedocs.io/en/latest/generated/brainprep.html>`_.
-All scripts are documentated in the `Scripts documentation <https://brainprep.readthedocs.io/en/latest/generated/brainprep.workflow.html>`_.
+The easiest way to get started is to:
+
+* browse available examples: https://brainprep.readthedocs.io/en/latest/auto_gallery/index.html.
+* refer to the list of available workflows: https://brainprep.readthedocs.io/en/latest/generated/brainprep.workflow.html.
+* refer to the module API documentation: https://brainprep.readthedocs.io/en/latest/generated/brainprep.html.
 
 
 Contributing
@@ -120,7 +120,7 @@ Citation
 ========
 
 There is no paper published yet about `brainprep`.
-We suggest that you aknowledge the brainprep team and reference to the code
+We suggest that you aknowledge the brainprep team or reference to the code
 repository: |link-to-paper|. Thank you.
 
 .. |link-to-paper| raw:: html
