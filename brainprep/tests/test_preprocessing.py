@@ -59,6 +59,7 @@ class TestPreprocessing(unittest.TestCase):
         """
         self.popen_patcher.stop()
 
+    @mock.patch("glob.glob")
     @mock.patch("builtins.open")
     @mock.patch("nibabel.save")
     @mock.patch("nibabel.load")
@@ -69,9 +70,9 @@ class TestPreprocessing(unittest.TestCase):
     @mock.patch("os.path.isdir")
     @mock.patch("os.path.isfile")
     @mock.patch("os.path.islink")
-    def test_processes(self, mock_islink, mock_isfile, mock_isdir, mock_rm,
-                       mock_cd, mock_loadtxt, mock_savetxt, mock_load,
-                       mock_save, mock_open):
+    def test_run(self, mock_islink, mock_isfile, mock_isdir, mock_rm,
+                 mock_cd, mock_loadtxt, mock_savetxt, mock_load,
+                 mock_save, mock_open, mock_glob):
         """ Test the processes.
         """
         print_title("Testing processes...")
@@ -89,6 +90,7 @@ class TestPreprocessing(unittest.TestCase):
         mock_exit = mock.Mock()
         setattr(mock_context_manager, "__enter__", mock_enter)
         setattr(mock_context_manager, "__exit__", mock_exit)
+        mock_glob.return_value = []
         for key, (fct, kwargs) in self.processes.items():
             print_subtitle(f"{key}...")
             fct(**kwargs)
