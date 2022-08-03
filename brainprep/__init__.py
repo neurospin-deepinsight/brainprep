@@ -20,3 +20,8 @@ from .spatial import (
     apply_mask)
 from .cortical import (
     recon_all, localgi, stats2table, interhemi_surfreg, interhemi_projection)
+from .dwitools import extract_dwi_shells, topup, epi_reg, eddy, extract_image,\
+                      flirt, triplanar
+from .dwi import (
+    reshape_input_data, Compute_and_Apply_susceptibility_correction,
+    eddy_current_and_motion_correction, create_qc_report)
