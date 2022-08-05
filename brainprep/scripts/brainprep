@@ -27,5 +27,6 @@ fire.Fire({
     "mriqc-summary": wf.brainprep_mriqc_summary,
     "deface": wf.brainprep_deface,
     "tbss-preproc": wf.brainprep_tbss_preproc,
-    "tbss": wf.brainprep_tbss
+    "tbss": wf.brainprep_tbss,
+    "dmriprep": wf.brainprep_dmriprep
 })
