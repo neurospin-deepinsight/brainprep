@@ -51,7 +51,7 @@ def extract_dwi_shells(dwi_nii_path, bvals_path, bvecs_path, outdir):
 
     # Detect shell indices
     bvals = real_bvals.copy()
-    bvecs = real_bvecs.copy()
+    # bvecs = real_bvecs.copy()
     b0_indices = numpy.where(bvals < 50)[0].tolist()
     bvals[b0_indices] = 0
     bvals = [int(round(bval, -2)) for bval in bvals]
@@ -210,7 +210,6 @@ def topup(
 
     # Write topup acqp
     # https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/eddy/UsersGuide
-    print(len(b0s))
     if len(b0s) != len(phase_enc_dirs):
         raise ValueError("Please specify properly the topup input data.")
     acqp_file = os.path.join(outroot, "acqp.txt")
@@ -219,7 +218,7 @@ def topup(
     tot_nvol = 0
     with open(acqp_file, "wt") as open_file:
         for enc_dir, path in zip(phase_enc_dirs, b0s):
-            print("loop : ", enc_dir, path)
+            print("b0 enc_dir : ", enc_dir, path)
             im = nibabel.load(path)
             if affine is None:
                 affine = im.affine
@@ -227,7 +226,6 @@ def topup(
                 assert numpy.allclose(affine, im.affine)
             arr = im.get_data()
             for cnt, size in enumerate(arr.shape[:3]):
-                print("size : ", size)
                 if size % 2 == 1:
                     print("[warn] reducing TOPUP B0 image size.")
                     arr = numpy.delete(arr, -1, axis=cnt)
@@ -294,8 +292,7 @@ def topup(
         "-Tmean", mean_corrected_b0s]
     check_command(cmd[0])
     execute_command(cmd)
-
-    return fieldmap, corrected_b0s, mean_corrected_b0s
+    return fieldmap, corrected_b0s, mean_corrected_b0s, acqp_file
 
 
 def epi_reg(

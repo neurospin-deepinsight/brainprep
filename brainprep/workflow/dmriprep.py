@@ -12,17 +12,16 @@ Interface for dwi preproc.
 """
 
 # System import
-import brainprep
 from brainprep.color_utils import print_title, print_result
 from brainprep.dwi import reshape_input_data,\
                            Compute_and_Apply_susceptibility_correction,\
-                           eddy_current_and_motion_correction,\
+                           eddy_and_motion_correction,\
                            create_qc_report
 
 
-def brainprep_dmriprep(subject, outdir, t1, dwi, bvec, bval, t1_mask, acqp,
-                       index, nodiff_mask=None, mag_mask=None, topup_b0=None,
-                       topup_b0_dir=None, readout_time=None):
+def brainprep_dmriprep(subject, outdir, t1, dwi, bvec, bval, t1_mask, index,
+                       acqp=None, nodiff_mask=None, mag_mask=None,
+                       topup_b0=None, topup_b0_dir=None, readout_time=None):
     """ Define dmri preproc workflow.
 
     Parameters
@@ -39,8 +38,6 @@ def brainprep_dmriprep(subject, outdir, t1, dwi, bvec, bval, t1_mask, acqp,
         Path to the bvec file.
     bval: str
         Path to the bval file.
-    acqp: str
-        Path to the FSL eddy acqp file.
     index: str
         Path to the FSL eddy index file.
     t1_mask: str
@@ -84,14 +81,13 @@ def brainprep_dmriprep(subject, outdir, t1, dwi, bvec, bval, t1_mask, acqp,
     print_result(outputs)
 
     print_title("3- Eddy current and motion correction.")
-    outputs = eddy_current_and_motion_correction(subject,
-                                                 t1,
-                                                 acqp,
-                                                 index,
-                                                 bvec,
-                                                 bval,
-                                                 outdir,
-                                                 outputs)
+    outputs = eddy_and_motion_correction(subject,
+                                         t1,
+                                         index,
+                                         bvec,
+                                         bval,
+                                         outdir,
+                                         outputs)
     print_result(outputs)
 
     print_title("4- Create QC report")
