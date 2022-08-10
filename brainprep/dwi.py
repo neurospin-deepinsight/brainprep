@@ -13,6 +13,7 @@ import shutil
 
 
 from .utils import check_command, execute_command
+from .color_utils import print_subtitle
 from .dwitools import read_bvals_bvecs, topup, epi_reg, eddy, extract_image,\
                       flirt, triplanar
 
@@ -202,7 +203,6 @@ def Compute_and_Apply_susceptibility_correction(subject,
     susceptibility_method = None
     # Perform susceptibility correction: check carefully the result
 
-    synB0 = "odo"
     # FSL topup
 
     if topup_b0 is not None and \
@@ -211,6 +211,8 @@ def Compute_and_Apply_susceptibility_correction(subject,
 
         # Select case
         susceptibility_method = "topup"
+        print_subtitle("susceptibility_method : {sm}"
+                       .format(sm=susceptibility_method))
 
         # Topup
         fieldmap_hz_to_diff_file, corrected_b0s,\
@@ -253,9 +255,81 @@ def Compute_and_Apply_susceptibility_correction(subject,
     # elif:
 
     # synb0-Disco
-    elif synB0 == "odo":
-        pass
+    elif type(topup_b0_dir) is str and\
+            topup_b0_dir in ["i", "i-", "j", "j-", "k", "k-"] and\
+            topup_b0 is None:
 
+        #  Select case
+        susceptibility_method = "synb0"
+        print_subtitle("susceptibility_method : {sm}"
+                       .format(sm=susceptibility_method))
+
+        synb0_input_dir = os.path.join(outdir, "synb0_inputs")
+        synb0_output_dir = os.path.join(outdir, "synb0_outputs")
+        os.mkdir(synb0_input_dir)
+        print(synb0_input_dir)
+        cmd = ["cp", t1, os.path.join(synb0_input_dir, "T1.nii.gz")]
+        check_command(cmd[0])
+        execute_command(cmd)
+        cmd = \
+            ["cp", outputs["nodif"],
+             os.path.join(synb0_input_dir, "b0.nii.gz")]
+        check_command(cmd[0])
+        execute_command(cmd)
+
+        # acqp file
+        data = []
+        affine = None
+        enc_dir = topup_b0_dir
+        print("PhaseEncodingDirection : ", enc_dir)
+        acqp_file = os.path.join(synb0_input_dir, "acqparams.txt")
+        with open(acqp_file, "wt") as open_file:
+            im = nibabel.load(dwi)
+            if affine is None:
+                affine = im.affine
+            else:
+                assert numpy.allclose(affine, im.affine)
+            arr = im.get_data()
+            for cnt, size in enumerate(arr.shape[:3]):
+                if size % 2 == 1:
+                    print("[warn] reducing TOPUP B0 image size.")
+                    arr = numpy.delete(arr, -1, axis=cnt)
+            if arr.ndim == 3:
+                arr.shape += (1, )
+            data.append(arr)
+            if enc_dir == "i":
+                row1 = "1 0 0 {0}".format(readout_time)
+                row2 = "-1 0 0 0.000"
+            elif enc_dir == "i-":
+                row1 = "-1 0 0 {0}".format(readout_time)
+                row2 = "1 0 0 0.000"
+            elif enc_dir == "j":
+                row1 = "0 1 0 {0}".format(readout_time)
+                row2 = "0 -1 0 0.000"
+            elif enc_dir == "j-":
+                row1 = "0 -1 0 {0}".format(readout_time)
+                row2 = "0 1 0 0.000"
+            else:
+                raise ValueError("Unknown encode phase direction : "
+                                 "{0}...".format(enc_dir))
+            open_file.write(row1 + "\n")
+            open_file.write(row2 + "\n")
+        outputs["acqp"] = acqp_file
+        # #############################TO ASK ARG##############################
+        fs = "/home/ld265905/neurospin/psy_sbox/tmp_loic/license.txt"
+        # #####################################################################
+        cmd = ["singularity", "run", "-e",
+               "-B",
+               "{INPUTS}/:/INPUTS".format(INPUTS=synb0_input_dir),
+               "-B",
+               "{OUTPUTS}/:/OUTPUTS".format(OUTPUTS=synb0_output_dir),
+               "-B",
+               "{license}:/extra/freesurfer/license.txt".format(license=fs),
+               "/home/ld265905/synb0-disco_v3.0.sif"]
+        check_command(cmd[0])
+        execute_command(cmd)
+        outputs["eddy_file_from_topup"] = os.path.join(synb0_output_dir,
+                                                       "topup")
     # Create an zero deformation field
     else:
         # Coregistration only
@@ -293,7 +367,7 @@ def Compute_and_Apply_susceptibility_correction(subject,
     """
 
     # Apply susceptibility correction to diffusion volumes
-    if susceptibility_method == "topup":
+    if susceptibility_method == "topup" or susceptibility_method == "synb0":
 
         # Susceptibility will be corrected directly by eddy
         eddy_dwi_input = dwi
@@ -389,16 +463,41 @@ def eddy_and_motion_correction(subject,
         field = outputs["fieldmap_hz"].replace(".nii.gz", "")
 
     # eddy
-    corrected_dwi, corrected_bvec = eddy(
-        dwi=outputs["eddy_dwi_input"],
-        dwi_brain_mask=outputs["nodif_brain_mask_undistorted"],
-        acqp=outputs["acqp"],
-        index=index,
-        bvecs=bvec,
-        bvals=bval,
-        outroot=eddy_outroot,
-        field=field,
-        strategy="openmp")
+    if outputs["2_method"] == "synb0":
+        # corrected_dwi, corrected_bvec = eddy(
+        #     dwi=outputs["eddy_dwi_input"],
+        #     dwi_brain_mask=outputs["nodif_brain_mask_undistorted"],
+        #     acqp=outputs["acqp"],
+        #     index=index,
+        #     bvecs=bvec,
+        #     bvals=bval,
+        #     outroot=eddy_outroot,
+        #     field=field,
+        #     strategy="openmp")
+        fsl_cmd = ["eddy_openmp",
+                   "--imain="+outputs["eddy_dwi_input"],
+                   "--mask="+outputs["nodif_brain_mask_undistorted"],
+                   "--acqp="+outputs["acqp"],
+                   "--index="+index,
+                   "--bvecs="+bvec,
+                   "--bvals="+bval,
+                   "--topup="+outputs["eddy_file_from_topup"],
+                   "--out="+eddy_outroot]
+        check_command(fsl_cmd[0])
+        execute_command(fsl_cmd)
+        corrected_dwi = "{0}.nii.gz".format(eddy_outroot)
+        corrected_bvec = "{0}.eddy_rotated_bvecs".format(eddy_outroot)
+    else:
+        corrected_dwi, corrected_bvec = eddy(
+            dwi=outputs["eddy_dwi_input"],
+            dwi_brain_mask=outputs["nodif_brain_mask_undistorted"],
+            acqp=outputs["acqp"],
+            index=index,
+            bvecs=bvec,
+            bvals=bval,
+            outroot=eddy_outroot,
+            field=field,
+            strategy="openmp")
 
     # Copy eddy corrected outputs
     corrected_dwi_undistorted = os.path.join(
