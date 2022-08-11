@@ -26,8 +26,7 @@ from .connectivity import func_connectivity
 from .tbss import (
     dtifit, tbss_1_preproc, tbss_2_reg, tbss_3_postreg, tbss_4_prestats)
 from .dwitools import extract_dwi_shells, topup, epi_reg, eddy, extract_image,\
-                      flirt, triplanar
+                      flirt, triplanar, register_mask_from_t1
 from .dwi import (
     reshape_input_data, Compute_and_Apply_susceptibility_correction,
     eddy_and_motion_correction, create_qc_report)
-

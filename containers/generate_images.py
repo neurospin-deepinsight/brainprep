@@ -17,7 +17,7 @@ import shutil
 
 def main(working_dir):
     """ Parse available Docker files and generates associated images.
-    
+
     Parameters
     ----------
     working_dir: str
@@ -34,7 +34,7 @@ def main(working_dir):
         cache_dir = os.path.join(dest_dir, "cache")
         for _path in (tmp_dir, cache_dir):
             if not os.path.isdir(_path):
-                os.mkdir(_path)           
+                os.mkdir(_path)
         shutil.copy(path, os.path.join(dest_dir, "Dockerfile"))
         cmds = "export WDIR={}\n".format(dest_dir)
         cmds += "cd $WDIR\n"
@@ -52,7 +52,7 @@ def main(working_dir):
         with open(cmds_file, "wt") as of:
             of.write(cmds)
         print("Ready to execute: {}".format(cmds_file))
-            
+
 
 if __name__ == "__main__":
 

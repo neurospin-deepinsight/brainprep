@@ -21,7 +21,8 @@ from brainprep.dwi import reshape_input_data,\
 
 def brainprep_dmriprep(subject, outdir, t1, dwi, bvec, bval, t1_mask, index,
                        acqp=None, nodiff_mask=None, mag_mask=None,
-                       topup_b0=None, topup_b0_dir=None, readout_time=None):
+                       topup_b0=None, topup_b0_dir=None, readout_time=None,
+                       license_fs=None):
     """ Define dmri preproc workflow.
 
     Parameters
@@ -46,9 +47,9 @@ def brainprep_dmriprep(subject, outdir, t1, dwi, bvec, bval, t1_mask, index,
         Path to the t1 brain mask image.
     mag_mask: str
         Path to the magnitude mask image.
-    topup_b0: str
+    topup_b0: list
         The b0 data acquired in opposite phase enc. direction.
-    topup_b0_dir: str
+    topup_b0_dir: list
         The b0 data enc.directions.
     readout_time: float
         The readout time.
@@ -75,6 +76,7 @@ def brainprep_dmriprep(subject, outdir, t1, dwi, bvec, bval, t1_mask, index,
                                                           dwi,
                                                           outdir,
                                                           outputs,
+                                                          license_fs,
                                                           topup_b0_dir,
                                                           readout_time,
                                                           topup_b0)

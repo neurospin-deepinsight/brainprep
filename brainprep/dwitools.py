@@ -745,3 +745,73 @@ def triplanar(input_file, output_fileroot, title=None, nb_slices=1,
     display.close()
 
     return output_png_file
+
+
+def register_mask_from_t1(t1, t1_mask, nodiff, outdir, name):
+    """ Get nodiff_mask from t1_mask, t1 and nodiff ,
+    Compute the transformation from nodiff to t1,
+    Inverse the mat to get t1 to nodiff,
+    Apply the inverse to t1_mask to get nodiff_mask,
+    Apply nodiff brain mask to extract nodiff brain.
+
+    Parameters
+    ----------
+    t1: str
+        the input t1 image.
+    outdir: str
+        output fileroot.
+    name: str
+        basename for the generated files
+    t1_mask: str
+        the input t1_mask image corresponding to the t1.
+    nodiff: str
+        the input b0 image.
+
+    Returns
+    -------
+    nodiff_brain: str
+        the extracted brain from the nodiff with the new nodiff brain mask.
+    nodiff_brain_mask: str
+        the new nodiff brain mask
+    """
+    # Get nodiff_mask from t1_mask, t1 and nodiff
+    # Compute the transformation from nodiff to t1
+    nodiff_to_t1 = os.path.join(
+        outdir, "{NAME}_to_t1.nii.gz".format(NAME=name))
+    omat1 = os.path.join(outdir, "{NAME}_to_t1.mat".format(NAME=name))
+    omat2 = os.path.join(outdir, "t1_to_{NAME}.mat".format(NAME=name))
+
+    flirt(
+        in_file=nodiff,
+        ref_file=t1,
+        out=nodiff_to_t1,
+        dof=6,
+        omat=omat1)
+
+    # Inverse the mat to get t1 to nodiff
+    fsl_cmd = ["convert_xfm", "-omat", omat2, "-inverse", omat1]
+    check_command(fsl_cmd[0])
+    execute_command(fsl_cmd)
+
+    # Apply the inverse to t1_mask to get nodiff_mask
+    nodiff_mask = os.path.join(outdir, "{NAME}_brain_mask.nii.gz"
+                                       .format(NAME=name))
+    flirt(
+        in_file=t1_mask,
+        ref_file=nodiff,
+        applyxfm=True,
+        init=omat2,
+        out=nodiff_mask,
+        interp="nearestneighbour")
+
+    # Extract
+    # Apply nodiff brain mask to extract nodiff brain
+    output_fileroot_fslmaths = os.path.join(outdir, "{NAME}_brain")
+    fsl_cmd = ["fslmaths", nodiff,
+               "-mas", nodiff_mask,
+               output_fileroot_fslmaths]
+    check_command(fsl_cmd[0])
+    execute_command(fsl_cmd)
+    nodiff_brain = glob.glob(output_fileroot_fslmaths + ".*")[0]
+    nodiff_brain_mask = nodiff_mask
+    return nodiff_brain, nodiff_brain_mask
