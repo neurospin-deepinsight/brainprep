@@ -68,12 +68,16 @@ def brainprep_cat12vbm(
     batch_file = os.path.join(outdir, "cat12vbm_matlabbatch.m")
     if not longitudinal:
         template_batch = os.path.join(resource_dir, "cat12vbm_matlabbatch.m")
+        print("use matlab batch:", template_batch)
+        brainprep.write_matlabbatch(
+            template_batch, anatomical, tpm, darteltpm, batch_file)
     else:
         template_batch = os.path.join(
             resource_dir, "cat12vbm_matlabbatch_longitudinal.m")
-    print("use matlab batch:", template_batch)
-    brainprep.write_matlabbatch(
-        template_batch, anatomical, tpm, darteltpm, batch_file)
+        print("use matlab batch:", template_batch)
+        brainprep.write_matlabbatch(
+            template_batch, anatomical, tpm, darteltpm, batch_file,
+            longitudinal=True)
 
     print_title("Launch CAT12 VBM matlab batch...")
     cmd = [cat12, "-s", spm12, "-m", matlab, "-b", batch_file]

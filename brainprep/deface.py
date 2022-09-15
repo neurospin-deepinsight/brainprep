@@ -18,22 +18,22 @@ from .utils import check_command, execute_command
 
 
 def deface(anat_file, outdir):
-    """ Deface MRI head images using the FSL 'fsl_deface' command.
+    """ Deface MRI head images using the FSL **fsl_deface** command.
 
     The UK Biobank study uses a customized image processing pipeline based
-    on FSL (Alfaro-Almagro et al., 2018), which includes a de-facing
+    on FSL Alfaro-Almagro et al. (2018), which includes a de-facing
     approach also based on FSL tools. It was designed for use with
     T1w images. This de-facing approach was later extracted from the larger
     processing pipeline and released as part of the main FSL package as
-    'fsl_deface'.
-    Like 'mri_deface' and 'pydeface', this method uses linear
+    **fsl_deface**.
+    Like **mri_deface** and **pydeface**, this method uses linear
     registration (also FLIRT) to locate its own pre-defined mask of face
     voxels on the target image, then sets voxels in the mask to zero. Unlike
-    'mri_deface' and 'pydeface', this method also removes the ears.
-    Although it is also relatively popular, we did not include 'mask_face'
-    (Milchenko and Marcus, 2013) because previous work has already
+    **mri_deface** and **pydeface**, this method also removes the ears.
+    Although it is also relatively popular, we did not include **mask_face**
+    Milchenko and Marcus (2013) because previous work has already
     demonstrated that it provides inadequate protection
-    (Abramian and Eklund, 2019).
+    Abramian and Eklund (2019).
 
     References
     ----------
@@ -47,7 +47,7 @@ def deface(anat_file, outdir):
     ----------
     anat_file: str
         input MRI T1w head image to be defaced: need to be named as
-        '*T1w.<ext>'.
+        **\*T1w.<ext>**.
     outdir: str
         the output folder.
 

@@ -23,3 +23,5 @@ from .cortical import (
     mri_conversion)
 from .deface import deface
 from .connectivity import func_connectivity
+from .tbss import (
+    dtifit, tbss_1_preproc, tbss_2_reg, tbss_3_postreg, tbss_4_prestats)
