@@ -66,7 +66,7 @@ REQUIRES = [
     "nibabel",
     "pandas",
     "scikit-learn",
-    "nilearn",
+    "nilearn==0.9.2",
     "matplotlib",
     "seaborn",
     "requests",
