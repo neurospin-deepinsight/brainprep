@@ -16,6 +16,7 @@ import os
 import tempfile
 import subprocess
 import brainprep
+import shutil
 from brainprep.color_utils import print_subtitle, print_command
 
 
