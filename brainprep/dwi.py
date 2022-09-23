@@ -199,18 +199,18 @@ def Compute_and_Apply_susceptibility_correction(subject,
         # synb0_input_dir = os.path.join(susceptibility_dir, "synb0_inputs")
         # synb0_output_dir = os.path.join(susceptibility_dir, "synb0_outputs")
         synb0_input_dir = "/INPUTS"
-        synb0_output_dir = "/OUTPUTS"
+        synb0_output = "/OUTPUTS/*"
         # os.mkdir(synb0_input_dir)
         # os.mkdir(synb0_output_dir)
         print(synb0_input_dir)
         # Prepare t1 for synb0
-        cmd = ["cp", t1, 
-              os.path.join(synb0_input_dir, "T1.nii.gz")]
+        cmd = ["cp", t1,
+               os.path.join(synb0_input_dir, "T1.nii.gz")]
         check_command(cmd[0])
         execute_command(cmd)
         # Prepare b0 for synb0
         cmd = ["cp", outputs["nodif"],
-              os.path.join(synb0_input_dir, "b0.nii.gz")]
+               os.path.join(synb0_input_dir, "b0.nii.gz")]
         check_command(cmd[0])
         execute_command(cmd)
 
@@ -252,38 +252,32 @@ def Compute_and_Apply_susceptibility_correction(subject,
             open_file.write(row1 + "\n")
             open_file.write(row2 + "\n")
         outputs["acqp"] = acqp_file
+
         # Prepare freesurfer licence for synb0
         cmd = ["ln", license_fs, "/extra/freesurfer/license.txt"]
         check_command(cmd[0])
         execute_command(cmd)
-        fs = license_fs
 
-        singularity run -e 
-        -B /home/ld265905/Documents/synb0_inputs/:/INPUTS:ro 
-        -B /home/ld265905/Documents/synb0_outputs/:/OUTPUTS 
-        -B /home/ld265905/Documents/license.txt:/extra/freesurfer/license.txt 
-        synb0-disco_v3.0.sif
-
-        # cmd = ["singularity", "run", "-e",
-        #        "-B",
-        #        "{INPUTS}/:/INPUTS".format(INPUTS=synb0_input_dir),
-        #        "-B",
-        #        "{OUTPUTS}/:/OUTPUTS".format(OUTPUTS=synb0_output_dir),
-        #        "-B",
-        #        "{LICENSE}:/extra/freesurfer/license.txt".format(LICENSE=fs),
-        #        "/home/ld265905/synb0-disco_v3.0.sif"]
-
+        # singularity run -e https://github.com/LoicDorval/brainprep
+        # -B /home/ld265905/Documents/synb0_inputs/:/INPUTS:ro 
+        # -B /home/ld265905/Documents/synb0_outputs/:/OUTPUTS 
+        # -B /home/ld265905/Documents/license.txt:/extra/freesurfer/license.txt 
+        # synb0-disco_v3.0.sif
         cmd = ["bash /extra/pipeline.sh"]
         check_command(cmd[0])
         execute_command(cmd)
         susceptibility_dir_synb0 = os.path.join(susceptibility_dir,
                                                 "topup-synb0")
+
         if not os.path.isdir(susceptibility_dir_synb0):
             cmd = ["mkdir", "-p", susceptibility_dir_synb0]
             execute_command(cmd)
+        cmd = ["cp", synb0_output, susceptibility_dir_synb0]
+        check_command(cmd[0])
+        execute_command(cmd)
         outputs["eddy_file_from_topup"] = \
-                                        os.path.join(susceptibility_dir_synb0,
-                                        "topup")
+            os.path.join(susceptibility_dir_synb0,
+                         "topup")
 
         # Check diffusion image size
         im = nibabel.load(dwi)
