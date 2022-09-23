@@ -16,6 +16,7 @@ import os
 import tempfile
 import subprocess
 import brainprep
+import shutil
 from brainprep.color_utils import print_subtitle, print_command
 
 
@@ -80,7 +81,7 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile, freesurfer,
                 "-w", workdir,
                 "--n_cpus", "1",
                 "--stop-on-first-crash",
-                "--fs-license-file", "/code/freesurfer.txt",
+                "--fs-license-file", "/home/brainprep/freesurfer.txt",
                 "--skip_bids_validation",
                 "--force-bbr",
                 "--output-spaces", "MNI152NLin6Asym:res-2",
