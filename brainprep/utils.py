@@ -101,7 +101,7 @@ def check_version(package_name, check_pkg_version):
 
 
 def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file, outfile,
-                      longitudinal=False):
+                      longitudinal=False, model_long=1):
     """ Complete matlab batch from template.
 
     Parameters
@@ -114,6 +114,10 @@ def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file, outfile,
         path to the SPM TPM file.
     darteltpm_file: str
         path to the CAT12 tempalte file.
+    longitudinal: bool
+        if true, complete longitudinal matlabbatch
+    model_long: int
+        1 short time, 2 long time between images sessions
     outfile: str
         path to the generated matlab batch file that can be used to launch
         CAT12 VBM preprocessing.
@@ -130,8 +134,13 @@ def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file, outfile,
                 ungzip_file(path, outdir=os.path.dirname(outfile)))
     with open(template, "r") as of:
         stream = of.read()
-    stream = stream.format(anat_file=nii_files_str, tpm_file=tpm_file,
-                           darteltpm_file=darteltpm_file)
+    if longitudinal:
+        stream = stream.format(model_long=model_long, anat_file=nii_files_str,
+                               tpm_file=tpm_file,
+                               darteltpm_file=darteltpm_file)
+    else:
+        stream = stream.format(anat_file=nii_files_str, tpm_file=tpm_file,
+                               darteltpm_file=darteltpm_file)
     with open(outfile, "w") as of:
         of.write(stream)
 
