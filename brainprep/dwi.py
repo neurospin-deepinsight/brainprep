@@ -15,12 +15,11 @@ import shutil
 from .utils import check_command, execute_command
 from .color_utils import print_subtitle
 from .dwitools import read_bvals_bvecs, topup, epi_reg, eddy, extract_image,\
-                      flirt, triplanar
+                      flirt, triplanar, register_mask_from_t1
 
 # Third-Party imports
 import nibabel
 import numpy
-import glob
 
 
 """
@@ -44,7 +43,7 @@ def reshape_input_data(subject,
     if not os.path.isdir(reshape_outdir):
         cmd = ["mkdir", "-p", reshape_outdir]
         execute_command(cmd)
-        # os.mkdir(reshape_outdir)
+
     # create a binary mask from the t1_mask
     mask_im = nibabel.load(t1_mask)
     arr = mask_im.get_fdata()
@@ -75,40 +74,7 @@ def reshape_input_data(subject,
     if mag_mask is not None:
         mag_mask = files_to_reorient["mag_mask"]
 
-    # # Crop neck with FSL robust fov
-    # if inputs["t1_mask"] is None:
-    #     t1 = os.path.join(reshape_outdir, "robust_fov")
-    #     cropped_trf = t1 + ".txt"
-    #     robustfov(
-    #         input_file=inputs["t1"],
-    #         output_file=t1,
-    #         brain_size=170,
-    #         matrix_file=cropped_trf,
-    #         fsl_sh=inputs["fsl_config"])
-    #     cropped_und_file = t1 + "_und.nii.gz"
-    #     cropped_und_file, _ = flirt(
-    #         in_file=t1 + ".nii.gz",
-    #         ref_file=inputs["t1"],
-    #         out=cropped_und_file,
-    #         init=cropped_trf,
-    #         applyxfm=True,
-    #         verbose=verbose,
-    #         shfile=inputs["fsl_config"])
-    #     t1 = cropped_und_file
-    # else:
     outputs["t1"] = t1
-
-    # Split nodiff from diffusion weighted: one shell expected
-    # TODO: use template b0 image
-    # nodiff_mean, dwis = extract_dwi_shells(
-    #     dwi_nii_path=dwi,
-    #     bvals_path=bval,
-    #     bvecs_path=bvec,
-    #     outdir=reshape_outdir)
-    # if len(dwis) > 1:
-    #     print("[warn] '{0}' shells detected: do not use FA map."
-    #           .format(len(dwis)))
-    # outputs["nodif"] = nodiff_mean
 
     bval_array, _, nshell, nb_dif = read_bvals_bvecs(bval, bvec)
     print("Number of shell : ", nshell)
@@ -130,46 +96,12 @@ def reshape_input_data(subject,
     outputs["t1_brain"] = brain_img
     outputs["t1_brain_mask"] = brain_mask
 
-    # Get nodiff_mask from t1_mask, t1 and nodiff
-    # Compute the transformation from nodiff to t1
-    nodiff_to_t1 = os.path.join(reshape_outdir, "nodiff_to_t1.nii.gz")
-    omat1 = os.path.join(reshape_outdir, "nodiff_to_t1.mat")
-    omat2 = os.path.join(reshape_outdir, "t1_to_nodiff.mat")
-
-    flirt(
-        in_file=outputs["nodif"],
-        ref_file=t1,
-        out=nodiff_to_t1,
-        dof=6,
-        omat=omat1)
-
-    # Inverse the mat to get t1 to nodiff
-    fsl_cmd = ["convert_xfm", "-omat", omat2, "-inverse", omat1]
-    check_command(fsl_cmd[0])
-    execute_command(fsl_cmd)
-
-    # Apply the inverse to t1_mask to get nodiff_mask
-    nodiff_mask = os.path.join(reshape_outdir, "nodiff_brain_mask.nii.gz")
-    flirt(
-        in_file=t1_mask,
-        ref_file=outputs["nodif"],
-        applyxfm=True,
-        init=omat2,
-        out=nodiff_mask,
-        interp="nearestneighbour")
-
-    # Extract
-    # Apply nodiff brain mask to extract nodiff brain
-    input_file = outputs["nodif"]
-    mask_file = nodiff_mask
-    output_fileroot_fslmaths = os.path.join(reshape_outdir, "nodiff_brain")
-    fsl_cmd = ["fslmaths", input_file,
-               "-mas", mask_file,
-               output_fileroot_fslmaths]
-    check_command(fsl_cmd[0])
-    execute_command(fsl_cmd)
-    nodiff_brain = glob.glob(output_fileroot_fslmaths + ".*")[0]
-    nodiff_brain_mask = nodiff_mask
+    nodiff_brain, nodiff_brain_mask = register_mask_from_t1(
+                                                        t1=t1,
+                                                        t1_mask=t1_mask,
+                                                        nodiff=nodiffb0,
+                                                        outdir=reshape_outdir,
+                                                        name="nodiff")
 
     outputs["nodif_brain"] = nodiff_brain
     outputs["nodif_brain_mask"] = nodiff_brain_mask
@@ -179,12 +111,6 @@ def reshape_input_data(subject,
 """
 2.1- Compute susceptibility correction.
 """
-# ###########ADD choice
-# -arbre de décision:
-# --1) top up
-# --2) synb0
-# --3) recalage T1
-# Run susceptibility correction
 
 
 def Compute_and_Apply_susceptibility_correction(subject,
@@ -192,6 +118,7 @@ def Compute_and_Apply_susceptibility_correction(subject,
                                                 dwi,
                                                 outdir,
                                                 outputs,
+                                                license_fs=None,
                                                 topup_b0_dir=None,
                                                 readout_time=None,
                                                 topup_b0=None):
@@ -208,7 +135,8 @@ def Compute_and_Apply_susceptibility_correction(subject,
     if topup_b0 is not None and \
        topup_b0_dir is not None and \
        readout_time is not None:
-
+        print(topup_b0, type(topup_b0))
+        print(topup_b0_dir, type(topup_b0_dir))
         # Select case
         susceptibility_method = "topup"
         print_subtitle("susceptibility_method : {sm}"
@@ -236,6 +164,13 @@ def Compute_and_Apply_susceptibility_correction(subject,
         im = nibabel.Nifti1Image(arr, im.affine)
         nibabel.save(im, dwi)
 
+        nodifftopup_brain, nodifftopup_brain_mask = register_mask_from_t1(
+                                            t1=t1,
+                                            t1_mask=outputs["t1_brain_mask"],
+                                            nodiff=mean_corrected_b0s,
+                                            outdir=susceptibility_dir,
+                                            name="nodifftopup")
+
         # Coregistration only
         dwi_corrected_fileroot = os.path.join(susceptibility_dir, "epi2struct")
         corrected_epi_file, _, _ = epi_reg(
@@ -251,9 +186,6 @@ def Compute_and_Apply_susceptibility_correction(subject,
         aff_inv = numpy.linalg.inv(aff)
         numpy.savetxt(t1_to_nodif_mat, aff_inv)
 
-    # RECALAGE T1
-    # elif:
-
     # synb0-Disco
     elif type(topup_b0_dir) is str and\
             topup_b0_dir in ["i", "i-", "j", "j-", "k", "k-"] and\
@@ -264,20 +196,25 @@ def Compute_and_Apply_susceptibility_correction(subject,
         print_subtitle("susceptibility_method : {sm}"
                        .format(sm=susceptibility_method))
 
-        synb0_input_dir = os.path.join(outdir, "synb0_inputs")
-        synb0_output_dir = os.path.join(outdir, "synb0_outputs")
-        os.mkdir(synb0_input_dir)
+        # synb0_input_dir = os.path.join(susceptibility_dir, "synb0_inputs")
+        # synb0_output_dir = os.path.join(susceptibility_dir, "synb0_outputs")
+        synb0_input_dir = "/INPUTS"
+        synb0_output_dir = "/OUTPUTS"
+        # os.mkdir(synb0_input_dir)
+        # os.mkdir(synb0_output_dir)
         print(synb0_input_dir)
-        cmd = ["cp", t1, os.path.join(synb0_input_dir, "T1.nii.gz")]
+        # Prepare t1 for synb0
+        cmd = ["cp", t1, 
+              os.path.join(synb0_input_dir, "T1.nii.gz")]
         check_command(cmd[0])
         execute_command(cmd)
-        cmd = \
-            ["cp", outputs["nodif"],
-             os.path.join(synb0_input_dir, "b0.nii.gz")]
+        # Prepare b0 for synb0
+        cmd = ["cp", outputs["nodif"],
+              os.path.join(synb0_input_dir, "b0.nii.gz")]
         check_command(cmd[0])
         execute_command(cmd)
 
-        # acqp file
+        # Prepare acqp file for synb0
         data = []
         affine = None
         enc_dir = topup_b0_dir
@@ -299,37 +236,80 @@ def Compute_and_Apply_susceptibility_correction(subject,
             data.append(arr)
             if enc_dir == "i":
                 row1 = "1 0 0 {0}".format(readout_time)
-                row2 = "-1 0 0 0.000"
+                row2 = "1 0 0 0.000"
             elif enc_dir == "i-":
                 row1 = "-1 0 0 {0}".format(readout_time)
-                row2 = "1 0 0 0.000"
+                row2 = "-1 0 0 0.000"
             elif enc_dir == "j":
                 row1 = "0 1 0 {0}".format(readout_time)
-                row2 = "0 -1 0 0.000"
+                row2 = "0 1 0 0.000"
             elif enc_dir == "j-":
                 row1 = "0 -1 0 {0}".format(readout_time)
-                row2 = "0 1 0 0.000"
+                row2 = "0 -1 0 0.000"
             else:
                 raise ValueError("Unknown encode phase direction : "
                                  "{0}...".format(enc_dir))
             open_file.write(row1 + "\n")
             open_file.write(row2 + "\n")
         outputs["acqp"] = acqp_file
-        # #############################TO ASK ARG##############################
-        fs = "/home/ld265905/neurospin/psy_sbox/tmp_loic/license.txt"
-        # #####################################################################
-        cmd = ["singularity", "run", "-e",
-               "-B",
-               "{INPUTS}/:/INPUTS".format(INPUTS=synb0_input_dir),
-               "-B",
-               "{OUTPUTS}/:/OUTPUTS".format(OUTPUTS=synb0_output_dir),
-               "-B",
-               "{license}:/extra/freesurfer/license.txt".format(license=fs),
-               "/home/ld265905/synb0-disco_v3.0.sif"]
+        # Prepare freesurfer licence for synb0
+        cmd = ["ln", license_fs, "/extra/freesurfer/license.txt"]
         check_command(cmd[0])
         execute_command(cmd)
-        outputs["eddy_file_from_topup"] = os.path.join(synb0_output_dir,
-                                                       "topup")
+        fs = license_fs
+
+        singularity run -e 
+        -B /home/ld265905/Documents/synb0_inputs/:/INPUTS:ro 
+        -B /home/ld265905/Documents/synb0_outputs/:/OUTPUTS 
+        -B /home/ld265905/Documents/license.txt:/extra/freesurfer/license.txt 
+        synb0-disco_v3.0.sif
+
+        # cmd = ["singularity", "run", "-e",
+        #        "-B",
+        #        "{INPUTS}/:/INPUTS".format(INPUTS=synb0_input_dir),
+        #        "-B",
+        #        "{OUTPUTS}/:/OUTPUTS".format(OUTPUTS=synb0_output_dir),
+        #        "-B",
+        #        "{LICENSE}:/extra/freesurfer/license.txt".format(LICENSE=fs),
+        #        "/home/ld265905/synb0-disco_v3.0.sif"]
+
+        cmd = ["bash /extra/pipeline.sh"]
+        check_command(cmd[0])
+        execute_command(cmd)
+        susceptibility_dir_synb0 = os.path.join(susceptibility_dir,
+                                                "topup-synb0")
+        if not os.path.isdir(susceptibility_dir_synb0):
+            cmd = ["mkdir", "-p", susceptibility_dir_synb0]
+            execute_command(cmd)
+        outputs["eddy_file_from_topup"] = \
+                                        os.path.join(susceptibility_dir_synb0,
+                                        "topup")
+
+        # Check diffusion image size
+        im = nibabel.load(dwi)
+        arr = im.get_data()
+        for cnt, size in enumerate(arr.shape[:3]):
+            if size % 2 == 1:
+                print("[warn] reducing DWI image size.")
+                arr = numpy.delete(arr, -1, axis=cnt)
+        im = nibabel.Nifti1Image(arr, im.affine)
+        nibabel.save(im, dwi)
+
+        # Coregistration only
+        dwi_corrected_fileroot = os.path.join(susceptibility_dir, "epi2struct")
+        corrected_epi_file, _, _ = epi_reg(
+            epi_file=dwi,
+            structural_file=t1,
+            brain_structural_file=outputs["t1_brain"],
+            output_fileroot=dwi_corrected_fileroot,
+            wmseg_file=None)
+        nodif_to_t1_mat = os.path.join(susceptibility_dir, "epi2struct.mat")
+        t1_to_nodif_mat = os.path.join(
+            susceptibility_dir, "epi2struct_inv.mat")
+        aff = numpy.loadtxt(nodif_to_t1_mat)
+        aff_inv = numpy.linalg.inv(aff)
+        numpy.savetxt(t1_to_nodif_mat, aff_inv)
+
     # Create an zero deformation field
     else:
         # Coregistration only
@@ -400,36 +380,13 @@ def Compute_and_Apply_susceptibility_correction(subject,
         fieldmap_hz_to_diff_file = None
         outputs["fieldmap_hz"] = fieldmap_hz_to_diff_file
     outputs["eddy_dwi_input"] = eddy_dwi_input
-    # Apply susceptibility correction to nodiff brain mask
+
     nodif_brain_mask = outputs["nodif_brain_mask"]
-    # nodif_brain_mask_undistorted = os.path.join(
-    #     outdir,
-    #     os.path.basename(nodif_brain_mask).replace(".nii.gz",
-    #                                                "_corrected.nii.gz"))
-    # if susceptibility_method == "topup":
-    #     nodif_brain_, nodif_brain_mask_, _, _, _, _, _, _, _, _, _ = bet2(
-    #         input_file=mean_corrected_b0s,
-    #         output_fileroot=susceptibility_dir,
-    #         mask=True,
-    #         skull=False,
-    #         f=inputs["bet_threshold_nodiff"],
-    #         shfile=inputs["fsl_config"])
-    #     shutil.copy2(nodif_brain_mask_, nodif_brain_mask_undistorted)
-    # else:
-    #     in_file = nodif_brain_mask
-    #     ref_file = nodif_brain_mask
-    #     out_file = nodif_brain_mask_undistorted
-    #     warp_file = deformation_field_file
-    #     interp = "nn"
-    #     fsl_cmd = ["applywarp",
-    #                "-i", in_file,
-    #                "-r", ref_file,
-    #                "-o", out_file,
-    #                "-w", warp_file,
-    #                "--interp={0}".format(interp)]
-    #     check_command(fsl_cmd)
-    #     execute_command(fsl_cmd)
-    outputs["nodif_brain_mask_undistorted"] = nodif_brain_mask
+
+    if susceptibility_method == "topup":
+        outputs["nodif_brain_mask_undistorted"] = nodifftopup_brain_mask
+    else:
+        outputs["nodif_brain_mask_undistorted"] = nodif_brain_mask
     outputs["2_method"] = susceptibility_method
     return outputs
 
@@ -457,11 +414,6 @@ def eddy_and_motion_correction(subject,
     eddy_outroot = os.path.join(
         eddy_outputdir, "{0}_dwi_eddy_corrected".format(subject))
 
-    # field
-    field = None
-    if outputs["fieldmap_hz"] is not None:
-        field = outputs["fieldmap_hz"].replace(".nii.gz", "")
-
     # eddy
     if outputs["2_method"] == "synb0":
         # corrected_dwi, corrected_bvec = eddy(
@@ -487,7 +439,13 @@ def eddy_and_motion_correction(subject,
         execute_command(fsl_cmd)
         corrected_dwi = "{0}.nii.gz".format(eddy_outroot)
         corrected_bvec = "{0}.eddy_rotated_bvecs".format(eddy_outroot)
-    else:
+    elif outputs["2_method"] == "topup":
+
+        # field
+        field = None
+        if outputs["fieldmap_hz"] is not None:
+            field = outputs["fieldmap_hz"].replace(".nii.gz", "")
+
         corrected_dwi, corrected_bvec = eddy(
             dwi=outputs["eddy_dwi_input"],
             dwi_brain_mask=outputs["nodif_brain_mask_undistorted"],
@@ -518,17 +476,6 @@ def eddy_and_motion_correction(subject,
     # Register t1 to dwi
     t1_to_dwi = os.path.join(outdir, "t1_to_dwi.nii.gz")
 
-    # #########################################################################
-    # if susceptibility_method == "reg":
-
-    #     # t1 has already been registered to dwi by BrainSuite
-    #     shutil.copy(t1_in_dwi_space, t1_to_dwi)
-
-    # else:
-    # #########################################################################
-
-    # For BrainSuite correction, topup correction or no correction, T1 to DWI
-    # transformation matrix has been saved by epi_reg
     flirt(
         in_file=t1,
         ref_file=corrected_nodiff_undistorted,
@@ -546,7 +493,7 @@ def eddy_and_motion_correction(subject,
 
 
 """
-5- Create QC report
+4- Create QC report
 """
 
 
@@ -554,7 +501,7 @@ def create_qc_report(subject, t1, outdir, outputs):
     # Create PDF comparison susceptibility correction/ no susceptibility
     # correction
     outdir = os.path.join(outdir, "sub-"+subject)
-    qc_dir = os.path.join(outdir, "5-QC")
+    qc_dir = os.path.join(outdir, "4-QC")
     if not os.path.isdir(qc_dir):
         os.mkdir(qc_dir)
 
