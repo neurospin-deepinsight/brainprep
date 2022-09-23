@@ -51,8 +51,12 @@ def plot_images(nii_files, cut_coords, outdir):
             fig, axs = plt.subplots(len(data))
             for idx, (path, cut) in enumerate(zip(data, cut_coords)):
                 img = nibabel.load(path)
-                plotting.plot_anat(img, figure=fig, axes=axs[idx],
-                                   cut_coords=cut, display_mode="ortho")
+                if len(data) == 1:
+                    plotting.plot_anat(img, figure=fig,
+                                       cut_coords=cut, display_mode="ortho")
+                else:
+                    plotting.plot_anat(img, figure=fig, axes=axs[idx],
+                                       cut_coords=cut, display_mode="ortho")
             plt.subplots_adjust(wspace=0, hspace=0, top=0.9, bottom=0.1)
             keys = get_bids_keys(path)
             participant_id = keys["participant_id"]
