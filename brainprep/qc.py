@@ -23,6 +23,8 @@ from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import seaborn as sns
 from .utils import get_bids_keys
+import ast
+import csv
 
 
 def check_files(input_files):
@@ -70,8 +72,10 @@ def plot_pca(X, df_description, outdir):
     if "participant_id" not in df_description.columns:
         raise ValueError("'df_description' must contains a 'participant_id' "
                          "column.")
+    X = X.reshape(len(X), -1)
+    X[np.isnan(X)] = 0
     pca = PCA(n_components=2)
-    components = pca.fit_transform(X.reshape(len(X), -1))
+    components = pca.fit_transform(X)
     fig, ax = plt.subplots(figsize=(20, 30))
     ax.scatter(components[:, 0], components[:, 1])
     for idx, desc in enumerate(df_description["participant_id"]):
@@ -182,7 +186,7 @@ def parse_fsreconall_stats(fs_dirs):
             lines = of.readlines()
         selection = [item for item in lines
                      if item.startswith("orig.nofix lheno")]
-        assert len(selection) == 1, row
+        assert len(selection) == 1, selection
         _, left_euler, right_euler = selection[0].split("=")
         left_euler, _ = left_euler.split(",")
         left_euler = int(left_euler.strip())
@@ -194,6 +198,120 @@ def parse_fsreconall_stats(fs_dirs):
         scores.setdefault("euler", []).append(euler)
     df_scores = pd.DataFrame.from_dict(scores)
     return df_scores
+
+
+def parse_cat12vbm_roi(xml_filenames, output_file):
+    # organized as /participant_id/sess_id/[TIV, GM, WM, CSF, ROIs]
+    output = dict()
+    ROI_names = None
+    for xml_file in xml_filenames:
+        xml_file_keys = get_bids_keys(xml_file)
+        participant_id = xml_file_keys['participant_id']
+        session = xml_file_keys['session'] or '1'
+        run = xml_file_keys['run'] or '1'
+
+        # Parse the CAT12 report to find the TIV and CGW volumes
+        if re.match('.*report/cat_.*\.xml', xml_file):
+            tree = ET.parse(xml_file)
+            try:
+                tiv = float(tree.find('subjectmeasures').find('vol_TIV').text)
+                vol_abs_CGW = list(ast.literal_eval(
+                                   tree.find('subjectmeasures')
+                                   .find('vol_abs_CGW').text.replace(' ', ','))
+                                   )
+            except Exception as e:
+                print('Parsing error for %s:\n%s' %
+                      (xml_file, traceback.format_exc()))
+            else:
+                if participant_id not in output:
+                    output[participant_id] = {session: dict()}
+                elif session not in output[participant_id]:
+                    output[participant_id][session] = {run: dict()}
+                elif run not in output[participant_id][session]:
+                    output[participant_id][session][run] = dict()
+                output[participant_id][session][run]['TIV'] = float(tiv)
+                output[participant_id][session][run]['CSF_Vol'] = \
+                    float(vol_abs_CGW[0])
+                output[participant_id][session][run]['GM_Vol'] = \
+                    float(vol_abs_CGW[1])
+                output[participant_id][session][run]['WM_Vol'] = \
+                    float(vol_abs_CGW[2])
+
+        elif re.match('.*label/catROI_.*\.xml', xml_file):
+            tree = ET.parse(xml_file)
+            try:
+                _ROI_names = [item.text for item in
+                              tree.find('neuromorphometrics')
+                              .find('names').findall('item')]
+                if ROI_names is None:
+                    ROI_names = _ROI_names
+                elif set(ROI_names) != set(_ROI_names):
+                    raise ValueError('Inconsistent ROI names '
+                                     'from %s (expected %s, got %s) ' %
+                                     (xml_file, ROI_names, _ROI_names))
+                else:
+                    ROI_names = _ROI_names
+                V_GM = list(ast.literal_eval(tree.find('neuromorphometrics')
+                            .find('data').find('Vgm').text.
+                            replace(';', ',')))
+                V_CSF = list(ast.literal_eval(tree.find('neuromorphometrics')
+                             .find('data').find('Vcsf').text.
+                                              replace(';', ',')))
+                assert len(ROI_names) == len(V_GM) == len(V_CSF)
+
+            except Exception as e:
+                print('Parsing error for %s: \n%s' %
+                      (xml_file, traceback.format_exc()))
+            else:
+                for i, ROI_name in enumerate(ROI_names):
+                    if participant_id not in output:
+                        output[participant_id] = {session:
+                                                  {run:
+                                                   {ROI_name +
+                                                    '_GM_Vol': float(V_GM[i]),
+                                                    ROI_name + '_CSF_Vol':
+                                                               float(V_CSF[i])}
+                                                   }
+                                                  }
+                    elif session not in output[participant_id]:
+                        output[participant_id][session] = {run:
+                                                           {ROI_name +
+                                                            '_GM_Vol':
+                                                            float(V_GM[i]),
+                                                            ROI_name +
+                                                            '_CSF_Vol':
+                                                            float(V_CSF[i])}}
+                    elif run not in output[participant_id][session]:
+                        output[participant_id][session][run] = \
+                                                               {ROI_name +
+                                                                '_GM_Vol':
+                                                                float(V_GM[i]),
+                                                                ROI_name +
+                                                                '_CSF_Vol':
+                                                                float(V_CSF[i])
+                                                                }
+                    else:
+                        output[participant_id][session][run][ROI_name +
+                                                             '_GM_Vol'] = \
+                                                             float(V_GM[i])
+                        output[participant_id][session][run][ROI_name +
+                                                             '_CSF_Vol'] = \
+                                                             float(V_CSF[i])
+    ROI_names = ROI_names or []
+    fieldnames = ['participant_id', 'session', 'run', 'TIV',
+                  'CSF_Vol', 'GM_Vol', 'WM_Vol'] + \
+                 [roi + '_GM_Vol' for roi in ROI_names] + \
+                 [roi + '_CSF_Vol' for roi in ROI_names]
+    with open(output_file, 'w') as tsvfile:
+        writer = csv.DictWriter(tsvfile, fieldnames=fieldnames,
+                                dialect="excel-tab")
+        writer.writeheader()
+        for participant_id in output:
+            for session in output[participant_id].keys():
+                for (run, measures) in output[participant_id][session].items():
+                    writer.writerow(dict(participant_id=participant_id,
+                                         session=session, run=run, **measures))
+    return output_file
 
 
 def parse_cat12vbm_qc(qc_files):
@@ -238,15 +356,15 @@ def parse_cat12vbm_qc(qc_files):
     return df_scores
 
 
-def parse_cat12vbm_report(img_files, report_root):
+def parse_cat12vbm_report(img_files, cat12vbm_root):
     """ Parse the CAT12 VBM report files for all subjects.
 
     Parameters
     ----------
     img_files: list of str
         path to images.
-    report_root: str
-        the root path of the CAT12VBM report files.
+    cat12vbm_root: str
+        the root path of the CAT12VBM preprocessing folder.
 
     Returns
     -------
@@ -258,7 +376,6 @@ def parse_cat12vbm_report(img_files, report_root):
         keys = get_bids_keys(path)
         participant_id = keys["participant_id"]
         session = keys["session"]
-        run = keys["run"]
         name = os.path.basename(path)[4:]
         if name.endswith(".nii.gz"):
             name = name.replace(".nii.gz", ".pdf")
@@ -282,7 +399,7 @@ def parse_cat12vbm_report(img_files, report_root):
             if _rpath is None:
                 reports.append("")
                 break
-            _path = os.path.join(report_root, _rpath)
+            _path = os.path.join(cat12vbm_root, _rpath)
             if os.path.isfile(_path):
                 reports.append(_path)
                 break
