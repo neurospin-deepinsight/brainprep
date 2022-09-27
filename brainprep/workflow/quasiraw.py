@@ -17,6 +17,8 @@ import glob
 import nibabel
 import numpy as np
 from html import unescape
+import subprocess
+import re
 import brainprep
 from brainprep.utils import load_images, create_clickable
 from brainprep.color_utils import print_title, print_result
@@ -34,7 +36,7 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
     mask: str
         a binary mask to be applied.
     outdir: str
-        the destination folder.
+        the destination folder. (sub folder)
     target: str
         a custom target image for the registration.
     no_bids: bool
@@ -51,12 +53,17 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
     imfile = anatomical
     maskfile = mask
     targetfile = target
+    ses = outdir.split(os.sep)[-3]
+    if not re.match("ses-*", ses):
+        ses = "ses-1"
+    outdir_bids = os.path.join(outdir, ses, "anat")
+    subprocess.check_call(["mkdir", "-p", outdir_bids])
     if no_bids:
         basename = os.path.basename(imfile).split(".")[0] + "_desc-{0}_T1w"
     else:
         basename = os.path.basename(imfile).split(".")[0].replace(
             "_T1w", "_desc-{0}_T1w")
-    basefile = os.path.join(outdir, basename + ".nii.gz")
+    basefile = os.path.join(outdir_bids, basename + ".nii.gz")
     print("use base file name:", basefile)
     stdfile = basefile.format("1std")
     stdmaskfile = basefile.format("1maskstd")
@@ -77,6 +84,15 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
     brainprep.apply_affine(stdmaskfile, regfile, regmaskfile, trffile,
                            interp="nearestneighbour")
     brainprep.apply_mask(regfile, regmaskfile, applyfile)
+
+    print_title("Make datasets...")
+    if not os.path.exists(applyfile):
+        raise ValueError("{0} file doesn't exists".format(applyfile))
+    nii_img = nibabel.load(applyfile)
+    nii_arr = nii_img.get_data()
+    nii_arr = nii_arr.astype(np.float32)
+    npy_mat = applyfile.replace(".nii.gz", ".npy")
+    np.save(npy_mat, nii_arr)
 
 
 def brainprep_quasiraw_qc(img_regex, outdir, brainmask_regex=None,

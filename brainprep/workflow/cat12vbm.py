@@ -81,37 +81,39 @@ def brainprep_cat12vbm(
             resource_dir, "cat12vbm_matlabbatch_longitudinal.m")
         print("use matlab batch:", template_batch)
         brainprep.write_matlabbatch(
-            template_batch, anatomical, tpm, darteltpm, batch_file, 
+            template_batch, anatomical, tpm, darteltpm, batch_file,
             model_long=model_long)
     print_title("Launch CAT12 VBM matlab batch...")
     cmd = [cat12, "-s", spm12, "-m", matlab, "-b", batch_file]
     brainprep.execute_command(cmd)
 
     print_title("Make datasets...")
-    for i in anatomical:
+    for c, i in enumerate(anatomical):
         name = os.path.basename(i)
         if not longitudinal:
             name = "mwp1u" + name
-            outfile = outdir
         else:
-            ses = i.split(os.sep)[-3]
-            outfile = os.path.join(outdir, ses, "anat")
             name = "mwp1ru" + name
+        ses = i.split(os.sep)[-3]
+        if not re.match("ses-*", ses):
+            ses = "ses-{0}".format(c+1)
+        outfile = os.path.join(outdir, ses, "anat")
         root = outfile + "/mri"
         mwp1 = os.path.join(root, name)
+        if re.search(".nii.gz", i):
+            mwp1 = os.path.join(root, name[0:-3])
+            assert os.path.exists(mwp1), mwp1
+        else:
+            raise Warning("cat12vbm results will be written in the same"
+                          " folder as the input image. If you want it written"
+                          " in the output folder,"
+                          " you need to gzip your images")
         if not os.path.exists(mwp1):
-            if re.search(".nii.gz", mwp1):
-                mwp1 = os.path.join(root, name[0:-3])
-                assert os.path.exists(mwp1), mwp1
-            else:
-                raise ValueError("{0} file doesn't exists".format(mwp1))
+            raise ValueError("{0} file doesn't exists".format(mwp1))
         nii_img = nibabel.load(mwp1)
         nii_arr = nii_img.get_data()
         nii_arr = nii_arr.astype(np.float32)
-        if re.search(".nii.gz", mwp1):
-            npy_mat = mwp1.replace(".nii.gz", ".npy")
-        else:
-            npy_mat = mwp1.replace(".nii", ".npy")
+        npy_mat = mwp1.replace(".nii", ".npy")
         np.save(npy_mat, nii_arr)
 
 

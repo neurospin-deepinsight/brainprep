@@ -121,9 +121,12 @@ def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file,
         CAT12 VBM preprocessing.
     """
     nii_files_str = ""
-    for path in nii_files:
+    for c, path in enumerate(nii_files):
         ses = path.split(os.sep)[-3]
+        if not re.match("ses-*", ses):
+            ses = "ses-{0}".format(c+1)
         outdir = os.path.join(os.path.dirname(batch_file), ses, "anat")
+        subprocess.check_call(["mkdir", "-p", outdir])
         nii_files_str += "'{0}' \n".format(
             ungzip_file(path, outdir=outdir))
     with open(template, "r") as of:
