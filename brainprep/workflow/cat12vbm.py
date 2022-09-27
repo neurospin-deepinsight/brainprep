@@ -47,7 +47,7 @@ def brainprep_cat12vbm(
         path to the anatomical T1w Nifti file(s), or path to anatomical T1w
         Nifti files of one subject if longitudinal data.
     outdir: str
-        the destination folder.
+        the destination folder. (subject dir)
     longitudinal: bool
         optionally perform longitudinal CAT12 VBM process.
     model_long: int
@@ -81,8 +81,7 @@ def brainprep_cat12vbm(
             resource_dir, "cat12vbm_matlabbatch_longitudinal.m")
         print("use matlab batch:", template_batch)
         brainprep.write_matlabbatch(
-            template_batch, anatomical, tpm, darteltpm, batch_file,
-            longitudinal=True, 
+            template_batch, anatomical, tpm, darteltpm, batch_file, 
             model_long=model_long)
     print_title("Launch CAT12 VBM matlab batch...")
     cmd = [cat12, "-s", spm12, "-m", matlab, "-b", batch_file]
@@ -91,15 +90,18 @@ def brainprep_cat12vbm(
     print_title("Make datasets...")
     for i in anatomical:
         name = os.path.basename(i)
-        root = outdir + "/mri"
         if not longitudinal:
             name = "mwp1u" + name
+            outfile = outdir
         else:
+            ses = i.split(os.sep)[-3]
+            outfile = os.path.join(outdir, ses, "anat")
             name = "mwp1ru" + name
+        root = outfile + "/mri"
         mwp1 = os.path.join(root, name)
         if not os.path.exists(mwp1):
             if re.search(".nii.gz", mwp1):
-                mwp1 = mwp1[0:-3]
+                mwp1 = os.path.join(root, name[0:-3])
                 assert os.path.exists(mwp1), mwp1
             else:
                 raise ValueError("{0} file doesn't exists".format(mwp1))

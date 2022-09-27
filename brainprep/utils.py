@@ -100,8 +100,8 @@ def check_version(package_name, check_pkg_version):
     print("{0} - {1}".format(package_name, version))
 
 
-def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file, outfile,
-                      longitudinal=False, model_long=1):
+def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file, 
+                      batch_file, model_long=1):
     """ Complete matlab batch from template.
 
     Parameters
@@ -114,34 +114,24 @@ def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file, outfile,
         path to the SPM TPM file.
     darteltpm_file: str
         path to the CAT12 tempalte file.
-    longitudinal: bool
-        if true, complete longitudinal matlabbatch
     model_long: int
         1 short time, 2 long time between images sessions
-    outfile: str
+    batch_file: str
         path to the generated matlab batch file that can be used to launch
         CAT12 VBM preprocessing.
     """
     nii_files_str = ""
     for path in nii_files:
-        if longitudinal:
-            ses = path.split(os.sep)[-3]
-            outdir = os.path.join(os.path.dirname(outfile), ses, "anat")
-            nii_files_str += "'{0}' \n".format(
-                ungzip_file(path, outdir=outdir))
-        else:
-            nii_files_str += "'{0}' \n".format(
-                ungzip_file(path, outdir=os.path.dirname(outfile)))
+        ses = path.split(os.sep)[-3]
+        outdir = os.path.join(os.path.dirname(batch_file), ses, "anat")
+        nii_files_str += "'{0}' \n".format(
+            ungzip_file(path, outdir=outdir))
     with open(template, "r") as of:
         stream = of.read()
-    if longitudinal:
         stream = stream.format(model_long=model_long, anat_file=nii_files_str,
                                tpm_file=tpm_file,
                                darteltpm_file=darteltpm_file)
-    else:
-        stream = stream.format(anat_file=nii_files_str, tpm_file=tpm_file,
-                               darteltpm_file=darteltpm_file)
-    with open(outfile, "w") as of:
+    with open(batch_file, "w") as of:
         of.write(stream)
 
 
