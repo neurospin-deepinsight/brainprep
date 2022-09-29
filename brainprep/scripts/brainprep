@@ -28,5 +28,5 @@ fire.Fire({
     "deface": wf.brainprep_deface,
     "tbss-preproc": wf.brainprep_tbss_preproc,
     "tbss": wf.brainprep_tbss,
-    "prequal": wf.brainprep_prequal
+    "dmriprep": wf.brainprep_prequal
 })

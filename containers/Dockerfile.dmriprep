@@ -1,4 +1,4 @@
-FROM prequal_test
+FROM prequal
 
 # Install dependencies and prereqs
 RUN apt-get update \

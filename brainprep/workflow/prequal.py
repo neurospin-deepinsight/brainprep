@@ -15,9 +15,8 @@ Interface for prequal.
 import os
 import shutil
 import tempfile
-import brainprep
 from brainprep.color_utils import print_subtitle, print_title
-from brainprep.utils import check_command, execute_command
+from brainprep.utils import execute_command
 
 # Suplementary import
 import numpy as np
@@ -56,17 +55,22 @@ def brainprep_prequal(dwi,
 
     Parameters
     ----------
-    input_dir: str
-        path to the input directory containing the dtiQA_config.csv file and
-        at least one diffusion weighted image.
+    dwi: str
+        path to the diffusion weighted image.
+    bvec:
+        path to the bvec file.
+    bval:
+        path to the bval file.
+    pe: str
+        the de phase encoding direction (i, i-, j, j-, k, k-).
+    readout_time: str
+        readout time of the dwi image.
     output_dir: str
         path to the output directory.
     tmp_dir: str
         path to an empty dir use as tmp.
-    pe_axis: str
-        the de phase encoding direction (i, j, k).
-    licence_fs: str
-        path to the freesurfer licence.
+    t1: str
+        path to the t1 image in case of synb0 use.
     """
     print_title("PreQual dtiQA pipeline")
     if pe in ["i", "j", "k"]:
@@ -75,16 +79,17 @@ def brainprep_prequal(dwi,
     elif pe in ["i-", "j-", "k-"]:
         pe_axis = pe[0]
         pe_signe = pe[1]
-
+    else:
+        raise Exception
     print_subtitle("Making dtiQA_config.csv")
-    dtiQA_config_file = [os.path.basename(dwi).split('.')[0],
-                         pe_signe,
-                         readout_time]
+    dtiQA_config = [os.path.basename(dwi).split('.')[0],
+                    pe_signe,
+                    readout_time]
 
     print_subtitle("Copy before launch")
     with tempfile.TemporaryDirectory() as tmpdir:
         np.savetxt(os.path.join(tmpdir, "dtiQA_config.csv"),
-                   dtiQA_config_file,
+                   dtiQA_config,
                    delimiter=",")
         shutil.copy(dwi, tmpdir)
         shutil.copy(bvec, tmpdir)
@@ -97,5 +102,4 @@ def brainprep_prequal(dwi,
                tmpdir,
                output_dir,
                pe_axis]
-        check_command(cmd[0])
         execute_command(cmd)
