@@ -39,6 +39,24 @@ def main(working_dir):
         cmds = "export WDIR={}\n".format(dest_dir)
         cmds += "cd $WDIR\n"
         cmds += "export IMG={}\n".format(name)
+        if name == "dmriprep":
+            cmds += "mkdir singularity_prequal\n"
+            cmds += "cd singularity_prequal\n"
+            cmds += "git clone https://github.com/MASILab/PreQual.git\n"
+            cmds += "cd PreQual\n"
+            cmds += "git checkout v1.0.8\n"
+            cmds += "sudo singularity build ../prequal.simg Singularity\n"
+            cmds += "cd ..\n"
+            cmds += "singularity sif list prequal.simg\n"
+            cmds += "echo FROM scratch > Dockerfile\n"
+            cmds += "echo 'COPY data /' >> Dockerfile\n"
+            cmds += ("echo ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:"
+                     "/usr/bin:/sbin:/bin >> Dockerfile\n")
+            cmds += 'echo CMD ["/bin/bash"] >> Dockerfile\n'
+            cmds += "singularity sif dump 3 prequal.simg > data.squash\n"
+            cmds += "unsquashfs -dest data data.squash\n"
+            cmds += "docker build --no-cache --tag prequal .\n"
+            cmds += "cd ..\n"
         cmds += "sudo docker build --tag brainprep-$IMG .\n"
         cmds += "sudo docker images\n"
         cmds += ("sudo docker save -o brainprep-$IMG-latest.tar "
