@@ -28,9 +28,6 @@ RUN useradd -m -s /bin/bash -G users brainprep
 WORKDIR /home/brainprep
 ENV HOME="/home/brainprep"
 
-# Add freesurfer license file
-COPY freesurfer.txt ./
-
 # Define entrypoint
 ENTRYPOINT []
 

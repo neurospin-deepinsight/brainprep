@@ -14,13 +14,12 @@ Interface for fmriprep.
 # System import
 import os
 import tempfile
-import subprocess
 import brainprep
 import shutil
-from brainprep.color_utils import print_subtitle, print_command
+from brainprep.color_utils import print_subtitle
 
 
-def brainprep_fmriprep(anatomical, functionals, subjid, descfile, freesurfer,
+def brainprep_fmriprep(anatomical, functionals, subjid, descfile, fsdir,
                        outdir="/out", workdir="/work", fmriprep="fmriprep"):
     """ Define the fmriprep pre-processing workflow.
 
@@ -34,8 +33,8 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile, freesurfer,
         the subject identifier.
     descfile: str
         the dataset description file. (bids)
-    freesurfer: str
-        subjects freesurfer dir.
+    fsdir: str
+        Path to existing FreeSurfer subjects directory to reuse.
     outdir: str
         the destination folder.
     workdir: str
@@ -77,27 +76,19 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile, freesurfer,
                 datadir,
                 resdir,
                 "participant",
-                "--fs-subjects-dir", freesurfer,
+                "--fs-subjects-dir", fsdir,
                 "-w", workdir,
                 "--n_cpus", "1",
                 "--stop-on-first-crash",
-                "--fs-license-file", "/home/brainprep/freesurfer.txt",
+                "--fs-license-file", "/code/freesurfer.txt",
                 "--skip_bids_validation",
                 "--force-bbr",
                 "--output-spaces", "MNI152NLin6Asym:res-2",
                 "--cifti-output", "91k",
                 "--ignore", "slicetiming",
                 "--participant_label", subjid]
-            print_command(" ".join(cmd))
-            sp = subprocess.Popen(cmd, env=os.environ, cwd=tmpdir,
-                                  stdout=subprocess.PIPE,
-                                  stderr=subprocess.PIPE)
-            out, err = sp.communicate()
-            if sp.returncode != 0:
-                print("out\n", out)
-                print("err\n", err)
-                raise ValueError("fmriprep command failed")
-            subprocess.check_call(["cp", "-r", resdir, destdir])
+            brainprep.execute_command(cmd)
+            brainprep.execute_command(["cp", "-r", resdir, destdir])
             open(status, "a").close()
 
 
