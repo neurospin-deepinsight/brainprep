@@ -266,7 +266,7 @@ def parse_cat12vbm_roi(xml_filenames, output_file):
                                     .str.split(";")[0]
                 V_GM = [float(volume) for volume in V_GM]
                 V_CSF = catroi['Vcsf'].str.replace("\[|\]", "", regex=True)\
-                                    .str.split(";")[0]
+                                      .str.split(";")[0]
                 V_CSF = [float(volume) for volume in V_CSF]
                 assert len(ROI_names) == len(V_GM) == len(V_CSF)
             except Exception as e:
