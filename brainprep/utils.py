@@ -100,8 +100,8 @@ def check_version(package_name, check_pkg_version):
     print("{0} - {1}".format(package_name, version))
 
 
-def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file, 
-                      batch_file, model_long=1):
+def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file,
+                      batch_file, outdir, model_long=1):
     """ Complete matlab batch from template.
 
     Parameters
@@ -114,21 +114,23 @@ def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file,
         path to the SPM TPM file.
     darteltpm_file: str
         path to the CAT12 tempalte file.
-    model_long: int
-        1 short time, 2 long time between images sessions
+    outdir: list or str
+        the destination folder for cat12vbm outputs.
+        the destination folders if longitudinal data (one folder per session).
     batch_file: str
         path to the generated matlab batch file that can be used to launch
         CAT12 VBM preprocessing.
+    model_long: int
+        longitudinal model choice, default 1.
+        1 short time (weeks), 2 long time (years) between images sessions.
     """
     nii_files_str = ""
-    for c, path in enumerate(nii_files):
-        ses = path.split(os.sep)[-3]
-        if not re.match("ses-*", ses):
-            ses = "ses-{0}".format(c+1)
-        outdir = os.path.join(os.path.dirname(batch_file), ses, "anat")
-        subprocess.check_call(["mkdir", "-p", outdir])
+    for idx, path in enumerate(nii_files):
+        if not isinstance(outdir, list):
+            outdir = [outdir]
+        os.makedirs(outdir[idx])
         nii_files_str += "'{0}' \n".format(
-            ungzip_file(path, outdir=outdir))
+            ungzip_file(path, outdir=outdir[idx]))
     with open(template, "r") as of:
         stream = of.read()
         stream = stream.format(model_long=model_long, anat_file=nii_files_str,

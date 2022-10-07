@@ -23,8 +23,6 @@ from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import seaborn as sns
 from .utils import get_bids_keys
-import ast
-import csv
 
 
 def check_files(input_files):
@@ -201,116 +199,99 @@ def parse_fsreconall_stats(fs_dirs):
 
 
 def parse_cat12vbm_roi(xml_filenames, output_file):
-    # organized as /participant_id/sess_id/[TIV, GM, WM, CSF, ROIs]
-    output = dict()
+    """ Parse the cat12vbm xml generated rois files for all
+    subjects.
+
+    Parameters
+    ----------
+    xml_filenames: list or str(regex,regex)
+        regex to the CAT12 VBM catROI and cat xml files for all subjects.
+        .../label/catROI_sub-*_ses-*_T1w.xml
+        .../report/cat_sub-*_ses-*_T1w.xml
+    output: str
+        the destination folder.
+
+    Returns
+    -------
+    output_file: str
+        rois tsv path.
+    """
     ROI_names = None
+    cohort_globvol = pd.DataFrame()
+    cohort_roivol = pd.DataFrame()
+
     for xml_file in xml_filenames:
+        df_sub_key = pd.DataFrame()
         xml_file_keys = get_bids_keys(xml_file)
-        participant_id = xml_file_keys['participant_id']
+        participant_id = "sub-"+xml_file_keys['participant_id']
         session = xml_file_keys['session'] or '1'
         run = xml_file_keys['run'] or '1'
+        df_sub_key["participant_id"] = [participant_id]
+        df_sub_key["session"] = [session]
+        df_sub_key["run"] = [run]
 
-        # Parse the CAT12 report to find the TIV and CGW volumes
         if re.match('.*report/cat_.*\.xml', xml_file):
-            tree = ET.parse(xml_file)
+            cat = pd.read_xml(xml_file)
             try:
-                tiv = float(tree.find('subjectmeasures').find('vol_TIV').text)
-                vol_abs_CGW = list(ast.literal_eval(
-                                   tree.find('subjectmeasures')
-                                   .find('vol_abs_CGW').text.replace(' ', ','))
-                                   )
+                tiv = cat['vol_TIV'][7]
+                vol_abs_CGW = cat['vol_abs_CGW'][7][1:-1].split()
+                vol_abs_CGW = [float(volume) for volume in vol_abs_CGW]
+               
             except Exception as e:
                 print('Parsing error for %s:\n%s' %
                       (xml_file, traceback.format_exc()))
             else:
-                if participant_id not in output:
-                    output[participant_id] = {session: dict()}
-                elif session not in output[participant_id]:
-                    output[participant_id][session] = {run: dict()}
-                elif run not in output[participant_id][session]:
-                    output[participant_id][session][run] = dict()
-                output[participant_id][session][run]['TIV'] = float(tiv)
-                output[participant_id][session][run]['CSF_Vol'] = \
-                    float(vol_abs_CGW[0])
-                output[participant_id][session][run]['GM_Vol'] = \
-                    float(vol_abs_CGW[1])
-                output[participant_id][session][run]['WM_Vol'] = \
-                    float(vol_abs_CGW[2])
-
+                globvolume_dico_sub = {}
+                globvolume_dico_sub['TIV'] = float(tiv)
+                globvolume_dico_sub['CSF_Vol'] = vol_abs_CGW[0]
+                globvolume_dico_sub['GM_Vol'] = vol_abs_CGW[1]
+                globvolume_dico_sub['WM_Vol'] = vol_abs_CGW[2]
+                df_global_sub = pd.DataFrame(globvolume_dico_sub, index=[0])
+            concat_globvol = [df_sub_key, df_global_sub]
+            sub_globvol = pd.concat(concat_globvol, axis=1)
+            cohort_globvol = pd.concat([cohort_globvol, sub_globvol], axis=0)
+               
         elif re.match('.*label/catROI_.*\.xml', xml_file):
             tree = ET.parse(xml_file)
             try:
+                iterparse = {"neuromorphometrics": ["ids", "Vgm", "Vcsf"]}
+                catroi = pd.read_xml(xml_file, iterparse=iterparse)
                 _ROI_names = [item.text for item in
                               tree.find('neuromorphometrics')
                               .find('names').findall('item')]
                 if ROI_names is None:
                     ROI_names = _ROI_names
-                elif set(ROI_names) != set(_ROI_names):
-                    raise ValueError('Inconsistent ROI names '
-                                     'from %s (expected %s, got %s) ' %
-                                     (xml_file, ROI_names, _ROI_names))
-                else:
-                    ROI_names = _ROI_names
-                V_GM = list(ast.literal_eval(tree.find('neuromorphometrics')
-                            .find('data').find('Vgm').text.
-                            replace(';', ',')))
-                V_CSF = list(ast.literal_eval(tree.find('neuromorphometrics')
-                             .find('data').find('Vcsf').text.
-                                              replace(';', ',')))
+                assert set(ROI_names) == set(_ROI_names), xml_file
+                V_GM = catroi['Vgm'].str.replace("\[|\]", "", regex=True)\
+                                    .str.split(";")[0]
+                V_GM = [float(volume) for volume in V_GM]
+                V_CSF = catroi['Vcsf'].str.replace("\[|\]", "", regex=True)\
+                                    .str.split(";")[0]
+                V_CSF = [float(volume) for volume in V_CSF]
                 assert len(ROI_names) == len(V_GM) == len(V_CSF)
-
             except Exception as e:
                 print('Parsing error for %s: \n%s' %
                       (xml_file, traceback.format_exc()))
             else:
-                for i, ROI_name in enumerate(ROI_names):
-                    if participant_id not in output:
-                        output[participant_id] = {session:
-                                                  {run:
-                                                   {ROI_name +
-                                                    '_GM_Vol': float(V_GM[i]),
-                                                    ROI_name + '_CSF_Vol':
-                                                               float(V_CSF[i])}
-                                                   }
-                                                  }
-                    elif session not in output[participant_id]:
-                        output[participant_id][session] = {run:
-                                                           {ROI_name +
-                                                            '_GM_Vol':
-                                                            float(V_GM[i]),
-                                                            ROI_name +
-                                                            '_CSF_Vol':
-                                                            float(V_CSF[i])}}
-                    elif run not in output[participant_id][session]:
-                        output[participant_id][session][run] = \
-                                                               {ROI_name +
-                                                                '_GM_Vol':
-                                                                float(V_GM[i]),
-                                                                ROI_name +
-                                                                '_CSF_Vol':
-                                                                float(V_CSF[i])
-                                                                }
-                    else:
-                        output[participant_id][session][run][ROI_name +
-                                                             '_GM_Vol'] = \
-                                                             float(V_GM[i])
-                        output[participant_id][session][run][ROI_name +
-                                                             '_CSF_Vol'] = \
-                                                             float(V_CSF[i])
+                rois_sub = {}
+                gm_rois_names = [rois_name+'_GM_Vol' for rois_name
+                                 in ROI_names]
+                csf_rois_names = [rois_name+'_CSF_Vol' for rois_name
+                                  in ROI_names]
+                for idx, gmroiname in enumerate(gm_rois_names):
+                    rois_sub[gmroiname] = V_GM[idx]
+                    rois_sub[csf_rois_names[idx]] = V_CSF[idx]
+                df_rois_sub = pd.DataFrame(rois_sub, index=[0])
+            concat_roivol = [df_sub_key, df_rois_sub]
+            sub_roivol = pd.concat(concat_roivol, axis=1)
+            cohort_roivol = pd.concat([cohort_roivol, sub_roivol], axis=0)
+         
     ROI_names = ROI_names or []
-    fieldnames = ['participant_id', 'session', 'run', 'TIV',
-                  'CSF_Vol', 'GM_Vol', 'WM_Vol'] + \
-                 [roi + '_GM_Vol' for roi in ROI_names] + \
-                 [roi + '_CSF_Vol' for roi in ROI_names]
-    with open(output_file, 'w') as tsvfile:
-        writer = csv.DictWriter(tsvfile, fieldnames=fieldnames,
-                                dialect="excel-tab")
-        writer.writeheader()
-        for participant_id in output:
-            for session in output[participant_id].keys():
-                for (run, measures) in output[participant_id][session].items():
-                    writer.writerow(dict(participant_id=participant_id,
-                                         session=session, run=run, **measures))
+    cohort_volumes = cohort_globvol.merge(cohort_roivol, how='outer',
+                                          on=['participant_id', 'session',
+                                              'run'])
+    cohort_volumes.to_csv(output_file, sep="\t", float_format=str, index=False)
+ 
     return output_file
 
 
