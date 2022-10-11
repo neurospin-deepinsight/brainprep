@@ -21,7 +21,7 @@ RUN apt-get update \
     && apt-get clean
 
 # Installing brainprep
-RUN pip install --no-cache-dir git+https://github.com/neurospin-deepinsight/brainprep.git
+RUN pip install --no-cache-dir git+https://github.com/LoicDorval/brainprep.git@prequal
 
 # Create a shared $HOME directory
 RUN useradd -m -s /bin/bash -G users brainprep
@@ -33,7 +33,7 @@ ENTRYPOINT []
 
 # Define labels
 MAINTAINER Antoine Grigis <antoine.grigis@cea.fr>
-LABEL description="fmriprep 21.0.1 standalone docker image for brainprep 0.0.0"
+LABEL description="prequal standalone docker image for brainprep 0.0.0"
 LABEL maintainer="antoine.grigis@cea.fr"
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="brainprep" \

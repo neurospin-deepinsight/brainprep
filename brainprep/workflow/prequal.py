@@ -18,9 +18,9 @@ import tempfile
 from brainprep.color_utils import print_subtitle, print_title
 from brainprep.utils import execute_command
 
-# Suplementary import
+# Supplementary import
 import numpy as np
-
+import pandas as pd
 
 # Commande singularity
 # singularity run \
@@ -85,12 +85,14 @@ def brainprep_prequal(dwi,
     dtiQA_config = [os.path.basename(dwi).split('.')[0],
                     pe_signe,
                     readout_time]
-
+    df_dtiQA_config = pd.DataFrame(dtiQA_config)
     print_subtitle("Copy before launch")
     with tempfile.TemporaryDirectory() as tmpdir:
-        np.savetxt(os.path.join(tmpdir, "dtiQA_config.csv"),
-                   dtiQA_config,
-                   delimiter=",")
+        # np.savetxt(os.path.join(tmpdir, "dtiQA_config.csv"),
+        #            dtiQA_config,
+        #            delimiter=",")
+        df_dtiQA_config.T.to_csv(os.path.join(tmpdir, "dtiQA_config.csv"),
+                                 sep=",", header=False, index=False)
         shutil.copy(dwi, tmpdir)
         shutil.copy(bvec, tmpdir)
         shutil.copy(bval, tmpdir)
