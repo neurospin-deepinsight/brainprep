@@ -19,7 +19,6 @@ from brainprep.color_utils import print_subtitle, print_title
 from brainprep.utils import execute_command
 
 # Supplementary import
-import numpy as np
 import pandas as pd
 
 # Commande singularity
@@ -99,9 +98,10 @@ def brainprep_prequal(dwi,
         if t1 is not None:
             shutil.copy(t1, os.path.join(tmpdir, "t1.nii.gz"))
         print_subtitle("Launch prequal...")
-        cmd = ["source", "/CODE/dtiQA_v7/venv/bin/activate", ";",
-               "python", "/CODE/dtiQA_v7/run_dtiQA.py",
-               tmpdir,
-               output_dir,
-               pe_axis]
+        # cmd = ["source", "/CODE/dtiQA_v7/venv/bin/activate", ";",
+        #        "python", "/CODE/dtiQA_v7/run_dtiQA.py",
+        #        tmpdir,
+        #        output_dir,
+        #        pe_axis]
+        cmd = ["bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
         execute_command(cmd)
