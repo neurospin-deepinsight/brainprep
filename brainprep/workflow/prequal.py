@@ -66,8 +66,6 @@ def brainprep_prequal(dwi,
         readout time of the dwi image.
     output_dir: str
         path to the output directory.
-    tmp_dir: str
-        path to an empty dir use as tmp.
     t1: str
         path to the t1 image in case of synb0 use.
     """
@@ -104,4 +102,12 @@ def brainprep_prequal(dwi,
         #        output_dir,
         #        pe_axis]
         cmd = ["bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
-        execute_command(cmd)
+        import os, sys
+        import subprocess
+
+        procExe = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+
+        while procExe.poll() is None:
+            line = procExe.stdout.readline()
+            print(line)
+        # execute_command(cmd)
