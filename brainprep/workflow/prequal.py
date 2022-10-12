@@ -104,23 +104,13 @@ def brainprep_prequal(dwi,
         #        output_dir,
         #        pe_axis]
         cmd = ["bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
+
+        with subprocess.Popen(cmd,
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT) as process:
+            print("outuihodhzoih")
+            for line in process.stdout:
+                print(line.decode('utf8'))
         
-
-        process = subprocess.Popen(
-                cmd,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                shell=True,
-                encoding='utf-8',
-                errors='replace'
-        )
-
-        while True:
-            realtime_output = process.stdout.readline()
-
-            if realtime_output == '' and process.poll() is not None:
-                break
-
-            if realtime_output:
-                print(realtime_output.strip(), flush=True)
+        
         # execute_command(cmd)
