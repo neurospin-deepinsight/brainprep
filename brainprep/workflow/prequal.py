@@ -20,6 +20,8 @@ from brainprep.utils import execute_command
 
 # Supplementary import
 import pandas as pd
+import sys
+import subprocess
 
 # Commande singularity
 # singularity run \
@@ -102,8 +104,7 @@ def brainprep_prequal(dwi,
         #        output_dir,
         #        pe_axis]
         cmd = ["bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
-        import os, sys
-        import subprocess
+        
 
         procExe = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 
