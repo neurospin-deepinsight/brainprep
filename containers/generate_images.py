@@ -39,7 +39,7 @@ def main(working_dir):
         cmds = "export WDIR={}\n".format(dest_dir)
         cmds += "cd $WDIR\n"
         cmds += "export IMG={}\n".format(name)
-        if name == "dmriprep":
+        if name == "dmriprep_test":
             cmds += "###################test_start############################"
             cmds += "mkdir singularity_prequal\n"
             cmds += "cd singularity_prequal\n"
