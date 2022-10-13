@@ -15,12 +15,10 @@ Interface for prequal.
 import os
 import shutil
 import tempfile
-from brainprep.color_utils import print_subtitle, print_title
-from brainprep.utils import execute_command
+from brainprep.color_utils import print_result, print_subtitle, print_title
 
 # Supplementary import
 import pandas as pd
-import sys
 import subprocess
 
 # Commande singularity
@@ -70,6 +68,9 @@ def brainprep_prequal(dwi,
         path to the output directory.
     t1: str
         path to the t1 image in case of synb0 use.
+
+    In order to use the synb0 feature you must bind your freesurfer license as
+    such: -B /path/to/freesurfer/license.txt:/APPS/freesurfer/license.txt
     """
     print_title("PreQual dtiQA pipeline")
     if pe in ["i", "j", "k"]:
@@ -85,6 +86,7 @@ def brainprep_prequal(dwi,
                     pe_signe,
                     readout_time]
     df_dtiQA_config = pd.DataFrame(dtiQA_config)
+    print_result("dtiQA_config file content :\n", dtiQA_config)
     print_subtitle("Copy before launch")
     with tempfile.TemporaryDirectory() as tmpdir:
         # np.savetxt(os.path.join(tmpdir, "dtiQA_config.csv"),
@@ -98,19 +100,10 @@ def brainprep_prequal(dwi,
         if t1 is not None:
             shutil.copy(t1, os.path.join(tmpdir, "t1.nii.gz"))
         print_subtitle("Launch prequal...")
-        # cmd = ["source", "/CODE/dtiQA_v7/venv/bin/activate", ";",
-        #        "python", "/CODE/dtiQA_v7/run_dtiQA.py",
-        #        tmpdir,
-        #        output_dir,
-        #        pe_axis]
         cmd = ["bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
 
         with subprocess.Popen(cmd,
                               stdout=subprocess.PIPE,
                               stderr=subprocess.STDOUT) as process:
-            print("outuihodhzoih")
             for line in process.stdout:
                 print(line.decode('utf8'))
-        
-        
-        # execute_command(cmd)
