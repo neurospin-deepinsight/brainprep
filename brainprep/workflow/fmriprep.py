@@ -14,12 +14,12 @@ Interface for fmriprep.
 # System import
 import os
 import tempfile
-import subprocess
 import brainprep
-from brainprep.color_utils import print_subtitle, print_command
+import shutil
+from brainprep.color_utils import print_subtitle
 
 
-def brainprep_fmriprep(anatomical, functionals, subjid, descfile,
+def brainprep_fmriprep(anatomical, functionals, subjid, descfile, fsdir,
                        outdir="/out", workdir="/work", fmriprep="fmriprep"):
     """ Define the fmriprep pre-processing workflow.
 
@@ -31,6 +31,10 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile,
         path to the functional Nifti files.
     subjid: str
         the subject identifier.
+    descfile: str
+        the dataset description file. (bids)
+    fsdir: str
+        Path to existing FreeSurfer subjects directory to reuse.
     outdir: str
         the destination folder.
     workdir: str
@@ -42,11 +46,8 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile,
     if not isinstance(functionals, list):
         functionals = functionals.split(",")
     destdir = os.path.join(outdir, "fmriprep_{0}".format(subjid))
-    status = os.path.join(destdir, "fmriprep", subjid, "ok")
+    status = os.path.join(destdir, subjid, "ok")
     if not os.path.isfile(status):
-        if (not os.path.isdir(os.path.join(sddir, "ses-1", "anat"))
-                or not os.path.isdir(os.path.join(sddir, "ses-1", "func"))):
-            raise ValueError("No anat or func path available.")
         with tempfile.TemporaryDirectory() as tmpdir:
             datadir = os.path.join(tmpdir, "data")
             anatdir = os.path.join(datadir, subjid, "anat")
@@ -55,31 +56,39 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile,
             for path in (anatdir, funcdir, resdir):
                 if not os.path.isdir(path):
                     os.makedirs(path)
-            os.symlink(anatomical, anatdir)
-            os.symlink(anatomical.replace(".nii.gz", ".json"), anatdir)
+            shutil.copy(anatomical, os.path.join(anatdir,
+                                                 os.path.basename(anatomical)))
+            shutil.copy(anatomical.replace(".nii.gz", ".json"),
+                        os.path.join(anatdir,
+                                     os.path.basename(anatomical.replace
+                                                      (".nii.gz", ".json"))))
             for path in functionals:
-                os.symlink(path, anatdir)
-                os.symlink(path.replace(".nii.gz", ".json"), funcdir)
-            os.symlink(descfile, datadir)
+                shutil.copy(path, os.path.join(funcdir,
+                                               os.path.basename(path)))
+                shutil.copy(path.replace(".nii.gz", ".json"),
+                            os.path.join(funcdir, os.path.basename(path.replace
+                                                                   (".nii.gz",
+                                                                    ".json"))))
+            shutil.copy(descfile, os.path.join(datadir,
+                                               os.path.basename(descfile)))
             cmd = [
                 fmriprep,
                 datadir,
                 resdir,
                 "participant",
+                "--fs-subjects-dir", fsdir,
                 "-w", workdir,
                 "--n_cpus", "1",
                 "--stop-on-first-crash",
                 "--fs-license-file", "/code/freesurfer.txt",
                 "--skip_bids_validation",
-                "--fs-no-reconall",
                 "--force-bbr",
                 "--output-spaces", "MNI152NLin6Asym:res-2",
                 "--cifti-output", "91k",
                 "--ignore", "slicetiming",
                 "--participant_label", subjid]
-            print_command(" ".join(cmd))
-            subprocess.check_call(cmd, env=os.environ, cwd=tmpdir)
-            subprocess.check_call(["cp", "-r", resdir, destdir])
+            brainprep.execute_command(cmd)
+            shutil.move(resdir, destdir)
             open(status, "a").close()
 
 
