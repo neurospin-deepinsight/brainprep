@@ -88,7 +88,7 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile, fsdir,
                 "--ignore", "slicetiming",
                 "--participant_label", subjid]
             brainprep.execute_command(cmd)
-            brainprep.execute_command(["cp", "-r", resdir, destdir])
+            shutil.move(resdir, destdir)
             open(status, "a").close()
 
 
