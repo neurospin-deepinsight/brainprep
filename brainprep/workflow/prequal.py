@@ -66,7 +66,8 @@ def brainprep_prequal(dwi,
                     pe_signe,
                     readout_time]
     df_dtiQA_config = pd.DataFrame(dtiQA_config)
-    print_result("dtiQA_config file content :\n", dtiQA_config)
+    print_result("dtiQA_config file content :\n")
+    print_result(dtiQA_config)
 
     print_subtitle("Copy before launch")
     with tempfile.TemporaryDirectory() as tmpdir:
