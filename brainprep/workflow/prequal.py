@@ -83,6 +83,7 @@ def brainprep_prequal(dwi,
         cmd = ['xvfb-run',  '-a', '--server-num=$((65536+$$))',
                '--server-args="-screen', '0', '1600x1280x24', '-ac"'
                "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
+        print(cmd) # to remove
         with subprocess.Popen(cmd,
                               stdout=subprocess.PIPE,
                               stderr=subprocess.STDOUT) as process:
