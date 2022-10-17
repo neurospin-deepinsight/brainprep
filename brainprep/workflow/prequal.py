@@ -95,6 +95,6 @@ def brainprep_prequal(dwi,
                               stderr=subprocess.STDOUT) as process:
             for line in process.stdout:
                 print(line.decode('utf8'))
-        print(subprocess.STDOUT)
-        print("2:", stdout)
-        print("3:", stderr)
+            print(subprocess.STDOUT)
+            print("2:", stdout)
+            print("3:", stderr.decode('ANSI_X3.4-1968'))
