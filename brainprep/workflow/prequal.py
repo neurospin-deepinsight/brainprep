@@ -82,7 +82,7 @@ def brainprep_prequal(dwi,
 
         print_subtitle("Launch prequal...")
         cmd = ['xvfb-run',  '-a', '--server-num=$((65536+$$))',
-               '--server-args="-screen 0 1600x1280x24 -ac"',
+               '--server-args="-screen', '0', '1600x1280x24', '-ac"',
                "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
         print(cmd) # to remove
         check_command(cmd[0])
