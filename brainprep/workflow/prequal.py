@@ -15,7 +15,8 @@ Interface for prequal.
 import os
 import shutil
 import tempfile
-from brainprep.color_utils import print_result, print_subtitle, print_title
+from brainprep.color_utils import print_result, print_subtitle, print_title, \
+                                  print_command
 from brainprep.utils import check_command
 
 # Supplementary import
@@ -85,7 +86,9 @@ def brainprep_prequal(dwi,
                '--server-args="-screen', '0', '1600x1280x24', '-ac"',
                "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
         print(cmd) # to remove
-        check_command(cmd[0])
+        check_command(cmd[0]) # to remove
+
+        print_command(" ".join(cmd))
         with subprocess.Popen(cmd,
                               stdout=subprocess.PIPE,
                               stderr=subprocess.STDOUT) as process:
