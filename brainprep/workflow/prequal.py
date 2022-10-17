@@ -14,6 +14,7 @@ Interface for prequal.
 # System import
 import os
 import shutil
+from sys import stderr, stdout
 import tempfile
 from brainprep.color_utils import print_result, print_subtitle, print_title, \
                                   print_command
@@ -95,3 +96,5 @@ def brainprep_prequal(dwi,
             for line in process.stdout:
                 print(line.decode('utf8'))
         print(subprocess.STDOUT)
+        print("2:", stdout)
+        print("3:", stderr)
