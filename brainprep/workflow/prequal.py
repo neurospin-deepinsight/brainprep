@@ -21,27 +21,6 @@ from brainprep.color_utils import print_result, print_subtitle, print_title
 import pandas as pd
 import subprocess
 
-# Commande singularity
-# singularity run \
-# -e \
-# --contain \
-# -B /home/ld265905/Documents/PreQual_input/:/INPUTS \
-# -B /home/ld265905/Documents/PreQual_output/:/OUTPUTS \
-# -B /home/ld265905/tmp:/tmp \
-# -B /home/ld265905/Documents//license.txt:/APPS/freesurfer/license.txt \
-# /home/ld265905/prequal.simg \
-# j
-
-# Dans leur singularity file l'entry point ou %runscript
-# xvfb-run -a --server-num=$((65536+$$)) --server-args="-screen 0 1600x1280x24
-# -ac" bash /CODE/run_dtiQA.sh /INPUTS /OUTPUTS "$@"
-
-# Dans le run_dtiQA.sh :
-# proj_path=/CODE/dtiQA_v7
-# source $proj_path/venv/bin/activate
-# python $proj_path/run_dtiQA.py $@
-# deactivate
-
 
 def brainprep_prequal(dwi,
                       bvec,
@@ -80,18 +59,17 @@ def brainprep_prequal(dwi,
         pe_axis = pe[0]
         pe_signe = pe[1]
     else:
-        raise Exception
+        raise Exception("Valid input for pe are (i, i-, j, j-, k, k-)")
+
     print_subtitle("Making dtiQA_config.csv")
     dtiQA_config = [os.path.basename(dwi).split('.')[0],
                     pe_signe,
                     readout_time]
     df_dtiQA_config = pd.DataFrame(dtiQA_config)
     print_result("dtiQA_config file content :\n", dtiQA_config)
+
     print_subtitle("Copy before launch")
     with tempfile.TemporaryDirectory() as tmpdir:
-        # np.savetxt(os.path.join(tmpdir, "dtiQA_config.csv"),
-        #            dtiQA_config,
-        #            delimiter=",")
         df_dtiQA_config.T.to_csv(os.path.join(tmpdir, "dtiQA_config.csv"),
                                  sep=",", header=False, index=False)
         shutil.copy(dwi, tmpdir)
@@ -99,9 +77,11 @@ def brainprep_prequal(dwi,
         shutil.copy(bval, tmpdir)
         if t1 is not None:
             shutil.copy(t1, os.path.join(tmpdir, "t1.nii.gz"))
-        print_subtitle("Launch prequal...")
-        cmd = ["bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
 
+        print_subtitle("Launch prequal...")
+        cmd = ['xvfb-run -a --server-num=$((65536+$$)) --server-args="-screen '
+               '0 1600x1280x24 -ac" '
+               "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
         with subprocess.Popen(cmd,
                               stdout=subprocess.PIPE,
                               stderr=subprocess.STDOUT) as process:
