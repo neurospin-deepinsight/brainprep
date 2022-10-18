@@ -216,7 +216,7 @@ def parse_cat12vbm_roi(xml_filenames, output_file):
     output_file: str
         rois tsv path.
     """
-    ROI_names = None
+    roi_names = None
     cohort_globvol = pd.DataFrame()
     cohort_roivol = pd.DataFrame()
 
@@ -234,64 +234,61 @@ def parse_cat12vbm_roi(xml_filenames, output_file):
             cat = pd.read_xml(xml_file)
             try:
                 tiv = cat['vol_TIV'][7]
-                vol_abs_CGW = cat['vol_abs_CGW'][7][1:-1].split()
-                vol_abs_CGW = [float(volume) for volume in vol_abs_CGW]
-               
+                vol_abs_cgw = cat['vol_abs_CGW'][7][1:-1].split()
+                vol_abs_cgw = [float(volume) for volume in vol_abs_cgw]
             except Exception as e:
                 print('Parsing error for %s:\n%s' %
                       (xml_file, traceback.format_exc()))
             else:
                 globvolume_dico_sub = {}
-                globvolume_dico_sub['TIV'] = float(tiv)
-                globvolume_dico_sub['CSF_Vol'] = vol_abs_CGW[0]
-                globvolume_dico_sub['GM_Vol'] = vol_abs_CGW[1]
-                globvolume_dico_sub['WM_Vol'] = vol_abs_CGW[2]
+                globvolume_dico_sub['tiv'] = float(tiv)
+                globvolume_dico_sub['CSF_Vol'] = vol_abs_cgw[0]
+                globvolume_dico_sub['GM_Vol'] = vol_abs_cgw[1]
+                globvolume_dico_sub['WM_Vol'] = vol_abs_cgw[2]
                 df_global_sub = pd.DataFrame(globvolume_dico_sub, index=[0])
             concat_globvol = [df_sub_key, df_global_sub]
             sub_globvol = pd.concat(concat_globvol, axis=1)
             cohort_globvol = pd.concat([cohort_globvol, sub_globvol], axis=0)
-               
+
         elif re.match('.*label/catROI_.*\.xml', xml_file):
             tree = ET.parse(xml_file)
             try:
                 iterparse = {"neuromorphometrics": ["ids", "Vgm", "Vcsf"]}
                 catroi = pd.read_xml(xml_file, iterparse=iterparse)
-                _ROI_names = [item.text for item in
+                _roi_names = [item.text for item in
                               tree.find('neuromorphometrics')
                               .find('names').findall('item')]
-                if ROI_names is None:
-                    ROI_names = _ROI_names
-                assert set(ROI_names) == set(_ROI_names), xml_file
-                V_GM = catroi['Vgm'].str.replace("\[|\]", "", regex=True)\
+                if roi_names is None:
+                    roi_names = _roi_names
+                assert set(roi_names) == set(_roi_names), xml_file
+                v_gm = catroi['Vgm'].str.replace("\[|\]", "", regex=True)\
                                     .str.split(";")[0]
-                V_GM = [float(volume) for volume in V_GM]
-                V_CSF = catroi['Vcsf'].str.replace("\[|\]", "", regex=True)\
+                v_gm = [float(volume) for volume in v_gm]
+                v_csf = catroi['Vcsf'].str.replace("\[|\]", "", regex=True)\
                                       .str.split(";")[0]
-                V_CSF = [float(volume) for volume in V_CSF]
-                assert len(ROI_names) == len(V_GM) == len(V_CSF)
+                v_csf = [float(volume) for volume in v_csf]
+                assert len(roi_names) == len(v_gm) == len(v_csf)
             except Exception as e:
                 print('Parsing error for %s: \n%s' %
                       (xml_file, traceback.format_exc()))
             else:
                 rois_sub = {}
                 gm_rois_names = [rois_name+'_GM_Vol' for rois_name
-                                 in ROI_names]
+                                 in roi_names]
                 csf_rois_names = [rois_name+'_CSF_Vol' for rois_name
-                                  in ROI_names]
+                                  in roi_names]
                 for idx, gmroiname in enumerate(gm_rois_names):
-                    rois_sub[gmroiname] = V_GM[idx]
-                    rois_sub[csf_rois_names[idx]] = V_CSF[idx]
+                    rois_sub[gmroiname] = v_gm[idx]
+                    rois_sub[csf_rois_names[idx]] = v_csf[idx]
                 df_rois_sub = pd.DataFrame(rois_sub, index=[0])
             concat_roivol = [df_sub_key, df_rois_sub]
             sub_roivol = pd.concat(concat_roivol, axis=1)
             cohort_roivol = pd.concat([cohort_roivol, sub_roivol], axis=0)
-         
-    ROI_names = ROI_names or []
+    roi_names = roi_names or []
     cohort_volumes = cohort_globvol.merge(cohort_roivol, how='outer',
                                           on=['participant_id', 'session',
                                               'run'])
     cohort_volumes.to_csv(output_file, sep="\t", float_format=str, index=False)
- 
     return output_file
 
 

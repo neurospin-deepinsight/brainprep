@@ -29,9 +29,10 @@ from brainprep.plotting import plot_images, plot_hists
 
 
 def brainprep_cat12vbm(
-        anatomical, outdir, batchdir,
+        anatomical, outdir,
         longitudinal=False,
         model_long=1,
+        session=None,
         cat12="/opt/spm/standalone/cat_standalone.sh",
         spm12="/opt/spm",
         matlab="/opt/mcr/v93",
@@ -45,14 +46,12 @@ def brainprep_cat12vbm(
     ----------
     anatomical: list or str
         path to the anatomical T1w Nifti file, or
-        path to anatomical T1w Nifti files of one subject if longitudinal data.
-    outdir: list or str
+        if longitudinal data path to anatomical T1w Nifti files of one subject.
+    outdir: str
         the destination folder for cat12vbm outputs.
-        the destination folders if longitudinal data (one folder per session).
-        Warning the outdirs must be in the same order than the anatomical.
-    batchdir: str
-        destination folder for the cat12vbm_matlabbatch.
-        (will contain the matlab script use to launch cat12vbm preproc)
+    session: str
+        the session names, usefull for longitudinal preprocessings.
+        Warning session and nii files must be in the same order.
     longitudinal: bool
         optionally perform longitudinal CAT12 VBM process.
     model_long: int
@@ -72,26 +71,28 @@ def brainprep_cat12vbm(
         control the verbosity level: 0 silent, [1, 2] verbose.
     """
     print_title("Complete matlab batch...")
-    batch_file = os.path.join(batchdir, "cat12vbm_matlabbatch.m")
+    batch_file = os.path.join(outdir, "cat12vbm_matlabbatch.m")
     if not isinstance(anatomical, list):
         anatomical = anatomical.split(",")
+    if not isinstance(session, list) and session:
+        session = session.split(",")
     resource_dir = os.path.join(
         os.path.dirname(brainprep.__file__), "resources")
     if not longitudinal:
         template_batch = os.path.join(resource_dir, "cat12vbm_matlabbatch.m")
         print("use matlab batch:", template_batch)
         brainprep.write_matlabbatch(
-            template_batch, anatomical, tpm, darteltpm, batch_file, outdir)
+            template_batch, anatomical, tpm, darteltpm, session, outdir)
     else:
         if not isinstance(outdir, list):
             outdir = outdir.split(",")
-        assert len(anatomical) == len(outdir), "each longitudinal image must"\
-                                               " have an outdir specified"
+        assert len(anatomical) == len(session), "each longitudinal image must"\
+                                                " have a session specified"
         template_batch = os.path.join(
             resource_dir, "cat12vbm_matlabbatch_longitudinal.m")
         print("use matlab batch:", template_batch)
         brainprep.write_matlabbatch(
-            template_batch, anatomical, tpm, darteltpm, batch_file, outdir,
+            template_batch, anatomical, tpm, darteltpm, session, outdir,
             model_long=model_long)
     print_title("Launch CAT12 VBM matlab batch...")
     cmd = [cat12, "-s", spm12, "-m", matlab, "-b", batch_file]
@@ -106,7 +107,7 @@ def brainprep_cat12vbm(
             name = "mwp1u" + name
         else:
             name = "mwp1ru" + name
-        root = outdir[idx] + "/mri"
+        root = os.path.join(outdir[idx], "mri")
         mwp1 = os.path.join(root, name)
         if re.search(".nii.gz", filename):
             mwp1 = os.path.join(root, name[0:-3])
@@ -139,7 +140,7 @@ def brainprep_cat12vbm_roi(xml_filenames, output):
     """
     print_title("Parse cat12vbm rois...")
     subprocess.check_call(["mkdir", "-p", output])
-    output_file = os.path.join(output, "cat12-12.7_vbm_roi.tsv")
+    output_file = os.path.join(output, "cat12_vbm_roi.tsv")
     if not isinstance(xml_filenames, list):
         xml_filenames = xml_filenames.split(",")
     xml_filenames = [glob.glob(regex) for regex in xml_filenames]

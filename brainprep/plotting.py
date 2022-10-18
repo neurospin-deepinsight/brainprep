@@ -54,7 +54,7 @@ def plot_images(nii_files, cut_coords, outdir):
                 if not isinstance(axs, list):
                     axs = [axs]
                 plotting.plot_anat(img, figure=fig, axes=axs[idx],
-                                    cut_coords=cut, display_mode="ortho")
+                                   cut_coords=cut, display_mode="ortho")
             plt.subplots_adjust(wspace=0, hspace=0, top=0.9, bottom=0.1)
             keys = get_bids_keys(path)
             participant_id = keys["participant_id"]

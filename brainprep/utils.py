@@ -16,8 +16,6 @@ import os
 import re
 import sys
 import gzip
-import shutil
-import tempfile
 import subprocess
 import numpy as np
 import pandas as pd
@@ -101,8 +99,9 @@ def check_version(package_name, check_pkg_version):
 
 
 def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file,
-                      batch_file, outdir, model_long=1):
-    """ Complete matlab batch from template.
+                      session, outdir, model_long=1):
+    """ Complete matlab batch from template and unzip T1w file in the outdir.
+        Create the outdir.
 
     Parameters
     ----------
@@ -114,20 +113,22 @@ def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file,
         path to the SPM TPM file.
     darteltpm_file: str
         path to the CAT12 tempalte file.
-    outdir: list or str
+    outdir: str
         the destination folder for cat12vbm outputs.
-        the destination folders if longitudinal data (one folder per session).
-    batch_file: str
-        path to the generated matlab batch file that can be used to launch
-        CAT12 VBM preprocessing.
+    session: str
+        the session names, usefull for longitudinal preprocessings.
+        Warning session and nii files must be in the same order.
     model_long: int
         longitudinal model choice, default 1.
         1 short time (weeks), 2 long time (years) between images sessions.
     """
     nii_files_str = ""
+    output = outdir
+    if session:
+        outdir = [os.path.join(outdir, ses) for ses in session]
+    if not isinstance(outdir, list):
+        outdir = [outdir]
     for idx, path in enumerate(nii_files):
-        if not isinstance(outdir, list):
-            outdir = [outdir]
         os.makedirs(outdir[idx])
         nii_files_str += "'{0}' \n".format(
             ungzip_file(path, outdir=outdir[idx]))
@@ -136,7 +137,7 @@ def write_matlabbatch(template, nii_files, tpm_file, darteltpm_file,
         stream = stream.format(model_long=model_long, anat_file=nii_files_str,
                                tpm_file=tpm_file,
                                darteltpm_file=darteltpm_file)
-    with open(batch_file, "w") as of:
+    with open(output, "w") as of:
         of.write(stream)
 
 
