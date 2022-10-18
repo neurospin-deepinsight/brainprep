@@ -51,6 +51,8 @@ def brainprep_prequal(dwi,
     t1: str
         path to the t1 image in case of synb0 use.
 
+    Note
+    ----
     In order to use the synb0 feature you must bind your freesurfer license as
     such: -B /path/to/freesurfer/license.txt:/APPS/freesurfer/license.txt
     """
@@ -85,6 +87,8 @@ def brainprep_prequal(dwi,
         print_subtitle("Launch prequal...")
         cmd = ["xvfb-run",  "-a", "--server-num=$((65536+$$))",
                "--server-args=\"-screen", "0", "1600x1280x24", "-ac\"",
+               "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
+        cmd = ["xvfb-run",  "-a",
                "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
         print(cmd) # to remove
         check_command(cmd[0]) # to remove
