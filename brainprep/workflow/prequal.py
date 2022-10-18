@@ -85,11 +85,11 @@ def brainprep_prequal(dwi,
             shutil.copy(t1, os.path.join(tmpdir, "t1.nii.gz"))
 
         print_subtitle("Launch prequal...")
-        cmd = ["xvfb-run",  "-a", "--server-num=$((65536+$$))",
-               "--server-args=\"-screen", "0", "1600x1280x24", "-ac\"",
+        cmd = ["xvfb-run",  "-a", "--server-num=1",
+               "--server-args='-screen 0 1600x1280x24 -ac'",
                "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
-        cmd = ["xvfb-run",  "-a",
-               "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
+        # cmd = ["xvfb-run",  "-a",
+        #        "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
         print(cmd) # to remove
         check_command(cmd[0]) # to remove
 
@@ -100,5 +100,5 @@ def brainprep_prequal(dwi,
             for line in process.stdout:
                 print(line.decode('utf8'))
             print(subprocess.STDOUT)
-            print("2:", stdout)
-            print("3:", stderr.decode('ANSI_X3.4-1968'))
+            # print("2:", stdout)
+            # print("3:", stderr.decode('ANSI_X3.4-1968'))
