@@ -11,6 +11,7 @@
 import unittest
 import unittest.mock as mock
 from unittest.mock import patch
+from pprint import pprint
 import os
 import inspect
 import nibabel
@@ -43,7 +44,6 @@ class TestPreprocessing(unittest.TestCase):
             _defaults = _signature.defaults or []
             _defaults = (
                 [None] * (len(_args) - len(_defaults)) + list(_defaults))
-
             _kwargs = dict((key, val if val is not None else key)
                            for key, val in zip(_args, _defaults))
             self.processes[name] = (_func, _kwargs)
@@ -52,6 +52,11 @@ class TestPreprocessing(unittest.TestCase):
         self.processes["tbss_1_preproc"][1]["tbss_dir"] = "/path"
         self.processes["tbss_1_preproc"][1]["fa_file"] = (
             "/path/sub-XX_FA.nii.gz")
+        self.processes["recon_all_longitudinal"][1]["fsdirs"] = [
+            "fsdir1", "fsdir2"]
+        self.processes["recon_all_longitudinal"][1]["timepoints"] = [
+            "V1", "V2"]
+        self.processes["write_matlabbatch"][1]["nii_files"] = ["nii_file"]
         del self.processes["func_connectivity"]
 
     def tearDown(self):
@@ -59,6 +64,8 @@ class TestPreprocessing(unittest.TestCase):
         """
         self.popen_patcher.stop()
 
+    @mock.patch("os.mkdir")
+    @mock.patch("shutil.move")
     @mock.patch("glob.glob")
     @mock.patch("builtins.open")
     @mock.patch("nibabel.save")
@@ -72,7 +79,7 @@ class TestPreprocessing(unittest.TestCase):
     @mock.patch("os.path.islink")
     def test_run(self, mock_islink, mock_isfile, mock_isdir, mock_rm,
                  mock_cd, mock_loadtxt, mock_savetxt, mock_load,
-                 mock_save, mock_open, mock_glob):
+                 mock_save, mock_open, mock_glob, mock_mv, mock_mkdir):
         """ Test the processes.
         """
         print_title("Testing processes...")
@@ -93,6 +100,7 @@ class TestPreprocessing(unittest.TestCase):
         mock_glob.return_value = []
         for key, (fct, kwargs) in self.processes.items():
             print_subtitle(f"{key}...")
+            pprint(kwargs)
             fct(**kwargs)
         print_title("Done.")
 

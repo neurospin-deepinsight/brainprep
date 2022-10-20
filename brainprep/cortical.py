@@ -106,15 +106,15 @@ def recon_all_custom_wm_mask(fsdir, sid, wm):
         raise ValueError(f"Directory does not exist: {subjfsdir}.")
 
     # Save original wm.seg.mgz as wm.seg.orig.mgz
-    wm_seg_mgz = os.path.join(subject_dir, "mri", "wm.seg.mgz")
-    save_as = os.path.join(subject_dir, "mri", "wm.seg.orig.mgz")
+    wm_seg_mgz = os.path.join(subjfsdir, "mri", "wm.seg.mgz")
+    save_as = os.path.join(subjfsdir, "mri", "wm.seg.orig.mgz")
     shutil.move(wm_seg_mgz, save_as)
 
     # Work in tmp
-    with tempfile.TemporaryDirectory() as tmpdirname:
+    with tempfile.TemporaryDirectory() as tmpdir:
 
         # Change input mask range of values: [0-1] to [0-110]
-        wm_mask_0_110 = os.path.join(temp_dir, "wm_mask_0_110.nii.gz")
+        wm_mask_0_110 = os.path.join(tmpdir, "wm_mask_0_110.nii.gz")
         cmd = ["mris_calc", "-o", wm_mask_0_110, wm, "mul", "110"]
         check_command("mris_calc")
         execute_command(cmd)
@@ -180,17 +180,17 @@ def recon_all_longitudinal(fsdirs, sid, outdir, timepoints=None):
 
     # FreeSurfer requires a unique SUBJECTS_DIR with all the timepoints to
     # compute the template: create symbolic links in <outdir> to all timepoints
-    tp_sids = [] 
+    tp_sids = []
     for tp, fsdir in zip(timepoints, fsdirs):
         tp_sid = f"{sid}_{tp}"
         src_path = os.path.join(fsdir, sid)
         dst_path = os.path.join(outdir, tp_sid)
         if not os.path.islink(dst_path):
             os.symlink(src_path, dst_path)
-        tp_sids.append(subject_tp_id)
+        tp_sids.append(tp_sid)
 
     # STEP 1 - create and process template
-    template_id = "{}_template_{}".format(subject_id, "_".join(timepoints))
+    template_id = "{}_template_{}".format(sid, "_".join(timepoints))
     cmd = ["recon-all", "-base", template_id]
     for tp_sid in tp_sids:
         cmd += ["-tp", tp_sid]
