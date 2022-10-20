@@ -13,22 +13,26 @@ Interface for CAT12 VBM.
 
 # System import
 import os
+import re
 import glob
 import nibabel
 import numpy as np
 from html import unescape
+import subprocess
 import brainprep
 from brainprep.utils import load_images, create_clickable
 from brainprep.color_utils import print_title, print_result
 from brainprep.qc import (
     parse_cat12vbm_qc, plot_pca, compute_mean_correlation,
-    parse_cat12vbm_report, check_files)
+    parse_cat12vbm_report, check_files, parse_cat12vbm_roi)
 from brainprep.plotting import plot_images, plot_hists
 
 
 def brainprep_cat12vbm(
         anatomical, outdir,
         longitudinal=False,
+        model_long=1,
+        session=None,
         cat12="/opt/spm/standalone/cat_standalone.sh",
         spm12="/opt/spm",
         matlab="/opt/mcr/v93",
@@ -40,13 +44,19 @@ def brainprep_cat12vbm(
 
     Parameters
     ----------
-    anatomical: list of str
-        path to the anatomical T1w Nifti file(s), or path to anatomical T1w
-        Nifti files of one subject if longitudinal data.
+    anatomical: list or str
+        path to the anatomical T1w Nifti file, or
+        if longitudinal data path to anatomical T1w Nifti files of one subject.
     outdir: str
-        the destination folder.
+        the destination folder for cat12vbm outputs.
+    session: str
+        the session names, usefull for longitudinal preprocessings.
+        Warning session and nii files must be in the same order.
     longitudinal: bool
         optionally perform longitudinal CAT12 VBM process.
+    model_long: int
+        longitudinal model choice, default 1.
+        1 short time (weeks), 2 long time (years) between images sessions.
     cat12: str
         path to the CAT12 standalone executable.
     spm12: str
@@ -55,37 +65,93 @@ def brainprep_cat12vbm(
         Matlab Compiler Runtime (MCR) folder.
     tpm: str
         path to the SPM TPM file.
-    darteltmp: str
+    darteltpm: str
         path to the CAT12 template file.
     verbose: int
         control the verbosity level: 0 silent, [1, 2] verbose.
     """
     print_title("Complete matlab batch...")
+    batch_file = os.path.join(outdir, "cat12vbm_matlabbatch.m")
     if not isinstance(anatomical, list):
         anatomical = anatomical.split(",")
+    if not isinstance(session, list) and session:
+        session = session.split(",")
     resource_dir = os.path.join(
         os.path.dirname(brainprep.__file__), "resources")
-    batch_file = os.path.join(outdir, "cat12vbm_matlabbatch.m")
     if not longitudinal:
         template_batch = os.path.join(resource_dir, "cat12vbm_matlabbatch.m")
         print("use matlab batch:", template_batch)
         brainprep.write_matlabbatch(
-            template_batch, anatomical, tpm, darteltpm, batch_file)
+            template_batch, anatomical, tpm, darteltpm, session, outdir)
     else:
+        if not isinstance(outdir, list):
+            outdir = outdir.split(",")
+        assert len(anatomical) == len(session), "each longitudinal image must"\
+                                                " have a session specified"
         template_batch = os.path.join(
             resource_dir, "cat12vbm_matlabbatch_longitudinal.m")
         print("use matlab batch:", template_batch)
         brainprep.write_matlabbatch(
-            template_batch, anatomical, tpm, darteltpm, batch_file,
-            longitudinal=True)
-
+            template_batch, anatomical, tpm, darteltpm, session, outdir,
+            model_long=model_long)
     print_title("Launch CAT12 VBM matlab batch...")
     cmd = [cat12, "-s", spm12, "-m", matlab, "-b", batch_file]
     brainprep.execute_command(cmd)
 
+    print_title("Make datasets...")
+    for idx, filename in enumerate(anatomical):
+        if not isinstance(outdir, list):
+            outdir = [outdir]
+        name = os.path.basename(filename)
+        if not longitudinal:
+            name = "mwp1u" + name
+        else:
+            name = "mwp1ru" + name
+        root = os.path.join(outdir[idx], "mri")
+        mwp1 = os.path.join(root, name)
+        if re.search(".nii.gz", filename):
+            mwp1 = os.path.join(root, name[0:-3])
+            assert os.path.exists(mwp1), mwp1
+        else:
+            raise Warning("cat12vbm results will be written in the same"
+                          " folder as the input image. If you want it written"
+                          " in the output folder,"
+                          " you need to gzip your images")
+        if not os.path.exists(mwp1):
+            raise ValueError("{0} file doesn't exists".format(mwp1))
+        nii_img = nibabel.load(mwp1)
+        nii_arr = nii_img.get_fdata()
+        nii_arr = nii_arr.astype(np.float32)
+        npy_mat = mwp1.replace(".nii", ".npy")
+        np.save(npy_mat, nii_arr)
+
+
+def brainprep_cat12vbm_roi(xml_filenames, output):
+    """ Parse cat12vbm rois workflow.
+
+    Parameters
+    ----------
+    xml_filenames: list or str(regex,regex)
+        regex to the CAT12 VBM catROI and cat xml files for all subjects.
+        .../label/catROI_sub-*_ses-*_T1w.xml
+        .../report/cat_sub-*_ses-*_T1w.xml
+    output: str
+        the destination folder.
+    """
+    print_title("Parse cat12vbm rois...")
+    subprocess.check_call(["mkdir", "-p", output])
+    output_file = os.path.join(output, "cat12_vbm_roi.tsv")
+    if not isinstance(xml_filenames, list):
+        xml_filenames = xml_filenames.split(",")
+    xml_filenames = [glob.glob(regex) for regex in xml_filenames]
+    xml_filenames = [filename for sublist in xml_filenames
+                     for filename in sublist]
+    rois_tsv_path = parse_cat12vbm_roi(xml_filenames, output_file)
+    print_result(rois_tsv_path)
+
 
 def brainprep_cat12vbm_qc(
-        img_regex, qc_regex, report_root, outdir, brainmask_regex=None,
+        img_regex, qc_regex, outdir, brainmask_regex=None,
         extra_img_regex=None, ncr_thr=4.5, iqr_thr=4.5, corr_thr=0.5):
     """ Define the CAT12 VBM quality control workflow.
 
@@ -95,8 +161,6 @@ def brainprep_cat12vbm_qc(
         regex to the CAT12 VBM image files for all subjects.
     qc_regex: str
         regex to the CAT12 VBM quality control xml files for all subjects.
-    report_root: str
-        the root path of the CAT12VBM report files.
     outdir: str
         the destination folder.
     brainmask_regex: str, default None
@@ -180,7 +244,6 @@ def brainprep_cat12vbm_qc(
     df_qc.to_csv(qc_path, index=False, sep="\t")
     print(df_qc)
     print_result(qc_path)
-
     print_title("Save scores histograms...")
     data = {
         "NCR": {"data": df_qc["NCR"].values, "bar": ncr_thr},
@@ -210,7 +273,11 @@ def brainprep_cat12vbm_qc(
     print_result(snapdir)
 
     print_title("Parse reports ordered by IQR...")
-    reports = parse_cat12vbm_report(img_files_sorted, report_root)
+    cat12vbm_root = img_files_sorted[0].split(os.sep)[0:-5]
+    cat12vbm_root = os.sep.join(cat12vbm_root)
+    if not os.path.exists(cat12vbm_root):
+        raise ValueError("the cat12vbm preprocessing folder doesn't exists")
+    reports = parse_cat12vbm_report(img_files_sorted, cat12vbm_root)
     df_report["report_path"] = reports
     df_report["report_path"] = df_report["report_path"].apply(
         create_clickable)

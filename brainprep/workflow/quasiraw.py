@@ -42,6 +42,8 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
         BIDS hierarchy.
     """
     print_title("Set outputs and default target if applicable...")
+    if not os.path.isdir(outdir):
+        raise ValueError("{0} does not exist".format(outdir))
     if target is None:
         resource_dir = os.path.join(
             os.path.dirname(brainprep.__file__), "resources")
@@ -77,6 +79,15 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
     brainprep.apply_affine(stdmaskfile, regfile, regmaskfile, trffile,
                            interp="nearestneighbour")
     brainprep.apply_mask(regfile, regmaskfile, applyfile)
+
+    print_title("Make datasets...")
+    if not os.path.exists(applyfile):
+        raise ValueError("{0} file doesn't exists".format(applyfile))
+    nii_img = nibabel.load(applyfile)
+    nii_arr = nii_img.get_fdata()
+    nii_arr = nii_arr.astype(np.float32)
+    npy_mat = applyfile.replace(".nii.gz", ".npy")
+    np.save(npy_mat, nii_arr)
 
 
 def brainprep_quasiraw_qc(img_regex, outdir, brainmask_regex=None,
