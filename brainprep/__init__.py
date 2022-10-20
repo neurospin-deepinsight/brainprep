@@ -20,7 +20,7 @@ from .spatial import (
     apply_mask)
 from .cortical import (
     recon_all, localgi, stats2table, interhemi_surfreg, interhemi_projection,
-    mri_conversion)
+    mri_conversion, recon_all_custom_wm_mask, recon_all_longitudinal)
 from .deface import deface
 from .connectivity import func_connectivity
 from .tbss import (

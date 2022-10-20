@@ -15,6 +15,8 @@ Common cortical functions.
 # Imports
 import os
 import glob
+import shutil
+import tempfile
 import warnings
 from .utils import check_version, check_command, execute_command
 
@@ -28,27 +30,27 @@ def recon_all(fsdir, anatfile, sid, reconstruction_stage="all", resume=False,
     Parameters
     ----------
     fsdir: str
-        The FreeSurfer working directory with all the subjects.
-    anatfile: str (mandatory)
-        The input anatomical image to be segmented with FreeSurfer.
+        the FreeSurfer working directory with all the subjects.
+    anatfile: str
+        the input anatomical image to be segmented with FreeSurfer.
     sid: str
-        The current subject identifier.
+        the current subject identifier.
     reconstruction_stage: str, default 'all'
-        The FreeSurfer reconstruction stage that will be launched.
+        the FreeSurfer reconstruction stage that will be launched.
     resume: bool, deafult False
-        If true, try to resume the recon-all. This option is also usefull if
+        if true, try to resume the recon-all. This option is also usefull if
         custom segmentation is used in recon-all.
     t2file: str, default None
-        Specify the path to a T2 image that will be used to improve the pial
+        specify the path to a T2 image that will be used to improve the pial
         surfaces.
     flairfile: str, default None
-        Specify the path to a FLAIR image that will be used to improve the pial
+        specify the path to a FLAIR image that will be used to improve the pial
         surfaces.
 
     Returns
     -------
     subjfsdir: str
-        Path to the resulting FreeSurfer segmentation.
+        path to the resulting FreeSurfer segmentation.
     """
     # Check input parameters
     if not os.path.isdir(fsdir):
@@ -74,6 +76,136 @@ def recon_all(fsdir, anatfile, sid, reconstruction_stage="all", resume=False,
     subjfsdir = os.path.join(fsdir, sid)
 
     return subjfsdir
+
+
+def recon_all_custom_wm_mask(fsdir, sid, wm):
+    """ Assuming you have run recon-all (at least upto wm.mgz creation), this
+    function allows to rerun recon-all using a custom white matter mask.
+
+    Parameters
+    ----------
+    fsdir: str
+        the FreeSurfer working directory with all the subjects.
+    sid: str
+        the current subject identifier.
+    wm: str
+        path to the custom white matter mask. It has to be in the subject's
+        FreeSurfer space (1mm iso + aligned with brain.mgz) with values in
+        [0, 1] (i.e. probability of being white matter).
+        For example, it can be the 'brain_pve_2.nii.gz" white matter
+        probability map created by FSL Fast.
+
+    Returns
+    -------
+    subjfsdir: str
+        path to the resulting FreeSurfer segmentation.
+    """
+    # Check existence of the subject's directory
+    subjfsdir = os.path.join(fsdir, sid)
+    if not os.path.isdir(subjfsdir):
+        raise ValueError(f"Directory does not exist: {subjfsdir}.")
+
+    # Save original wm.seg.mgz as wm.seg.orig.mgz
+    wm_seg_mgz = os.path.join(subject_dir, "mri", "wm.seg.mgz")
+    save_as = os.path.join(subject_dir, "mri", "wm.seg.orig.mgz")
+    shutil.move(wm_seg_mgz, save_as)
+
+    # Work in tmp
+    with tempfile.TemporaryDirectory() as tmpdirname:
+
+        # Change input mask range of values: [0-1] to [0-110]
+        wm_mask_0_110 = os.path.join(temp_dir, "wm_mask_0_110.nii.gz")
+        cmd = ["mris_calc", "-o", wm_mask_0_110, wm, "mul", "110"]
+        check_command("mris_calc")
+        execute_command(cmd)
+
+        # Write the new wm.seg.mgz, FreeSurfer requires MRI_UCHAR type
+        cmd = ["mri_convert", wm_mask_0_110, wm_seg_mgz, "-odt", "uchar"]
+        check_command("mri_convert")
+        execute_command(cmd)
+
+    # Rerun recon-all
+    cmd = ["recon-all", "-autorecon2-wm", "-autorecon3", "-s", sid,
+           "-sd", fsdir]
+    check_command("recon-all")
+    execute_command(cmd)
+
+    return subjfsdir
+
+
+def recon_all_longitudinal(fsdirs, sid, outdir, timepoints=None):
+    """ Assuming you have run recon-all for all timepoints of a given subject,
+    and that the results are stored in one subject directory per timepoint,
+    this function will:
+
+    - create a template for the subject and process it with recon-all
+    - rerun recon-all for all timepoints of the subject using the template
+
+    Parameters
+    ----------
+    fsdirs: list of str
+        the FreeSurfer working directory where to find the the subject
+        associated timepoints.
+    sid: str
+        the current subject identifier.
+    outdir: str
+        destination folder.
+    timepoints: list of str, default None
+        the timepoint names in the same order as the ``subjfsdirs``.
+        Used to create the subject longitudinal IDs. By default timepoints
+        are "1", "2"...
+
+    Return
+    ------
+    template_id: str
+        ID of the subject template.
+    long_sids: list of str
+        longitudinal IDs of the subject for all the timepoints.
+    """
+    # Check existence of FreeSurfer subject directories
+    for fsdir in fsdirs:
+        subjfsdir = os.path.join(fsdir, sid)
+        if not os.path.isdir(subjfsdir):
+            raise ValueError("Directory does not exist: {subjfsdir}.")
+
+    # If 'timepoints' not passed, used defaults, else check validity
+    if timepoints is None:
+        timepoints = [str(n) for n in range(1, len(fsdirs) + 1)]
+    elif len(timepoints) != len(fsdirs):
+        raise ValueError("There should be as many timepoints as 'fsdirs'.")
+
+    # Create destination folder if necessary
+    if not os.path.isdir(outdir):
+        os.mkdir(outdir)
+
+    # FreeSurfer requires a unique SUBJECTS_DIR with all the timepoints to
+    # compute the template: create symbolic links in <outdir> to all timepoints
+    tp_sids = [] 
+    for tp, fsdir in zip(timepoints, fsdirs):
+        tp_sid = f"{sid}_{tp}"
+        src_path = os.path.join(fsdir, sid)
+        dst_path = os.path.join(outdir, tp_sid)
+        if not os.path.islink(dst_path):
+            os.symlink(src_path, dst_path)
+        tp_sids.append(subject_tp_id)
+
+    # STEP 1 - create and process template
+    template_id = "{}_template_{}".format(subject_id, "_".join(timepoints))
+    cmd = ["recon-all", "-base", template_id]
+    for tp_sid in tp_sids:
+        cmd += ["-tp", tp_sid]
+    cmd += ["-all", "-sd", fsdir]
+    check_command("recon-all")
+    execute_command(cmd)
+
+    # STEP 2 - rerun recon-all for all timepoints using the template
+    long_sids = []
+    for tp_sid in tp_sids:
+        cmd = ["recon-all", "-long", tp_sid, template_id, "-all", "-sd", fsdir]
+        execute_command(cmd)
+        long_sids += [f"{tp_sid}.long.{template_id}"]
+
+    return template_id, long_sids
 
 
 def interhemi_surfreg(fsdir, sid, template_dir):

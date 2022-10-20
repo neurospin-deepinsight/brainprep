@@ -27,7 +27,7 @@ from brainprep.plotting import plot_fsreconall, plot_hists
 
 
 def brainprep_fsreconall(subjid, anatomical, outdir, template_dir,
-                         do_lgi=False):
+                         do_lgi=False, wm=None):
     """ Define the FreeSurfer recon-all pre-processing workflow.
 
     Parameters
@@ -43,11 +43,22 @@ def brainprep_fsreconall(subjid, anatomical, outdir, template_dir,
     do_lgi: bool
         optionally perform the Local Gyrification Index (LGI) "
         computation (requires Matlab).
+    wm: str
+        optionally give a path to the custom white matter mask (we assume
+        you have run recon-all at least upto wm.mgz creation). It has to be
+        in the subject's FreeSurfer space (1mm iso + aligned with brain.mgz)
+        with values in [0, 1] (i.e. probability of being white matter).
+        For example, it can be the 'brain_pve_2.nii.gz" white matter
+        probability map created by FSL Fast.
     """
     print_title("Launch FreeSurfer reconall...")
-    brainprep.recon_all(
-        fsdir=outdir, anatfile=anatomical, sid=subjid,
-        reconstruction_stage="all", resume=False, t2file=None, flairfile=None)
+    if wm is None:
+        brainprep.recon_all(
+            fsdir=outdir, anatfile=anatomical, sid=subjid,
+            reconstruction_stage="all", resume=False, t2file=None,
+            flairfile=None)
+    else:
+        brainprep.recon_all_custom_wm_mask(fsdir=outdir, sid=subjid, wm=wm)
 
     if do_lgi:
         print_title("Launch FreeSurfer LGI computation...")
@@ -88,6 +99,36 @@ def brainprep_fsreconall(subjid, anatomical, outdir, template_dir,
     destfile = os.path.join(outdir, subjid, "xhemi-textures.npy")
     np.save(destfile, data)
     print_result(destfile)
+
+
+def brainprep_fsreconall_longitudinal(subjid, anatomical, outdir, template_dir,
+                         do_lgi=False, wm=None):
+    """ Assuming you have run recon-all for all timepoints of a given subject,
+    and that the results are stored in one subject directory per timepoint,
+    this function will:
+
+    - create a template for the subject and process it with recon-all
+    - rerun recon-all for all timepoints of the subject using the template
+
+    Parameters
+    ----------
+    fsdirs: list of str
+        the FreeSurfer working directory where to find the the subject
+        associated timepoints.
+    sid: str
+        the current subject identifier.
+    outdir: str
+        destination folder.
+    timepoints: list of str, default None
+        the timepoint names in the same order as the ``subjfsdirs``.
+        Used to create the subject longitudinal IDs. By default timepoints
+        are "1", "2"...
+    """
+    print_title("Launch FreeSurfer reconall longitudinal...")
+    template_id, long_sids = brainprep.recon_all_longitudinal(
+        fsdirs, sid, outdir, timepoints)
+    print_result(template_id)
+    print_result(long_sids)
 
 
 def brainprep_fsreconall_summary(fsdir, outdir):
