@@ -172,7 +172,7 @@ def brainprep_fsreconall_summary(fsdir, outdir):
                 if subjects is None:
                     subjects = values[:, 0]
                 else:
-                    assert subjects == values[:, 0], (
+                    assert (subjects == values[:, 0]).all(), (
                         "Inconsistent subjects list.")
                 if columns is None:
                     columns = df.columns[1:]

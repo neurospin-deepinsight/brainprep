@@ -16,7 +16,7 @@ fprintf('SPM path: %s\n', which('spm'));
 matlabbatch{{1}}.spm.tools.cat.long.datalong.subjects = {{{{
     {anat_file}
 }}}}';
-matlabbatch{{1}}.spm.tools.cat.long.longmodel = 1;
+matlabbatch{{1}}.spm.tools.cat.long.longmodel = {model_long};
 matlabbatch{{1}}.spm.tools.cat.long.nproc = 2;
 matlabbatch{{1}}.spm.tools.cat.long.opts.tpm = {{'{tpm_file}'}};
 matlabbatch{{1}}.spm.tools.cat.long.opts.affreg = 'mni';
