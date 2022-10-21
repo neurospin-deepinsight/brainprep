@@ -11,7 +11,6 @@
 import unittest
 import unittest.mock as mock
 from unittest.mock import patch
-from pprint import pprint
 import os
 import inspect
 import nibabel
@@ -100,7 +99,7 @@ class TestPreprocessing(unittest.TestCase):
         mock_glob.return_value = []
         for key, (fct, kwargs) in self.processes.items():
             print_subtitle(f"{key}...")
-            pprint(kwargs)
+            print(kwargs)
             fct(**kwargs)
         print_title("Done.")
 
