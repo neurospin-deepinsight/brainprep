@@ -92,7 +92,7 @@ def brainprep_cat12vbm(
             resource_dir, "cat12vbm_matlabbatch_longitudinal.m")
         print("use matlab batch:", template_batch)
         brainprep.write_matlabbatch(template_batch, anatomical, tpm, darteltpm,
-                                    session, outdir, batch_file,
+                                    session, batch_file, outdir,
                                     model_long=model_long)
     print_title("Launch CAT12 VBM matlab batch...")
     cmd = [cat12, "-s", spm12, "-m", matlab, "-b", batch_file]
