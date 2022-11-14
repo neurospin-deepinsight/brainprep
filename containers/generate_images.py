@@ -98,7 +98,9 @@ def main(working_dir):
         cmds = "export WDIR={}\n".format(dest_dir)
         cmds += "cd $WDIR\n"
         cmds += "export IMG={}\n".format(name)
-
+        cmds += "mkdir $WDIR/home\n"
+        cmds += "mkdir $WDIR/tmp\n"
+        cmds += "mkdir $WDIR/cache\n"
         cmds += "env HOME=$WDIR/home sudo "
         cmds += "SINGULARITY_TMPDIR=$WDIR/tmp "
         cmds += "SINGULARITY_CACHEDIR=$WDIR/cache "

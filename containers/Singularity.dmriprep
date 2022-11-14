@@ -112,7 +112,9 @@ From: ubuntu:18.04
     pip install -r /INSTALLERS/PreQual/venv/pip_install_dtiQA.txt
     deactivate
     cd /
-
+    
+    sed -i -e"s/vis_cmd = 'mrview/vis_cmd = 'xvfb-run -a -server-num=1 --server-args=\"-screen 0 1600x1280x24 -ac\" mrview/g" /CODE/dtiQA_v7/vis.py
+    sed -i -e"s/vis_zoom_cmd = 'mrview/vis_zoom_cmd = 'xvfb-run -a -server-num=1 --server-args=\"-screen 0 1600x1280x24 -ac\" mrview/g" /CODE/dtiQA_v7/vis.py
     # Clean up
     rm -r /INSTALLERS
 
@@ -170,9 +172,5 @@ From: ubuntu:18.04
     author Antoine Grigis <antoine.grigis@cea.fr>
     description prequal standalone docker image for brainprep 0.0.0
     maintainer antoine.grigis@cea.fr
-
-# %runscript
-
-#     xvfb-run -a --server-num=$((65536+$$)) --server-args="-screen 0 1600x1280x24 -ac" bash /CODE/run_dtiQA.sh /INPUTS /OUTPUTS "$@"
 
 
