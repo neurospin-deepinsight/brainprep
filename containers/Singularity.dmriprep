@@ -138,7 +138,7 @@ From: ubuntu:18.04
             locales \
         && apt-get clean
 
-    pip3 install --no-cache-dir git+https://github.com/LoicDorval/brainprep.git@prequal
+    pip3 install --no-cache-dir git+https://github.com/neurospin-deepinsight/brainprep.git
     
 %environment
 
