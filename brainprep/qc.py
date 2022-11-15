@@ -205,9 +205,9 @@ def parse_cat12vbm_roi(xml_filenames, output_file):
     Parameters
     ----------
     xml_filenames: list or str(regex,regex)
-        regex to the CAT12 VBM catROI and cat xml files for all subjects.
-        .../label/catROI_sub-*_ses-*_T1w.xml
-        .../report/cat_sub-*_ses-*_T1w.xml
+        regex to the CAT12 VBM catROI and cat xml files for all subjects:
+        `<PATH>/label/catROI_sub-*_ses-*_T1w.xml`,
+        `<PATH>/report/cat_sub-*_ses-*_T1w.xml`.
     output: str
         the destination folder.
 

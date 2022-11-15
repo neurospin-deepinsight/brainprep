@@ -49,8 +49,8 @@ def brainprep_prequal(dwi,
     t1: str
         path to the t1 image in case of synb0 use.
 
-    Note
-    ----
+    Notes
+    -----
     In order to use the synb0 feature you must bind your freesurfer license as
     such: -B /path/to/freesurfer/license.txt:/APPS/freesurfer/license.txt
     """

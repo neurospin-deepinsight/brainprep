@@ -155,8 +155,8 @@ def recon_all_longitudinal(fsdirs, sid, outdir, timepoints=None):
         Used to create the subject longitudinal IDs. By default timepoints
         are "1", "2"...
 
-    Return
-    ------
+    Returns
+    -------
     template_id: str
         ID of the subject template.
     long_sids: list of str
