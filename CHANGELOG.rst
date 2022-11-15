@@ -25,10 +25,12 @@ The following workflows are released:
 * fsreconall
 * fsreconall-summary
 * fsreconall-qc
+* fsreconall-longitudinal
 * cat12vbm
 * cat12vbm-qc
+* cat12vbm-roi
 * quasiraw
-* bquasiraw-qc
+* quasiraw-qc
 * fmriprep
 * fmriprep-conn
 * mriqc
@@ -36,6 +38,7 @@ The following workflows are released:
 * deface
 * tbss-preproc
 * tbss
+* dmriprep
 
 Bug fixes
 ---------
