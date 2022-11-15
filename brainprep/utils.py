@@ -38,7 +38,9 @@ def execute_command(command):
     if proc.returncode != 0:
         raise ValueError(
             "\nCommand {0} failed:\n\n- output:\n{1}\n\n- error: "
-            "{2}\n\n".format(" ".join(command), output, error))
+            "{2}\n\n".format(" ".join(command),
+                             output.decode("utf8"),
+                             error.decode("utf8")))
 
 
 def check_command(command):
