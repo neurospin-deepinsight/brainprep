@@ -63,6 +63,7 @@ class TestPreprocessing(unittest.TestCase):
         """
         self.popen_patcher.stop()
 
+    @mock.patch("shutil.rmtree")
     @mock.patch("os.mkdir")
     @mock.patch("shutil.move")
     @mock.patch("glob.glob")
@@ -78,7 +79,8 @@ class TestPreprocessing(unittest.TestCase):
     @mock.patch("os.path.islink")
     def test_run(self, mock_islink, mock_isfile, mock_isdir, mock_rm,
                  mock_cd, mock_loadtxt, mock_savetxt, mock_load,
-                 mock_save, mock_open, mock_glob, mock_mv, mock_mkdir):
+                 mock_save, mock_open, mock_glob, mock_mv, mock_mkdir,
+                 mock_rmtree):
         """ Test the processes.
         """
         print_title("Testing processes...")
