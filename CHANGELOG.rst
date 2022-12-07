@@ -48,4 +48,6 @@ Contributors
 
 The following people contributed to this release (from ``git shortlog -ns v0.0.1``)::
 
-
+* 61  Antoine Grigis
+* 38  LoicDorval
+* 26  JulieNeuro

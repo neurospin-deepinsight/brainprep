@@ -81,7 +81,8 @@ Important links
 ===============
 
 * Official source code repo: https://github.com/neurospin-deepinsight/brainprep
-* HTML documentation (stable release): https://brainprep.readthedocs.io/en/latest
+* HTML documentation (stable release): https://brainprep.readthedocs.io/en/v0.0.1
+* HTML documentation (latest release): https://brainprep.readthedocs.io/en/latest
 * Release notes: https://github.com/neurospin-deepinsight/brainprep/blob/master/CHANGELOG.rst
 
 
