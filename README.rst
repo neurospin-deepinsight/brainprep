@@ -8,7 +8,7 @@
 
 **Release**
 
-|PyPi|_ |Docker|_
+|PyPi|_ |DockerANAT|_ |DockerMRIQC|_ |DockerFMRIPREP|_ |DockerDMRIPREP|_
 
 
 .. |PythonVersion| image:: https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9-blue
@@ -35,14 +35,23 @@
 .. |ExtraDoc| image:: https://readthedocs.org/projects/brainprep/badge/?version=latest
 .. _ExtraDoc: https://brainprep.readthedocs.io/en/latest/?badge=latest
 
-.. |Docker| image:: https://img.shields.io/docker/pulls/neurospin/brainprep
-.. _Docker: https://hub.docker.com/r/neurospin/brainprep
-
 .. |License| image:: https://img.shields.io/badge/License-CeCILLB-blue.svg
 .. _License: http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html
 
 .. |PoweredBy| image:: https://img.shields.io/badge/Powered%20by-CEA%2FNeuroSpin-blue.svg
 .. _PoweredBy: https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx
+
+.. |DockerANAT| image:: https://img.shields.io/docker/pulls/neurospin/brainprep-anat
+.. _DockerANAT: https://hub.docker.com/r/neurospin/brainprep-anat
+
+.. |DockerMRIQC| image:: https://img.shields.io/docker/pulls/neurospin/brainprep-mriqc
+.. _DockerMRIQC: https://hub.docker.com/r/neurospin/brainprep-mriqc
+
+.. |DockerFMRIPREP| image:: https://img.shields.io/docker/pulls/neurospin/brainprep-fmriprep
+.. _DockerFMRIPREP: https://hub.docker.com/r/neurospin/brainprep-fmriprep
+
+.. |DockerDMRIPREP| image:: https://img.shields.io/docker/pulls/neurospin/brainprep-dmriprep
+.. _DockerDMRIPREP: https://hub.docker.com/r/neurospin/brainprep-dmriprep
 
 
 brainprep: tools for brain MRI Deep Learning pre-processing
