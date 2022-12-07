@@ -1,122 +1,56 @@
-FROM leonyichencai/synb0-disco:v3.0
+FROM scratch
+# Find out which ID to use (look for FS Squashfs).
+# > singularity sif list brainprep-dmriprep-latest.simg
+# Get the environment variables defined in the Singularity image (look for
+# JSON.Generic).
+# > singularity sif dump 3 brainprep-dmriprep-latest.simg > env.txt
+# Parse env variables
+# > d = json.load(open("env.txt"))
+# > print(d["data"]["attributes"].keys())
+# > print(d["data"]["attributes"]["environment"]["/.singularity.d/env/90-environment.sh"])
+# Extract squashfs file.
+# > singularity sif dump 4 brainprep-dmriprep-latest.simg > data.squash
+# > unsquashfs -dest data data.squash
+# Create a Dockerfile that inherits from scratch.
+# > docker build --tag brainprep-dmriprep:latest .
+COPY data /
 
-# Install dependencies and prereqs
-RUN apt-get update \
-    && apt-get -y install \
-        wget \
-        nano \
-        unzip \
-        libxext6 \
-        libxt6 \
-        moreutils \
-        locales \
-        curl \
-        bzip2 \
-        python3.8 \
-        python3-pip \
-        python3.8-dev \
-        git \
-        tcsh \
-        locales \
-    && apt-get clean
-
-RUN locale-gen "en_US.UTF-8" \
-    && dpkg-reconfigure locales \
-    && echo "LANGUAGE='en_US.UTF-8'" >> /etc/default/locale \
-    && echo "LC_ALL='en_US.UTF-8'" >> /etc/default/locale
-
-ENV DEBIAN_FRONTEND="noninteractive" \
-    LANG="en_US.UTF-8" \
-    LANGUAGE="en_US.UTF-8" \
-    LC_ALL=C
-
-RUN apt-get update \
-    && apt-get -y install \
-        libtiff5-dev \
-        libjpeg8-dev \
-        libopenjp2-7-dev \
-        zlib1g-dev \
-        libfreetype6-dev \
-        liblcms2-dev \
-        libwebp-dev \
-        tcl8.6-dev \
-        tk8.6-dev \
-        python3-tk \
-        libharfbuzz-dev \
-        libfribidi-dev \
-        libxcb1-dev \
-    && apt-get clean
-
-# Installing brainprep
-RUN pip3 install --no-cache-dir git+https://github.com/LoicDorval/brainprep.git
-
-# FSL 5.0.11 (neurodocker build)
-RUN apt-get update -qq \
-    && apt-get install -y -q --no-install-recommends \
-           bc \
-           dc \
-           file \
-           libfontconfig1 \
-           libfreetype6 \
-           libgl1-mesa-dev \
-           libgl1-mesa-dri \
-           libglu1-mesa-dev \
-           libgomp1 \
-           libice6 \
-           libxcursor1 \
-           libxft2 \
-           libxinerama1 \
-           libxrandr2 \
-           libxrender1 \
-           libxt6 \
-           sudo \
-           wget \
-    && apt-get clean
-
-RUN rm -rf /var/lib/apt/lists/* \
-    && echo "Downloading FSL ..." \
-    && mkdir -p /opt/fsl-5.0.11 \
-    && curl -fsSL --retry 5 https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-5.0.11-centos6_64.tar.gz \
-    | tar -xz -C /opt/fsl-5.0.11 --strip-components 1
-
-RUN echo "Installing FSL conda environment ..." \
-    && bash /opt/fsl-5.0.11/etc/fslconf/fslpython_install.sh -f /opt/fsl-5.0.11
-
-ENV FSLDIR="/opt/fsl-5.0.11" \
-    PATH="/opt/fsl-5.0.11/bin:$PATH" \
+# Define environement variables
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# > MRTrix3
+ENV PATH="/APPS/mrtrix3/bin:$PATH"
+# > FSL
+ENV FSLDIR=/APPS/fsl
+ENV FSLDIR="/APPS/fsl" \
+    PATH="/APPS/fsl/bin:$PATH" \
     FSLOUTPUTTYPE="NIFTI_GZ" \
     FSLMULTIFILEQUIT="TRUE" \
-    FSLTCLSH="/opt/fsl-5.0.11/bin/fsltclsh" \
-    FSLWISH="/opt/fsl-5.0.11/bin/fslwish" \
     FSLLOCKDIR="" \
     FSLMACHINELIST="" \
     FSLREMOTECALL="" \
     FSLGECUDAQ="cuda.q" \
-    POSSUMDIR="/opt/fsl-5.0.11" \
-    LD_LIBRARY_PATH="/opt/fsl-5.0.11:$LD_LIBRARY_PATH"
+    LD_LIBRARY_PATH="/APPS/fsl/lib:$LD_LIBRARY_PATH"
+# RUN echo ". ${FSLDIR}/etc/fslconf/fsl.sh" >> /root/.bashrc
+# > Convert3D
+ENV PATH="/APPS/c3d-1.0.0-Linux-x86_64/bin:$PATH"
+# > ANTs
+ENV ANTSPATH="/APPS/ants/bin/" \
+    PATH=${ANTSPATH}:$PATH
+# > FreeSurfer
+ENV FREESURFER_HOME=/APPS/freesurfer
+# > CUDA
+ENV CPATH="/usr/local/cuda/include:$CPATH" \
+    PATH="/usr/local/cuda/bin:$PATH" \
+    LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH" \
+    CUDA_HOME="/usr/local/cuda"
 
-# Installing ANTs 2.3.4 (NeuroDocker build)
-ENV ANTSPATH="/usr/lib/ants" \
-    PATH="/usr/lib/ants:$PATH"
-WORKDIR $ANTSPATH
-RUN curl -sSL "https://dl.dropbox.com/s/gwf51ykkk5bifyj/ants-Linux-centos6_x86_64-v2.3.4.tar.gz" \
-    | tar -xzC $ANTSPATH --strip-components 1
 
-# Create a shared $HOME directory
-RUN useradd -m -s /bin/bash -G users brainprep
-WORKDIR /home/brainprep
-ENV HOME="/home/brainprep"
-
-# Make input and output directory for synb0
-RUN mkdir -p /INPUTS
-RUN mkdir -p /OUTPUTS
-
-# Define entrypoint
-ENTRYPOINT []
+# Define command
+CMD ["/bin/bash"]
 
 # Define labels
 MAINTAINER Antoine Grigis <antoine.grigis@cea.fr>
-LABEL description="synb0-disco v3.0 standalone docker image for brainprep 0.0.0"
+LABEL description="FSL 5.0.11, ANTS 2.3.4, FreeSurfer v7.1.1, MATLAB Compiler Runtime R2017b v9.3 and CAT12.7 r1743 standalone docker image for brainprep 0.0.0"
 LABEL maintainer="antoine.grigis@cea.fr"
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="brainprep" \

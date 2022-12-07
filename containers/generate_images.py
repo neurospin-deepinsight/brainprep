@@ -27,6 +27,8 @@ def main(working_dir):
     for path in glob.glob(os.path.join(image_dir, "Dockerfile.*")):
         basename = os.path.basename(path)
         name = basename.split(".", 1)[1]
+        if name in ("dmriprep", ):
+            continue
         dest_dir = os.path.join(working_dir, name)
         if not os.path.isdir(dest_dir):
             os.mkdir(dest_dir)
@@ -39,35 +41,6 @@ def main(working_dir):
         cmds = "export WDIR={}\n".format(dest_dir)
         cmds += "cd $WDIR\n"
         cmds += "export IMG={}\n".format(name)
-        if name == "dmriprep_test":
-            cmds += "###################test_start############################"
-            cmds += "mkdir singularity_prequal\n"
-            cmds += "cd singularity_prequal\n"
-            cmds += "git clone https://github.com/MASILab/PreQual.git\n"
-            cmds += "cd PreQual\n"
-            cmds += "git checkout v1.0.8\n"
-            cmds += "env HOME=/volatile/loic/home sudo "
-            cmds += "SINGULARITY_TMPDIR=$WDIR/singularity_prequal/PreQual/tmp "
-            cmds += "SINGULARITY_CACHEDIR=$WDIR/singularity_prequal/PreQual/"
-            cmds += "cache singularity build ../prequal.simg Singularity\n"
-
-            cmds += "cd ..\n"
-            cmds += "singularity sif list prequal.simg\n"
-            cmds += "echo FROM scratch > Dockerfile\n"
-            cmds += "echo 'COPY data /' >> Dockerfile\n"
-            cmds += ("echo ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:"
-                     "/usr/bin:/sbin:/bin >> Dockerfile\n")
-            cmds += 'echo CMD ["/bin/bash"] >> Dockerfile\n'
-            cmds += "singularity sif dump 3 prequal.simg > data.squash\n"
-            cmds += "unsquashfs -dest data data.squash\n"
-            cmds += "mkdir creation\n"
-            cmds += "mv data creation/\n"
-            cmds += "mv Dockerfile creation\n"
-            cmds += "cd creation\n"
-            cmds += "docker build --no-cache --tag prequal .\n"
-            cmds += "cd ../..\n"
-            cmds += "#########################test_end########################"
-
         cmds += "sudo docker build --tag brainprep-$IMG .\n"
         cmds += "sudo docker images\n"
         cmds += ("sudo docker save -o brainprep-$IMG-latest.tar "
@@ -84,7 +57,12 @@ def main(working_dir):
 
     for path in glob.glob(os.path.join(image_dir, "Singularity.*")):
         basename = os.path.basename(path)
+        dirname = os.path.dirname(path)
         name = basename.split(".", 1)[1]
+        docker_path = os.path.join(dirname, "Dockerfile.{}".format(name))
+        if not os.path.isfile(docker_path):
+            raise ValueError("Please define the '{}' docker file associated "
+                             "to the singularity recipe.".format(docker_path))
         dest_dir = os.path.join(working_dir, name)
         if not os.path.isdir(dest_dir):
             os.mkdir(dest_dir)
@@ -95,16 +73,26 @@ def main(working_dir):
             if not os.path.isdir(_path):
                 os.mkdir(_path)
         shutil.copy(path, os.path.join(dest_dir, "Singularity"))
+        shutil.copy(docker_path, os.path.join(dest_dir, "Dockerfile"))
         cmds = "export WDIR={}\n".format(dest_dir)
         cmds += "cd $WDIR\n"
         cmds += "export IMG={}\n".format(name)
         cmds += "mkdir $WDIR/home\n"
         cmds += "mkdir $WDIR/tmp\n"
         cmds += "mkdir $WDIR/cache\n"
-        cmds += "env HOME=$WDIR/home sudo "
-        cmds += "SINGULARITY_TMPDIR=$WDIR/tmp "
-        cmds += "SINGULARITY_CACHEDIR=$WDIR/cache "
-        cmds += "singularity build brainprep-$IMG-latest.simg Singularity \n"
+        cmds += ("sudo SINGULARITY_TMPDIR=$WDIR/tmp "
+                 "SINGULARITY_CACHEDIR=$WDIR/cache "
+                 "SINGULARITY_HOME=$WDIR/home "
+                 "singularity build brainprep-$IMG-latest.simg Singularity\n")
+        cmds += "singularity sif list brainprep-$IMG-latest.simg\n"
+        cmds += ("singularity sif dump 4 brainprep-$IMG-latest.simg "
+                 "> data.squash\n")
+        cmds += "unsquashfs -dest data data.squash\n"
+        cmds += "docker build --tag brainprep-$IMG .\n"
+        cmds += "sudo docker images\n"
+        cmds += ("sudo docker save -o brainprep-$IMG-latest.tar "
+                 "brainprep-$IMG:latest\n")
+        cmds += "sudo chmod 755 brainprep-$IMG-latest.tar\n"
         cmds_file = os.path.join(dest_dir, "commands")
         with open(cmds_file, "wt") as of:
             of.write(cmds)
