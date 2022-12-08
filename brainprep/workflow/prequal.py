@@ -151,8 +151,9 @@ def brainprep_prequal(dwi,
 
         print_subtitle("Copy before launch")
         with tempfile.TemporaryDirectory() as tmpdir:
-            df_dtiQA_config.T.to_csv(os.path.join(tmpdir, "dtiQA_config.csv"),
-                                     sep=",", header=False, index=False)
+            print()
+            df_dtiQA_config.to_csv(os.path.join(tmpdir, "dtiQA_config.csv"),
+                                   sep=",", header=False, index=False)
             shutil.copy(dwi[0], tmpdir)
             shutil.copy(bvec[0], tmpdir)
             shutil.copy(bval[0], tmpdir)
