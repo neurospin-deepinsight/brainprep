@@ -60,7 +60,7 @@ def brainprep_prequal(dwi,
         bval = bval.split(",")
         bvec = bvec.split(",")
         pe = pe.split(",")
-
+        readout_time = list(readout_time)
     print_title("INPUTS")
     print("diffusion image(s) : ", dwi, type(dwi))
     if t1 is not None:
