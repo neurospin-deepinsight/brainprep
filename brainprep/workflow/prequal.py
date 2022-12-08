@@ -55,13 +55,11 @@ def brainprep_prequal(dwi,
     such: -B /path/to/freesurfer/license.txt:/APPS/freesurfer/license.txt
     """
     if len(dwi.split(",")) == 2 and len(bvec.split(",")) == 2 and\
-       len(bval.split(",")) == 2 and len(pe.split(",")) == 2 and\
-       len(readout_time.split(",")) == 2:
+       len(bval.split(",")) == 2 and len(pe.split(",")) == 2:
         dwi = dwi.split(",")
         bval = bval.split(",")
         bvec = bvec.split(",")
         pe = pe.split(",")
-        readout_time = readout_time.split(",")
 
     print_title("INPUTS")
     print("diffusion image(s) : ", dwi, type(dwi))
