@@ -54,6 +54,15 @@ def brainprep_prequal(dwi,
     In order to use the synb0 feature you must bind your freesurfer license as
     such: -B /path/to/freesurfer/license.txt:/APPS/freesurfer/license.txt
     """
+    if len(dwi.split(";")) == 2 and len(bvec.split(";")) == 2 and\
+       len(bval.split(";")) == 2 and len(pe.split(";")) == 2 and\
+       len(readout_time.split(";")) == 2:
+        dwi = dwi.split(";")
+        bval = bval.split(";")
+        bvec = bvec.split(";")
+        pe = pe.split(";")
+        readout_time = readout_time.split(";")
+
     print_title("INPUTS")
     print("diffusion image(s) : ", dwi, type(dwi))
     if t1 is not None:
