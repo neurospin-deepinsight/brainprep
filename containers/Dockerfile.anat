@@ -37,7 +37,10 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 RUN pip install --no-cache-dir git+https://github.com/neurospin-deepinsight/brainprep.git
 
 
-# FSL 5.0.11 (neurodocker build)
+# FSL 6.0.6
+echo "-------------------"
+echo ">>>>>FSL-6.0.6<<<<<"
+echo "-------------------"
 RUN apt-get update -qq \
     && apt-get install -y -q --no-install-recommends \
            bc \
@@ -62,25 +65,25 @@ RUN apt-get update -qq \
 
 RUN rm -rf /var/lib/apt/lists/* \
     && echo "Downloading FSL ..." \
-    && mkdir -p /opt/fsl-5.0.11 \
-    && curl -fsSL --retry 5 https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-5.0.11-centos6_64.tar.gz \
-    | tar -xz -C /opt/fsl-5.0.11 --strip-components 1
+    && mkdir -p /opt/fsl-6.0.6 \
+    && curl -fsSL --retry 5 https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-6.0.4-centos7_64.tar.gz \
+    | tar -xz -C /opt/fsl-6.0.6 --strip-components 1
 
 RUN echo "Installing FSL conda environment ..." \
-    && bash /opt/fsl-5.0.11/etc/fslconf/fslpython_install.sh -f /opt/fsl-5.0.11
+    && bash /opt/fsl-6.0.6/etc/fslconf/fslpython_install.sh -f /opt/fsl-6.0.6
 
-ENV FSLDIR="/opt/fsl-5.0.11" \
-    PATH="/opt/fsl-5.0.11/bin:$PATH" \
+ENV FSLDIR="/opt/fsl-6.0.6" \
+    PATH="/opt/fsl-6.0.6/bin:$PATH" \
     FSLOUTPUTTYPE="NIFTI_GZ" \
     FSLMULTIFILEQUIT="TRUE" \
-    FSLTCLSH="/opt/fsl-5.0.11/bin/fsltclsh" \
-    FSLWISH="/opt/fsl-5.0.11/bin/fslwish" \
+    FSLTCLSH="/opt/fsl-6.0.6/bin/fsltclsh" \
+    FSLWISH="/opt/fsl-6.0.6/bin/fslwish" \
     FSLLOCKDIR="" \
     FSLMACHINELIST="" \
     FSLREMOTECALL="" \
     FSLGECUDAQ="cuda.q" \
-    POSSUMDIR="/opt/fsl-5.0.11" \
-    LD_LIBRARY_PATH="/opt/fsl-5.0.11:$LD_LIBRARY_PATH"
+    POSSUMDIR="/opt/fsl-6.0.6" \
+    LD_LIBRARY_PATH="/opt/fsl-6.0.6:$LD_LIBRARY_PATH"
 
 
 # Installing ANTs 2.3.4 (NeuroDocker build)
@@ -143,7 +146,7 @@ RUN curl -sSL https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.1.1/frees
     --exclude="freesurfer/subjects/V1_average" \
     --exclude="freesurfer/trctrain"
 
-ENV FSL_DIR="/opt/fsl-5.0.11" \
+ENV FSL_DIR="/opt/fsl-6.0.6" \
     OS="Linux" \
     FS_OVERRIDE=0 \
     FIX_VERTEX_AREA="" \
