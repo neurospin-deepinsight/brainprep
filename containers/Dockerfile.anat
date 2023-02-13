@@ -38,9 +38,9 @@ RUN pip install --no-cache-dir git+https://github.com/neurospin-deepinsight/brai
 
 
 # FSL 6.0.6
-echo "-------------------"
-echo ">>>>>FSL-6.0.6<<<<<"
-echo "-------------------"
+RUN echo "-------------------"
+RUN echo ">>>>>FSL-6.0.6<<<<<"
+RUN echo "-------------------"
 RUN apt-get update -qq \
     && apt-get install -y -q --no-install-recommends \
            bc \
