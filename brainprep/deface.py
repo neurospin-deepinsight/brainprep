@@ -66,17 +66,19 @@ def deface(anat_file, outdir):
                          "as '*T1w.<ext>'.")
 
     # Call FSL reorient2std
-    cmd_reorient = ["fslreorient2std", anat_file, anat_file]
+    outdir = os.path.abspath(outdir)
+    _basename = basename.replace("T1w", "space-RAS_mod-T1w")
+    reo_file = os.path.join(outdir, _basename + ".nii.gz")
+    cmd_reorient = ["fslreorient2std", anat_file, reo_file]
     check_command("fslreorient2std")
     execute_command(cmd_reorient)
-    
+
     # Call FSL defacing
-    outdir = os.path.abspath(outdir)
     deface_file = os.path.join(outdir, basename + ".nii.gz")
-    basename = basename.replace("T1w", "mod-T1w_defacemask")
-    mask_file = os.path.join(outdir, basename + ".nii.gz")
+    _basename = basename.replace("T1w", "mod-T1w_defacemask")
+    mask_file = os.path.join(outdir, _basename + ".nii.gz")
     snap_pattern = os.path.join(outdir, basename)
-    cmd = ["fsl_deface", anat_file, deface_file, "-d", mask_file, "-f", "0.5",
+    cmd = ["fsl_deface", reo_file, deface_file, "-d", mask_file, "-f", "0.5",
            "-B", "-p", snap_pattern]
     check_command("fsl_deface")
     execute_command(cmd)
