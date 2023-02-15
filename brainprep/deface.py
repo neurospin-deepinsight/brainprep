@@ -65,6 +65,11 @@ def deface(anat_file, outdir):
         raise ValueError("The input anatomical file must be a T1w image named "
                          "as '*T1w.<ext>'.")
 
+    # Call FSL reorient2std
+    cmd_reorient = ["fslreorient2std", anat_file, anat_file]
+    check_command("fslreorient2std")
+    execute_command(cmd_reorient)
+    
     # Call FSL defacing
     outdir = os.path.abspath(outdir)
     deface_file = os.path.join(outdir, basename + ".nii.gz")
