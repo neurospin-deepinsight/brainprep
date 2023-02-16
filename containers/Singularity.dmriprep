@@ -28,7 +28,7 @@ From: ubuntu:18.04
     ./build
     cd /
     
-    # FSL 6.0.4
+    # FSL-6.0.5.1
     echo " "
     echo "Installing FSL 6.0.4"
     apt-get update -qq \
@@ -59,7 +59,7 @@ From: ubuntu:18.04
     echo " "
     echo "Downloading FSL ..."
     mkdir -p /APPS/fsl \
-        && curl -fsSL --retry 5 https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-6.0.4-centos7_64.tar.gz \
+        && curl -fsSL --retry 5 https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-6.0.5.1-centos7_64.tar.gz \
         | tar -xz -C /APPS/fsl --strip-components 1
 
     echo "Installing FSL conda environment ..." \
