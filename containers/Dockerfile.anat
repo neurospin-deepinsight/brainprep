@@ -37,7 +37,7 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 RUN pip install --no-cache-dir git+https://github.com/neurospin-deepinsight/brainprep.git
 
 
-# FSL 6.0.6
+# FSL-6.0.5.1
 RUN echo "-------------------"
 RUN echo ">>>>fsl-6.0.5.1<<<<"
 RUN echo "-------------------"
