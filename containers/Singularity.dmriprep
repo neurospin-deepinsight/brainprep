@@ -30,7 +30,7 @@ From: ubuntu:18.04
     
     # FSL-6.0.5.1
     echo " "
-    echo "Installing FSL 6.0.4"
+    echo "Installing FSL 6.0.5.1"
     apt-get update -qq \
     # apt-get -y install curl tar
     apt-get install -y -q \
