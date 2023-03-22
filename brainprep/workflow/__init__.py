@@ -22,4 +22,4 @@ from .fmriprep import brainprep_fmriprep, brainprep_fmriprep_conn
 from .mriqc import brainprep_mriqc, brainprep_mriqc_summary
 from .deface import brainprep_deface, brainprep_deface_qc
 from .tbss import brainprep_tbss_preproc, brainprep_tbss
-from .prequal import brainprep_prequal
+from .prequal import brainprep_prequal, brainprep_prequal_qc
