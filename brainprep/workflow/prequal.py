@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##########################################################################
-# NSAp - Copyright (C) CEA, 2021 - 2022
+# NSAp - Copyright (C) CEA, 2021 - 2023
 # Distributed under the terms of the CeCILL-B license, as published by
 # the CEA-CNRS-INRIA. Refer to the LICENSE file or to
 # http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html
@@ -11,26 +11,19 @@
 Interface for prequal.
 """
 
-# System import
+# Imports
 import os
+import glob
 import shutil
 import tempfile
-from brainprep.color_utils import print_result, print_subtitle, print_title, \
-                                  print_command
-
-# Supplementary import
+from brainprep.color_utils import (
+    print_result, print_subtitle, print_title, print_command)
 import pandas as pd
 import subprocess
 
 
-def brainprep_prequal(dwi,
-                      bvec,
-                      bval,
-                      pe,
-                      readout_time,
-                      output_dir,
-                      t1=None):
-    """ Define the fmriprep pre-processing workflow.
+def brainprep_prequal(dwi, bvec, bval, pe, readout_time, output_dir, t1=None):
+    """ Define the dMRI pre-processing workflow.
 
     Parameters
     ----------
@@ -170,3 +163,59 @@ def brainprep_prequal(dwi,
                                   stderr=subprocess.STDOUT) as process:
                 for line in process.stdout:
                     print(line.decode('utf8'))
+
+
+def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4):
+    """ Define the dMRI pre-processing quality control workflow.
+
+    Parameters
+    ----------
+    datadir: str
+        regex to the dmriprep 'stats.csv' files.
+    outdir: str
+        path to the destination folder.
+    sub_idx: int, default -4
+        the position of the subject identifier in the input path.
+    """
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+    from sklearn import preprocessing
+
+    print_title("Loading PreQual dtiQA stats files...")
+    stat_files = glob.glob(data_regex)
+    stats = []
+    for path in stat_files:
+        df = pd.read_csv(path, index_col=0, header=None).T
+        sid = path.split(os.sep)[sub_idx]
+        df["participant_id"] = sid
+        stats.append(df)
+    df = pd.concat(stats)
+    df.to_csv(os.path.join(outdir, "transformation.tsv"), sep="\t",
+              index=False)
+
+    print_title("Computing box plot by category...")
+    for score_name in ("fa", "md", "rd", "ad"):
+        _cols = [name for name in df.columns
+                 if name.endswith(f"_{score_name}")]
+        _df = pd.melt(df, id_vars=["participant_id"], value_vars=_cols,
+                      var_name="metric", value_name="value")
+        le = preprocessing.LabelEncoder()
+        _df["label"] = le.fit_transform(_df.metric.values)
+        sns.set(style="whitegrid")
+        ax = sns.boxplot(x="label", y="value", data=_df)
+        plt.setp(ax.get_xticklabels(), rotation=90)
+        ax.tick_params(labelsize=8)
+        plt.tight_layout()
+        plt.savefig(os.path.join(outdir, f"{score_name}.png"), dpi=400)
+    _cols = ["eddy_avg_rotations_x", "eddy_avg_rotations_y",
+             "eddy_avg_rotations_z", "eddy_avg_translations_x",
+             "eddy_avg_translations_y", "eddy_avg_translations_z",
+             "eddy_avg_abs_displacement", "eddy_avg_rel_displacement"]
+    _df = pd.melt(df, id_vars=["participant_id"], value_vars=_cols,
+                  var_name="metric", value_name="value")
+    sns.set(style="whitegrid")
+    ax = sns.boxplot(x="metric", y="value", data=_df)
+    plt.setp(ax.get_xticklabels(), rotation=70)
+    ax.tick_params(labelsize=8)
+    plt.tight_layout()
+    plt.savefig(os.path.join(outdir, "transformation.png"), dpi=400)

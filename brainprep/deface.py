@@ -77,7 +77,7 @@ def deface(anat_file, outdir):
     deface_file = os.path.join(outdir, basename + ".nii.gz")
     _basename = basename.replace("T1w", "mod-T1w_defacemask")
     mask_file = os.path.join(outdir, _basename + ".nii.gz")
-    snap_pattern = os.path.join(outdir, basename)
+    snap_pattern = os.path.join(outdir, basename + "_snapshot")
     cmd = ["fsl_deface", reo_file, deface_file, "-d", mask_file, "-f", "0.5",
            "-B", "-p", snap_pattern]
     check_command("fsl_deface")
