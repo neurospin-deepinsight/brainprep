@@ -18,7 +18,7 @@ import glob
 import shutil
 import tempfile
 import warnings
-from .utils import check_version, check_command, execute_command
+from .utils import check_command, execute_command
 
 
 def recon_all(fsdir, anatfile, sid, reconstruction_stage="all", resume=False,
@@ -194,14 +194,15 @@ def recon_all_longitudinal(fsdirs, sid, outdir, timepoints=None):
     cmd = ["recon-all", "-base", template_id]
     for tp_sid in tp_sids:
         cmd += ["-tp", tp_sid]
-    cmd += ["-all", "-sd", fsdir]
+    cmd += ["-all", "-sd", outdir]
     check_command("recon-all")
     execute_command(cmd)
 
     # STEP 2 - rerun recon-all for all timepoints using the template
     long_sids = []
     for tp_sid in tp_sids:
-        cmd = ["recon-all", "-long", tp_sid, template_id, "-all", "-sd", fsdir]
+        cmd = ["recon-all", "-long", tp_sid, template_id,
+               "-all", "-sd", outdir]
         execute_command(cmd)
         long_sids += [f"{tp_sid}.long.{template_id}"]
 

@@ -18,6 +18,7 @@ import shutil
 import tempfile
 from brainprep.color_utils import (
     print_result, print_subtitle, print_title, print_command)
+from brainprep.plotting import plot_hists
 import pandas as pd
 import subprocess
 
@@ -165,7 +166,8 @@ def brainprep_prequal(dwi, bvec, bval, pe, readout_time, output_dir, t1=None):
                     print(line.decode('utf8'))
 
 
-def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4):
+def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4, thr_low=0.3,
+                         thr_up=0.75):
     """ Define the dMRI pre-processing quality control workflow.
 
     Parameters
@@ -174,6 +176,13 @@ def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4):
         regex to the dmriprep 'stats.csv' files.
     outdir: str
         path to the destination folder.
+
+    Optionnal
+    ---------
+    thr_low: float
+        lower treshold for outlier selection.
+    thr_up: float
+        upper treshold for outlier selection.
     sub_idx: int, default -4
         the position of the subject identifier in the input path.
     """
@@ -204,7 +213,7 @@ def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4):
         sns.set(style="whitegrid")
         ax = sns.boxplot(x="label", y="value", data=_df)
         plt.setp(ax.get_xticklabels(), rotation=90)
-        ax.tick_params(labelsize=8)
+        ax.tick_params(labelsize=3.5)
         plt.tight_layout()
         plt.savefig(os.path.join(outdir, f"{score_name}.png"), dpi=400)
     _cols = ["eddy_avg_rotations_x", "eddy_avg_rotations_y",
@@ -215,7 +224,35 @@ def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4):
                   var_name="metric", value_name="value")
     sns.set(style="whitegrid")
     ax = sns.boxplot(x="metric", y="value", data=_df)
-    plt.setp(ax.get_xticklabels(), rotation=70)
-    ax.tick_params(labelsize=8)
+    plt.setp(ax.get_xticklabels(), rotation=90)
+    ax.tick_params(labelsize=3.5)
     plt.tight_layout()
     plt.savefig(os.path.join(outdir, "transformation.png"), dpi=400)
+
+    print_title("Outlier hist")
+    os.makedirs(os.path.join(outdir, "outlier"), exist_ok=True)
+    choosen_bundle = ["Genu_of_corpus_callosum_med_fa",
+                      "Body_of_corpus_callosum_med_fa",
+                      "Splenium_of_corpus_callosum_med_fa",
+                      "Corticospinal_tract_L_med_fa",
+                      "Corticospinal_tract_R_med_fa"]
+    choosen_bundle_pid = choosen_bundle.copy()
+    choosen_bundle_pid.append("participant_id")
+
+    for fiber_bundle in choosen_bundle:
+        data = {"fa": {"data": df[fiber_bundle].values,
+                       "bar_low": thr_low,
+                       "bar_up": thr_up}}
+        snap = plot_hists(data, outdir, fiber_bundle)
+        print("snap = ", snap)
+    mask = None
+    for faisceaux in choosen_bundle:
+        _mask = (df[faisceaux] <= thr_low) | (df[faisceaux] >= thr_up)
+        if mask is not None:
+            mask |= _mask
+        else:
+            mask = _mask
+    result_df = df[mask].loc[:, choosen_bundle_pid]
+    outdir_csv = os.path.join(outdir, "outlier", "outlier.tsv")
+    result_df.to_csv(outdir_csv, sep="\t")
+    print_result(outdir_csv)

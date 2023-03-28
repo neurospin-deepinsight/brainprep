@@ -102,7 +102,7 @@ def brainprep_fsreconall(subjid, anatomical, outdir, template_dir,
 
 
 def brainprep_fsreconall_longitudinal(
-        subjid, anatomical, outdir, template_dir, do_lgi=False, wm=None):
+        sid, fsdirs, outdir, timepoints, do_lgi=False, wm=None):
     """ Assuming you have run recon-all for all timepoints of a given subject,
     and that the results are stored in one subject directory per timepoint,
     this function will:

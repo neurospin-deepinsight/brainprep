@@ -83,9 +83,8 @@ def brainprep_cat12vbm(
         print("use matlab batch:", template_batch)
         brainprep.write_matlabbatch(template_batch, anatomical, tpm, darteltpm,
                                     session, batch_file, outdir)
+        outdir = [os.path.join(outdir, session[0])]
     else:
-        if not isinstance(outdir, list):
-            outdir = outdir.split(",")
         assert len(anatomical) == len(session), "each longitudinal image must"\
                                                 " have a session specified"
         template_batch = os.path.join(
@@ -94,6 +93,8 @@ def brainprep_cat12vbm(
         brainprep.write_matlabbatch(template_batch, anatomical, tpm, darteltpm,
                                     session, batch_file, outdir,
                                     model_long=model_long)
+        outdir = [os.path.join(outdir, ses) for ses in session]
+
     print_title("Launch CAT12 VBM matlab batch...")
     cmd = [cat12, "-s", spm12, "-m", matlab, "-b", batch_file]
     brainprep.execute_command(cmd)
