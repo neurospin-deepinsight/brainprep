@@ -64,7 +64,7 @@ def brainprep_prequal(dwi,
     print_title("INPUTS")
     print("diffusion image(s) : ", dwi, type(dwi))
     if t1 is not None:
-        print_result("T1w image : ", t1, type(t1))
+        print("T1w image : ", t1, type(t1))
     print("bvec file(s) : ", bvec, type(bvec))
     print("bval file(s) :", bval, type(bval))
     print("phase encoding direction : ", pe, type(pe))
