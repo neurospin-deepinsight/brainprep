@@ -188,7 +188,6 @@ def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4, thr_low=0.3,
     """
     import seaborn as sns
     import matplotlib.pyplot as plt
-    from sklearn import preprocessing
 
     print_title("Loading PreQual dtiQA stats files...")
     stat_files = glob.glob(data_regex)
@@ -196,20 +195,21 @@ def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4, thr_low=0.3,
     for path in stat_files:
         df = pd.read_csv(path, index_col=0, header=None).T
         sid = path.split(os.sep)[sub_idx]
+        ses = path.split(os.sep)[sub_idx+1]
+        df["ses"] = ses
         df["participant_id"] = sid
         stats.append(df)
     df = pd.concat(stats)
     df.to_csv(os.path.join(outdir, "transformation.tsv"), sep="\t",
               index=False)
-
+    print_result(os.path.join(outdir, "transformation.tsv"))
     print_title("Computing box plot by category...")
     for score_name in ("fa", "md", "rd", "ad"):
         _cols = [name for name in df.columns
                  if name.endswith(f"_{score_name}")]
         _df = pd.melt(df, id_vars=["participant_id"], value_vars=_cols,
                       var_name="metric", value_name="value")
-        le = preprocessing.LabelEncoder()
-        _df["label"] = le.fit_transform(_df.metric.values)
+        _df["label"] = _df.metric.values
         sns.set(style="whitegrid")
         ax = sns.boxplot(x="label", y="value", data=_df)
         plt.setp(ax.get_xticklabels(), rotation=90)
@@ -230,7 +230,6 @@ def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4, thr_low=0.3,
     plt.savefig(os.path.join(outdir, "transformation.png"), dpi=400)
 
     print_title("Outlier hist")
-    os.makedirs(os.path.join(outdir, "outlier"), exist_ok=True)
     choosen_bundle = ["Genu_of_corpus_callosum_med_fa",
                       "Body_of_corpus_callosum_med_fa",
                       "Splenium_of_corpus_callosum_med_fa",
@@ -238,21 +237,23 @@ def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4, thr_low=0.3,
                       "Corticospinal_tract_R_med_fa"]
     choosen_bundle_pid = choosen_bundle.copy()
     choosen_bundle_pid.append("participant_id")
-
+    choosen_bundle_pid.append("ses")
     for fiber_bundle in choosen_bundle:
         data = {"fa": {"data": df[fiber_bundle].values,
                        "bar_low": thr_low,
                        "bar_up": thr_up}}
         snap = plot_hists(data, outdir, fiber_bundle)
-        print("snap = ", snap)
-    mask = None
+        print_result(snap)
+    result_df = df.loc[:, choosen_bundle_pid]
+    result_df["qc"] = 1
     for faisceaux in choosen_bundle:
-        _mask = (df[faisceaux] <= thr_low) | (df[faisceaux] >= thr_up)
-        if mask is not None:
-            mask |= _mask
-        else:
-            mask = _mask
-    result_df = df[mask].loc[:, choosen_bundle_pid]
-    outdir_csv = os.path.join(outdir, "outlier", "outlier.tsv")
-    result_df.to_csv(outdir_csv, sep="\t")
+        result_df.loc[result_df[faisceaux] <= thr_low, 'qc'] = 0
+        result_df.loc[result_df[faisceaux] >= thr_up, 'qc'] = 0
+    # reorder output csv
+    result_df.sort_values(by=["qc"], inplace=True)
+    result_df = result_df.reindex(columns=["participant_id", "ses"] +
+                                  choosen_bundle +
+                                  ["qc"])
+    outdir_csv = os.path.join(outdir, "qc.tsv")
+    result_df.to_csv(outdir_csv, index=False, sep="\t")
     print_result(outdir_csv)
