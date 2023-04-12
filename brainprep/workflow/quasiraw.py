@@ -18,7 +18,7 @@ import nibabel
 import numpy as np
 from html import unescape
 import brainprep
-from brainprep.utils import load_images, create_clickable
+from brainprep.utils import load_images, create_clickable, listify
 from brainprep.color_utils import print_title, print_result
 from brainprep.qc import plot_pca, compute_mean_correlation, check_files
 from brainprep.plotting import plot_images, plot_hists
@@ -119,8 +119,7 @@ def brainprep_quasiraw_qc(img_regex, outdir, brainmask_regex=None,
     if extra_img_regex is None:
         extra_img_files = []
     else:
-        if not isinstance(extra_img_regex, list):
-            extra_img_regex = extra_img_regex.split(",")
+        extra_img_regex = listify(extra_img_regex)
         extra_img_files = [sorted(glob.glob(item)) for item in extra_img_regex]
     print("  images:", len(img_files))
     print("  brain masks:", len(brainmask_files))

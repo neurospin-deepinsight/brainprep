@@ -286,3 +286,9 @@ def create_clickable(path_or_url):
     """
     url = "<a href='{}' target='_blank'>&plus;</a>".format(path_or_url)
     return url
+
+
+def listify(obj):
+    if not isinstance(obj, list):
+        obj = obj.split(",")
+    return obj

@@ -19,6 +19,7 @@ import tempfile
 from brainprep.color_utils import (
     print_result, print_subtitle, print_title, print_command)
 from brainprep.plotting import plot_hists
+from brainprep.utils import listify
 import pandas as pd
 import subprocess
 
@@ -48,13 +49,11 @@ def brainprep_prequal(dwi, bvec, bval, pe, readout_time, output_dir, t1=None):
     In order to use the synb0 feature you must bind your freesurfer license as
     such: -B /path/to/freesurfer/license.txt:/APPS/freesurfer/license.txt
     """
-    if len(dwi.split(",")) == 2 and len(bvec.split(",")) == 2 and\
-       len(bval.split(",")) == 2 and len(pe.split(",")) == 2:
-        dwi = dwi.split(",")
-        bval = bval.split(",")
-        bvec = bvec.split(",")
-        pe = pe.split(",")
-        readout_time = list(readout_time)
+    dwi = listify(dwi)
+    bval = listify(bval)
+    bvec = listify(bvec)
+    pe = listify(pe)
+    readout_time = list(readout_time)
     print_title("INPUTS")
     print("diffusion image(s) : ", dwi, type(dwi))
     if t1 is not None:
@@ -67,19 +66,16 @@ def brainprep_prequal(dwi, bvec, bval, pe, readout_time, output_dir, t1=None):
 
     print_title("check input for topup or synb0")
     topup = False
-    if type(dwi) == list\
-       and type(bvec) == list\
-       and type(bval) == list\
-       and type(pe) == list\
-       and type(readout_time) == list\
-       and len(dwi) == 2:
+    if isinstance(dwi, list) and isinstance(bvec, list)\
+       and isinstance(bval, list) and isinstance(pe, list)\
+       and isinstance(readout_time, list) and len(dwi) == 2:
         topup = True
         print_result("Using topup")
     else:
         print("Using synb0")
 
     print_title("PreQual dtiQA pipeline")
-    if topup is False:
+    if not topup:
         if pe in ["i", "j", "k"]:
             pe_axis = pe
             pe_signe = "+"
@@ -118,7 +114,7 @@ def brainprep_prequal(dwi, bvec, bval, pe, readout_time, output_dir, t1=None):
                 for line in process.stdout:
                     print(line.decode('utf8'))
 
-    elif topup is True:
+    else:
         pe_axis = []
         pe_signe = []
         for pe_ind in pe:
