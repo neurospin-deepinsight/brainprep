@@ -69,17 +69,17 @@ def plot_images(nii_files, cut_coords, outdir):
     return snaps, snapdir
 
 
-def plot_hists(data, outdir):
+def plot_hists(data, outdir, title=None):
     """ Plot hisograms with optional vertical bars.
-
     Parameters
     ----------
     data: dict
         containes the data to display in 'data' and optionnaly the coordianate
-        of the vertical line in 'bar'.
+        of the vertical line in 'bar_low' and 'bar_up'.
     outdir: str
         the destination folder.
-
+    title: str
+        Title of the histogram.
     Returns
     -------
     snap: str
@@ -94,14 +94,21 @@ def plot_hists(data, outdir):
         arr = arr[~np.isinf(arr)]
         sns.histplot(arr, color="gray", alpha=0.6, ax=axs[cnt],
                      kde=True, stat="density", label=name)
-        coord = item.get("bar")
-        if coord is not None:
-            axs[cnt].axvline(x=coord, color="red")
+        coord_low = item.get("bar_low")
+        coord_up = item.get("bar_up")
+        if coord_low is not None:
+            axs[cnt].axvline(x=coord_low, color="red")
+        if coord_up is not None:
+            axs[cnt].axvline(x=coord_up, color="red")
         axs[cnt].spines["right"].set_visible(False)
         axs[cnt].spines["top"].set_visible(False)
         axs[cnt].legend()
     plt.subplots_adjust(wspace=0, hspace=0, top=0.9, bottom=0.1)
-    snap_path = os.path.join(outdir, "hists.png")
+    if title is not None:
+        plt.title(title)
+        snap_path = os.path.join(outdir, f"hists_{title}.png")
+    else:
+        snap_path = os.path.join(outdir, "hists.png")
     plt.savefig(snap_path)
     return snap_path
 

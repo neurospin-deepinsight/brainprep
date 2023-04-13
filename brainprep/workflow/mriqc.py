@@ -140,7 +140,7 @@ def compute_score(data, dtype_iqms):
     else:
         _data = data.drop(columns=["_id", "source"])
     _columns = _data.columns.tolist()
-    _data = scaler = MinMaxScaler().fit_transform(_data.values)
+    _data = MinMaxScaler().fit_transform(_data.values)
     for key in _columns:
         to_maximize = dtype_iqms[key]
         index = _columns.index(key)
@@ -240,7 +240,6 @@ def filter_iqms(apidf, filters):
         "SNR_CSF": "snr_csf", "CNR": "cnr", "EFC": "efc",
         "FIELD": "bids_meta_MagneticFieldStrength",
         "TE": "bids_meta_EchoTime", "TR": "bids_meta_RepetitionTime"}
-    filter_check = list(expected_filters.keys())
     query = []
     for cond in filters:
         var, op, val = cond.split(" ")

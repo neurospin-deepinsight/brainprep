@@ -20,7 +20,7 @@ import numpy as np
 from html import unescape
 import subprocess
 import brainprep
-from brainprep.utils import load_images, create_clickable
+from brainprep.utils import load_images, create_clickable, listify
 from brainprep.color_utils import print_title, print_result
 from brainprep.qc import (
     parse_cat12vbm_qc, plot_pca, compute_mean_correlation,
@@ -73,9 +73,9 @@ def brainprep_cat12vbm(
     print_title("Complete matlab batch...")
     batch_file = os.path.join(outdir, "cat12vbm_matlabbatch.m")
     if not isinstance(anatomical, list):
-        anatomical = anatomical.split(",")
+        anatomical = listify(anatomical)
     if not isinstance(session, list) and session:
-        session = session.split(",")
+        session = listify(session)
     resource_dir = os.path.join(
         os.path.dirname(brainprep.__file__), "resources")
     if not longitudinal:
@@ -83,9 +83,8 @@ def brainprep_cat12vbm(
         print("use matlab batch:", template_batch)
         brainprep.write_matlabbatch(template_batch, anatomical, tpm, darteltpm,
                                     session, batch_file, outdir)
+        outdir = [os.path.join(outdir, session[0])]
     else:
-        if not isinstance(outdir, list):
-            outdir = outdir.split(",")
         assert len(anatomical) == len(session), "each longitudinal image must"\
                                                 " have a session specified"
         template_batch = os.path.join(
@@ -94,6 +93,8 @@ def brainprep_cat12vbm(
         brainprep.write_matlabbatch(template_batch, anatomical, tpm, darteltpm,
                                     session, batch_file, outdir,
                                     model_long=model_long)
+        outdir = [os.path.join(outdir, ses) for ses in session]
+
     print_title("Launch CAT12 VBM matlab batch...")
     cmd = [cat12, "-s", spm12, "-m", matlab, "-b", batch_file]
     brainprep.execute_command(cmd)
@@ -142,7 +143,7 @@ def brainprep_cat12vbm_roi(xml_filenames, output):
     subprocess.check_call(["mkdir", "-p", output])
     output_file = os.path.join(output, "cat12_vbm_roi.tsv")
     if not isinstance(xml_filenames, list):
-        xml_filenames = xml_filenames.split(",")
+        xml_filenames = listify(xml_filenames)
     xml_filenames = [glob.glob(regex) for regex in xml_filenames]
     xml_filenames = [filename for sublist in xml_filenames
                      for filename in sublist]
@@ -188,7 +189,7 @@ def brainprep_cat12vbm_qc(
         extra_img_files = []
     else:
         if not isinstance(extra_img_regex, list):
-            extra_img_regex = extra_img_regex.split(",")
+            extra_img_regex = listify(extra_img_regex)
         extra_img_files = [sorted(glob.glob(item)) for item in extra_img_regex]
     print("  images:", len(img_files))
     print("  brain masks:", len(brainmask_files))

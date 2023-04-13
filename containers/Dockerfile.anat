@@ -37,7 +37,10 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 RUN pip install --no-cache-dir git+https://github.com/neurospin-deepinsight/brainprep.git
 
 
-# FSL 5.0.11 (neurodocker build)
+# FSL-6.0.5.1
+RUN echo "-------------------"
+RUN echo ">>>>fsl-6.0.5.1<<<<"
+RUN echo "-------------------"
 RUN apt-get update -qq \
     && apt-get install -y -q --no-install-recommends \
            bc \
@@ -62,25 +65,25 @@ RUN apt-get update -qq \
 
 RUN rm -rf /var/lib/apt/lists/* \
     && echo "Downloading FSL ..." \
-    && mkdir -p /opt/fsl-5.0.11 \
-    && curl -fsSL --retry 5 https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-5.0.11-centos6_64.tar.gz \
-    | tar -xz -C /opt/fsl-5.0.11 --strip-components 1
+    && mkdir -p /opt/fsl-6.0.5.1 \
+    && curl -fsSL --retry 5 https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-6.0.5.1-centos7_64.tar.gz \
+    | tar -xz -C /opt/fsl-6.0.5.1 --strip-components 1
 
 RUN echo "Installing FSL conda environment ..." \
-    && bash /opt/fsl-5.0.11/etc/fslconf/fslpython_install.sh -f /opt/fsl-5.0.11
+    && bash /opt/fsl-6.0.5.1/etc/fslconf/fslpython_install.sh -f /opt/fsl-6.0.5.1
 
-ENV FSLDIR="/opt/fsl-5.0.11" \
-    PATH="/opt/fsl-5.0.11/bin:$PATH" \
+ENV FSLDIR="/opt/fsl-6.0.5.1" \
+    PATH="/opt/fsl-6.0.5.1/bin:$PATH" \
     FSLOUTPUTTYPE="NIFTI_GZ" \
     FSLMULTIFILEQUIT="TRUE" \
-    FSLTCLSH="/opt/fsl-5.0.11/bin/fsltclsh" \
-    FSLWISH="/opt/fsl-5.0.11/bin/fslwish" \
+    FSLTCLSH="/opt/fsl-6.0.5.1/bin/fsltclsh" \
+    FSLWISH="/opt/fsl-6.0.5.1/bin/fslwish" \
     FSLLOCKDIR="" \
     FSLMACHINELIST="" \
     FSLREMOTECALL="" \
     FSLGECUDAQ="cuda.q" \
-    POSSUMDIR="/opt/fsl-5.0.11" \
-    LD_LIBRARY_PATH="/opt/fsl-5.0.11:$LD_LIBRARY_PATH"
+    POSSUMDIR="/opt/fsl-6.0.5.1" \
+    LD_LIBRARY_PATH="/opt/fsl-6.0.5.1:$LD_LIBRARY_PATH"
 
 
 # Installing ANTs 2.3.4 (NeuroDocker build)
@@ -103,22 +106,25 @@ ENV MCRROOT="/opt/mcr/${MCR_VERSION}" \
     LD_LIBRARY_PATH="$MCRROOT/runtime/glnxa64:$MCRROOT/bin/glnxa64:$MCRROOT/sys/os/glnxa64:$LD_LIBRARY_PATH"
 
 
-# Install CAT12.7 r1743 Standalone at /opt/spm
-ENV SPM_VERSION="12" \
-    SPM_REVISION="r7771" \
-    MCR_INHIBIT_CTF_LOCK=1 \
-    SPM_HTML_BROWSER=0
-RUN wget --progress=bar:force -P /tmp http://www.neuro.uni-jena.de/cat12/CAT12.7_r1743_${MATLAB_VERSION}_MCR_Linux.zip \
-    && unzip -q /tmp/CAT12.7_r1743_${MATLAB_VERSION}_MCR_Linux.zip -d /opt \
-    && mv /opt/CAT12.7_r1743_${MATLAB_VERSION}_MCR_Linux /opt/spm \
-    && /opt/spm/run_spm12.sh ${MCRROOT} quit \
-    && chmod +x /opt/spm/spm12 /opt/spm/*.sh \
-    && chmod -R o+r /opt/spm \
-    && rm -rf /tmp/*
-ENV PATH="${PATH}:/opt/spm/standalone" \
-    SPMROOT="/opt/spm" \
-    CAT_VERSION="12.7" \
-    CAT_REVISION="r1733"
+# Install CAT12.8.2 r1743 Standalone at /opt/spm
+ENV SPM_VERSION="12"
+ENV SPM_REVISION="r7771"
+ENV MCR_INHIBIT_CTF_LOCK=1
+ENV SPM_HTML_BROWSER=0
+ENV CAT_VERSION="12.8.2"
+ENV CAT_REVISION="r2166"
+ENV CAT_FULLVERSION=CAT${CAT_VERSION}_${CAT_REVISION}
+ENV CAT_PATH="/opt/spm/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12"
+RUN wget --progress=bar:force -P /tmp http://www.neuro.uni-jena.de/cat12/${CAT_FULLVERSION}_${MATLAB_VERSION}_MCR_Linux.zip \
+ && unzip -q /tmp/${CAT_FULLVERSION}_${MATLAB_VERSION}_MCR_Linux.zip -d /opt \
+ && mv /opt/${CAT_FULLVERSION}_${MATLAB_VERSION}_MCR_Linux /opt/spm \
+ && /opt/spm/run_spm12.sh ${MCRROOT} --version \
+ && chmod +x /opt/spm/spm12 /opt/spm/*.sh ${CAT_PATH}/CAT.glnx86/CAT_* \
+ && cp -v ${CAT_PATH}/cat_long_main.txt ${CAT_PATH}/cat_long_main.m \
+ && rm -rf /tmp/*
+ENV PATH="${PATH}:/opt/spm/standalone"
+ENV SPMROOT="/opt/spm"
+
 
 
 # Installing FreeSurfer v7.1.1
@@ -143,7 +149,7 @@ RUN curl -sSL https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.1.1/frees
     --exclude="freesurfer/subjects/V1_average" \
     --exclude="freesurfer/trctrain"
 
-ENV FSL_DIR="/opt/fsl-5.0.11" \
+ENV FSL_DIR="/opt/fsl-6.0.5.1" \
     OS="Linux" \
     FS_OVERRIDE=0 \
     FIX_VERTEX_AREA="" \
@@ -176,7 +182,7 @@ ENV HOME="/home/brainprep"
 
 # Define labels
 MAINTAINER Antoine Grigis <antoine.grigis@cea.fr>
-LABEL description="FSL 5.0.11, ANTS 2.3.4, FreeSurfer v7.1.1, MATLAB Compiler Runtime R2017b v9.3 and CAT12.7 r1743 standalone docker image for brainprep 0.0.0"
+LABEL description="FSL 6.0.5.1, ANTS 2.3.4, FreeSurfer v7.1.1, MATLAB Compiler Runtime R2017b v9.3 and CAT12.8.2 r2166 standalone docker image for brainprep 0.0.0"
 LABEL maintainer="antoine.grigis@cea.fr"
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="brainprep" \

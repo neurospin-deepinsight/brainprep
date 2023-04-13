@@ -13,6 +13,7 @@ import os
 import glob
 import fire
 import shutil
+from datetime import date
 
 
 def main(working_dir):
@@ -24,6 +25,8 @@ def main(working_dir):
         the directory where the images will be generated.
     """
     image_dir = os.path.dirname(os.path.abspath(__file__))
+    today = date.today()
+    today = today.strftime("%d%m%Y")
     for path in glob.glob(os.path.join(image_dir, "Dockerfile.*")):
         basename = os.path.basename(path)
         name = basename.split(".", 1)[1]
@@ -41,15 +44,16 @@ def main(working_dir):
         cmds = "export WDIR={}\n".format(dest_dir)
         cmds += "cd $WDIR\n"
         cmds += "export IMG={}\n".format(name)
-        cmds += "sudo docker build --tag brainprep-$IMG .\n"
+        cmds += "sudo docker build --no-cache --tag brainprep-$IMG .\n"
         cmds += "sudo docker images\n"
-        cmds += ("sudo docker save -o brainprep-$IMG-latest.tar "
-                 "brainprep-$IMG:latest\n")
-        cmds += "sudo chmod 755 brainprep-$IMG-latest.tar\n"
+        cmds += ("sudo docker save -o brainprep-$IMG-{}.tar "
+                 "brainprep-$IMG:{}\n".format(today, today))
+        cmds += "sudo chmod 755 brainprep-$IMG-{}.tar\n".format(today)
         cmds += ("sudo SINGULARITY_TMPDIR=$WDIR/tmp SINGULARITY_CACHEDIR="
-                 "$WDIR/cache singularity build brainprep-$IMG-latest.simg "
-                 "docker-archive://brainprep-$IMG-latest.tar\n")
-        cmds += "singularity inspect brainprep-$IMG-latest.simg\n"
+                 "$WDIR/cache singularity build brainprep-$IMG-{}.simg "
+                 "docker-archive://brainprep-$IMG-{}.tar\n"
+                 .format(today, today))
+        cmds += "singularity inspect brainprep-$IMG-{}.simg\n".format(today)
         cmds_file = os.path.join(dest_dir, "commands")
         with open(cmds_file, "wt") as of:
             of.write(cmds)
@@ -77,22 +81,20 @@ def main(working_dir):
         cmds = "export WDIR={}\n".format(dest_dir)
         cmds += "cd $WDIR\n"
         cmds += "export IMG={}\n".format(name)
-        cmds += "mkdir $WDIR/home\n"
-        cmds += "mkdir $WDIR/tmp\n"
-        cmds += "mkdir $WDIR/cache\n"
         cmds += ("sudo SINGULARITY_TMPDIR=$WDIR/tmp "
                  "SINGULARITY_CACHEDIR=$WDIR/cache "
                  "SINGULARITY_HOME=$WDIR/home "
-                 "singularity build brainprep-$IMG-latest.simg Singularity\n")
-        cmds += "singularity sif list brainprep-$IMG-latest.simg\n"
-        cmds += ("singularity sif dump 4 brainprep-$IMG-latest.simg "
-                 "> data.squash\n")
+                 "singularity build brainprep-$IMG-{}.simg Singularity\n"
+                 .format(today))
+        cmds += "singularity sif list brainprep-$IMG-{}.simg\n".format(today)
+        cmds += ("singularity sif dump 4 brainprep-$IMG-{}.simg "
+                 "> data.squash\n".format(today))
         cmds += "unsquashfs -dest data data.squash\n"
         cmds += "docker build --tag brainprep-$IMG .\n"
         cmds += "sudo docker images\n"
-        cmds += ("sudo docker save -o brainprep-$IMG-latest.tar "
-                 "brainprep-$IMG:latest\n")
-        cmds += "sudo chmod 755 brainprep-$IMG-latest.tar\n"
+        cmds += ("sudo docker save -o brainprep-$IMG-{}.tar "
+                 "brainprep-$IMG:{}\n".format(today, today))
+        cmds += "sudo chmod 755 brainprep-$IMG-{}.tar\n".format(today)
         cmds_file = os.path.join(dest_dir, "commands")
         with open(cmds_file, "wt") as of:
             of.write(cmds)

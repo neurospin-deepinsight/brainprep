@@ -27,13 +27,46 @@ From: ubuntu:18.04
     ./configure
     ./build
     cd /
+    
+    # FSL-6.0.5.1
+    echo " "
+    echo "Installing FSL 6.0.5.1"
+    apt-get update -qq \
+    # apt-get -y install curl tar
+    apt-get install -y -q \
+           bc \
+           dc \
+           file \
+           libfontconfig1 \
+           libfreetype6 \
+           libgl1-mesa-dev \
+           libgl1-mesa-dri \
+           libglu1-mesa-dev \
+           libgomp1 \
+           libice6 \
+           libxcursor1 \
+           libxft2 \
+           libxinerama1 \
+           libxrandr2 \
+           libxrender1 \
+           libxt6 \
+           sudo \
+           wget \
+           curl \
+           tar \
+    && apt-get clean
 
-    # Install FSL
-    apt-get -y install python wget ca-certificates libglu1-mesa libgl1-mesa-glx libsm6 libice6 libxt6 libpng16-16 libxrender1 libxcursor1 libxinerama1 libfreetype6 libxft2 libxrandr2 libgtk2.0-0 libpulse0 libasound2 libcaca0 libopenblas-base bzip2 dc bc 
-    wget -O /INSTALLERS/fslinstaller.py "https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py"
-    cd /INSTALLERS
-    python fslinstaller.py -d /APPS/fsl -V 6.0.4
-    cd /
+    echo " "
+    echo "Downloading FSL ..."
+    mkdir -p /APPS/fsl \
+        && curl -fsSL --retry 5 https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-6.0.5.1-centos7_64.tar.gz \
+        | tar -xz -C /APPS/fsl --strip-components 1
+
+    echo "Installing FSL conda environment ..." \
+    bash /APPS/fsl/etc/fslconf/fslpython_install.sh -f /APPS/fsl
+
+    
+    
 
     # Install Convert3D (stable build 1.0.0)
     apt-get -y install wget tar
@@ -112,9 +145,11 @@ From: ubuntu:18.04
     pip install -r /INSTALLERS/PreQual/venv/pip_install_dtiQA.txt
     deactivate
     cd /
-    
+
+    # Add xvfb-run for mrview
     sed -i -e"s/vis_cmd = 'mrview/vis_cmd = 'xvfb-run -a -server-num=1 --server-args=\"-screen 0 1600x1280x24 -ac\" mrview/g" /CODE/dtiQA_v7/vis.py
     sed -i -e"s/vis_zoom_cmd = 'mrview/vis_zoom_cmd = 'xvfb-run -a -server-num=1 --server-args=\"-screen 0 1600x1280x24 -ac\" mrview/g" /CODE/dtiQA_v7/vis.py
+
     # Clean up
     rm -r /INSTALLERS
 
@@ -145,13 +180,7 @@ From: ubuntu:18.04
     # MRTrix3
     export PATH="/APPS/mrtrix3/bin:$PATH"
 
-    # FSL
-    FSLDIR=/APPS/fsl
-    . ${FSLDIR}/etc/fslconf/fsl.sh
-    PATH=${FSLDIR}/bin:${PATH}
-    export FSLDIR PATH
-
-    # Convert3D
+   # Convert3D
     export PATH="/APPS/c3d-1.0.0-Linux-x86_64/bin:$PATH"
 
     # ANTs
@@ -168,9 +197,20 @@ From: ubuntu:18.04
     export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
     export CUDA_HOME="/usr/local/cuda"
     
+    # FSL
+    export FSLDIR="/APPS/fsl" \
+    export PATH="/APPS/fsl/bin:$PATH" \
+    export FSLOUTPUTTYPE="NIFTI_GZ" \
+    export FSLMULTIFILEQUIT="TRUE" \
+    export FSLTCLSH="/APPS/fsl/bin/fsltclsh" \
+    export FSLWISH="/APPS/fsl/bin/fslwish" \
+    export FSLLOCKDIR="" \
+    export FSLMACHINELIST="" \
+    export FSLREMOTECALL="" \
+    export FSLGECUDAQ="cuda.q" \
+    export POSSUMDIR="/APPS/fsl" \
+    export LD_LIBRARY_PATH="/APPS/fsl:$LD_LIBRARY_PATH"
 %labels
     author Antoine Grigis <antoine.grigis@cea.fr>
     description prequal standalone docker image for brainprep 0.0.0
     maintainer antoine.grigis@cea.fr
-
-

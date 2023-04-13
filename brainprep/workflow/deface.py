@@ -12,7 +12,6 @@ Interface for brain imaging defacing.
 """
 
 # System import
-import os
 import nibabel
 import numpy as np
 from nilearn import plotting

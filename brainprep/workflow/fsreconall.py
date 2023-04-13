@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 from html import unescape
 import brainprep
-from brainprep.utils import create_clickable
+from brainprep.utils import create_clickable, listify
 from brainprep.color_utils import print_title, print_result
 from brainprep.qc import parse_fsreconall_stats
 from brainprep.plotting import plot_fsreconall, plot_hists
@@ -102,7 +102,7 @@ def brainprep_fsreconall(subjid, anatomical, outdir, template_dir,
 
 
 def brainprep_fsreconall_longitudinal(
-        subjid, anatomical, outdir, template_dir, do_lgi=False, wm=None):
+        sid, fsdirs, outdir, timepoints, do_lgi=False, wm=None):
     """ Assuming you have run recon-all for all timepoints of a given subject,
     and that the results are stored in one subject directory per timepoint,
     this function will:
@@ -124,6 +124,9 @@ def brainprep_fsreconall_longitudinal(
         Used to create the subject longitudinal IDs. By default timepoints
         are "1", "2"...
     """
+    fsdirs = listify(fsdirs)
+    timepoints = listify(timepoints)
+
     print_title("Launch FreeSurfer reconall longitudinal...")
     template_id, long_sids = brainprep.recon_all_longitudinal(
         fsdirs, sid, outdir, timepoints)
