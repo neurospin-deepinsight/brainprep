@@ -124,10 +124,9 @@ def brainprep_fsreconall_longitudinal(
         Used to create the subject longitudinal IDs. By default timepoints
         are "1", "2"...
     """
+    print_title("Launch FreeSurfer reconall longitudinal...")
     fsdirs = listify(fsdirs)
     timepoints = listify(timepoints)
-
-    print_title("Launch FreeSurfer reconall longitudinal...")
     template_id, long_sids = brainprep.recon_all_longitudinal(
         fsdirs, sid, outdir, timepoints)
     print_result(template_id)

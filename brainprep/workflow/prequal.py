@@ -16,12 +16,12 @@ import os
 import glob
 import shutil
 import tempfile
+import subprocess
+import pandas as pd
 from brainprep.color_utils import (
     print_result, print_subtitle, print_title, print_command)
 from brainprep.plotting import plot_hists
 from brainprep.utils import listify
-import pandas as pd
-import subprocess
 
 
 def brainprep_prequal(dwi, bvec, bval, pe, readout_time, output_dir, t1=None):
@@ -41,7 +41,7 @@ def brainprep_prequal(dwi, bvec, bval, pe, readout_time, output_dir, t1=None):
         readout time of the dwi image.
     output_dir: str
         path to the output directory.
-    t1: str
+    t1: str, default None
         path to the t1 image in case of synb0 use.
 
     Notes
@@ -49,12 +49,12 @@ def brainprep_prequal(dwi, bvec, bval, pe, readout_time, output_dir, t1=None):
     In order to use the synb0 feature you must bind your freesurfer license as
     such: -B /path/to/freesurfer/license.txt:/APPS/freesurfer/license.txt
     """
+    print_title("INPUTS")
     dwi = listify(dwi)
     bval = listify(bval)
     bvec = listify(bvec)
     pe = listify(pe)
     readout_time = list(readout_time)
-    print_title("INPUTS")
     print("diffusion image(s) : ", dwi, type(dwi))
     if t1 is not None:
         print("T1w image : ", t1, type(t1))
@@ -65,101 +65,74 @@ def brainprep_prequal(dwi, bvec, bval, pe, readout_time, output_dir, t1=None):
     print("output directory : ", output_dir, type(output_dir))
 
     print_title("check input for topup or synb0")
-    topup = False
-    if isinstance(dwi, list) and isinstance(bvec, list)\
-       and isinstance(bval, list) and isinstance(pe, list)\
-       and isinstance(readout_time, list) and len(dwi) == 2:
+    if (isinstance(dwi, list) and isinstance(bvec, list)
+            and isinstance(bval, list) and isinstance(pe, list)
+            and isinstance(readout_time, list) and len(dwi) == 2):
         topup = True
         print_result("Using topup")
     else:
+        topup = False
         print("Using synb0")
 
     print_title("PreQual dtiQA pipeline")
-    if not topup:
-        if pe in ["i", "j", "k"]:
-            pe_axis = pe
-            pe_signe = "+"
-        elif pe in ["i-", "j-", "k-"]:
-            pe_axis = pe[0]
-            pe_signe = pe[1]
+    pe_sign = []
+    pe_axe = None
+    for pe_ind in pe:
+        if pe_axe is None:
+            pe_axe = pe_ind[0]
         else:
-            raise Exception("Valid input for pe are (i, i-, j, j-, k, k-)")
+            assert pe_axe == pe_ind[0], "Incoherant PE."
+        assert pe_axe in ["i", "j", "k"], "Invalid PE."
+        if pe_ind in ["i", "j", "k"]:
+            pe_sign.append("+")
+        elif pe_ind in ["i-", "j-", "k-"]:
+            pe_sign.append("-")
+        else:
+            raise Exception("Valid input for PE are (i, i-, j, j-, k, k-).")
 
-        print_subtitle("Making dtiQA_config.csv")
-        dtiQA_config = [os.path.basename(dwi).split('.')[0],
-                        pe_signe,
-                        readout_time]
-        df_dtiQA_config = pd.DataFrame(dtiQA_config)
-        print_result("dtiQA_config file content :\n")
-        print_result(dtiQA_config)
-
-        print_subtitle("Copy before launch")
-        with tempfile.TemporaryDirectory() as tmpdir:
-            df_dtiQA_config.T.to_csv(os.path.join(tmpdir, "dtiQA_config.csv"),
-                                     sep=",", header=False, index=False)
-            shutil.copy(dwi, tmpdir)
-            shutil.copy(bvec, tmpdir)
-            shutil.copy(bval, tmpdir)
-            if t1 is not None:
-                shutil.copy(t1, os.path.join(tmpdir, "t1.nii.gz"))
-
-            print_subtitle("Launch prequal...")
-            cmd = ["xvfb-run",  "-a", "--server-num=1",
-                   "--server-args='-screen 0 1600x1280x24 -ac'",
-                   "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axis]
-            print_command(" ".join(cmd))
-            with subprocess.Popen(cmd,
-                                  stdout=subprocess.PIPE,
-                                  stderr=subprocess.STDOUT) as process:
-                for line in process.stdout:
-                    print(line.decode('utf8'))
-
-    else:
-        pe_axis = []
-        pe_signe = []
-        for pe_ind in pe:
-            if pe_ind in ["i", "j", "k"]:
-                pe_axis.append(pe_ind)
-                pe_axe = pe_ind
-                pe_signe.append("+")
-            elif pe_ind in ["i-", "j-", "k-"]:
-                pe_axis.append(pe_ind)
-                pe_signe.append("-")
-            else:
-                raise Exception("Valid input for pe are (i, i-, j, j-, k, k-)")
-
-        print_subtitle("Making dtiQA_config.csv")
-        dtiQA_config = [[os.path.basename(dwi[0]).split('.')[0],
-                         pe_signe[0],
+    print_subtitle("Making dtiQA_config.csv")
+    if topup:
+        dtiQA_config = [[os.path.basename(dwi[0]).split(".")[0],
+                         pe_sign[0],
                          readout_time[0]],
                         ["rpe",
-                         pe_signe[1],
+                         pe_sign[1],
                          readout_time[1]]]
-        df_dtiQA_config = pd.DataFrame(dtiQA_config)
-        print_result("dtiQA_config file content :\n")
-        print_result(dtiQA_config)
+    else:
+        dtiQA_config = [os.path.basename(dwi[0]).split(".")[0],
+                        pe_sign[0],
+                        readout_time[0]]
+    df_dtiQA_config = pd.DataFrame(dtiQA_config)
+    print_result("dtiQA_config file content :\n")
+    print_result(dtiQA_config)
 
-        print_subtitle("Copy before launch")
-        with tempfile.TemporaryDirectory() as tmpdir:
-            print()
-            df_dtiQA_config.to_csv(os.path.join(tmpdir, "dtiQA_config.csv"),
-                                   sep=",", header=False, index=False)
-            shutil.copy(dwi[0], tmpdir)
-            shutil.copy(bvec[0], tmpdir)
-            shutil.copy(bval[0], tmpdir)
-            shutil.copy(dwi[1], tmpdir+"/rpe.nii.gz")
-            shutil.copy(bvec[1], tmpdir+"/rpe.bvec")
-            shutil.copy(bval[1], tmpdir+"/rpe.bval")
-            print_subtitle("Launch prequal...")
-            cmd = ["xvfb-run",  "-a", "--server-num=1",
-                   "--server-args='-screen 0 1600x1280x24 -ac'",
-                   "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axe]
-            print_command(" ".join(cmd))
-            with subprocess.Popen(cmd,
-                                  stdout=subprocess.PIPE,
-                                  stderr=subprocess.STDOUT) as process:
-                for line in process.stdout:
-                    print(line.decode('utf8'))
+    print_subtitle("Copy before launch")
+    with tempfile.TemporaryDirectory() as tmpdir:
+        if not topup:
+            df_dtiQA_config = df_dtiQA_config.T
+        df_dtiQA_config.to_csv(os.path.join(tmpdir, "dtiQA_config.csv"),
+                               sep=",", header=False, index=False)
+        shutil.copy(dwi[0], tmpdir)
+        shutil.copy(bvec[0], tmpdir)
+        shutil.copy(bval[0], tmpdir)
+        if topup:
+            shutil.copy(dwi[1], os.path.join(tmpdir, "rpe.nii.gz"))
+            shutil.copy(bvec[1], os.path.join(tmpdir, "rpe.bvec"))
+            shutil.copy(bval[1], os.path.join(tmpdir, "rpe.bval"))
+        else:
+            assert t1 is not None, "Need T1 image for SynB0."
+            shutil.copy(t1, os.path.join(tmpdir, "t1.nii.gz"))
+
+        print_subtitle("Launch prequal...")
+        cmd = ["xvfb-run",  "-a", "--server-num=1",
+               "--server-args='-screen 0 1600x1280x24 -ac'",
+               "bash", "/CODE/run_dtiQA.sh", tmpdir, output_dir, pe_axe]
+        print_command(" ".join(cmd))
+        with subprocess.Popen(cmd,
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT) as process:
+            for line in process.stdout:
+                print(line.decode("utf8"))
 
 
 def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4, thr_low=0.3,
@@ -172,15 +145,12 @@ def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4, thr_low=0.3,
         regex to the dmriprep 'stats.csv' files.
     outdir: str
         path to the destination folder.
-
-    Optionnal
-    ---------
-    thr_low: float
-        lower treshold for outlier selection.
-    thr_up: float
-        upper treshold for outlier selection.
     sub_idx: int, default -4
         the position of the subject identifier in the input path.
+    thr_low: float, default 0.3
+        lower treshold for outlier selection.
+    thr_up: float, default 0.75
+        upper treshold for outlier selection.
     """
     import seaborn as sns
     import matplotlib.pyplot as plt
@@ -243,9 +213,8 @@ def brainprep_prequal_qc(data_regex, outdir, sub_idx=-4, thr_low=0.3,
     result_df = df.loc[:, choosen_bundle_pid]
     result_df["qc"] = 1
     for faisceaux in choosen_bundle:
-        result_df.loc[result_df[faisceaux] <= thr_low, 'qc'] = 0
-        result_df.loc[result_df[faisceaux] >= thr_up, 'qc'] = 0
-    # reorder output csv
+        result_df.loc[result_df[faisceaux] <= thr_low, "qc"] = 0
+        result_df.loc[result_df[faisceaux] >= thr_up, "qc"] = 0
     result_df.sort_values(by=["qc"], inplace=True)
     result_df = result_df.reindex(columns=["participant_id", "ses"] +
                                   choosen_bundle +

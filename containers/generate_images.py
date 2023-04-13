@@ -46,8 +46,8 @@ def main(working_dir):
         cmds += "export IMG={}\n".format(name)
         cmds += "sudo docker build --no-cache --tag brainprep-$IMG .\n"
         cmds += "sudo docker images\n"
-        cmds += ("sudo docker save -o brainprep-$IMG-{}.tar "
-                 "brainprep-$IMG:{}\n".format(today, today))
+        cmds += ("sudo docker save -o brainprep-$IMG-{0}.tar "
+                 "brainprep-$IMG:{0}\n".format(today))
         cmds += "sudo chmod 755 brainprep-$IMG-{}.tar\n".format(today)
         cmds += ("sudo SINGULARITY_TMPDIR=$WDIR/tmp SINGULARITY_CACHEDIR="
                  "$WDIR/cache singularity build brainprep-$IMG-{}.simg "
@@ -92,8 +92,8 @@ def main(working_dir):
         cmds += "unsquashfs -dest data data.squash\n"
         cmds += "docker build --tag brainprep-$IMG .\n"
         cmds += "sudo docker images\n"
-        cmds += ("sudo docker save -o brainprep-$IMG-{}.tar "
-                 "brainprep-$IMG:{}\n".format(today, today))
+        cmds += ("sudo docker save -o brainprep-$IMG-{0}.tar "
+                 "brainprep-$IMG:{0}\n".format(today))
         cmds += "sudo chmod 755 brainprep-$IMG-{}.tar\n".format(today)
         cmds_file = os.path.join(dest_dir, "commands")
         with open(cmds_file, "wt") as of:

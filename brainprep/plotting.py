@@ -71,6 +71,7 @@ def plot_images(nii_files, cut_coords, outdir):
 
 def plot_hists(data, outdir, title=None):
     """ Plot hisograms with optional vertical bars.
+
     Parameters
     ----------
     data: dict
@@ -78,8 +79,9 @@ def plot_hists(data, outdir, title=None):
         of the vertical line in 'bar_low' and 'bar_up'.
     outdir: str
         the destination folder.
-    title: str
-        Title of the histogram.
+    title: str, default None
+        title of the histogram.
+
     Returns
     -------
     snap: str

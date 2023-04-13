@@ -72,10 +72,8 @@ def brainprep_cat12vbm(
     """
     print_title("Complete matlab batch...")
     batch_file = os.path.join(outdir, "cat12vbm_matlabbatch.m")
-    if not isinstance(anatomical, list):
-        anatomical = listify(anatomical)
-    if not isinstance(session, list) and session:
-        session = listify(session)
+    anatomical = listify(anatomical)
+    session = listify(session)
     resource_dir = os.path.join(
         os.path.dirname(brainprep.__file__), "resources")
     if not longitudinal:
@@ -101,8 +99,6 @@ def brainprep_cat12vbm(
 
     print_title("Make datasets...")
     for idx, filename in enumerate(anatomical):
-        if not isinstance(outdir, list):
-            outdir = [outdir]
         name = os.path.basename(filename)
         if not longitudinal:
             name = "mwp1u" + name

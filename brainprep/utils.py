@@ -289,6 +289,19 @@ def create_clickable(path_or_url):
 
 
 def listify(obj):
+    """ Function to transform a coma separated string to a list of string.
+
+    Parameters
+    ----------
+    obj: list or string
+        the input data.
+
+    Returns
+    -------
+    list: list
+        the list of input data or input data.
+    """
     if not isinstance(obj, list):
-        obj = obj.split(",")
-    return obj
+        return obj.split(",")
+    else:
+        return obj
