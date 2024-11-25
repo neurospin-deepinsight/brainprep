@@ -4,7 +4,7 @@
 
 **Development**
 
-|Coveralls|_ |Testing|_ |Pep8|_ |Doc|_ |ExtraTesting|_ |ExtraDoc|_
+|Coveralls|_ |Testing|_ |Pep8|_ |Doc|_
 
 **Release**
 
@@ -17,9 +17,6 @@
 .. |Coveralls| image:: https://coveralls.io/repos/neurospin-deepinsight/brainprep/badge.svg?branch=master&service=github
 .. _Coveralls: https://coveralls.io/github/neurospin-deepinsight/brainprep
 
-.. |ExtraTesting| image:: https://travis-ci.com/neurospin-deepinsight/brainprep.svg?branch=master
-.. _ExtraTesting: https://travis-ci.com/neurospin/brainprep
-
 .. |Testing| image:: https://github.com/neurospin-deepinsight/brainprep/actions/workflows/testing.yml/badge.svg
 .. _Testing: https://github.com/neurospin-deepinsight/brainprep/actions
 
@@ -30,10 +27,7 @@
 .. _PyPi: https://badge.fury.io/py/brainprep
 
 .. |Doc| image:: https://github.com/neurospin-deepinsight/brainprep/actions/workflows/documentation.yml/badge.svg
-.. _Doc: https://github.com/neurospin-deepinsight/brainprep/actions
-
-.. |ExtraDoc| image:: https://readthedocs.org/projects/brainprep/badge/?version=latest
-.. _ExtraDoc: https://brainprep.readthedocs.io/en/latest/?badge=latest
+.. _Doc: https://neurospin-deepinsight.github.io/brainprep
 
 .. |License| image:: https://img.shields.io/badge/License-CeCILLB-blue.svg
 .. _License: http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html
