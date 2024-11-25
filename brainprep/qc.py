@@ -198,8 +198,9 @@ def parse_fsreconall_stats(fs_dirs):
     return df_scores
 
 
-def parse_cat12vbm_roi(xml_filenames, output_file,
-                       iterparse={"neuromorphometrics": ["ids", "Vgm", "Vcsf"]}):
+def parse_cat12vbm_roi(
+        xml_filenames, output_file,
+        iterparse={"neuromorphometrics": ["ids", "Vgm", "Vcsf"]}):
     """ Parse the cat12vbm xml generated rois files for all
     subjects.
 
@@ -234,7 +235,8 @@ def parse_cat12vbm_roi(xml_filenames, output_file,
         df_sub_key["session"] = [session]
         df_sub_key["run"] = [run]
 
-        if re.match('.*report/cat_.*\.xml', xml_file) and 'avg' not in xml_file:
+        if (re.match(".*report/cat_.*\.xml", xml_file) and
+                "avg" not in xml_file):
             cat = pd.read_xml(xml_file)
             try:
                 # read the global volumes
@@ -272,31 +274,33 @@ def parse_cat12vbm_roi(xml_filenames, output_file,
                 assert set(roi_names) == set(_roi_names), xml_file
                 # parse GM, WM and CSF data if needed
                 if "Vgm" in iterparse[key]:
-                    v_gm = catroi['Vgm'].str.replace("\[|\]", "", regex=True)\
-                                        .str.split(";")[0]
+                    v_gm = (catroi['Vgm']
+                            .str.replace("\[|\]", "", regex=True)
+                            .str.split(";")[0])
                     v_gm = [float(volume) for volume in v_gm]
                     assert len(roi_names) == len(v_gm)
                 if "Vcsf" in iterparse[key]:
-                    v_csf = catroi['Vcsf'].str.replace("\[|\]", "", regex=True)\
-                                        .str.split(";")[0]
+                    v_csf = (catroi['Vcsf']
+                             .str.replace("\[|\]", "", regex=True)
+                             .str.split(";")[0])
                     v_csf = [float(volume) for volume in v_csf]
                     assert len(roi_names) == len(v_csf)
                 if "Vwm" in iterparse[key]:
-                    v_wm = catroi['Vwm'].str.replace("\[|\]", "", regex=True)\
-                                        .str.split(";")[0]
+                    v_wm = (catroi['Vwm']
+                            .str.replace("\[|\]", "", regex=True)
+                            .str.split(";")[0])
                     v_wm = [float(volume) for volume in v_wm]
                     assert len(roi_names) == len(v_wm)
-                
             except Exception as e:
                 print('Parsing error for %s: \n%s' %
                       (xml_file, traceback.format_exc()))
             else:
                 rois_sub = {}
-                gm_rois_names = [rois_name+'_GM_Vol' for rois_name
+                gm_rois_names = [rois_name + '_GM_Vol' for rois_name
                                  in roi_names]
-                wm_rois_names = [rois_name+'_WM_Vol' for rois_name
+                wm_rois_names = [rois_name + '_WM_Vol' for rois_name
                                  in roi_names]
-                csf_rois_names = [rois_name+'_CSF_Vol' for rois_name
+                csf_rois_names = [rois_name + '_CSF_Vol' for rois_name
                                   in roi_names]
                 for idx, gmroiname in enumerate(gm_rois_names):
                     if "Vgm" in iterparse[key]:

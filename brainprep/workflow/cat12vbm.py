@@ -149,7 +149,7 @@ def brainprep_cat12vbm_roi(xml_filenames, output):
     for key, value in iterparse.items():
         output_file = os.path.join(output, f"{key}_cat12_vbm_roi.tsv")
         rois_tsv_path = parse_cat12vbm_roi(xml_filenames, output_file,
-                                           iterparse={key:value})
+                                           iterparse={key: value})
         print_result(rois_tsv_path)
 
 
