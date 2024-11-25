@@ -198,7 +198,8 @@ def parse_fsreconall_stats(fs_dirs):
     return df_scores
 
 
-def parse_cat12vbm_roi(xml_filenames, output_file):
+def parse_cat12vbm_roi(xml_filenames, output_file,
+                       iterparse={"neuromorphometrics": ["ids", "Vgm", "Vcsf"]}):
     """ Parse the cat12vbm xml generated rois files for all
     subjects.
 
@@ -210,6 +211,9 @@ def parse_cat12vbm_roi(xml_filenames, output_file):
         `<PATH>/report/cat_sub-*_ses-*_T1w.xml`.
     output: str
         the destination folder.
+    iterparse: dict
+        a dictionary with the region type to focus on as key, and the list of
+        data to return as values.
 
     Returns
     -------
@@ -230,9 +234,10 @@ def parse_cat12vbm_roi(xml_filenames, output_file):
         df_sub_key["session"] = [session]
         df_sub_key["run"] = [run]
 
-        if re.match('.*report/cat_.*\.xml', xml_file):
+        if re.match('.*report/cat_.*\.xml', xml_file) and 'avg' not in xml_file:
             cat = pd.read_xml(xml_file)
             try:
+                # read the global volumes
                 tiv = cat['vol_TIV'][7]
                 vol_abs_cgw = cat['vol_abs_CGW'][7][1:-1].split()
                 vol_abs_cgw = [float(volume) for volume in vol_abs_cgw]
@@ -240,12 +245,14 @@ def parse_cat12vbm_roi(xml_filenames, output_file):
                 print('Parsing error for %s:\n%s' %
                       (xml_file, traceback.format_exc()))
             else:
+                # put these volumes in a dataframe
                 globvolume_dico_sub = {}
                 globvolume_dico_sub['tiv'] = float(tiv)
                 globvolume_dico_sub['CSF_Vol'] = vol_abs_cgw[0]
                 globvolume_dico_sub['GM_Vol'] = vol_abs_cgw[1]
                 globvolume_dico_sub['WM_Vol'] = vol_abs_cgw[2]
                 df_global_sub = pd.DataFrame(globvolume_dico_sub, index=[0])
+            # concatenate the subject dataframe to the global one
             concat_globvol = [df_sub_key, df_global_sub]
             sub_globvol = pd.concat(concat_globvol, axis=1)
             cohort_globvol = pd.concat([cohort_globvol, sub_globvol], axis=0)
@@ -253,21 +260,33 @@ def parse_cat12vbm_roi(xml_filenames, output_file):
         elif re.match('.*label/catROI_.*\.xml', xml_file):
             tree = ET.parse(xml_file)
             try:
-                iterparse = {"neuromorphometrics": ["ids", "Vgm", "Vcsf"]}
+                # read the label xml file
                 catroi = pd.read_xml(xml_file, iterparse=iterparse)
+                key = list(iterparse.keys())[0]
+                # get the ROI names
                 _roi_names = [item.text for item in
-                              tree.find('neuromorphometrics')
+                              tree.find(key)
                               .find('names').findall('item')]
                 if roi_names is None:
                     roi_names = _roi_names
                 assert set(roi_names) == set(_roi_names), xml_file
-                v_gm = catroi['Vgm'].str.replace("\[|\]", "", regex=True)\
-                                    .str.split(";")[0]
-                v_gm = [float(volume) for volume in v_gm]
-                v_csf = catroi['Vcsf'].str.replace("\[|\]", "", regex=True)\
-                                      .str.split(";")[0]
-                v_csf = [float(volume) for volume in v_csf]
-                assert len(roi_names) == len(v_gm) == len(v_csf)
+                # parse GM, WM and CSF data if needed
+                if "Vgm" in iterparse[key]:
+                    v_gm = catroi['Vgm'].str.replace("\[|\]", "", regex=True)\
+                                        .str.split(";")[0]
+                    v_gm = [float(volume) for volume in v_gm]
+                    assert len(roi_names) == len(v_gm)
+                if "Vcsf" in iterparse[key]:
+                    v_csf = catroi['Vcsf'].str.replace("\[|\]", "", regex=True)\
+                                        .str.split(";")[0]
+                    v_csf = [float(volume) for volume in v_csf]
+                    assert len(roi_names) == len(v_csf)
+                if "Vwm" in iterparse[key]:
+                    v_wm = catroi['Vwm'].str.replace("\[|\]", "", regex=True)\
+                                        .str.split(";")[0]
+                    v_wm = [float(volume) for volume in v_wm]
+                    assert len(roi_names) == len(v_wm)
+                
             except Exception as e:
                 print('Parsing error for %s: \n%s' %
                       (xml_file, traceback.format_exc()))
@@ -275,11 +294,17 @@ def parse_cat12vbm_roi(xml_filenames, output_file):
                 rois_sub = {}
                 gm_rois_names = [rois_name+'_GM_Vol' for rois_name
                                  in roi_names]
+                wm_rois_names = [rois_name+'_WM_Vol' for rois_name
+                                 in roi_names]
                 csf_rois_names = [rois_name+'_CSF_Vol' for rois_name
                                   in roi_names]
                 for idx, gmroiname in enumerate(gm_rois_names):
-                    rois_sub[gmroiname] = v_gm[idx]
-                    rois_sub[csf_rois_names[idx]] = v_csf[idx]
+                    if "Vgm" in iterparse[key]:
+                        rois_sub[gmroiname] = v_gm[idx]
+                    if "Vcsf" in iterparse[key]:
+                        rois_sub[csf_rois_names[idx]] = v_csf[idx]
+                    if "Vwm" in iterparse[key]:
+                        rois_sub[wm_rois_names[idx]] = v_wm[idx]
                 df_rois_sub = pd.DataFrame(rois_sub, index=[0])
             concat_roivol = [df_sub_key, df_rois_sub]
             sub_roivol = pd.concat(concat_roivol, axis=1)

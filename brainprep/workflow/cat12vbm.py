@@ -137,14 +137,20 @@ def brainprep_cat12vbm_roi(xml_filenames, output):
     """
     print_title("Parse cat12vbm rois...")
     subprocess.check_call(["mkdir", "-p", output])
-    output_file = os.path.join(output, "cat12_vbm_roi.tsv")
     if not isinstance(xml_filenames, list):
         xml_filenames = listify(xml_filenames)
     xml_filenames = [glob.glob(regex) for regex in xml_filenames]
     xml_filenames = [filename for sublist in xml_filenames
                      for filename in sublist]
-    rois_tsv_path = parse_cat12vbm_roi(xml_filenames, output_file)
-    print_result(rois_tsv_path)
+    iterparse = {"neuromorphometrics": ["ids", "Vgm", "Vcsf", "Vwm"],
+                 "suit": ["ids", "Vgm", "Vwm"],
+                 "thalamic_nuclei": ["ids", "Vgm"],
+                 "thalamus": ["ids", "Vgm"]}
+    for key, value in iterparse.items():
+        output_file = os.path.join(output, f"{key}_cat12_vbm_roi.tsv")
+        rois_tsv_path = parse_cat12vbm_roi(xml_filenames, output_file,
+                                           iterparse={key:value})
+        print_result(rois_tsv_path)
 
 
 def brainprep_cat12vbm_qc(
