@@ -5,16 +5,16 @@
 
 Computation times
 =================
-**00:07.092** total execution time for **auto_gallery** files:
+**00:05.810** total execution time for **auto_gallery** files:
 
 +--------------------------------------------------------------------------+-----------+----------+
-| :ref:`sphx_glr_auto_gallery_plot_mriqc.py` (``plot_mriqc.py``)           | 00:05.786 | 770.5 MB |
+| :ref:`sphx_glr_auto_gallery_plot_mriqc.py` (``plot_mriqc.py``)           | 00:04.567 | 770.7 MB |
 +--------------------------------------------------------------------------+-----------+----------+
-| :ref:`sphx_glr_auto_gallery_plot_cat12vbm.py` (``plot_cat12vbm.py``)     | 00:00.332 | 8.1 MB   |
+| :ref:`sphx_glr_auto_gallery_plot_quasiraw.py` (``plot_quasiraw.py``)     | 00:00.312 | 8.1 MB   |
 +--------------------------------------------------------------------------+-----------+----------+
-| :ref:`sphx_glr_auto_gallery_plot_fmriprep.py` (``plot_fmriprep.py``)     | 00:00.326 | 8.2 MB   |
+| :ref:`sphx_glr_auto_gallery_plot_cat12vbm.py` (``plot_cat12vbm.py``)     | 00:00.311 | 8.1 MB   |
 +--------------------------------------------------------------------------+-----------+----------+
-| :ref:`sphx_glr_auto_gallery_plot_fsreconall.py` (``plot_fsreconall.py``) | 00:00.325 | 8.1 MB   |
+| :ref:`sphx_glr_auto_gallery_plot_fsreconall.py` (``plot_fsreconall.py``) | 00:00.311 | 8.1 MB   |
 +--------------------------------------------------------------------------+-----------+----------+
-| :ref:`sphx_glr_auto_gallery_plot_quasiraw.py` (``plot_quasiraw.py``)     | 00:00.323 | 8.1 MB   |
+| :ref:`sphx_glr_auto_gallery_plot_fmriprep.py` (``plot_fmriprep.py``)     | 00:00.310 | 8.1 MB   |
 +--------------------------------------------------------------------------+-----------+----------+

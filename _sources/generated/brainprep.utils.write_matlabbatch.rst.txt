@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.utils.write_matlabbatch
 
-.. minigallery:: brainprep.write_matlabbatch brainprep.utils.write_matlabbatch
+.. minigallery:: brainprep.utils.write_matlabbatch brainprep.write_matlabbatch
     :add-heading: Examples
     :heading-level: -
 

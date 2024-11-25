@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.workflow.prequal.brainprep_prequal
 
-.. minigallery:: brainprep.workflow.brainprep_prequal brainprep.workflow.prequal.brainprep_prequal
+.. minigallery:: brainprep.workflow.prequal.brainprep_prequal brainprep.workflow.brainprep_prequal
     :add-heading: Examples
     :heading-level: -
 

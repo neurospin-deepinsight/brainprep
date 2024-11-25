@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.cortical.recon_all_custom_wm_mask
 
-.. minigallery:: brainprep.recon_all_custom_wm_mask brainprep.cortical.recon_all_custom_wm_mask
+.. minigallery:: brainprep.cortical.recon_all_custom_wm_mask brainprep.recon_all_custom_wm_mask
     :add-heading: Examples
     :heading-level: -
 

@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.spatial.reorient2std
 
-.. minigallery:: brainprep.reorient2std brainprep.spatial.reorient2std
+.. minigallery:: brainprep.spatial.reorient2std brainprep.reorient2std
     :add-heading: Examples
     :heading-level: -
 

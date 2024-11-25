@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.utils.check_version
 
-.. minigallery:: brainprep.check_version brainprep.utils.check_version
+.. minigallery:: brainprep.utils.check_version brainprep.check_version
     :add-heading: Examples
     :heading-level: -
 

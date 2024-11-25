@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.workflow.quasiraw.brainprep_quasiraw
 
-.. minigallery:: brainprep.workflow.brainprep_quasiraw brainprep.workflow.quasiraw.brainprep_quasiraw
+.. minigallery:: brainprep.workflow.quasiraw.brainprep_quasiraw brainprep.workflow.brainprep_quasiraw
     :add-heading: Examples
     :heading-level: -
 

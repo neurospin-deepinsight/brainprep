@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.workflow.mriqc.brainprep_mriqc_summary
 
-.. minigallery:: brainprep.workflow.mriqc.brainprep_mriqc_summary brainprep.workflow.brainprep_mriqc_summary
+.. minigallery:: brainprep.workflow.brainprep_mriqc_summary brainprep.workflow.mriqc.brainprep_mriqc_summary
     :add-heading: Examples
     :heading-level: -
 

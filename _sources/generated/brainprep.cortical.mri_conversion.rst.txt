@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.cortical.mri_conversion
 
-.. minigallery:: brainprep.cortical.mri_conversion brainprep.mri_conversion
+.. minigallery:: brainprep.mri_conversion brainprep.cortical.mri_conversion
     :add-heading: Examples
     :heading-level: -
 

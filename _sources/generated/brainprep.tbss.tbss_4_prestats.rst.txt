@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.tbss.tbss_4_prestats
 
-.. minigallery:: brainprep.tbss.tbss_4_prestats brainprep.tbss_4_prestats
+.. minigallery:: brainprep.tbss_4_prestats brainprep.tbss.tbss_4_prestats
     :add-heading: Examples
     :heading-level: -
 

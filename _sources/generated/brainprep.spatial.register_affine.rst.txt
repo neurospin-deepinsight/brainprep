@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.spatial.register_affine
 
-.. minigallery:: brainprep.register_affine brainprep.spatial.register_affine
+.. minigallery:: brainprep.spatial.register_affine brainprep.register_affine
     :add-heading: Examples
     :heading-level: -
 

@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.cortical.localgi
 
-.. minigallery:: brainprep.localgi brainprep.cortical.localgi
+.. minigallery:: brainprep.cortical.localgi brainprep.localgi
     :add-heading: Examples
     :heading-level: -
 
