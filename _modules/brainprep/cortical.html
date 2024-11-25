@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+		<!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>brainprep</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="../../_static/css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="../../_static/css/animate.css">
+        <link rel="stylesheet" href="../../_static/css/style.css">
+        <link rel="stylesheet" href="../../_static/css/jquery.mosaic.css">
+        <link rel="stylesheet" href="../../_static/gallery.css">
+        <link rel="stylesheet" href="../../_static/css/media-queries.css">
+        <link rel="stylesheet" href="../../_static/css/pygment.css">
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="../../_static/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../_static/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../_static/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../_static/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../../_static/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+
+		<!-- Wrapper -->
+    	<div class="wrapper">
+
+			<!-- Sidebar -->
+			<nav class="sidebar">
+				
+				<!-- close sidebar menu -->
+				<div class="dismiss">
+					<i class="fas fa-arrow-left"></i>
+				</div>
+				
+				<div class="logo"">
+					<h3><a href="../../index.html">Sidebar Menu</a></h3>
+				</div>
+
+                <!-- info setup -->
+                    <p class="doc-version">
+                        This documentation is for brainprep <strong>version 0.0.1</strong>
+                    </p>
+                <p class="citing">
+                    If you use the software, please do not hesitate to 
+                    <a &mdash; <a href="https://github.com/neurospin-deepinsight/brainprep">
+                    Report a Bug</a>.
+                </p>
+				
+                <!-- links -->
+                
+                
+				<ul class="list-unstyled menu-elements">
+					<li class="active">
+						<a href="../../index.html"><i class="fas fa-home"></i> Home</a>
+					</li>
+					<li>
+						<a href="../../generated/installation.html"><i class="fas fa-cog"></i> Installation</a>
+					</li>
+					<li>
+						<a href="../../auto_gallery/index.html"><i class="fas fa-eye"></i> Gallery</a>
+					</li>
+					<li>
+						<a href="../../generated/documentation.html"><i class="fas fa-pencil-alt"></i> API documentation</a>
+					</li>
+					<li>
+						<a href="../../generated/search.html"><i class="fas fa-search"></i> Search</a>
+					</li>
+					<li>
+						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
+					</li>
+					<li>
+						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+							<i class="fas fa-sync"></i>Sections Shortcuts
+						</a>
+						<ul class="collapse list-unstyled" id="otherSections">
+                            <li>LINKS</li><li><a href='https://github.com/neurospin-deepinsight/deepinsight'>deepinsight</a></li>
+                            
+                            <li>API</li>
+                            <li><a href="../../generated/brainprep.html">brainprep</a></li><li><a href="../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
+						</ul>
+					</li>
+				</ul>
+				
+                <!-- go top page -->
+				<div class="to-top">
+					<a class="btn btn-primary btn-customized-3" href="#" role="button">
+	                    <i class="fas fa-arrow-up"></i> Top
+	                </a>
+				</div>
+			
+                <!-- change color -->
+				<div class="dark-light-buttons">
+					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+				</div>
+			
+			</nav>
+			<!-- End sidebar -->
+			
+			<!-- Dark overlay -->
+    		<div class="overlay"></div>
+
+			<!-- Content -->
+			<div class="content">
+			
+				<!-- open sidebar menu -->
+				<a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+                    <i class="fas fa-align-left"></i> <span>Menu</span>
+                </a>
+
+		        <!-- Top content -->
+		        <div class="top-content section-container" id="top-content">
+			        <div class="container">
+			            <div class="row">
+                            <div class="col-md-3 section-5-box banner-logo">
+                                <img alt="Logo" src="../../_static/brainprep.png">
+                            </div>
+			                <div class="col-md-7 section-5-box">
+			                	<h1 class="wow fadeIn">    <p>Package that provides tools for brain MRI Deep Learning pre-processing.</p></h1>
+			                </div>
+			            </div>
+			        </div>
+		        </div>
+                    
+                    <div class="document">
+                        <h1>Source code for brainprep.cortical</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">##########################################################################</span>
+<span class="c1"># NSAp - Copyright (C) CEA, 2021</span>
+<span class="c1"># Distributed under the terms of the CeCILL-B license, as published by</span>
+<span class="c1"># the CEA-CNRS-INRIA. Refer to the LICENSE file or to</span>
+<span class="c1"># http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html</span>
+<span class="c1"># for details.</span>
+<span class="c1">##########################################################################</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Common cortical functions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">check_command</span><span class="p">,</span> <span class="n">execute_command</span>
+
+
+<div class="viewcode-block" id="recon_all"><a class="viewcode-back" href="../../generated/brainprep.recon_all.html#brainprep.cortical.recon_all">[docs]</a><span class="k">def</span> <span class="nf">recon_all</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">anatfile</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">reconstruction_stage</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">resume</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+              <span class="n">t2file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flairfile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs all the FreeSurfer cortical reconstruction steps.</span>
+
+<span class="sd">    .. note:: This function is based on FreeSurfer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fsdir: str</span>
+<span class="sd">        the FreeSurfer working directory with all the subjects.</span>
+<span class="sd">    anatfile: str</span>
+<span class="sd">        the input anatomical image to be segmented with FreeSurfer.</span>
+<span class="sd">    sid: str</span>
+<span class="sd">        the current subject identifier.</span>
+<span class="sd">    reconstruction_stage: str, default &#39;all&#39;</span>
+<span class="sd">        the FreeSurfer reconstruction stage that will be launched.</span>
+<span class="sd">    resume: bool, deafult False</span>
+<span class="sd">        if true, try to resume the recon-all. This option is also usefull if</span>
+<span class="sd">        custom segmentation is used in recon-all.</span>
+<span class="sd">    t2file: str, default None</span>
+<span class="sd">        specify the path to a T2 image that will be used to improve the pial</span>
+<span class="sd">        surfaces.</span>
+<span class="sd">    flairfile: str, default None</span>
+<span class="sd">        specify the path to a FLAIR image that will be used to improve the pial</span>
+<span class="sd">        surfaces.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    subjfsdir: str</span>
+<span class="sd">        path to the resulting FreeSurfer segmentation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check input parameters</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">fsdir</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">{0}</span><span class="s2">&#39; FreeSurfer home directory does not &quot;</span>
+                         <span class="s2">&quot;exists.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fsdir</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">reconstruction_stage</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;autorecon1&quot;</span><span class="p">,</span> <span class="s2">&quot;autorecon2&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;autorecon2-cp&quot;</span><span class="p">,</span> <span class="s2">&quot;autorecon2-wm&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;autorecon2-pial&quot;</span><span class="p">,</span> <span class="s2">&quot;autorecon3&quot;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsupported &#39;</span><span class="si">{0}</span><span class="s2">&#39; recon-all reconstruction &quot;</span>
+                         <span class="s2">&quot;stage.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reconstruction_stage</span><span class="p">))</span>
+
+    <span class="c1"># Call FreeSurfer segmentation</span>
+    <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;recon-all&quot;</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;recon-all&quot;</span><span class="p">,</span> <span class="s2">&quot;-</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reconstruction_stage</span><span class="p">),</span> <span class="s2">&quot;-subjid&quot;</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span>
+           <span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="n">anatfile</span><span class="p">,</span> <span class="s2">&quot;-sd&quot;</span><span class="p">,</span> <span class="n">fsdir</span><span class="p">,</span> <span class="s2">&quot;-noappend&quot;</span><span class="p">,</span> <span class="s2">&quot;-no-isrunning&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">t2file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cmd</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s2">&quot;-T2&quot;</span><span class="p">,</span> <span class="n">t2file</span><span class="p">,</span> <span class="s2">&quot;-T2pial&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">flairfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cmd</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s2">&quot;-FLAIR&quot;</span><span class="p">,</span> <span class="n">t2file</span><span class="p">,</span> <span class="s2">&quot;-FLAIRpial&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">resume</span><span class="p">:</span>
+        <span class="n">cmd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-make all&quot;</span>
+    <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+    <span class="n">subjfsdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">subjfsdir</span></div>
+
+
+<div class="viewcode-block" id="recon_all_custom_wm_mask"><a class="viewcode-back" href="../../generated/brainprep.recon_all_custom_wm_mask.html#brainprep.cortical.recon_all_custom_wm_mask">[docs]</a><span class="k">def</span> <span class="nf">recon_all_custom_wm_mask</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">wm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Assuming you have run recon-all (at least upto wm.mgz creation), this</span>
+<span class="sd">    function allows to rerun recon-all using a custom white matter mask.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fsdir: str</span>
+<span class="sd">        the FreeSurfer working directory with all the subjects.</span>
+<span class="sd">    sid: str</span>
+<span class="sd">        the current subject identifier.</span>
+<span class="sd">    wm: str</span>
+<span class="sd">        path to the custom white matter mask. It has to be in the subject&#39;s</span>
+<span class="sd">        FreeSurfer space (1mm iso + aligned with brain.mgz) with values in</span>
+<span class="sd">        [0, 1] (i.e. probability of being white matter).</span>
+<span class="sd">        For example, it can be the &#39;brain_pve_2.nii.gz&quot; white matter</span>
+<span class="sd">        probability map created by FSL Fast.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    subjfsdir: str</span>
+<span class="sd">        path to the resulting FreeSurfer segmentation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check existence of the subject&#39;s directory</span>
+    <span class="n">subjfsdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">subjfsdir</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Directory does not exist: </span><span class="si">{</span><span class="n">subjfsdir</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Save original wm.seg.mgz as wm.seg.orig.mgz</span>
+    <span class="n">wm_seg_mgz</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subjfsdir</span><span class="p">,</span> <span class="s2">&quot;mri&quot;</span><span class="p">,</span> <span class="s2">&quot;wm.seg.mgz&quot;</span><span class="p">)</span>
+    <span class="n">save_as</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subjfsdir</span><span class="p">,</span> <span class="s2">&quot;mri&quot;</span><span class="p">,</span> <span class="s2">&quot;wm.seg.orig.mgz&quot;</span><span class="p">)</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">wm_seg_mgz</span><span class="p">,</span> <span class="n">save_as</span><span class="p">)</span>
+
+    <span class="c1"># Work in tmp</span>
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
+
+        <span class="c1"># Change input mask range of values: [0-1] to [0-110]</span>
+        <span class="n">wm_mask_0_110</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="s2">&quot;wm_mask_0_110.nii.gz&quot;</span><span class="p">)</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mris_calc&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">wm_mask_0_110</span><span class="p">,</span> <span class="n">wm</span><span class="p">,</span> <span class="s2">&quot;mul&quot;</span><span class="p">,</span> <span class="s2">&quot;110&quot;</span><span class="p">]</span>
+        <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;mris_calc&quot;</span><span class="p">)</span>
+        <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+        <span class="c1"># Write the new wm.seg.mgz, FreeSurfer requires MRI_UCHAR type</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mri_convert&quot;</span><span class="p">,</span> <span class="n">wm_mask_0_110</span><span class="p">,</span> <span class="n">wm_seg_mgz</span><span class="p">,</span> <span class="s2">&quot;-odt&quot;</span><span class="p">,</span> <span class="s2">&quot;uchar&quot;</span><span class="p">]</span>
+        <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;mri_convert&quot;</span><span class="p">)</span>
+        <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+    <span class="c1"># Rerun recon-all</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;recon-all&quot;</span><span class="p">,</span> <span class="s2">&quot;-autorecon2-wm&quot;</span><span class="p">,</span> <span class="s2">&quot;-autorecon3&quot;</span><span class="p">,</span> <span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span>
+           <span class="s2">&quot;-sd&quot;</span><span class="p">,</span> <span class="n">fsdir</span><span class="p">]</span>
+    <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;recon-all&quot;</span><span class="p">)</span>
+    <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">subjfsdir</span></div>
+
+
+<div class="viewcode-block" id="recon_all_longitudinal"><a class="viewcode-back" href="../../generated/brainprep.recon_all_longitudinal.html#brainprep.cortical.recon_all_longitudinal">[docs]</a><span class="k">def</span> <span class="nf">recon_all_longitudinal</span><span class="p">(</span><span class="n">fsdirs</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">timepoints</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Assuming you have run recon-all for all timepoints of a given subject,</span>
+<span class="sd">    and that the results are stored in one subject directory per timepoint,</span>
+<span class="sd">    this function will:</span>
+
+<span class="sd">    - create a template for the subject and process it with recon-all</span>
+<span class="sd">    - rerun recon-all for all timepoints of the subject using the template</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fsdirs: list of str</span>
+<span class="sd">        the FreeSurfer working directory where to find the the subject</span>
+<span class="sd">        associated timepoints.</span>
+<span class="sd">    sid: str</span>
+<span class="sd">        the current subject identifier.</span>
+<span class="sd">    outdir: str</span>
+<span class="sd">        destination folder.</span>
+<span class="sd">    timepoints: list of str, default None</span>
+<span class="sd">        the timepoint names in the same order as the ``subjfsdirs``.</span>
+<span class="sd">        Used to create the subject longitudinal IDs. By default timepoints</span>
+<span class="sd">        are &quot;1&quot;, &quot;2&quot;...</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    template_id: str</span>
+<span class="sd">        ID of the subject template.</span>
+<span class="sd">    long_sids: list of str</span>
+<span class="sd">        longitudinal IDs of the subject for all the timepoints.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check existence of FreeSurfer subject directories</span>
+    <span class="k">for</span> <span class="n">fsdir</span> <span class="ow">in</span> <span class="n">fsdirs</span><span class="p">:</span>
+        <span class="n">subjfsdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">subjfsdir</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Directory does not exist: </span><span class="si">{subjfsdir}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># If &#39;timepoints&#39; not passed, used defaults, else check validity</span>
+    <span class="k">if</span> <span class="n">timepoints</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">timepoints</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fsdirs</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">timepoints</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fsdirs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;There should be as many timepoints as &#39;fsdirs&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create destination folder if necessary</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+
+    <span class="c1"># FreeSurfer requires a unique SUBJECTS_DIR with all the timepoints to</span>
+    <span class="c1"># compute the template: create symbolic links in &lt;outdir&gt; to all timepoints</span>
+    <span class="n">tp_sids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">tp</span><span class="p">,</span> <span class="n">fsdir</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">timepoints</span><span class="p">,</span> <span class="n">fsdirs</span><span class="p">):</span>
+        <span class="n">tp_sid</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sid</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tp</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">src_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">)</span>
+        <span class="n">dst_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">tp_sid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">islink</span><span class="p">(</span><span class="n">dst_path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">src_path</span><span class="p">,</span> <span class="n">dst_path</span><span class="p">)</span>
+        <span class="n">tp_sids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tp_sid</span><span class="p">)</span>
+
+    <span class="c1"># STEP 1 - create and process template</span>
+    <span class="n">template_id</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_template_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">timepoints</span><span class="p">))</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;recon-all&quot;</span><span class="p">,</span> <span class="s2">&quot;-base&quot;</span><span class="p">,</span> <span class="n">template_id</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">tp_sid</span> <span class="ow">in</span> <span class="n">tp_sids</span><span class="p">:</span>
+        <span class="n">cmd</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;-tp&quot;</span><span class="p">,</span> <span class="n">tp_sid</span><span class="p">]</span>
+    <span class="n">cmd</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;-all&quot;</span><span class="p">,</span> <span class="s2">&quot;-sd&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="p">]</span>
+    <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;recon-all&quot;</span><span class="p">)</span>
+    <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+    <span class="c1"># STEP 2 - rerun recon-all for all timepoints using the template</span>
+    <span class="n">long_sids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">tp_sid</span> <span class="ow">in</span> <span class="n">tp_sids</span><span class="p">:</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;recon-all&quot;</span><span class="p">,</span> <span class="s2">&quot;-long&quot;</span><span class="p">,</span> <span class="n">tp_sid</span><span class="p">,</span> <span class="n">template_id</span><span class="p">,</span>
+               <span class="s2">&quot;-all&quot;</span><span class="p">,</span> <span class="s2">&quot;-sd&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="p">]</span>
+        <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="n">long_sids</span> <span class="o">+=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tp_sid</span><span class="si">}</span><span class="s2">.long.</span><span class="si">{</span><span class="n">template_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">template_id</span><span class="p">,</span> <span class="n">long_sids</span></div>
+
+
+<div class="viewcode-block" id="interhemi_surfreg"><a class="viewcode-back" href="../../generated/brainprep.interhemi_surfreg.html#brainprep.cortical.interhemi_surfreg">[docs]</a><span class="k">def</span> <span class="nf">interhemi_surfreg</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">template_dir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Surface-based interhemispheric registration by applying an existing</span>
+<span class="sd">    atlas, the &#39;fsaverage_sym&#39;.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Greve, Douglas N., Lise Van der Haegen, Qing Cai, Steven Stufflebeam,</span>
+<span class="sd">    Mert R. Sabuncu, Bruce Fischl, and Marc Bysbaert, A surface-based analysis</span>
+<span class="sd">    of language lateralization and cortical asymmetry, Journal of Cognitive</span>
+<span class="sd">    Neuroscience 25.9: 1477-1492 2013.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fsdir: str</span>
+<span class="sd">        the FreeSurfer subjects directory &#39;SUBJECTS_DIR&#39;.</span>
+<span class="sd">    sid: str</span>
+<span class="sd">        the subject identifier.</span>
+<span class="sd">    template_dir: str</span>
+<span class="sd">        path to the &#39;fsaverage_sym&#39; template.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    xhemidir: str</span>
+<span class="sd">        the symetrized hemispheres.</span>
+<span class="sd">    spherefile: str</span>
+<span class="sd">        the registration file to the template.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check input parameters</span>
+    <span class="n">hemi</span> <span class="o">=</span> <span class="s2">&quot;lh&quot;</span>
+    <span class="n">subjfsdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">subjfsdir</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">{0}</span><span class="s2">&#39; is not a valid directory.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subjfsdir</span><span class="p">))</span>
+
+    <span class="c1"># Symlink input data in destination foler</span>
+    <span class="n">dest_template_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="s2">&quot;fsaverage_sym&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">islink</span><span class="p">(</span><span class="n">dest_template_dir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">template_dir</span><span class="p">,</span> <span class="n">dest_template_dir</span><span class="p">)</span>
+
+    <span class="c1"># Create the commands</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SUBJECTS_DIR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fsdir</span>
+    <span class="n">sym_template_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">subjfsdir</span><span class="p">,</span> <span class="s2">&quot;surf&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.fsaverage_sym.sphere.reg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hemi</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">sym_template_file</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">sym_template_file</span><span class="p">)</span>
+    <span class="n">cmds</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="s2">&quot;surfreg&quot;</span><span class="p">,</span> <span class="s2">&quot;--s&quot;</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="s2">&quot;--t&quot;</span><span class="p">,</span> <span class="s2">&quot;fsaverage_sym&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;--</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hemi</span><span class="p">)],</span>
+        <span class="p">[</span><span class="s2">&quot;xhemireg&quot;</span><span class="p">,</span> <span class="s2">&quot;--s&quot;</span><span class="p">,</span> <span class="n">sid</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;surfreg&quot;</span><span class="p">,</span> <span class="s2">&quot;--s&quot;</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="s2">&quot;--t&quot;</span><span class="p">,</span> <span class="s2">&quot;fsaverage_sym&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;--</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hemi</span><span class="p">),</span> <span class="s2">&quot;--xhemi&quot;</span><span class="p">]]</span>
+
+    <span class="c1"># Call FreeSurfer xhemi</span>
+    <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;surfreg&quot;</span><span class="p">)</span>
+    <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;xhemireg&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmds</span><span class="p">:</span>
+        <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+    <span class="c1"># Get outputs</span>
+    <span class="n">xhemidir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subjfsdir</span><span class="p">,</span> <span class="s2">&quot;xhemi&quot;</span><span class="p">)</span>
+    <span class="n">spherefile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">subjfsdir</span><span class="p">,</span> <span class="s2">&quot;surf&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.fsaverage_sym.sphere.reg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hemi</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">xhemidir</span><span class="p">,</span> <span class="n">spherefile</span></div>
+
+
+<div class="viewcode-block" id="interhemi_projection"><a class="viewcode-back" href="../../generated/brainprep.interhemi_projection.html#brainprep.cortical.interhemi_projection">[docs]</a><span class="k">def</span> <span class="nf">interhemi_projection</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">template_dir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Surface-based features projection to the &#39;fsaverage_sym&#39; atlas.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fsdir: str</span>
+<span class="sd">        the FreeSurfer subjects directory &#39;SUBJECTS_DIR&#39;.</span>
+<span class="sd">    sid: str</span>
+<span class="sd">        the subject identifier</span>
+<span class="sd">    template_dir: str</span>
+<span class="sd">        path to the &#39;fsaverage_sym&#39; template.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    xhemi_features: dict</span>
+<span class="sd">        the different features projected to the common symmetric atlas.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">textures</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;thickness&quot;</span><span class="p">,</span> <span class="s2">&quot;curv&quot;</span><span class="p">,</span> <span class="s2">&quot;area&quot;</span><span class="p">,</span> <span class="s2">&quot;pial_lgi&quot;</span><span class="p">,</span> <span class="s2">&quot;sulc&quot;</span><span class="p">)</span>
+    <span class="n">subjfsdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">)</span>
+    <span class="n">reg_xhemi_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">subjfsdir</span><span class="p">,</span> <span class="s2">&quot;xhemi&quot;</span><span class="p">,</span> <span class="s2">&quot;surf&quot;</span><span class="p">,</span> <span class="s2">&quot;lh.fsaverage_sym.sphere.reg&quot;</span><span class="p">)</span>
+    <span class="n">reg_sub_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">subjfsdir</span><span class="p">,</span> <span class="s2">&quot;surf&quot;</span><span class="p">,</span> <span class="s2">&quot;lh.fsaverage_sym.sphere.reg&quot;</span><span class="p">)</span>
+    <span class="n">target_reg</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">template_dir</span><span class="p">,</span> <span class="s2">&quot;surf&quot;</span><span class="p">,</span> <span class="s2">&quot;lh.sphere.reg&quot;</span><span class="p">)</span>
+    <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;mris_apply_reg&quot;</span><span class="p">)</span>
+    <span class="n">xhemi_features</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">textures</span><span class="p">:</span>
+        <span class="n">xhemi_features</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">hemi</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;lh&quot;</span><span class="p">,</span> <span class="s2">&quot;rh&quot;</span><span class="p">):</span>
+            <span class="n">texture_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">subjfsdir</span><span class="p">,</span> <span class="s2">&quot;surf&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hemi</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">texture_file</span><span class="p">):</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="s2">&quot;Texture file not found: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">texture_file</span><span class="p">),</span>
+                    <span class="ne">UserWarning</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">hemi</span> <span class="o">==</span> <span class="s2">&quot;lh&quot;</span><span class="p">:</span>
+                <span class="n">reg_file</span> <span class="o">=</span> <span class="n">reg_sub_file</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">reg_file</span> <span class="o">=</span> <span class="n">reg_xhemi_file</span>
+            <span class="n">dest_texture_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">subjfsdir</span><span class="p">,</span> <span class="s2">&quot;surf&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">.xhemi.mgh&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">hemi</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+            <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mris_apply_reg&quot;</span><span class="p">,</span> <span class="s2">&quot;--src&quot;</span><span class="p">,</span> <span class="n">texture_file</span><span class="p">,</span>
+                   <span class="s2">&quot;--trg&quot;</span><span class="p">,</span> <span class="n">dest_texture_file</span><span class="p">,</span> <span class="s2">&quot;--streg&quot;</span><span class="p">,</span> <span class="n">reg_file</span><span class="p">,</span>
+                   <span class="n">target_reg</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">dest_texture_file</span><span class="p">):</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="s2">&quot;Projected texture file already creatred: </span><span class="si">{}</span><span class="s2">. Remove it &quot;</span>
+                    <span class="s2">&quot;for regeneration.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dest_texture_file</span><span class="p">),</span>
+                    <span class="ne">UserWarning</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+            <span class="n">xhemi_features</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">hemi</span><span class="p">]</span> <span class="o">=</span> <span class="n">dest_texture_file</span>
+    <span class="k">return</span> <span class="n">xhemi_features</span></div>
+
+
+<div class="viewcode-block" id="mri_conversion"><a class="viewcode-back" href="../../generated/brainprep.mri_conversion.html#brainprep.cortical.mri_conversion">[docs]</a><span class="k">def</span> <span class="nf">mri_conversion</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Convert some modality in NiFTI format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fsdir: str</span>
+<span class="sd">        the FreeSurfer subjects directory &#39;SUBJECTS_DIR&#39;.</span>
+<span class="sd">    sid: str</span>
+<span class="sd">        the subject identifier</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    niifiles: dict</span>
+<span class="sd">        the converted modalities.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">niifiles</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">regex</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="s2">&quot;mri&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.mgz&quot;</span><span class="p">)</span>
+    <span class="n">reference_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="s2">&quot;mri&quot;</span><span class="p">,</span> <span class="s2">&quot;rawavg.mgz&quot;</span><span class="p">)</span>
+    <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;mri_convert&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">modality</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;aparc+aseg&quot;</span><span class="p">,</span> <span class="s2">&quot;aparc.a2009s+aseg&quot;</span><span class="p">,</span> <span class="s2">&quot;aseg&quot;</span><span class="p">,</span> <span class="s2">&quot;wm&quot;</span><span class="p">,</span> <span class="s2">&quot;rawavg&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;ribbon&quot;</span><span class="p">,</span> <span class="s2">&quot;brain&quot;</span><span class="p">]:</span>
+        <span class="n">srcfile</span> <span class="o">=</span> <span class="n">regex</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">modality</span><span class="p">)</span>
+        <span class="n">destfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="s2">&quot;mri&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.nii.gz&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">modality</span><span class="p">))</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mri_convert&quot;</span><span class="p">,</span> <span class="s2">&quot;--resample_type&quot;</span><span class="p">,</span> <span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;--reslice_like&quot;</span><span class="p">,</span> <span class="n">reference_file</span><span class="p">,</span> <span class="n">srcfile</span><span class="p">,</span> <span class="n">destfile</span><span class="p">]</span>
+        <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="n">niifiles</span><span class="p">[</span><span class="n">modality</span><span class="p">]</span> <span class="o">=</span> <span class="n">destfile</span>
+    <span class="k">return</span> <span class="n">niifiles</span></div>
+
+
+<div class="viewcode-block" id="localgi"><a class="viewcode-back" href="../../generated/brainprep.localgi.html#brainprep.cortical.localgi">[docs]</a><span class="k">def</span> <span class="nf">localgi</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes local measurements of pial-surface gyrification at thousands</span>
+<span class="sd">    of points over the cortical surface.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fsdir: str</span>
+<span class="sd">        The FreeSurfer working directory with all the subjects.</span>
+<span class="sd">    sid: str</span>
+<span class="sd">        Identifier of subject.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    subjfsdir: str</span>
+<span class="sd">        the FreeSurfer results for the subject.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check input parameters</span>
+    <span class="n">subjfsdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">subjfsdir</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">{0}</span><span class="s2">&#39; FreeSurfer subject directory does not &quot;</span>
+                         <span class="s2">&quot;exists.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subjfsdir</span><span class="p">))</span>
+
+    <span class="c1"># Call FreeSurfer local gyrification</span>
+    <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;recon-all&quot;</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;recon-all&quot;</span><span class="p">,</span> <span class="s2">&quot;-localGI&quot;</span><span class="p">,</span> <span class="s2">&quot;-subjid&quot;</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="s2">&quot;-sd&quot;</span><span class="p">,</span> <span class="n">fsdir</span><span class="p">,</span>
+           <span class="s2">&quot;-no-isrunning&quot;</span><span class="p">]</span>
+    <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">subjfsdir</span></div>
+
+
+<div class="viewcode-block" id="stats2table"><a class="viewcode-back" href="../../generated/brainprep.stats2table.html#brainprep.cortical.stats2table">[docs]</a><span class="k">def</span> <span class="nf">stats2table</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">outdir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generate text/ascii tables of freesurfer parcellation stats data</span>
+<span class="sd">    &#39;?h.aparc.stats&#39; for both templates (Desikan &amp; Destrieux) and</span>
+<span class="sd">    &#39;aseg.stats&#39;.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fsdir: str</span>
+<span class="sd">        the FreeSurfer working directory with all the subjects.</span>
+<span class="sd">    outdir: str</span>
+<span class="sd">        the destination folder.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    statfiles: list of str</span>
+<span class="sd">        The FreeSurfer summary stats.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check input parameters</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">outdir</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">{0}</span><span class="s2">&#39; is not a valid directory.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+    <span class="c1"># Fist find all the subjects with a stat dir</span>
+    <span class="n">statdirs</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="s2">&quot;stats&quot;</span><span class="p">))</span>
+    <span class="n">subjects</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">statdirs</span><span class="p">]</span>
+    <span class="n">subjects</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">subjects</span>
+                <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;fsaverage&quot;</span><span class="p">,</span> <span class="s2">&quot;fsaverage_sym&quot;</span><span class="p">)]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SUBJECTS_DIR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fsdir</span>
+    <span class="n">statfiles</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">measures</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;thickness&quot;</span><span class="p">,</span> <span class="s2">&quot;thicknessstd&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;meancurv&quot;</span><span class="p">,</span> <span class="s2">&quot;gauscurv&quot;</span><span class="p">,</span> <span class="s2">&quot;foldind&quot;</span><span class="p">,</span> <span class="s2">&quot;curvind&quot;</span><span class="p">]</span>
+    <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;aparcstats2table&quot;</span><span class="p">)</span>
+    <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;asegstats2table&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Call FreeSurfer aparcstats2table: Desikan template</span>
+    <span class="k">for</span> <span class="n">hemi</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;lh&quot;</span><span class="p">,</span> <span class="s2">&quot;rh&quot;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">meas</span> <span class="ow">in</span> <span class="n">measures</span><span class="p">:</span>
+            <span class="n">statfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">outdir</span><span class="p">,</span> <span class="s2">&quot;aparc_stats_</span><span class="si">{0}</span><span class="s2">_</span><span class="si">{1}</span><span class="s2">.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hemi</span><span class="p">,</span> <span class="n">meas</span><span class="p">))</span>
+            <span class="n">statfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">statfile</span><span class="p">)</span>
+            <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;aparcstats2table&quot;</span><span class="p">,</span> <span class="s2">&quot;--subjects&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">subjects</span> <span class="o">+</span> <span class="p">[</span>
+                <span class="s2">&quot;--hemi&quot;</span><span class="p">,</span> <span class="n">hemi</span><span class="p">,</span> <span class="s2">&quot;--meas&quot;</span><span class="p">,</span> <span class="n">meas</span><span class="p">,</span> <span class="s2">&quot;--tablefile&quot;</span><span class="p">,</span> <span class="n">statfile</span><span class="p">,</span>
+                <span class="s2">&quot;--delimiter&quot;</span><span class="p">,</span> <span class="s2">&quot;comma&quot;</span><span class="p">,</span> <span class="s2">&quot;--parcid-only&quot;</span><span class="p">]</span>
+            <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+    <span class="c1"># Call FreeSurfer aparcstats2table: Destrieux template</span>
+    <span class="k">for</span> <span class="n">hemi</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;lh&quot;</span><span class="p">,</span> <span class="s2">&quot;rh&quot;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">meas</span> <span class="ow">in</span> <span class="n">measures</span><span class="p">:</span>
+            <span class="n">statfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">outdir</span><span class="p">,</span> <span class="s2">&quot;aparc2009s_stats_</span><span class="si">{0}</span><span class="s2">_</span><span class="si">{1}</span><span class="s2">.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hemi</span><span class="p">,</span> <span class="n">meas</span><span class="p">))</span>
+            <span class="n">statfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">statfile</span><span class="p">)</span>
+            <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;aparcstats2table&quot;</span><span class="p">,</span> <span class="s2">&quot;--subjects&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">subjects</span> <span class="o">+</span> <span class="p">[</span>
+                <span class="s2">&quot;--parc&quot;</span><span class="p">,</span> <span class="s2">&quot;aparc.a2009s&quot;</span><span class="p">,</span> <span class="s2">&quot;--hemi&quot;</span><span class="p">,</span> <span class="n">hemi</span><span class="p">,</span> <span class="s2">&quot;--meas&quot;</span><span class="p">,</span> <span class="n">meas</span><span class="p">,</span>
+                <span class="s2">&quot;--tablefile&quot;</span><span class="p">,</span> <span class="n">statfile</span><span class="p">,</span> <span class="s2">&quot;--delimiter&quot;</span><span class="p">,</span> <span class="s2">&quot;comma&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;--parcid-only&quot;</span><span class="p">]</span>
+            <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+    <span class="c1"># Call FreeSurfer asegstats2table</span>
+    <span class="n">statfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="s2">&quot;aseg_stats.csv&quot;</span><span class="p">)</span>
+    <span class="n">statfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">statfile</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;asegstats2table&quot;</span><span class="p">,</span> <span class="s2">&quot;--subjects&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">subjects</span> <span class="o">+</span> <span class="p">[</span>
+        <span class="s2">&quot;--meas&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;--tablefile&quot;</span><span class="p">,</span> <span class="n">statfile</span><span class="p">,</span> <span class="s2">&quot;--delimiter&quot;</span><span class="p">,</span> <span class="s2">&quot;comma&quot;</span><span class="p">]</span>
+    <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+    <span class="n">statfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">statfile</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">statfiles</span></div>
+</pre></div>
+                    </div>
+                <div class="spacer"></div>
+		        
+		        <!-- Footer -->
+		        <div class="section-6-container section-container section-container-image-bg" id="section-6">
+			        <div class="container">
+			            <div class="row">
+		                    <div class="col-md-5 offset-md-1 section-6-box wow fadeInDown">
+                                <div class="section-6-title">
+		                    	    <p>Follow us</p>
+                                </div>
+		                    	<div class="section-6-social">
+			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
+									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
+									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
+									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
+                                    <p>&copy; 2024, 
+brainprep developers
+ <antoine.grigis@cea.fr></p>
+		                    	</div>
+		                    </div>
+			            </div>
+			        </div>
+                </div>
+	        
+	        </div>
+	        <!-- End content -->
+        
+        </div>
+        <!-- End wrapper -->
+
+        <!-- Javascript -->
+		<script src="../../_static/js/jquery-3.3.1.min.js"></script>
+		<script src="../../_static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="../../_static/js/jquery.backstretch.min.js"></script>
+        <script src="../../_static/js/wow.min.js"></script>
+        <script src="../../_static/js/jquery.waypoints.min.js"></script>
+        <script src="../../_static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="../../_static/js/scripts.js"></script>
+        <script src="../../_static/js/jquery.mosaic.js"></script>
+        <script src="../../_static/js/search.js"></script>
+        <script type="text/javascript">
+	        $('.top-content').backstretch("../../_static/img/backgrounds/banner1.png");
+            $('.section-6-container').backstretch("../../_static/img/backgrounds/footer1.png");
+        </script>
+
+    </body>
+
+</html>

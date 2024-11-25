@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+		<!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>brainprep</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="../../_static/css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="../../_static/css/animate.css">
+        <link rel="stylesheet" href="../../_static/css/style.css">
+        <link rel="stylesheet" href="../../_static/css/jquery.mosaic.css">
+        <link rel="stylesheet" href="../../_static/gallery.css">
+        <link rel="stylesheet" href="../../_static/css/media-queries.css">
+        <link rel="stylesheet" href="../../_static/css/pygment.css">
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="../../_static/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../_static/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../_static/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../_static/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../../_static/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+
+		<!-- Wrapper -->
+    	<div class="wrapper">
+
+			<!-- Sidebar -->
+			<nav class="sidebar">
+				
+				<!-- close sidebar menu -->
+				<div class="dismiss">
+					<i class="fas fa-arrow-left"></i>
+				</div>
+				
+				<div class="logo"">
+					<h3><a href="../../index.html">Sidebar Menu</a></h3>
+				</div>
+
+                <!-- info setup -->
+                    <p class="doc-version">
+                        This documentation is for brainprep <strong>version 0.0.1</strong>
+                    </p>
+                <p class="citing">
+                    If you use the software, please do not hesitate to 
+                    <a &mdash; <a href="https://github.com/neurospin-deepinsight/brainprep">
+                    Report a Bug</a>.
+                </p>
+				
+                <!-- links -->
+                
+                
+				<ul class="list-unstyled menu-elements">
+					<li class="active">
+						<a href="../../index.html"><i class="fas fa-home"></i> Home</a>
+					</li>
+					<li>
+						<a href="../../generated/installation.html"><i class="fas fa-cog"></i> Installation</a>
+					</li>
+					<li>
+						<a href="../../auto_gallery/index.html"><i class="fas fa-eye"></i> Gallery</a>
+					</li>
+					<li>
+						<a href="../../generated/documentation.html"><i class="fas fa-pencil-alt"></i> API documentation</a>
+					</li>
+					<li>
+						<a href="../../generated/search.html"><i class="fas fa-search"></i> Search</a>
+					</li>
+					<li>
+						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
+					</li>
+					<li>
+						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+							<i class="fas fa-sync"></i>Sections Shortcuts
+						</a>
+						<ul class="collapse list-unstyled" id="otherSections">
+                            <li>LINKS</li><li><a href='https://github.com/neurospin-deepinsight/deepinsight'>deepinsight</a></li>
+                            
+                            <li>API</li>
+                            <li><a href="../../generated/brainprep.html">brainprep</a></li><li><a href="../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
+						</ul>
+					</li>
+				</ul>
+				
+                <!-- go top page -->
+				<div class="to-top">
+					<a class="btn btn-primary btn-customized-3" href="#" role="button">
+	                    <i class="fas fa-arrow-up"></i> Top
+	                </a>
+				</div>
+			
+                <!-- change color -->
+				<div class="dark-light-buttons">
+					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+				</div>
+			
+			</nav>
+			<!-- End sidebar -->
+			
+			<!-- Dark overlay -->
+    		<div class="overlay"></div>
+
+			<!-- Content -->
+			<div class="content">
+			
+				<!-- open sidebar menu -->
+				<a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+                    <i class="fas fa-align-left"></i> <span>Menu</span>
+                </a>
+
+		        <!-- Top content -->
+		        <div class="top-content section-container" id="top-content">
+			        <div class="container">
+			            <div class="row">
+                            <div class="col-md-3 section-5-box banner-logo">
+                                <img alt="Logo" src="../../_static/brainprep.png">
+                            </div>
+			                <div class="col-md-7 section-5-box">
+			                	<h1 class="wow fadeIn">    <p>Package that provides tools for brain MRI Deep Learning pre-processing.</p></h1>
+			                </div>
+			            </div>
+			        </div>
+		        </div>
+                    
+                    <div class="document">
+                        <h1>Source code for brainprep.qc</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">##########################################################################</span>
+<span class="c1"># NSAp - Copyright (C) CEA, 2021 - 2022</span>
+<span class="c1"># Distributed under the terms of the CeCILL-B license, as published by</span>
+<span class="c1"># the CEA-CNRS-INRIA. Refer to the LICENSE file or to</span>
+<span class="c1"># http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html</span>
+<span class="c1"># for details.</span>
+<span class="c1">##########################################################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Usefull automatic quality control (QC) functions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_bids_keys</span>
+
+
+<div class="viewcode-block" id="check_files"><a class="viewcode-back" href="../../generated/brainprep.qc.check_files.html#brainprep.qc.check_files">[docs]</a><span class="k">def</span> <span class="nf">check_files</span><span class="p">(</span><span class="n">input_files</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Check if all data are ordered the same way and follows the BIDS</span>
+<span class="sd">    nomenclature.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    input_files: list of list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">input_files</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">sizes</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">input_files</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input list of files must have the same number of &quot;</span>
+                         <span class="s2">&quot;elements.&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">input_files</span><span class="p">):</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_bids_keys</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">item</span><span class="p">]</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{participant_id}</span><span class="s2">_</span><span class="si">{session}</span><span class="s2">_</span><span class="si">{run}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">item</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Input list of files are not ordered the same way.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_pca"><a class="viewcode-back" href="../../generated/brainprep.qc.plot_pca.html#brainprep.qc.plot_pca">[docs]</a><span class="k">def</span> <span class="nf">plot_pca</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">df_description</span><span class="p">,</span> <span class="n">outdir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Save the two first PCA components.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X: array (n_samples, ...)</span>
+<span class="sd">        the input data.</span>
+<span class="sd">    df_description: pandas DataFrame</span>
+<span class="sd">        samples associated descriptons: must have &#39;n_samples&#39; rows and a</span>
+<span class="sd">        &#39;participant_id&#39; column.</span>
+<span class="sd">    outdir: str</span>
+<span class="sd">        the destination folder.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pca_path: str</span>
+<span class="sd">        the path to the generated file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_description</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;X&#39; and &#39;df_description&#39; must have the same length.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;participant_id&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_description</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;df_description&#39; must contains a &#39;participant_id&#39; &quot;</span>
+                         <span class="s2">&quot;column.&quot;</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">X</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">components</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">components</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">components</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">desc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df_description</span><span class="p">[</span><span class="s2">&quot;participant_id&quot;</span><span class="p">]):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">components</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset pixels&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;PC1 (var=</span><span class="si">%.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;PC2 (var=</span><span class="si">%.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">pca_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="s2">&quot;pca.pdf&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">pca_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pca_path</span></div>
+
+
+<div class="viewcode-block" id="compute_mean_correlation"><a class="viewcode-back" href="../../generated/brainprep.qc.compute_mean_correlation.html#brainprep.qc.compute_mean_correlation">[docs]</a><span class="k">def</span> <span class="nf">compute_mean_correlation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">df_description</span><span class="p">,</span> <span class="n">outdir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Compute mean correlation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X: array (n_samples, ...)</span>
+<span class="sd">        the input data.</span>
+<span class="sd">    df_description: pandas DataFrame</span>
+<span class="sd">        samples associated descriptons: must have &#39;n_samples&#39; rows and</span>
+<span class="sd">        &#39;participant_id&#39;, &#39;session&#39;, &#39;run&#39; and &#39;ni_path&#39; columns.</span>
+<span class="sd">    outdir: str</span>
+<span class="sd">        the destination folder.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    df_corr: pandas DataFrame</span>
+<span class="sd">        sorted input data description based on mean correlation: columns are</span>
+<span class="sd">        &#39;participant_id&#39;, &#39;session&#39;, &#39;run&#39;, &#39;corr_mean&#39;.</span>
+<span class="sd">    heatmap_path: str</span>
+<span class="sd">        path to the heatmap of mean correlation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Checks</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_description</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;X&#39; and &#39;df_description&#39; must have the same length.&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;participant_id&quot;</span><span class="p">,</span> <span class="s2">&quot;ni_path&quot;</span><span class="p">,</span> <span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_description</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;&#39;df_description&#39; must contains a &#39;</span><span class="si">{}</span><span class="s2">&#39; column.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+    <span class="c1"># Compute the correlation matrix</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">X</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">X</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">X</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">single</span><span class="p">)</span>
+
+    <span class="c1"># Compute the Z-transformation of the correlation</span>
+    <span class="n">den</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">corr</span>
+    <span class="n">den</span><span class="p">[</span><span class="n">den</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-8</span>
+    <span class="n">zcorr</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">corr</span><span class="p">)</span> <span class="o">/</span> <span class="n">den</span><span class="p">)</span>
+    <span class="n">zcorr</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">zcorr</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">zcorr</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">zcorr</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">zcorr_mean</span> <span class="o">=</span> <span class="p">(</span><span class="n">zcorr</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">zcorr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Get the index sorted by descending Z-corrected mean correlation values</span>
+    <span class="n">sort_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">zcorr_mean</span><span class="p">)</span>
+    <span class="n">participant_ids</span> <span class="o">=</span> <span class="n">df_description</span><span class="p">[</span><span class="s2">&quot;participant_id&quot;</span><span class="p">][</span><span class="n">sort_idx</span><span class="p">]</span>
+    <span class="n">sessions_ids</span> <span class="o">=</span> <span class="n">df_description</span><span class="p">[</span><span class="s2">&quot;session&quot;</span><span class="p">][</span><span class="n">sort_idx</span><span class="p">]</span>
+    <span class="n">run_ids</span> <span class="o">=</span> <span class="n">df_description</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">][</span><span class="n">sort_idx</span><span class="p">]</span>
+    <span class="n">corr_reorder</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">sort_idx</span><span class="p">,</span> <span class="n">sort_idx</span><span class="p">)]</span>
+
+    <span class="c1"># Plot heatmap of mean correlation</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_reorder</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">corr_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="s2">&quot;correlation.png&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">corr_path</span><span class="p">)</span>
+
+    <span class="c1"># Generate data frame with results</span>
+    <span class="n">df_corr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">participant_id</span><span class="o">=</span><span class="n">participant_ids</span><span class="p">,</span>
+                                <span class="n">session</span><span class="o">=</span><span class="n">sessions_ids</span><span class="p">,</span>
+                                <span class="n">run</span><span class="o">=</span><span class="n">run_ids</span><span class="p">,</span>
+                                <span class="n">corr_mean</span><span class="o">=</span><span class="n">zcorr_mean</span><span class="p">[</span><span class="n">sort_idx</span><span class="p">]))</span>
+    <span class="n">df_corr</span> <span class="o">=</span> <span class="n">df_corr</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">&quot;participant_id&quot;</span><span class="p">,</span> <span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="s2">&quot;corr_mean&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_corr</span><span class="p">,</span> <span class="n">corr_path</span></div>
+
+
+<div class="viewcode-block" id="parse_fsreconall_stats"><a class="viewcode-back" href="../../generated/brainprep.qc.parse_fsreconall_stats.html#brainprep.qc.parse_fsreconall_stats">[docs]</a><span class="k">def</span> <span class="nf">parse_fsreconall_stats</span><span class="p">(</span><span class="n">fs_dirs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Parse the FreeSurfer reconall generated quality control files for all</span>
+<span class="sd">    subjects.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fs_dirs: list of str</span>
+<span class="sd">        list of FreeSurfer recon-all generated directories.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    df_scores: pandas DataFrame</span>
+<span class="sd">        the FreeSurfer recon-all scores organized by &#39;participant_id&#39;,</span>
+<span class="sd">        &#39;session&#39;, &#39;run&#39;, &#39;euler&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">fs_dirs</span><span class="p">:</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">get_bids_keys</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">participant_id</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="s2">&quot;participant_id&quot;</span><span class="p">]</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="s2">&quot;session&quot;</span><span class="p">]</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span>
+        <span class="n">logfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;scripts&quot;</span><span class="p">,</span> <span class="s2">&quot;recon-all.log&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">logfile</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">of</span><span class="p">:</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="n">of</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lines</span>
+                     <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;orig.nofix lheno&quot;</span><span class="p">)]</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">selection</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">left_euler</span><span class="p">,</span> <span class="n">right_euler</span> <span class="o">=</span> <span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+        <span class="n">left_euler</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">left_euler</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="n">left_euler</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">left_euler</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="n">right_euler</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">right_euler</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="n">euler</span> <span class="o">=</span> <span class="p">(</span><span class="n">left_euler</span> <span class="o">+</span> <span class="n">right_euler</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
+        <span class="n">scores</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;participant_id&quot;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">participant_id</span><span class="p">)</span>
+        <span class="n">scores</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">scores</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">run</span><span class="p">)</span>
+        <span class="n">scores</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;euler&quot;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">euler</span><span class="p">)</span>
+    <span class="n">df_scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df_scores</span></div>
+
+
+<div class="viewcode-block" id="parse_cat12vbm_roi"><a class="viewcode-back" href="../../generated/brainprep.qc.parse_cat12vbm_roi.html#brainprep.qc.parse_cat12vbm_roi">[docs]</a><span class="k">def</span> <span class="nf">parse_cat12vbm_roi</span><span class="p">(</span>
+        <span class="n">xml_filenames</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span>
+        <span class="n">iterparse</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;neuromorphometrics&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">,</span> <span class="s2">&quot;Vgm&quot;</span><span class="p">,</span> <span class="s2">&quot;Vcsf&quot;</span><span class="p">]}):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Parse the cat12vbm xml generated rois files for all</span>
+<span class="sd">    subjects.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xml_filenames: list or str(regex,regex)</span>
+<span class="sd">        regex to the CAT12 VBM catROI and cat xml files for all subjects:</span>
+<span class="sd">        `&lt;PATH&gt;/label/catROI_sub-*_ses-*_T1w.xml`,</span>
+<span class="sd">        `&lt;PATH&gt;/report/cat_sub-*_ses-*_T1w.xml`.</span>
+<span class="sd">    output: str</span>
+<span class="sd">        the destination folder.</span>
+<span class="sd">    iterparse: dict</span>
+<span class="sd">        a dictionary with the region type to focus on as key, and the list of</span>
+<span class="sd">        data to return as values.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    output_file: str</span>
+<span class="sd">        rois tsv path.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">roi_names</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">cohort_globvol</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">cohort_roivol</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">xml_file</span> <span class="ow">in</span> <span class="n">xml_filenames</span><span class="p">:</span>
+        <span class="n">df_sub_key</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="n">xml_file_keys</span> <span class="o">=</span> <span class="n">get_bids_keys</span><span class="p">(</span><span class="n">xml_file</span><span class="p">)</span>
+        <span class="n">participant_id</span> <span class="o">=</span> <span class="s2">&quot;sub-&quot;</span><span class="o">+</span><span class="n">xml_file_keys</span><span class="p">[</span><span class="s1">&#39;participant_id&#39;</span><span class="p">]</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">xml_file_keys</span><span class="p">[</span><span class="s1">&#39;session&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="s1">&#39;1&#39;</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="n">xml_file_keys</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="s1">&#39;1&#39;</span>
+        <span class="n">df_sub_key</span><span class="p">[</span><span class="s2">&quot;participant_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">participant_id</span><span class="p">]</span>
+        <span class="n">df_sub_key</span><span class="p">[</span><span class="s2">&quot;session&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">session</span><span class="p">]</span>
+        <span class="n">df_sub_key</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">run</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;.*report/cat_.*\.xml&quot;</span><span class="p">,</span> <span class="n">xml_file</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="s2">&quot;avg&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">xml_file</span><span class="p">):</span>
+            <span class="n">cat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_xml</span><span class="p">(</span><span class="n">xml_file</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># read the global volumes</span>
+                <span class="n">tiv</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="s1">&#39;vol_TIV&#39;</span><span class="p">][</span><span class="mi">7</span><span class="p">]</span>
+                <span class="n">vol_abs_cgw</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="s1">&#39;vol_abs_CGW&#39;</span><span class="p">][</span><span class="mi">7</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">vol_abs_cgw</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span> <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="n">vol_abs_cgw</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Parsing error for </span><span class="si">%s</span><span class="s1">:</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span>
+                      <span class="p">(</span><span class="n">xml_file</span><span class="p">,</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># put these volumes in a dataframe</span>
+                <span class="n">globvolume_dico_sub</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">globvolume_dico_sub</span><span class="p">[</span><span class="s1">&#39;tiv&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tiv</span><span class="p">)</span>
+                <span class="n">globvolume_dico_sub</span><span class="p">[</span><span class="s1">&#39;CSF_Vol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vol_abs_cgw</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">globvolume_dico_sub</span><span class="p">[</span><span class="s1">&#39;GM_Vol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vol_abs_cgw</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">globvolume_dico_sub</span><span class="p">[</span><span class="s1">&#39;WM_Vol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vol_abs_cgw</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">df_global_sub</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">globvolume_dico_sub</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="c1"># concatenate the subject dataframe to the global one</span>
+            <span class="n">concat_globvol</span> <span class="o">=</span> <span class="p">[</span><span class="n">df_sub_key</span><span class="p">,</span> <span class="n">df_global_sub</span><span class="p">]</span>
+            <span class="n">sub_globvol</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">concat_globvol</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">cohort_globvol</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">cohort_globvol</span><span class="p">,</span> <span class="n">sub_globvol</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;.*label/catROI_.*\.xml&#39;</span><span class="p">,</span> <span class="n">xml_file</span><span class="p">):</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">xml_file</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># read the label xml file</span>
+                <span class="n">catroi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_xml</span><span class="p">(</span><span class="n">xml_file</span><span class="p">,</span> <span class="n">iterparse</span><span class="o">=</span><span class="n">iterparse</span><span class="p">)</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterparse</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="c1"># get the ROI names</span>
+                <span class="n">_roi_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span>
+                              <span class="n">tree</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                              <span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;names&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="n">roi_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">roi_names</span> <span class="o">=</span> <span class="n">_roi_names</span>
+                <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">roi_names</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">_roi_names</span><span class="p">),</span> <span class="n">xml_file</span>
+                <span class="c1"># parse GM, WM and CSF data if needed</span>
+                <span class="k">if</span> <span class="s2">&quot;Vgm&quot;</span> <span class="ow">in</span> <span class="n">iterparse</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="n">v_gm</span> <span class="o">=</span> <span class="p">(</span><span class="n">catroi</span><span class="p">[</span><span class="s1">&#39;Vgm&#39;</span><span class="p">]</span>
+                            <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;\[|\]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                            <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">v_gm</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span> <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="n">v_gm</span><span class="p">]</span>
+                    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">roi_names</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">v_gm</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;Vcsf&quot;</span> <span class="ow">in</span> <span class="n">iterparse</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="n">v_csf</span> <span class="o">=</span> <span class="p">(</span><span class="n">catroi</span><span class="p">[</span><span class="s1">&#39;Vcsf&#39;</span><span class="p">]</span>
+                             <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;\[|\]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                             <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">v_csf</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span> <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="n">v_csf</span><span class="p">]</span>
+                    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">roi_names</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">v_csf</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;Vwm&quot;</span> <span class="ow">in</span> <span class="n">iterparse</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="n">v_wm</span> <span class="o">=</span> <span class="p">(</span><span class="n">catroi</span><span class="p">[</span><span class="s1">&#39;Vwm&#39;</span><span class="p">]</span>
+                            <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;\[|\]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                            <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">v_wm</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span> <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="n">v_wm</span><span class="p">]</span>
+                    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">roi_names</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">v_wm</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Parsing error for </span><span class="si">%s</span><span class="s1">: </span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span>
+                      <span class="p">(</span><span class="n">xml_file</span><span class="p">,</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rois_sub</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">gm_rois_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">rois_name</span> <span class="o">+</span> <span class="s1">&#39;_GM_Vol&#39;</span> <span class="k">for</span> <span class="n">rois_name</span>
+                                 <span class="ow">in</span> <span class="n">roi_names</span><span class="p">]</span>
+                <span class="n">wm_rois_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">rois_name</span> <span class="o">+</span> <span class="s1">&#39;_WM_Vol&#39;</span> <span class="k">for</span> <span class="n">rois_name</span>
+                                 <span class="ow">in</span> <span class="n">roi_names</span><span class="p">]</span>
+                <span class="n">csf_rois_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">rois_name</span> <span class="o">+</span> <span class="s1">&#39;_CSF_Vol&#39;</span> <span class="k">for</span> <span class="n">rois_name</span>
+                                  <span class="ow">in</span> <span class="n">roi_names</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">gmroiname</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gm_rois_names</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="s2">&quot;Vgm&quot;</span> <span class="ow">in</span> <span class="n">iterparse</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                        <span class="n">rois_sub</span><span class="p">[</span><span class="n">gmroiname</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_gm</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="s2">&quot;Vcsf&quot;</span> <span class="ow">in</span> <span class="n">iterparse</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                        <span class="n">rois_sub</span><span class="p">[</span><span class="n">csf_rois_names</span><span class="p">[</span><span class="n">idx</span><span class="p">]]</span> <span class="o">=</span> <span class="n">v_csf</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="s2">&quot;Vwm&quot;</span> <span class="ow">in</span> <span class="n">iterparse</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                        <span class="n">rois_sub</span><span class="p">[</span><span class="n">wm_rois_names</span><span class="p">[</span><span class="n">idx</span><span class="p">]]</span> <span class="o">=</span> <span class="n">v_wm</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                <span class="n">df_rois_sub</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rois_sub</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">concat_roivol</span> <span class="o">=</span> <span class="p">[</span><span class="n">df_sub_key</span><span class="p">,</span> <span class="n">df_rois_sub</span><span class="p">]</span>
+            <span class="n">sub_roivol</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">concat_roivol</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">cohort_roivol</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">cohort_roivol</span><span class="p">,</span> <span class="n">sub_roivol</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">roi_names</span> <span class="o">=</span> <span class="n">roi_names</span> <span class="ow">or</span> <span class="p">[]</span>
+    <span class="n">cohort_volumes</span> <span class="o">=</span> <span class="n">cohort_globvol</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">cohort_roivol</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">,</span>
+                                          <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;participant_id&#39;</span><span class="p">,</span> <span class="s1">&#39;session&#39;</span><span class="p">,</span>
+                                              <span class="s1">&#39;run&#39;</span><span class="p">])</span>
+    <span class="n">cohort_volumes</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output_file</span></div>
+
+
+<div class="viewcode-block" id="parse_cat12vbm_qc"><a class="viewcode-back" href="../../generated/brainprep.qc.parse_cat12vbm_qc.html#brainprep.qc.parse_cat12vbm_qc">[docs]</a><span class="k">def</span> <span class="nf">parse_cat12vbm_qc</span><span class="p">(</span><span class="n">qc_files</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Parse the CAT12 VBM generated quality control files for all</span>
+<span class="sd">    subjects.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    qc_files: list of str</span>
+<span class="sd">        list of CAT12 VBM generated quality control xml files.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    df_scores: pandas DataFrame</span>
+<span class="sd">        the CAT12 VBM scores organized by &#39;participant_id&#39;, &#39;session&#39;, &#39;run&#39;,</span>
+<span class="sd">        &#39;NCR&#39;, &#39;ICR&#39;, &#39;IQR&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">xml_file</span> <span class="ow">in</span> <span class="n">qc_files</span><span class="p">:</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">get_bids_keys</span><span class="p">(</span><span class="n">xml_file</span><span class="p">)</span>
+        <span class="n">participant_id</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="s2">&quot;participant_id&quot;</span><span class="p">]</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="s2">&quot;session&quot;</span><span class="p">]</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;.*report/cat_.*\.xml&quot;</span><span class="p">,</span> <span class="n">xml_file</span><span class="p">):</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">xml_file</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ncr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;qualityratings&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;NCR&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+                <span class="n">icr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;qualityratings&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;ICR&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+                <span class="n">iqr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;qualityratings&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;IQR&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="n">trace</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parsing error for </span><span class="si">{}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">xml_file</span><span class="p">,</span> <span class="n">trace</span><span class="p">))</span>
+                <span class="n">ncr</span><span class="p">,</span> <span class="n">icr</span><span class="p">,</span> <span class="n">iqr</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+            <span class="n">scores</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;participant_id&quot;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">participant_id</span><span class="p">)</span>
+            <span class="n">scores</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+            <span class="n">scores</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">run</span><span class="p">)</span>
+            <span class="n">scores</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;NCR&quot;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ncr</span><span class="p">)</span>
+            <span class="n">scores</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;ICR&quot;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">icr</span><span class="p">)</span>
+            <span class="n">scores</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;IQR&quot;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">iqr</span><span class="p">)</span>
+    <span class="n">df_scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df_scores</span></div>
+
+
+<div class="viewcode-block" id="parse_cat12vbm_report"><a class="viewcode-back" href="../../generated/brainprep.qc.parse_cat12vbm_report.html#brainprep.qc.parse_cat12vbm_report">[docs]</a><span class="k">def</span> <span class="nf">parse_cat12vbm_report</span><span class="p">(</span><span class="n">img_files</span><span class="p">,</span> <span class="n">cat12vbm_root</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Parse the CAT12 VBM report files for all subjects.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    img_files: list of str</span>
+<span class="sd">        path to images.</span>
+<span class="sd">    cat12vbm_root: str</span>
+<span class="sd">        the root path of the CAT12VBM preprocessing folder.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    reports: list of str</span>
+<span class="sd">        the associated CAT12 VBM reports.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reports</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">img_files</span><span class="p">:</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">get_bids_keys</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">participant_id</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="s2">&quot;participant_id&quot;</span><span class="p">]</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="s2">&quot;session&quot;</span><span class="p">]</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)[</span><span class="mi">4</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nii.gz&quot;</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.nii.gz&quot;</span><span class="p">,</span> <span class="s2">&quot;.pdf&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nii&quot;</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.nii&quot;</span><span class="p">,</span> <span class="s2">&quot;.pdf&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unexpected file extension: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+        <span class="n">rpath</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="s2">&quot;sub-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">participant_id</span><span class="p">),</span> <span class="s2">&quot;ses-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">session</span><span class="p">),</span>
+                <span class="s2">&quot;anat&quot;</span><span class="p">,</span> <span class="s2">&quot;report&quot;</span><span class="p">,</span> <span class="s2">&quot;catreport_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)),</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="s2">&quot;sub-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">participant_id</span><span class="p">),</span> <span class="s2">&quot;anat&quot;</span><span class="p">,</span> <span class="s2">&quot;report&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;catreport_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)),</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="s2">&quot;sub-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">participant_id</span><span class="p">),</span> <span class="s2">&quot;ses-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">session</span><span class="p">),</span>
+                <span class="s2">&quot;anat&quot;</span><span class="p">,</span> <span class="s2">&quot;report&quot;</span><span class="p">,</span> <span class="s2">&quot;catreport_r</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)),</span>
+            <span class="kc">None</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">_rpath</span> <span class="ow">in</span> <span class="n">rpath</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_rpath</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">reports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="n">_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cat12vbm_root</span><span class="p">,</span> <span class="n">_rpath</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">_path</span><span class="p">):</span>
+                <span class="n">reports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_path</span><span class="p">)</span>
+                <span class="k">break</span>
+    <span class="k">return</span> <span class="n">reports</span></div>
+</pre></div>
+                    </div>
+                <div class="spacer"></div>
+		        
+		        <!-- Footer -->
+		        <div class="section-6-container section-container section-container-image-bg" id="section-6">
+			        <div class="container">
+			            <div class="row">
+		                    <div class="col-md-5 offset-md-1 section-6-box wow fadeInDown">
+                                <div class="section-6-title">
+		                    	    <p>Follow us</p>
+                                </div>
+		                    	<div class="section-6-social">
+			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
+									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
+									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
+									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
+                                    <p>&copy; 2024, 
+brainprep developers
+ <antoine.grigis@cea.fr></p>
+		                    	</div>
+		                    </div>
+			            </div>
+			        </div>
+                </div>
+	        
+	        </div>
+	        <!-- End content -->
+        
+        </div>
+        <!-- End wrapper -->
+
+        <!-- Javascript -->
+		<script src="../../_static/js/jquery-3.3.1.min.js"></script>
+		<script src="../../_static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="../../_static/js/jquery.backstretch.min.js"></script>
+        <script src="../../_static/js/wow.min.js"></script>
+        <script src="../../_static/js/jquery.waypoints.min.js"></script>
+        <script src="../../_static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="../../_static/js/scripts.js"></script>
+        <script src="../../_static/js/jquery.mosaic.js"></script>
+        <script src="../../_static/js/search.js"></script>
+        <script type="text/javascript">
+	        $('.top-content').backstretch("../../_static/img/backgrounds/banner1.png");
+            $('.section-6-container').backstretch("../../_static/img/backgrounds/footer1.png");
+        </script>
+
+    </body>
+
+</html>

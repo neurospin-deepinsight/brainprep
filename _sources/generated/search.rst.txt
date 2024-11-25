@@ -1,0 +1,139 @@
+.. AUTO-GENERATED FILE -- DO NOT EDIT!
+
+Search in API documentation of BRAINPREP
+=========================================
+
+.. raw:: html
+
+    <!-- Block section -->
+
+    <div class='my-search-bar'>
+    <i class='icon fa fa-search'></i>
+    <input type='text' id='my-search' onkeyup='mySearch()' placeholder='Search for functions & classes...' title='Search'>
+
+    </div>
+    <ul id='my-search-entries'>
+        <li><a href='brainprep.spatial.apply_affine.html'>brainprep.apply_affine</a></li>
+        <li><a href='brainprep.spatial.apply_mask.html'>brainprep.apply_mask</a></li>
+        <li><a href='brainprep.spatial.bet2.html'>brainprep.bet2</a></li>
+        <li><a href='brainprep.spatial.biasfield.html'>brainprep.biasfield</a></li>
+        <li><a href='brainprep.utils.check_command.html'>brainprep.check_command</a></li>
+        <li><a href='brainprep.utils.check_version.html'>brainprep.check_version</a></li>
+        <li><a href='brainprep.color_utils.HEX.html'>brainprep.color_utils.HEX</a></li>
+        <li><a href='brainprep.color_utils.attr.html'>brainprep.color_utils.attr</a></li>
+        <li><a href='brainprep.color_utils.colored.html'>brainprep.color_utils.colored</a></li>
+        <li><a href='brainprep.color_utils.fg.html'>brainprep.color_utils.fg</a></li>
+        <li><a href='brainprep.color_utils.print_command.html'>brainprep.color_utils.print_command</a></li>
+        <li><a href='brainprep.color_utils.print_error.html'>brainprep.color_utils.print_error</a></li>
+        <li><a href='brainprep.color_utils.print_result.html'>brainprep.color_utils.print_result</a></li>
+        <li><a href='brainprep.color_utils.print_subtitle.html'>brainprep.color_utils.print_subtitle</a></li>
+        <li><a href='brainprep.color_utils.print_title.html'>brainprep.color_utils.print_title</a></li>
+        <li><a href='brainprep.color_utils.stylize.html'>brainprep.color_utils.stylize</a></li>
+        <li><a href='brainprep.connectivity.func_connectivity.html'>brainprep.connectivity.func_connectivity</a></li>
+        <li><a href='brainprep.cortical.interhemi_projection.html'>brainprep.cortical.interhemi_projection</a></li>
+        <li><a href='brainprep.cortical.interhemi_surfreg.html'>brainprep.cortical.interhemi_surfreg</a></li>
+        <li><a href='brainprep.cortical.localgi.html'>brainprep.cortical.localgi</a></li>
+        <li><a href='brainprep.cortical.mri_conversion.html'>brainprep.cortical.mri_conversion</a></li>
+        <li><a href='brainprep.cortical.recon_all.html'>brainprep.cortical.recon_all</a></li>
+        <li><a href='brainprep.cortical.recon_all_custom_wm_mask.html'>brainprep.cortical.recon_all_custom_wm_mask</a></li>
+        <li><a href='brainprep.cortical.recon_all_longitudinal.html'>brainprep.cortical.recon_all_longitudinal</a></li>
+        <li><a href='brainprep.cortical.stats2table.html'>brainprep.cortical.stats2table</a></li>
+        <li><a href='brainprep.deface.deface.html'>brainprep.deface</a></li>
+        <li><a href='brainprep.deface.deface.html'>brainprep.deface.deface</a></li>
+        <li><a href='brainprep.tbss.dtifit.html'>brainprep.dtifit</a></li>
+        <li><a href='brainprep.utils.execute_command.html'>brainprep.execute_command</a></li>
+        <li><a href='brainprep.connectivity.func_connectivity.html'>brainprep.func_connectivity</a></li>
+        <li><a href='brainprep.cortical.interhemi_projection.html'>brainprep.interhemi_projection</a></li>
+        <li><a href='brainprep.cortical.interhemi_surfreg.html'>brainprep.interhemi_surfreg</a></li>
+        <li><a href='brainprep.cortical.localgi.html'>brainprep.localgi</a></li>
+        <li><a href='brainprep.cortical.mri_conversion.html'>brainprep.mri_conversion</a></li>
+        <li><a href='brainprep.plotting.get_fsreconall_masks.html'>brainprep.plotting.get_fsreconall_masks</a></li>
+        <li><a href='brainprep.plotting.plot_fsreconall.html'>brainprep.plotting.plot_fsreconall</a></li>
+        <li><a href='brainprep.plotting.plot_hists.html'>brainprep.plotting.plot_hists</a></li>
+        <li><a href='brainprep.plotting.plot_images.html'>brainprep.plotting.plot_images</a></li>
+        <li><a href='brainprep.qc.check_files.html'>brainprep.qc.check_files</a></li>
+        <li><a href='brainprep.qc.compute_mean_correlation.html'>brainprep.qc.compute_mean_correlation</a></li>
+        <li><a href='brainprep.qc.parse_cat12vbm_qc.html'>brainprep.qc.parse_cat12vbm_qc</a></li>
+        <li><a href='brainprep.qc.parse_cat12vbm_report.html'>brainprep.qc.parse_cat12vbm_report</a></li>
+        <li><a href='brainprep.qc.parse_cat12vbm_roi.html'>brainprep.qc.parse_cat12vbm_roi</a></li>
+        <li><a href='brainprep.qc.parse_fsreconall_stats.html'>brainprep.qc.parse_fsreconall_stats</a></li>
+        <li><a href='brainprep.qc.plot_pca.html'>brainprep.qc.plot_pca</a></li>
+        <li><a href='brainprep.cortical.recon_all.html'>brainprep.recon_all</a></li>
+        <li><a href='brainprep.cortical.recon_all_custom_wm_mask.html'>brainprep.recon_all_custom_wm_mask</a></li>
+        <li><a href='brainprep.cortical.recon_all_longitudinal.html'>brainprep.recon_all_longitudinal</a></li>
+        <li><a href='brainprep.spatial.register_affine.html'>brainprep.register_affine</a></li>
+        <li><a href='brainprep.spatial.reorient2std.html'>brainprep.reorient2std</a></li>
+        <li><a href='brainprep.spatial.scale.html'>brainprep.scale</a></li>
+        <li><a href='brainprep.spatial.apply_affine.html'>brainprep.spatial.apply_affine</a></li>
+        <li><a href='brainprep.spatial.apply_mask.html'>brainprep.spatial.apply_mask</a></li>
+        <li><a href='brainprep.spatial.bet2.html'>brainprep.spatial.bet2</a></li>
+        <li><a href='brainprep.spatial.biasfield.html'>brainprep.spatial.biasfield</a></li>
+        <li><a href='brainprep.spatial.register_affine.html'>brainprep.spatial.register_affine</a></li>
+        <li><a href='brainprep.spatial.reorient2std.html'>brainprep.spatial.reorient2std</a></li>
+        <li><a href='brainprep.spatial.scale.html'>brainprep.spatial.scale</a></li>
+        <li><a href='brainprep.cortical.stats2table.html'>brainprep.stats2table</a></li>
+        <li><a href='brainprep.tbss.dtifit.html'>brainprep.tbss.dtifit</a></li>
+        <li><a href='brainprep.tbss.tbss_1_preproc.html'>brainprep.tbss.tbss_1_preproc</a></li>
+        <li><a href='brainprep.tbss.tbss_2_reg.html'>brainprep.tbss.tbss_2_reg</a></li>
+        <li><a href='brainprep.tbss.tbss_3_postreg.html'>brainprep.tbss.tbss_3_postreg</a></li>
+        <li><a href='brainprep.tbss.tbss_4_prestats.html'>brainprep.tbss.tbss_4_prestats</a></li>
+        <li><a href='brainprep.tbss.tbss_1_preproc.html'>brainprep.tbss_1_preproc</a></li>
+        <li><a href='brainprep.tbss.tbss_2_reg.html'>brainprep.tbss_2_reg</a></li>
+        <li><a href='brainprep.tbss.tbss_3_postreg.html'>brainprep.tbss_3_postreg</a></li>
+        <li><a href='brainprep.tbss.tbss_4_prestats.html'>brainprep.tbss_4_prestats</a></li>
+        <li><a href='brainprep.utils.check_command.html'>brainprep.utils.check_command</a></li>
+        <li><a href='brainprep.utils.check_version.html'>brainprep.utils.check_version</a></li>
+        <li><a href='brainprep.utils.create_clickable.html'>brainprep.utils.create_clickable</a></li>
+        <li><a href='brainprep.utils.execute_command.html'>brainprep.utils.execute_command</a></li>
+        <li><a href='brainprep.utils.get_bids_keys.html'>brainprep.utils.get_bids_keys</a></li>
+        <li><a href='brainprep.utils.listify.html'>brainprep.utils.listify</a></li>
+        <li><a href='brainprep.utils.load_images.html'>brainprep.utils.load_images</a></li>
+        <li><a href='brainprep.utils.ungzip_file.html'>brainprep.utils.ungzip_file</a></li>
+        <li><a href='brainprep.utils.write_matlabbatch.html'>brainprep.utils.write_matlabbatch</a></li>
+        <li><a href='brainprep.workflow.cat12vbm.brainprep_cat12vbm.html'>brainprep.workflow.brainprep_cat12vbm</a></li>
+        <li><a href='brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc.html'>brainprep.workflow.brainprep_cat12vbm_qc</a></li>
+        <li><a href='brainprep.workflow.cat12vbm.brainprep_cat12vbm_roi.html'>brainprep.workflow.brainprep_cat12vbm_roi</a></li>
+        <li><a href='brainprep.workflow.deface.brainprep_deface.html'>brainprep.workflow.brainprep_deface</a></li>
+        <li><a href='brainprep.workflow.deface.brainprep_deface_qc.html'>brainprep.workflow.brainprep_deface_qc</a></li>
+        <li><a href='brainprep.workflow.fmriprep.brainprep_fmriprep.html'>brainprep.workflow.brainprep_fmriprep</a></li>
+        <li><a href='brainprep.workflow.fmriprep.brainprep_fmriprep_conn.html'>brainprep.workflow.brainprep_fmriprep_conn</a></li>
+        <li><a href='brainprep.workflow.fsreconall.brainprep_fsreconall.html'>brainprep.workflow.brainprep_fsreconall</a></li>
+        <li><a href='brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal.html'>brainprep.workflow.brainprep_fsreconall_longitudinal</a></li>
+        <li><a href='brainprep.workflow.fsreconall.brainprep_fsreconall_qc.html'>brainprep.workflow.brainprep_fsreconall_qc</a></li>
+        <li><a href='brainprep.workflow.fsreconall.brainprep_fsreconall_summary.html'>brainprep.workflow.brainprep_fsreconall_summary</a></li>
+        <li><a href='brainprep.workflow.mriqc.brainprep_mriqc.html'>brainprep.workflow.brainprep_mriqc</a></li>
+        <li><a href='brainprep.workflow.mriqc.brainprep_mriqc_summary.html'>brainprep.workflow.brainprep_mriqc_summary</a></li>
+        <li><a href='brainprep.workflow.prequal.brainprep_prequal.html'>brainprep.workflow.brainprep_prequal</a></li>
+        <li><a href='brainprep.workflow.prequal.brainprep_prequal_qc.html'>brainprep.workflow.brainprep_prequal_qc</a></li>
+        <li><a href='brainprep.workflow.quasiraw.brainprep_quasiraw.html'>brainprep.workflow.brainprep_quasiraw</a></li>
+        <li><a href='brainprep.workflow.quasiraw.brainprep_quasiraw_qc.html'>brainprep.workflow.brainprep_quasiraw_qc</a></li>
+        <li><a href='brainprep.workflow.tbss.brainprep_tbss.html'>brainprep.workflow.brainprep_tbss</a></li>
+        <li><a href='brainprep.workflow.tbss.brainprep_tbss_preproc.html'>brainprep.workflow.brainprep_tbss_preproc</a></li>
+        <li><a href='brainprep.workflow.cat12vbm.brainprep_cat12vbm.html'>brainprep.workflow.cat12vbm.brainprep_cat12vbm</a></li>
+        <li><a href='brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc.html'>brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc</a></li>
+        <li><a href='brainprep.workflow.cat12vbm.brainprep_cat12vbm_roi.html'>brainprep.workflow.cat12vbm.brainprep_cat12vbm_roi</a></li>
+        <li><a href='brainprep.workflow.deface.brainprep_deface.html'>brainprep.workflow.deface.brainprep_deface</a></li>
+        <li><a href='brainprep.workflow.deface.brainprep_deface_qc.html'>brainprep.workflow.deface.brainprep_deface_qc</a></li>
+        <li><a href='brainprep.workflow.fmriprep.brainprep_fmriprep.html'>brainprep.workflow.fmriprep.brainprep_fmriprep</a></li>
+        <li><a href='brainprep.workflow.fmriprep.brainprep_fmriprep_conn.html'>brainprep.workflow.fmriprep.brainprep_fmriprep_conn</a></li>
+        <li><a href='brainprep.workflow.fsreconall.brainprep_fsreconall.html'>brainprep.workflow.fsreconall.brainprep_fsreconall</a></li>
+        <li><a href='brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal.html'>brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal</a></li>
+        <li><a href='brainprep.workflow.fsreconall.brainprep_fsreconall_qc.html'>brainprep.workflow.fsreconall.brainprep_fsreconall_qc</a></li>
+        <li><a href='brainprep.workflow.fsreconall.brainprep_fsreconall_summary.html'>brainprep.workflow.fsreconall.brainprep_fsreconall_summary</a></li>
+        <li><a href='brainprep.workflow.mriqc.brainprep_mriqc.html'>brainprep.workflow.mriqc.brainprep_mriqc</a></li>
+        <li><a href='brainprep.workflow.mriqc.brainprep_mriqc_summary.html'>brainprep.workflow.mriqc.brainprep_mriqc_summary</a></li>
+        <li><a href='brainprep.workflow.mriqc.compute_score.html'>brainprep.workflow.mriqc.compute_score</a></li>
+        <li><a href='brainprep.workflow.mriqc.detect_outliers.html'>brainprep.workflow.mriqc.detect_outliers</a></li>
+        <li><a href='brainprep.workflow.mriqc.filter_iqms.html'>brainprep.workflow.mriqc.filter_iqms</a></li>
+        <li><a href='brainprep.workflow.mriqc.load_iqms.html'>brainprep.workflow.mriqc.load_iqms</a></li>
+        <li><a href='brainprep.workflow.mriqc.merge_dfs.html'>brainprep.workflow.mriqc.merge_dfs</a></li>
+        <li><a href='brainprep.workflow.mriqc.plot_iqms.html'>brainprep.workflow.mriqc.plot_iqms</a></li>
+        <li><a href='brainprep.workflow.mriqc.query_api.html'>brainprep.workflow.mriqc.query_api</a></li>
+        <li><a href='brainprep.workflow.prequal.brainprep_prequal.html'>brainprep.workflow.prequal.brainprep_prequal</a></li>
+        <li><a href='brainprep.workflow.prequal.brainprep_prequal_qc.html'>brainprep.workflow.prequal.brainprep_prequal_qc</a></li>
+        <li><a href='brainprep.workflow.quasiraw.brainprep_quasiraw.html'>brainprep.workflow.quasiraw.brainprep_quasiraw</a></li>
+        <li><a href='brainprep.workflow.quasiraw.brainprep_quasiraw_qc.html'>brainprep.workflow.quasiraw.brainprep_quasiraw_qc</a></li>
+        <li><a href='brainprep.workflow.tbss.brainprep_tbss.html'>brainprep.workflow.tbss.brainprep_tbss</a></li>
+        <li><a href='brainprep.workflow.tbss.brainprep_tbss_preproc.html'>brainprep.workflow.tbss.brainprep_tbss_preproc</a></li>
+        <li><a href='brainprep.utils.write_matlabbatch.html'>brainprep.write_matlabbatch</a></li>
+    </ul>

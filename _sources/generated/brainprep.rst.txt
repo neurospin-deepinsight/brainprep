@@ -1,0 +1,178 @@
+.. AUTO-GENERATED FILE -- DO NOT EDIT!
+
+:orphan:
+
+API documentation of *brainprep*
+=================================
+
+brainprep
+^^^^^^^^^
+
+Package that provides tools for brain MRI Deep Leanring PreProcessing.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.apply_affine <brainprep.spatial.apply_affine.html>`_
+    * `brainprep.apply_mask <brainprep.spatial.apply_mask.html>`_
+    * `brainprep.bet2 <brainprep.spatial.bet2.html>`_
+    * `brainprep.biasfield <brainprep.spatial.biasfield.html>`_
+    * `brainprep.check_command <brainprep.utils.check_command.html>`_
+    * `brainprep.check_version <brainprep.utils.check_version.html>`_
+    * `brainprep.deface <brainprep.deface.deface.html>`_
+    * `brainprep.dtifit <brainprep.tbss.dtifit.html>`_
+    * `brainprep.execute_command <brainprep.utils.execute_command.html>`_
+    * `brainprep.func_connectivity <brainprep.connectivity.func_connectivity.html>`_
+    * `brainprep.interhemi_projection <brainprep.cortical.interhemi_projection.html>`_
+    * `brainprep.interhemi_surfreg <brainprep.cortical.interhemi_surfreg.html>`_
+    * `brainprep.localgi <brainprep.cortical.localgi.html>`_
+    * `brainprep.mri_conversion <brainprep.cortical.mri_conversion.html>`_
+    * `brainprep.recon_all <brainprep.cortical.recon_all.html>`_
+    * `brainprep.recon_all_custom_wm_mask <brainprep.cortical.recon_all_custom_wm_mask.html>`_
+    * `brainprep.recon_all_longitudinal <brainprep.cortical.recon_all_longitudinal.html>`_
+    * `brainprep.register_affine <brainprep.spatial.register_affine.html>`_
+    * `brainprep.reorient2std <brainprep.spatial.reorient2std.html>`_
+    * `brainprep.scale <brainprep.spatial.scale.html>`_
+    * `brainprep.stats2table <brainprep.cortical.stats2table.html>`_
+    * `brainprep.tbss_1_preproc <brainprep.tbss.tbss_1_preproc.html>`_
+    * `brainprep.tbss_2_reg <brainprep.tbss.tbss_2_reg.html>`_
+    * `brainprep.tbss_3_postreg <brainprep.tbss.tbss_3_postreg.html>`_
+    * `brainprep.tbss_4_prestats <brainprep.tbss.tbss_4_prestats.html>`_
+    * `brainprep.write_matlabbatch <brainprep.utils.write_matlabbatch.html>`_
+
+brainprep.tbss
+^^^^^^^^^^^^^^
+
+FSL TBSS tools.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.tbss.dtifit <brainprep.tbss.dtifit.html>`_
+    * `brainprep.tbss.tbss_1_preproc <brainprep.tbss.tbss_1_preproc.html>`_
+    * `brainprep.tbss.tbss_2_reg <brainprep.tbss.tbss_2_reg.html>`_
+    * `brainprep.tbss.tbss_3_postreg <brainprep.tbss.tbss_3_postreg.html>`_
+    * `brainprep.tbss.tbss_4_prestats <brainprep.tbss.tbss_4_prestats.html>`_
+
+brainprep.utils
+^^^^^^^^^^^^^^^
+
+Module that contains some utility functions.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.utils.check_command <brainprep.utils.check_command.html>`_
+    * `brainprep.utils.check_version <brainprep.utils.check_version.html>`_
+    * `brainprep.utils.create_clickable <brainprep.utils.create_clickable.html>`_
+    * `brainprep.utils.execute_command <brainprep.utils.execute_command.html>`_
+    * `brainprep.utils.get_bids_keys <brainprep.utils.get_bids_keys.html>`_
+    * `brainprep.utils.listify <brainprep.utils.listify.html>`_
+    * `brainprep.utils.load_images <brainprep.utils.load_images.html>`_
+    * `brainprep.utils.ungzip_file <brainprep.utils.ungzip_file.html>`_
+    * `brainprep.utils.write_matlabbatch <brainprep.utils.write_matlabbatch.html>`_
+
+brainprep.connectivity
+^^^^^^^^^^^^^^^^^^^^^^
+
+Import pre-processed images and confounds from fMRIPrep and generate
+connectivity matrices based on standard parcellations and metrics.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.connectivity.func_connectivity <brainprep.connectivity.func_connectivity.html>`_
+
+brainprep.deface
+^^^^^^^^^^^^^^^^
+
+Common defacing functions.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.deface.deface <brainprep.deface.deface.html>`_
+
+brainprep.spatial
+^^^^^^^^^^^^^^^^^
+
+Common functions to spatialy normalize the data.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.spatial.apply_affine <brainprep.spatial.apply_affine.html>`_
+    * `brainprep.spatial.apply_mask <brainprep.spatial.apply_mask.html>`_
+    * `brainprep.spatial.bet2 <brainprep.spatial.bet2.html>`_
+    * `brainprep.spatial.biasfield <brainprep.spatial.biasfield.html>`_
+    * `brainprep.spatial.register_affine <brainprep.spatial.register_affine.html>`_
+    * `brainprep.spatial.reorient2std <brainprep.spatial.reorient2std.html>`_
+    * `brainprep.spatial.scale <brainprep.spatial.scale.html>`_
+
+brainprep.cortical
+^^^^^^^^^^^^^^^^^^
+
+Common cortical functions.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.cortical.interhemi_projection <brainprep.cortical.interhemi_projection.html>`_
+    * `brainprep.cortical.interhemi_surfreg <brainprep.cortical.interhemi_surfreg.html>`_
+    * `brainprep.cortical.localgi <brainprep.cortical.localgi.html>`_
+    * `brainprep.cortical.mri_conversion <brainprep.cortical.mri_conversion.html>`_
+    * `brainprep.cortical.recon_all <brainprep.cortical.recon_all.html>`_
+    * `brainprep.cortical.recon_all_custom_wm_mask <brainprep.cortical.recon_all_custom_wm_mask.html>`_
+    * `brainprep.cortical.recon_all_longitudinal <brainprep.cortical.recon_all_longitudinal.html>`_
+    * `brainprep.cortical.stats2table <brainprep.cortical.stats2table.html>`_
+
+brainprep.plotting
+^^^^^^^^^^^^^^^^^^
+
+Usefull plotting functions.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.plotting.get_fsreconall_masks <brainprep.plotting.get_fsreconall_masks.html>`_
+    * `brainprep.plotting.plot_fsreconall <brainprep.plotting.plot_fsreconall.html>`_
+    * `brainprep.plotting.plot_hists <brainprep.plotting.plot_hists.html>`_
+    * `brainprep.plotting.plot_images <brainprep.plotting.plot_images.html>`_
+
+brainprep.color_utils
+^^^^^^^^^^^^^^^^^^^^^
+
+Utility methods to print the results in a terminal using term colors.
+
+.. rst-class:: documentation-contents
+
+  **Classes**:
+    * `brainprep.color_utils.colored <brainprep.color_utils.colored.html>`_
+
+  **Functions**:
+    * `brainprep.color_utils.HEX <brainprep.color_utils.HEX.html>`_
+    * `brainprep.color_utils.attr <brainprep.color_utils.attr.html>`_
+    * `brainprep.color_utils.fg <brainprep.color_utils.fg.html>`_
+    * `brainprep.color_utils.print_command <brainprep.color_utils.print_command.html>`_
+    * `brainprep.color_utils.print_error <brainprep.color_utils.print_error.html>`_
+    * `brainprep.color_utils.print_result <brainprep.color_utils.print_result.html>`_
+    * `brainprep.color_utils.print_subtitle <brainprep.color_utils.print_subtitle.html>`_
+    * `brainprep.color_utils.print_title <brainprep.color_utils.print_title.html>`_
+    * `brainprep.color_utils.stylize <brainprep.color_utils.stylize.html>`_
+
+brainprep.qc
+^^^^^^^^^^^^
+
+Usefull automatic quality control (QC) functions.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.qc.check_files <brainprep.qc.check_files.html>`_
+    * `brainprep.qc.compute_mean_correlation <brainprep.qc.compute_mean_correlation.html>`_
+    * `brainprep.qc.parse_cat12vbm_qc <brainprep.qc.parse_cat12vbm_qc.html>`_
+    * `brainprep.qc.parse_cat12vbm_report <brainprep.qc.parse_cat12vbm_report.html>`_
+    * `brainprep.qc.parse_cat12vbm_roi <brainprep.qc.parse_cat12vbm_roi.html>`_
+    * `brainprep.qc.parse_fsreconall_stats <brainprep.qc.parse_fsreconall_stats.html>`_
+    * `brainprep.qc.plot_pca <brainprep.qc.plot_pca.html>`_
+

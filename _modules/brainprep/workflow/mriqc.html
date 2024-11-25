@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+		<!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>brainprep</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="../../../_static/css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="../../../_static/css/animate.css">
+        <link rel="stylesheet" href="../../../_static/css/style.css">
+        <link rel="stylesheet" href="../../../_static/css/jquery.mosaic.css">
+        <link rel="stylesheet" href="../../../_static/gallery.css">
+        <link rel="stylesheet" href="../../../_static/css/media-queries.css">
+        <link rel="stylesheet" href="../../../_static/css/pygment.css">
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="../../../_static/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../_static/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../_static/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../_static/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../../../_static/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+
+		<!-- Wrapper -->
+    	<div class="wrapper">
+
+			<!-- Sidebar -->
+			<nav class="sidebar">
+				
+				<!-- close sidebar menu -->
+				<div class="dismiss">
+					<i class="fas fa-arrow-left"></i>
+				</div>
+				
+				<div class="logo"">
+					<h3><a href="../../../index.html">Sidebar Menu</a></h3>
+				</div>
+
+                <!-- info setup -->
+                    <p class="doc-version">
+                        This documentation is for brainprep <strong>version 0.0.1</strong>
+                    </p>
+                <p class="citing">
+                    If you use the software, please do not hesitate to 
+                    <a &mdash; <a href="https://github.com/neurospin-deepinsight/brainprep">
+                    Report a Bug</a>.
+                </p>
+				
+                <!-- links -->
+                
+                
+				<ul class="list-unstyled menu-elements">
+					<li class="active">
+						<a href="../../../index.html"><i class="fas fa-home"></i> Home</a>
+					</li>
+					<li>
+						<a href="../../../generated/installation.html"><i class="fas fa-cog"></i> Installation</a>
+					</li>
+					<li>
+						<a href="../../../auto_gallery/index.html"><i class="fas fa-eye"></i> Gallery</a>
+					</li>
+					<li>
+						<a href="../../../generated/documentation.html"><i class="fas fa-pencil-alt"></i> API documentation</a>
+					</li>
+					<li>
+						<a href="../../../generated/search.html"><i class="fas fa-search"></i> Search</a>
+					</li>
+					<li>
+						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
+					</li>
+					<li>
+						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+							<i class="fas fa-sync"></i>Sections Shortcuts
+						</a>
+						<ul class="collapse list-unstyled" id="otherSections">
+                            <li>LINKS</li><li><a href='https://github.com/neurospin-deepinsight/deepinsight'>deepinsight</a></li>
+                            
+                            <li>API</li>
+                            <li><a href="../../../generated/brainprep.html">brainprep</a></li><li><a href="../../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
+						</ul>
+					</li>
+				</ul>
+				
+                <!-- go top page -->
+				<div class="to-top">
+					<a class="btn btn-primary btn-customized-3" href="#" role="button">
+	                    <i class="fas fa-arrow-up"></i> Top
+	                </a>
+				</div>
+			
+                <!-- change color -->
+				<div class="dark-light-buttons">
+					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+				</div>
+			
+			</nav>
+			<!-- End sidebar -->
+			
+			<!-- Dark overlay -->
+    		<div class="overlay"></div>
+
+			<!-- Content -->
+			<div class="content">
+			
+				<!-- open sidebar menu -->
+				<a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+                    <i class="fas fa-align-left"></i> <span>Menu</span>
+                </a>
+
+		        <!-- Top content -->
+		        <div class="top-content section-container" id="top-content">
+			        <div class="container">
+			            <div class="row">
+                            <div class="col-md-3 section-5-box banner-logo">
+                                <img alt="Logo" src="../../../_static/brainprep.png">
+                            </div>
+			                <div class="col-md-7 section-5-box">
+			                	<h1 class="wow fadeIn">    <p>Package that provides tools for brain MRI Deep Learning pre-processing.</p></h1>
+			                </div>
+			            </div>
+			        </div>
+		        </div>
+                    
+                    <div class="document">
+                        <h1>Source code for brainprep.workflow.mriqc</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">##########################################################################</span>
+<span class="c1"># NSAp - Copyright (C) CEA, 2021 - 2022</span>
+<span class="c1"># Distributed under the terms of the CeCILL-B license, as published by</span>
+<span class="c1"># the CEA-CNRS-INRIA. Refer to the LICENSE file or to</span>
+<span class="c1"># http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html</span>
+<span class="c1"># for details.</span>
+<span class="c1">##########################################################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Interface for mriqc.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># System import</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">brainprep</span>
+<span class="kn">from</span> <span class="nn">brainprep.color_utils</span> <span class="kn">import</span> <span class="n">print_title</span>
+
+
+<div class="viewcode-block" id="brainprep_mriqc"><a class="viewcode-back" href="../../../generated/brainprep.workflow.mriqc.brainprep_mriqc.html#brainprep.workflow.brainprep_mriqc">[docs]</a><span class="k">def</span> <span class="nf">brainprep_mriqc</span><span class="p">(</span><span class="n">rawdir</span><span class="p">,</span> <span class="n">subjid</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;/out&quot;</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="s2">&quot;/work&quot;</span><span class="p">,</span>
+                    <span class="n">mriqc</span><span class="o">=</span><span class="s2">&quot;mriqc&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Define the mriqc pre-processing workflow.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rawdir: str</span>
+<span class="sd">        the BIDS raw folder.</span>
+<span class="sd">    subjid: str</span>
+<span class="sd">        the subject identifier.</span>
+<span class="sd">    outdir: str</span>
+<span class="sd">        the destination folder.</span>
+<span class="sd">    workdir: str</span>
+<span class="sd">        the working folder.</span>
+<span class="sd">    mriqc: str</span>
+<span class="sd">        path to the mriqc binary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">print_title</span><span class="p">(</span><span class="s2">&quot;Launch mriqc...&quot;</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">subjid</span><span class="p">,</span> <span class="s2">&quot;ok&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">status</span><span class="p">):</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">mriqc</span><span class="p">,</span>
+            <span class="n">rawdir</span><span class="p">,</span>
+            <span class="n">outdir</span><span class="p">,</span>
+            <span class="s2">&quot;participant&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;-w&quot;</span><span class="p">,</span> <span class="n">workdir</span><span class="p">,</span>
+            <span class="s2">&quot;--no-sub&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;--participant-label&quot;</span><span class="p">,</span> <span class="n">subjid</span><span class="p">]</span>
+        <span class="n">brainprep</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="nb">open</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="brainprep_mriqc_summary"><a class="viewcode-back" href="../../../generated/brainprep.workflow.mriqc.brainprep_mriqc_summary.html#brainprep.workflow.brainprep_mriqc_summary">[docs]</a><span class="k">def</span> <span class="nf">brainprep_mriqc_summary</span><span class="p">(</span><span class="n">indir</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Provide context for the image quality metrics (IQMs) shown in the</span>
+<span class="sd">    MRIQC reports.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    indir: str</span>
+<span class="sd">        the derivatives folder with the mriqc results.</span>
+<span class="sd">    outdir: str</span>
+<span class="sd">        the destination folder with the IQMs summary.</span>
+<span class="sd">    filters: list, default None</span>
+<span class="sd">        list of filters as strings: by default filter on the scanner field.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">print_title</span><span class="p">(</span><span class="s2">&quot;Launch mriqc summary...&quot;</span><span class="p">)</span>
+    <span class="n">resource_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;resources&quot;</span><span class="p">)</span>
+    <span class="n">api_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;t1w&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_dir</span><span class="p">,</span> <span class="s2">&quot;iqm_T1w.csv&quot;</span><span class="p">)),</span>
+        <span class="s2">&quot;t2w&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_dir</span><span class="p">,</span> <span class="s2">&quot;iqm_T2w.csv&quot;</span><span class="p">)),</span>
+        <span class="s2">&quot;bold&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_dir</span><span class="p">,</span> <span class="s2">&quot;iqm_bold.csv&quot;</span><span class="p">))}</span>
+    <span class="n">selected_iqms</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">resource_dir</span><span class="p">,</span> <span class="s2">&quot;iqm_select.tsv&quot;</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">dtype_iqms</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;ALIAS&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;MAXIMIZE&quot;</span><span class="p">])</span>
+                      <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">selected_iqms</span><span class="o">.</span><span class="n">iterrows</span><span class="p">())</span>
+    <span class="n">anat_iqms</span> <span class="o">=</span> <span class="n">selected_iqms</span><span class="p">[</span><span class="n">selected_iqms</span><span class="p">[</span><span class="s2">&quot;APPLIES_TO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">&quot;structural&quot;</span><span class="p">,</span> <span class="s2">&quot;structural, functional&quot;</span><span class="p">])][</span><span class="s2">&quot;ALIAS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">func_iqms</span> <span class="o">=</span> <span class="n">selected_iqms</span><span class="p">[</span><span class="n">selected_iqms</span><span class="p">[</span><span class="s2">&quot;APPLIES_TO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">&quot;functional&quot;</span><span class="p">,</span> <span class="s2">&quot;strucural, functional&quot;</span><span class="p">])][</span><span class="s2">&quot;ALIAS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">user_files</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;t1w&quot;</span><span class="p">:</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">indir</span><span class="p">,</span> <span class="s2">&quot;sub-*&quot;</span><span class="p">,</span> <span class="s2">&quot;ses-*&quot;</span><span class="p">,</span> <span class="s2">&quot;anat&quot;</span><span class="p">,</span> <span class="s2">&quot;sub-*T1w.json&quot;</span><span class="p">)),</span>
+        <span class="s2">&quot;t2w&quot;</span><span class="p">:</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">indir</span><span class="p">,</span> <span class="s2">&quot;sub-*&quot;</span><span class="p">,</span> <span class="s2">&quot;ses-*&quot;</span><span class="p">,</span> <span class="s2">&quot;anat&quot;</span><span class="p">,</span> <span class="s2">&quot;sub-*T2w.json&quot;</span><span class="p">)),</span>
+        <span class="s2">&quot;bold&quot;</span><span class="p">:</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">indir</span><span class="p">,</span> <span class="s2">&quot;sub-*&quot;</span><span class="p">,</span> <span class="s2">&quot;ses-*&quot;</span><span class="p">,</span> <span class="s2">&quot;func&quot;</span><span class="p">,</span> <span class="s2">&quot;sub-*bold.json&quot;</span><span class="p">))}</span>
+    <span class="n">user_data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">load_iqms</span><span class="p">(</span><span class="n">val</span><span class="p">))</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">user_files</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">filters</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">user_data</span><span class="p">[</span><span class="s2">&quot;t1w&quot;</span><span class="p">][</span><span class="s2">&quot;bids_meta.MagneticFieldStrength&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">filters</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">fields</span><span class="p">):</span>
+            <span class="n">filters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;FIELD == </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+    <span class="n">api_data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">filter_iqms</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">filters</span><span class="p">))</span>
+                    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">api_data</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">merge_dfs</span><span class="p">(</span><span class="n">user_data</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">api_data</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">user_data</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;t1w&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;t1w&quot;</span><span class="p">][[</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">anat_iqms</span><span class="p">],</span>
+        <span class="s2">&quot;t2w&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;t2w&quot;</span><span class="p">][[</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">anat_iqms</span><span class="p">],</span>
+        <span class="s2">&quot;bold&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">][[</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">func_iqms</span><span class="p">]}</span>
+    <span class="k">for</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">plot_iqms</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">rm_outliers</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">qc</span> <span class="o">=</span> <span class="n">detect_outliers</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">compute_score</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dtype_iqms</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">score</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;qc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;user&quot;</span><span class="p">]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">])</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_qc.tsv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dtype</span><span class="p">)),</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>
+                  <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="compute_score"><a class="viewcode-back" href="../../../generated/brainprep.workflow.mriqc.compute_score.html#brainprep.workflow.compute_score">[docs]</a><span class="k">def</span> <span class="nf">compute_score</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype_iqms</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Compute an agregation score.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data: DataFrame</span>
+<span class="sd">        the table with the raw scores.</span>
+<span class="sd">    dtype_iqms: dict</span>
+<span class="sd">        specify which IQM needs to be maximized/minimized.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    score: array</span>
+<span class="sd">        the generated summary score.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;dummy_trs&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="s2">&quot;dummy_trs&quot;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">])</span>
+    <span class="n">_columns</span> <span class="o">=</span> <span class="n">_data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">_data</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">_data</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_columns</span><span class="p">:</span>
+        <span class="n">to_maximize</span> <span class="o">=</span> <span class="n">dtype_iqms</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">_columns</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">to_maximize</span><span class="p">:</span>
+            <span class="n">score</span> <span class="o">+=</span> <span class="n">_data</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">score</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">_data</span><span class="p">[:,</span> <span class="n">index</span><span class="p">])</span>
+    <span class="n">score</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">_columns</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">score</span></div>
+
+
+<div class="viewcode-block" id="detect_outliers"><a class="viewcode-back" href="../../../generated/brainprep.workflow.mriqc.detect_outliers.html#brainprep.workflow.detect_outliers">[docs]</a><span class="k">def</span> <span class="nf">detect_outliers</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">percentiles</span><span class="o">=</span><span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mi">5</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Detect outliers.</span>
+<span class="sd">    Lower outlier threshold is calculated as 5% quartile(data) -</span>
+<span class="sd">    1.5*IQR(data); upper outlier threshold calculated as 95% quartile(data) +</span>
+<span class="sd">    1.5*IQR(data).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data: DataFrame</span>
+<span class="sd">        the table with the data to QC.</span>
+<span class="sd">    percentiles: 2-uplet, default [95, 5]</span>
+<span class="sd">        sequence of percentiles to compute.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    qc: array</span>
+<span class="sd">        the QC result as a binary vector.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="s2">&quot;dummy_trs&quot;</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="n">api_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;api&quot;</span><span class="p">]</span>
+        <span class="n">q2</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">api_data</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">percentiles</span><span class="p">)</span>
+        <span class="n">iqr</span> <span class="o">=</span> <span class="n">q2</span> <span class="o">-</span> <span class="n">q1</span>
+        <span class="n">min_out</span> <span class="o">=</span> <span class="n">q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span>
+        <span class="n">max_out</span> <span class="o">=</span> <span class="n">q2</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">&lt;=</span> <span class="n">max_out</span><span class="p">),</span>
+                                 <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">&gt;=</span> <span class="n">min_out</span><span class="p">)))</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">qc</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qc</span></div>
+
+
+<div class="viewcode-block" id="load_iqms"><a class="viewcode-back" href="../../../generated/brainprep.workflow.mriqc.load_iqms.html#brainprep.workflow.load_iqms">[docs]</a><span class="k">def</span> <span class="nf">load_iqms</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Load/merge individual IQM file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    files: list</span>
+<span class="sd">        the input mriqc IQM files.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    mergedf: DataFrame</span>
+<span class="sd">        the merged IQM data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">of</span><span class="p">:</span>
+            <span class="n">_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">of</span><span class="p">)</span>
+        <span class="n">_data</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="filter_iqms"><a class="viewcode-back" href="../../../generated/brainprep.workflow.mriqc.filter_iqms.html#brainprep.workflow.filter_iqms">[docs]</a><span class="k">def</span> <span class="nf">filter_iqms</span><span class="p">(</span><span class="n">apidf</span><span class="p">,</span> <span class="n">filters</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Filters the API table based on user-provided parameters. Filter</span>
+<span class="sd">    parameters should be a list of strings and string formats should</span>
+<span class="sd">    be &quot;(VAR) (Operator) (Value)&quot;.</span>
+
+<span class="sd">    Example: [&#39;TR == 3.0&#39;] or [&#39;TR &gt; 1.0&#39;,&#39;FD &lt; .3&#39;]</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Each filter element is SPACE separated!</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    apidf: DataFrame</span>
+<span class="sd">        API table.</span>
+<span class="sd">    filters: list</span>
+<span class="sd">        list of filters as strings.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    filterdf: DataFrame</span>
+<span class="sd">        table  containing data pulled from the mriqc API, but filtered to</span>
+<span class="sd">        contain only your match specifications.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">apidf</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">cols</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">))</span>
+    <span class="n">apidf</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">cols</span>
+    <span class="n">expected_filters</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;SNR&quot;</span><span class="p">:</span> <span class="s2">&quot;snr&quot;</span><span class="p">,</span> <span class="s2">&quot;TSNR&quot;</span><span class="p">:</span> <span class="s2">&quot;tsnr&quot;</span><span class="p">,</span> <span class="s2">&quot;SNR_WM&quot;</span><span class="p">:</span> <span class="s2">&quot;snr_wm&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SNR_CSF&quot;</span><span class="p">:</span> <span class="s2">&quot;snr_csf&quot;</span><span class="p">,</span> <span class="s2">&quot;CNR&quot;</span><span class="p">:</span> <span class="s2">&quot;cnr&quot;</span><span class="p">,</span> <span class="s2">&quot;EFC&quot;</span><span class="p">:</span> <span class="s2">&quot;efc&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;FIELD&quot;</span><span class="p">:</span> <span class="s2">&quot;bids_meta_MagneticFieldStrength&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;TE&quot;</span><span class="p">:</span> <span class="s2">&quot;bids_meta_EchoTime&quot;</span><span class="p">,</span> <span class="s2">&quot;TR&quot;</span><span class="p">:</span> <span class="s2">&quot;bids_meta_RepetitionTime&quot;</span><span class="p">}</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="n">filters</span><span class="p">:</span>
+        <span class="n">var</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">cond</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">expected_filters</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unrecognize filtering variable: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+        <span class="n">cond_str</span> <span class="o">=</span> <span class="n">expected_filters</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">+</span> <span class="n">op</span> <span class="o">+</span> <span class="n">val</span>
+        <span class="n">query</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cond_str</span><span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot; or &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">query</span><span class="p">)]</span>
+    <span class="n">filterdf</span> <span class="o">=</span> <span class="n">apidf</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot; &amp; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">query</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">filterdf</span></div>
+
+
+<div class="viewcode-block" id="merge_dfs"><a class="viewcode-back" href="../../../generated/brainprep.workflow.mriqc.merge_dfs.html#brainprep.workflow.merge_dfs">[docs]</a><span class="k">def</span> <span class="nf">merge_dfs</span><span class="p">(</span><span class="n">userdf</span><span class="p">,</span> <span class="n">apidf</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Merges the user dataframe and the filtered API dataframe</span>
+<span class="sd">    while adding a &#39;source&#39; column.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    userdf: DataFrame</span>
+<span class="sd">        user mriqc table.</span>
+<span class="sd">    apidf: DataFrame</span>
+<span class="sd">        filtered API table.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    mergedf: DataFrame</span>
+<span class="sd">        a merged pandas dataframe containing the user and</span>
+<span class="sd">        the filtered API tables. A &#39;source&#39; column  is added</span>
+<span class="sd">        with &#39;user&#39; or &#39;api&#39; entries for easy sorting/splitting.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">userdf</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;user&quot;</span>
+    <span class="n">apidf</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;api&quot;</span>
+    <span class="n">mergedf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">userdf</span><span class="p">,</span> <span class="n">apidf</span><span class="p">],</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mergedf</span></div>
+
+
+<div class="viewcode-block" id="plot_iqms"><a class="viewcode-back" href="../../../generated/brainprep.workflow.mriqc.plot_iqms.html#brainprep.workflow.plot_iqms">[docs]</a><span class="k">def</span> <span class="nf">plot_iqms</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">rm_outliers</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Make a violin plot of the api and user IQMs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data: DataFrame</span>
+<span class="sd">        a table including the api and uer data. Must have a column labeled</span>
+<span class="sd">        &#39;source&#39; with &#39;user&#39; or &#39;api&#39; defined.</span>
+<span class="sd">    dtype: str</span>
+<span class="sd">        the data type in the input table.</span>
+<span class="sd">    outdir: str</span>
+<span class="sd">        the destination folder.</span>
+<span class="sd">    rm_outliers: bool, default False</span>
+<span class="sd">        remove outliers from the API data.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A violin plot of each MRIQC metric, comparing the user-level data to</span>
+<span class="sd">    the API data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Filter outliers</span>
+    <span class="k">if</span> <span class="n">rm_outliers</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">var_name</span> <span class="o">=</span> <span class="s2">&quot;snr_total&quot;</span>
+        <span class="k">if</span> <span class="n">var_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">var_name</span> <span class="o">=</span> <span class="s2">&quot;snr&quot;</span>
+        <span class="n">user_index</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;user&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+        <span class="n">api_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;api&quot;</span><span class="p">]</span>
+        <span class="n">q75</span><span class="p">,</span> <span class="n">q25</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">api_data</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="p">[</span><span class="mi">75</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
+        <span class="n">iqr</span> <span class="o">=</span> <span class="n">q75</span> <span class="o">-</span> <span class="n">q25</span>
+        <span class="n">min_out</span> <span class="o">=</span> <span class="n">q25</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span>
+        <span class="n">max_out</span> <span class="o">=</span> <span class="n">q75</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span>
+        <span class="n">api_data</span> <span class="o">=</span> <span class="n">api_data</span><span class="p">[</span><span class="n">api_data</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">max_out</span><span class="p">]</span>
+        <span class="n">api_data</span> <span class="o">=</span> <span class="n">api_data</span><span class="p">[</span><span class="n">api_data</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">min_out</span><span class="p">]</span>
+        <span class="n">api_index</span> <span class="o">=</span> <span class="n">api_data</span><span class="o">.</span><span class="n">index</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">user_index</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">+</span> <span class="n">api_index</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="c1"># Change the table from short format to long format</span>
+    <span class="n">df_long</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">],</span> <span class="n">var_name</span><span class="o">=</span><span class="s2">&quot;var&quot;</span><span class="p">,</span>
+                      <span class="n">value_name</span><span class="o">=</span><span class="s2">&quot;val&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Make colors dictionary for family:</span>
+    <span class="c1"># temporal: #D2691E</span>
+    <span class="c1"># spatial: #DAA520</span>
+    <span class="c1"># noise: #A52A2A</span>
+    <span class="c1"># motion: #66CDAA</span>
+    <span class="c1"># artifact: #6495ED</span>
+    <span class="c1"># descriptive: #00008B</span>
+    <span class="c1"># other: #9932CC</span>
+    <span class="n">plot_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;tsnr&quot;</span><span class="p">:</span> <span class="s2">&quot;#D2691E&quot;</span><span class="p">,</span> <span class="s2">&quot;gcor&quot;</span><span class="p">:</span> <span class="s2">&quot;#D2691E&quot;</span><span class="p">,</span> <span class="s2">&quot;dvars_vstd&quot;</span><span class="p">:</span> <span class="s2">&quot;#D2691E&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dvars_std&quot;</span><span class="p">:</span> <span class="s2">&quot;#D2691E&quot;</span><span class="p">,</span> <span class="s2">&quot;dvars_nstd&quot;</span><span class="p">:</span> <span class="s2">&quot;#D2691E&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fwhm_x&quot;</span><span class="p">:</span> <span class="s2">&quot;#DAA520&quot;</span><span class="p">,</span> <span class="s2">&quot;fwhm_y&quot;</span><span class="p">:</span> <span class="s2">&quot;#DAA520&quot;</span><span class="p">,</span> <span class="s2">&quot;fwhm_z&quot;</span><span class="p">:</span> <span class="s2">&quot;#DAA520&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fwhm_avg&quot;</span><span class="p">:</span> <span class="s2">&quot;#DAA520&quot;</span><span class="p">,</span> <span class="s2">&quot;fber&quot;</span><span class="p">:</span> <span class="s2">&quot;#DAA520&quot;</span><span class="p">,</span> <span class="s2">&quot;efc&quot;</span><span class="p">:</span> <span class="s2">&quot;#DAA520&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cjv&quot;</span><span class="p">:</span> <span class="s2">&quot;#A52A2A&quot;</span><span class="p">,</span> <span class="s2">&quot;cnr&quot;</span><span class="p">:</span> <span class="s2">&quot;#A52A2A&quot;</span><span class="p">,</span> <span class="s2">&quot;qi_2&quot;</span><span class="p">:</span> <span class="s2">&quot;#A52A2A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;snr&quot;</span><span class="p">:</span> <span class="s2">&quot;#A52A2A&quot;</span><span class="p">,</span> <span class="s2">&quot;snr_csf&quot;</span><span class="p">:</span> <span class="s2">&quot;#A52A2A&quot;</span><span class="p">,</span> <span class="s2">&quot;snr_gm&quot;</span><span class="p">:</span> <span class="s2">&quot;#A52A2A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;snr_wm&quot;</span><span class="p">:</span> <span class="s2">&quot;#A52A2A&quot;</span><span class="p">,</span> <span class="s2">&quot;snr_total&quot;</span><span class="p">:</span> <span class="s2">&quot;#A52A2A&quot;</span><span class="p">,</span> <span class="s2">&quot;snrd_csf&quot;</span><span class="p">:</span> <span class="s2">&quot;#A52A2A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;snrd_gm&quot;</span><span class="p">:</span> <span class="s2">&quot;#A52A2A&quot;</span><span class="p">,</span> <span class="s2">&quot;snrd_wm&quot;</span><span class="p">:</span> <span class="s2">&quot;#A52A2A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fd_mean&quot;</span><span class="p">:</span> <span class="s2">&quot;#66CDAA&quot;</span><span class="p">,</span> <span class="s2">&quot;fd_num&quot;</span><span class="p">:</span> <span class="s2">&quot;#66CDAA&quot;</span><span class="p">,</span> <span class="s2">&quot;fd_perc&quot;</span><span class="p">:</span> <span class="s2">&quot;#66CDAA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;inu_med&quot;</span><span class="p">:</span> <span class="s2">&quot;#6495ED&quot;</span><span class="p">,</span> <span class="s2">&quot;inu_range&quot;</span><span class="p">:</span> <span class="s2">&quot;#6495ED&quot;</span><span class="p">,</span> <span class="s2">&quot;wm2max&quot;</span><span class="p">:</span> <span class="s2">&quot;#6495ED&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;aor&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span> <span class="s2">&quot;aqi&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span> <span class="s2">&quot;dummy_trs&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gsr_x&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span> <span class="s2">&quot;gsr_y&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span> <span class="s2">&quot;qi_1&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rpve_csf&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span> <span class="s2">&quot;rpve_gm&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span> <span class="s2">&quot;rpve_wm&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tpm_overlap_csf&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span> <span class="s2">&quot;tpm_overlap_gm&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tpm_overlap_wm&quot;</span><span class="p">:</span> <span class="s2">&quot;#9932CC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;icvs_csf&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;icvs_gm&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;icvs_wm&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_bg_k&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_bg_mad&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_bg_mean&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_bg_median&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_bg_n&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_bg_p05&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_bg_p95&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_bg_stdv&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_csf_k&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_csf_mad&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_csf_mean&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_csf_median&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_csf_n&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_csf_p05&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_csf_p95&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_csf_stdv&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_fg_k&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_fg_mad&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_fg_mean&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_fg_median&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_fg_n&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_fg_p05&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_fg_p95&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_fg_stdv&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_gm_k&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_gm_mad&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_gm_mean&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_gm_median&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_gm_n&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_gm_p05&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_gm_p95&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_gm_stdv&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_wm_k&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_wm_mad&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_wm_mean&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_wm_median&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_wm_n&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_wm_p05&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summary_wm_p95&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span><span class="p">,</span> <span class="s2">&quot;summary_wm_stdv&quot;</span><span class="p">:</span> <span class="s2">&quot;#00008B&quot;</span>
+        <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">var_name</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">df_long</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;var&quot;</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;val&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">plot_dict</span><span class="p">[</span><span class="n">var_name</span><span class="p">],</span>
+                    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;hue&quot;</span><span class="p">,</span> <span class="n">hue_order</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;val&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.8&quot;</span><span class="p">,</span>
+                               <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;hue&quot;</span><span class="p">,</span> <span class="n">hue_order</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">legend_</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;val&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">jitter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                              <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">plot_dict</span><span class="p">[</span><span class="n">var_name</span><span class="p">])</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s2">&quot;right&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">var_name</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">.png&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">var_name</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="query_api"><a class="viewcode-back" href="../../../generated/brainprep.workflow.mriqc.query_api.html#brainprep.workflow.query_api">[docs]</a><span class="k">def</span> <span class="nf">query_api</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxpage</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Query the mriqc API using 3 element conditional statement.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dtype: str</span>
+<span class="sd">        the data type: &#39;bold&#39;,&#39;T1w&#39;,or &#39;T2w&#39;.</span>
+<span class="sd">    filters: list or str, default None</span>
+<span class="sd">        list of conditional phrases consisting of:</span>
+<span class="sd">        keyword to query + conditional argument + value. All</span>
+<span class="sd">        conditions checked against API as and phrases.</span>
+<span class="sd">    maxpage: int, default None</span>
+<span class="sd">        optionally define the maximum number of page to scroll.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    df: DataFrame</span>
+<span class="sd">        a table of all mriqc entries that satisfy the contitional</span>
+<span class="sd">        statement.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># API limits at a max results of 1k</span>
+    <span class="n">url_root</span> <span class="o">=</span> <span class="s2">&quot;https://mriqc.nimh.nih.gov/api/v1/&quot;</span> <span class="o">+</span> <span class="n">dtype</span>
+    <span class="k">if</span> <span class="n">filters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filters</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">filters_str</span> <span class="o">=</span> <span class="n">filters</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filters</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">filters_str</span> <span class="o">=</span> <span class="s2">&quot;&amp;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The filters can either be a list of strings or &quot;</span>
+                             <span class="s2">&quot;a string.&quot;</span><span class="p">)</span>
+    <span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">last_page</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span> <span class="s2">&quot;Accept-Charset&quot;</span><span class="p">:</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">}</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">page</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;On page </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">last_page</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">filters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">page_url</span> <span class="o">=</span> <span class="n">url_root</span> <span class="o">+</span> <span class="s2">&quot;?max_results=1000&amp;</span><span class="si">{}</span><span class="s2">&amp;page=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">filters_str</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">page_url</span> <span class="o">=</span> <span class="n">url_root</span> <span class="o">+</span> <span class="s2">&quot;?max_results=1000&amp;page=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">page_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">last_page</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">last_page</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;_links&quot;</span><span class="p">][</span><span class="s2">&quot;last&quot;</span><span class="p">][</span><span class="s2">&quot;href&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">last_page</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">last_page</span><span class="p">,</span> <span class="n">maxpage</span><span class="p">)</span>
+        <span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;_items&quot;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">page</span> <span class="o">&gt;=</span> <span class="n">last_page</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+    <span class="n">destdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="s2">&quot;resources&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;T1w&quot;</span><span class="p">,</span> <span class="s2">&quot;T2w&quot;</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">):</span>
+        <span class="n">print_title</span><span class="p">(</span><span class="s2">&quot;Fetching </span><span class="si">{}</span><span class="s2"> reference...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mod</span><span class="p">))</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">query_api</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">mod</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxpage</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">destdir</span><span class="p">,</span> <span class="s2">&quot;iqm_</span><span class="si">{}</span><span class="s2">.tsv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mod</span><span class="p">)),</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>
+                  <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+                    </div>
+                <div class="spacer"></div>
+		        
+		        <!-- Footer -->
+		        <div class="section-6-container section-container section-container-image-bg" id="section-6">
+			        <div class="container">
+			            <div class="row">
+		                    <div class="col-md-5 offset-md-1 section-6-box wow fadeInDown">
+                                <div class="section-6-title">
+		                    	    <p>Follow us</p>
+                                </div>
+		                    	<div class="section-6-social">
+			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
+									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
+									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
+									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
+                                    <p>&copy; 2024, 
+brainprep developers
+ <antoine.grigis@cea.fr></p>
+		                    	</div>
+		                    </div>
+			            </div>
+			        </div>
+                </div>
+	        
+	        </div>
+	        <!-- End content -->
+        
+        </div>
+        <!-- End wrapper -->
+
+        <!-- Javascript -->
+		<script src="../../../_static/js/jquery-3.3.1.min.js"></script>
+		<script src="../../../_static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="../../../_static/js/jquery.backstretch.min.js"></script>
+        <script src="../../../_static/js/wow.min.js"></script>
+        <script src="../../../_static/js/jquery.waypoints.min.js"></script>
+        <script src="../../../_static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="../../../_static/js/scripts.js"></script>
+        <script src="../../../_static/js/jquery.mosaic.js"></script>
+        <script src="../../../_static/js/search.js"></script>
+        <script type="text/javascript">
+	        $('.top-content').backstretch("../../../_static/img/backgrounds/banner1.png");
+            $('.section-6-container').backstretch("../../../_static/img/backgrounds/footer1.png");
+        </script>
+
+    </body>
+
+</html>

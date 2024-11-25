@@ -1,0 +1,15 @@
+..  brainprep documentation master file
+
+
+Package that provides tools for brain MRI Deep Learning pre-processing.
+
+
+
+.. toctree::
+    :maxdepth: 1
+    :hidden:
+
+    generated/installation
+    generated/documentation
+    generated/search
+
