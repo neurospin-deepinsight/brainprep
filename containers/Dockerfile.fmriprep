@@ -1,4 +1,4 @@
-FROM nipreps/fmriprep:21.0.1
+FROM nipreps/fmriprep:25.0.0
 
 # Install dependencies and prereqs
 RUN apt-get update \
