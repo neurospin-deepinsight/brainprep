@@ -56,8 +56,11 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
     if no_bids:
         basename = os.path.basename(imfile).split(".")[0] + "_desc-{0}_T1w"
     else:
-        basename = os.path.basename(imfile).split(".")[0].replace(
-            "_T1w", "_desc-{0}_T1w")
+        basename = os.path.basename(imfile).split(".")[0]
+        if not basename.endswith("_T1w"):
+            raise ValueError("The input file is not formatted in BIDS! "
+                             "Please use the --no-bids parameter.")
+        basename = basename.replace("_T1w", "_desc-{0}_T1w")
     basefile = os.path.join(outdir, basename + ".nii.gz")
     print("use base file name:", basefile)
     stdfile = basefile.format("1std")
