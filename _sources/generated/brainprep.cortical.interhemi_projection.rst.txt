@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.cortical.interhemi_projection
 
-.. minigallery:: brainprep.interhemi_projection brainprep.cortical.interhemi_projection
+.. minigallery:: brainprep.cortical.interhemi_projection brainprep.interhemi_projection
     :add-heading: Examples
     :heading-level: -
 

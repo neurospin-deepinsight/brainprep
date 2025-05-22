@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc
 
-.. minigallery:: brainprep.workflow.brainprep_cat12vbm_qc brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc
+.. minigallery:: brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc brainprep.workflow.brainprep_cat12vbm_qc
     :add-heading: Examples
     :heading-level: -
 

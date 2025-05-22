@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:05.867** total execution time for 5 files **from auto_gallery**:
+**00:07.535** total execution time for 5 files **from auto_gallery**:
 
 .. container::
 
@@ -33,17 +33,17 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_gallery_plot_mriqc.py` (``plot_mriqc.py``)
-     - 00:04.715
-     - 697.1
-   * - :ref:`sphx_glr_auto_gallery_plot_cat12vbm.py` (``plot_cat12vbm.py``)
-     - 00:00.301
-     - 67.6
-   * - :ref:`sphx_glr_auto_gallery_plot_fsreconall.py` (``plot_fsreconall.py``)
-     - 00:00.284
-     - 67.6
+     - 00:06.420
+     - 697.2
    * - :ref:`sphx_glr_auto_gallery_plot_fmriprep.py` (``plot_fmriprep.py``)
-     - 00:00.284
+     - 00:00.280
      - 67.6
    * - :ref:`sphx_glr_auto_gallery_plot_quasiraw.py` (``plot_quasiraw.py``)
-     - 00:00.282
+     - 00:00.279
+     - 67.6
+   * - :ref:`sphx_glr_auto_gallery_plot_cat12vbm.py` (``plot_cat12vbm.py``)
+     - 00:00.278
+     - 67.6
+   * - :ref:`sphx_glr_auto_gallery_plot_fsreconall.py` (``plot_fsreconall.py``)
+     - 00:00.278
      - 67.6

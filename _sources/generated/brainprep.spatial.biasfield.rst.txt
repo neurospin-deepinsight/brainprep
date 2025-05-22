@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.spatial.biasfield
 
-.. minigallery:: brainprep.spatial.biasfield brainprep.biasfield
+.. minigallery:: brainprep.biasfield brainprep.spatial.biasfield
     :add-heading: Examples
     :heading-level: -
 
