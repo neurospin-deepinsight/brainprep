@@ -31,9 +31,6 @@ dependencies = [
 ]
 dynamic = ["version"]
 
-#[project.scripts]
-#brainprep = "brainprep/scripts/brainprep"
-
 [project.urls]
 Source = "https://github.com/neurospin-deepinsight/brainprep"
 Tracker = "https://github.com/neurospin-deepinsight/brainprep/issues"
@@ -41,6 +38,9 @@ Tracker = "https://github.com/neurospin-deepinsight/brainprep/issues"
 [tool.setuptools]
 platforms = ["Linux", "OSX"]
 include-package-data = true
+script-files = [
+    "brainprep/scripts/brainprep",
+]
 
 [tool.setuptools.dynamic]
 version = {attr = "brainprep.info.__version__"}
