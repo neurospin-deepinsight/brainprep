@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.deface.deface
 
-.. minigallery:: brainprep.deface.deface brainprep.deface
+.. minigallery:: brainprep.deface brainprep.deface.deface
     :add-heading: Examples
     :heading-level: -
 

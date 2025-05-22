@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.tbss.tbss_2_reg
 
-.. minigallery:: brainprep.tbss_2_reg brainprep.tbss.tbss_2_reg
+.. minigallery:: brainprep.tbss.tbss_2_reg brainprep.tbss_2_reg
     :add-heading: Examples
     :heading-level: -
 

@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.tbss.dtifit
 
-.. minigallery:: brainprep.tbss.dtifit brainprep.dtifit
+.. minigallery:: brainprep.dtifit brainprep.tbss.dtifit
     :add-heading: Examples
     :heading-level: -
 

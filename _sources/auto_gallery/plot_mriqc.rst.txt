@@ -116,9 +116,9 @@ You can now execute this command.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 4.526 seconds)
+   **Total running time of the script:** (0 minutes 4.715 seconds)
 
-**Estimated memory usage:**  707 MB
+**Estimated memory usage:**  697 MB
 
 
 .. _sphx_glr_download_auto_gallery_plot_mriqc.py:

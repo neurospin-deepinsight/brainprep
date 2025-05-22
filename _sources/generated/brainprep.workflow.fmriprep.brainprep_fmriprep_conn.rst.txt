@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.workflow.fmriprep.brainprep_fmriprep_conn
 
-.. minigallery:: brainprep.workflow.brainprep_fmriprep_conn brainprep.workflow.fmriprep.brainprep_fmriprep_conn
+.. minigallery:: brainprep.workflow.fmriprep.brainprep_fmriprep_conn brainprep.workflow.brainprep_fmriprep_conn
     :add-heading: Examples
     :heading-level: -
 
