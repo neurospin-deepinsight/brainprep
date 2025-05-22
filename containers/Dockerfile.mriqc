@@ -1,4 +1,4 @@
-FROM poldracklab/mriqc:0.16.1
+FROM poldracklab/mriqc:24.0.1
 
 # Install dependencies and prereqs
 RUN apt-get update \
