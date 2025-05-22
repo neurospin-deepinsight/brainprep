@@ -31,6 +31,9 @@ dependencies = [
 ]
 dynamic = ["version"]
 
+[project.scripts]
+brainprep = "brainprep/scripts/brainprep"
+
 [project.urls]
 Source = "https://github.com/neurospin-deepinsight/brainprep"
 Tracker = "https://github.com/neurospin-deepinsight/brainprep/issues"
@@ -51,7 +54,8 @@ brainprep = [
     "tests/*.py",
     "resources/*.m",
     "resources/*.nii.gz",
-
+    "workflow/resources/*.csv",
+    "workflow/resources/*.tsv",
 ]
 
 [tool.ruff.lint]
