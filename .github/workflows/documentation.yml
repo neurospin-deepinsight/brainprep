@@ -9,14 +9,19 @@ on:
       - "*"
 
 jobs:
-  build:
+
+  build_and_deploy:
 
     runs-on: ${{ matrix.os }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
         python-version: [3.12]
+
+    permissions:
+      contents: write
 
     steps:
     - name: Checkout repository
@@ -31,13 +36,16 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install --progress-bar off .
-        python -m pip install -r doc/requirements.txt
+        python -m pip install git+https://github.com/AGrigis/pysphinxdoc.git
     - name: Compute documentation
       run: |
         mkdir -p tmp/doc
         sphinxdoc -v 2 -p . -n brainprep -o tmp/doc
         cd tmp/doc
         make raw-html
+        ls source/_static
+        ls build/html/_static
+        cp -r source/_static/* build/html/_static
         cd ../..
     - name: Upload documentation as an artifact
       uses: actions/upload-artifact@v4
@@ -51,3 +59,41 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: tmp/doc/build/html
+
+  build:
+
+    runs-on: ${{ matrix.os }}
+    if: ${{ github.ref != 'refs/heads/master' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.12]
+
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install --progress-bar off .
+        python -m pip install git+https://github.com/AGrigis/pysphinxdoc.git
+    - name: Compute documentation
+      run: |
+        mkdir -p tmp/doc
+        sphinxdoc -v 2 -p . -n brainprep -o tmp/doc
+        cd tmp/doc
+        make raw-html
+        ls source/_static
+        ls build/html/_static
+        cp -r source/_static/* build/html/_static
+        cd ../..
