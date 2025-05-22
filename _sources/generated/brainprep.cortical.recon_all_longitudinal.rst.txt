@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.cortical.recon_all_longitudinal
 
-.. minigallery:: brainprep.cortical.recon_all_longitudinal brainprep.recon_all_longitudinal
+.. minigallery:: brainprep.recon_all_longitudinal brainprep.cortical.recon_all_longitudinal
     :add-heading: Examples
     :heading-level: -
 

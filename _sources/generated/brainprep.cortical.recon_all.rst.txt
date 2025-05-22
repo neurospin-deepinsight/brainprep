@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.cortical.recon_all
 
-.. minigallery:: brainprep.recon_all brainprep.cortical.recon_all
+.. minigallery:: brainprep.cortical.recon_all brainprep.recon_all
     :add-heading: Examples
     :heading-level: -
 

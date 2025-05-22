@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.spatial.scale
 
-.. minigallery:: brainprep.scale brainprep.spatial.scale
+.. minigallery:: brainprep.spatial.scale brainprep.scale
     :add-heading: Examples
     :heading-level: -
 

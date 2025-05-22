@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.workflow.deface.brainprep_deface_qc
 
-.. minigallery:: brainprep.workflow.brainprep_deface_qc brainprep.workflow.deface.brainprep_deface_qc
+.. minigallery:: brainprep.workflow.deface.brainprep_deface_qc brainprep.workflow.brainprep_deface_qc
     :add-heading: Examples
     :heading-level: -
 

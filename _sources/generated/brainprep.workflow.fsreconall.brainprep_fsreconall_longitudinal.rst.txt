@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal
 
-.. minigallery:: brainprep.workflow.brainprep_fsreconall_longitudinal brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal
+.. minigallery:: brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal brainprep.workflow.brainprep_fsreconall_longitudinal
     :add-heading: Examples
     :heading-level: -
 

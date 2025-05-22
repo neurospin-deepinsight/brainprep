@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.workflow.tbss.brainprep_tbss
 
-.. minigallery:: brainprep.workflow.tbss.brainprep_tbss brainprep.workflow.brainprep_tbss
+.. minigallery:: brainprep.workflow.brainprep_tbss brainprep.workflow.tbss.brainprep_tbss
     :add-heading: Examples
     :heading-level: -
 

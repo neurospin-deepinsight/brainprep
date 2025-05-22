@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.utils.execute_command
 
-.. minigallery:: brainprep.utils.execute_command brainprep.execute_command
+.. minigallery:: brainprep.execute_command brainprep.utils.execute_command
     :add-heading: Examples
     :heading-level: -
 

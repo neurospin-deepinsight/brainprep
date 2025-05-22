@@ -105,7 +105,7 @@ You can now execute this command.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.299 seconds)
+   **Total running time of the script:** (0 minutes 0.311 seconds)
 
 **Estimated memory usage:**  68 MB
 
