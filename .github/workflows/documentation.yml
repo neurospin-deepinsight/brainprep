@@ -37,6 +37,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install --progress-bar off .
         python -m pip install git+https://github.com/AGrigis/pysphinxdoc.git
+        python -m pip install git+https://github.com/neurospin-deepinsight/brainrise.git
     - name: Compute documentation
       run: |
         mkdir -p tmp/doc
@@ -87,6 +88,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install --progress-bar off .
         python -m pip install git+https://github.com/AGrigis/pysphinxdoc.git
+        python -m pip install git+https://github.com/neurospin-deepinsight/brainrise.git
     - name: Compute documentation
       run: |
         mkdir -p tmp/doc
