@@ -34,7 +34,7 @@ jobs:
         python -m pip install --progress-bar off .
     - name: Run unit tests
       run: |
-        nosetests --with-coverage --cover-package=surfify --verbosity=2
+        nosetests --with-coverage --cover-package=brainprep --verbosity=2
     - name: Coveralls
       if: matrix.python-version == 3.9
       env:
