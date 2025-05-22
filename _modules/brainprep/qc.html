@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../../_static/css/animate.css">
         <link rel="stylesheet" href="../../_static/css/style.css">
         <link rel="stylesheet" href="../../_static/css/jquery.mosaic.css">
-        <link rel="stylesheet" href="../../_static/gallery.css">
+        <link rel="stylesheet" href="../../_static/sg_gallery.css">
         <link rel="stylesheet" href="../../_static/css/media-queries.css">
         <link rel="stylesheet" href="../../_static/css/pygment.css">
 
@@ -43,9 +43,9 @@
 					<i class="fas fa-arrow-left"></i>
 				</div>
 				
-				<div class="logo"">
+				<!-- <div class="logo"">
 					<h3><a href="../../index.html">Sidebar Menu</a></h3>
-				</div>
+				</div> -->
 
                 <!-- info setup -->
                     <p class="doc-version">
@@ -76,10 +76,10 @@
 					<li>
 						<a href="../../generated/search.html"><i class="fas fa-search"></i> Search</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
 							<i class="fas fa-sync"></i>Sections Shortcuts
 						</a>
@@ -89,21 +89,21 @@
                             <li>API</li>
                             <li><a href="../../generated/brainprep.html">brainprep</a></li><li><a href="../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 				
                 <!-- go top page -->
-				<div class="to-top">
+				<!-- <div class="to-top">
 					<a class="btn btn-primary btn-customized-3" href="#" role="button">
 	                    <i class="fas fa-arrow-up"></i> Top
 	                </a>
-				</div>
+				</div> -->
 			
                 <!-- change color -->
-				<div class="dark-light-buttons">
+				<!-- <div class="dark-light-buttons">
 					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
 					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-				</div>
+				</div> -->
 			
 			</nav>
 			<!-- End sidebar -->
@@ -134,7 +134,7 @@
 		        </div>
                     
                     <div class="document">
-                        <h1>Source code for brainprep.qc</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+                        <h1>Source code for brainprep.qc</h1><div class='divider-1 wow fadeInUp' style='margin-top: -20px;'><span></span></div><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1">##########################################################################</span>
 <span class="c1"># NSAp - Copyright (C) CEA, 2021 - 2022</span>
@@ -149,20 +149,22 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># Imports</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">traceback</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
-<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_bids_keys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_bids_keys</span>
 
 
-<div class="viewcode-block" id="check_files"><a class="viewcode-back" href="../../generated/brainprep.qc.check_files.html#brainprep.qc.check_files">[docs]</a><span class="k">def</span> <span class="nf">check_files</span><span class="p">(</span><span class="n">input_files</span><span class="p">):</span>
+<div class="viewcode-block" id="check_files">
+<a class="viewcode-back" href="../../generated/brainprep.qc.check_files.html#brainprep.qc.check_files">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_files</span><span class="p">(</span><span class="n">input_files</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Check if all data are ordered the same way and follows the BIDS</span>
 <span class="sd">    nomenclature.</span>
 
@@ -184,7 +186,10 @@
                 <span class="s2">&quot;Input list of files are not ordered the same way.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="plot_pca"><a class="viewcode-back" href="../../generated/brainprep.qc.plot_pca.html#brainprep.qc.plot_pca">[docs]</a><span class="k">def</span> <span class="nf">plot_pca</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">df_description</span><span class="p">,</span> <span class="n">outdir</span><span class="p">):</span>
+
+<div class="viewcode-block" id="plot_pca">
+<a class="viewcode-back" href="../../generated/brainprep.qc.plot_pca.html#brainprep.qc.plot_pca">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_pca</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">df_description</span><span class="p">,</span> <span class="n">outdir</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Save the two first PCA components.</span>
 
 <span class="sd">    Parameters</span>
@@ -227,7 +232,10 @@
     <span class="k">return</span> <span class="n">pca_path</span></div>
 
 
-<div class="viewcode-block" id="compute_mean_correlation"><a class="viewcode-back" href="../../generated/brainprep.qc.compute_mean_correlation.html#brainprep.qc.compute_mean_correlation">[docs]</a><span class="k">def</span> <span class="nf">compute_mean_correlation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">df_description</span><span class="p">,</span> <span class="n">outdir</span><span class="p">):</span>
+
+<div class="viewcode-block" id="compute_mean_correlation">
+<a class="viewcode-back" href="../../generated/brainprep.qc.compute_mean_correlation.html#brainprep.qc.compute_mean_correlation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_mean_correlation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">df_description</span><span class="p">,</span> <span class="n">outdir</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Compute mean correlation.</span>
 
 <span class="sd">    Parameters</span>
@@ -295,7 +303,10 @@
     <span class="k">return</span> <span class="n">df_corr</span><span class="p">,</span> <span class="n">corr_path</span></div>
 
 
-<div class="viewcode-block" id="parse_fsreconall_stats"><a class="viewcode-back" href="../../generated/brainprep.qc.parse_fsreconall_stats.html#brainprep.qc.parse_fsreconall_stats">[docs]</a><span class="k">def</span> <span class="nf">parse_fsreconall_stats</span><span class="p">(</span><span class="n">fs_dirs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="parse_fsreconall_stats">
+<a class="viewcode-back" href="../../generated/brainprep.qc.parse_fsreconall_stats.html#brainprep.qc.parse_fsreconall_stats">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_fsreconall_stats</span><span class="p">(</span><span class="n">fs_dirs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Parse the FreeSurfer reconall generated quality control files for all</span>
 <span class="sd">    subjects.</span>
 
@@ -335,7 +346,10 @@
     <span class="k">return</span> <span class="n">df_scores</span></div>
 
 
-<div class="viewcode-block" id="parse_cat12vbm_roi"><a class="viewcode-back" href="../../generated/brainprep.qc.parse_cat12vbm_roi.html#brainprep.qc.parse_cat12vbm_roi">[docs]</a><span class="k">def</span> <span class="nf">parse_cat12vbm_roi</span><span class="p">(</span>
+
+<div class="viewcode-block" id="parse_cat12vbm_roi">
+<a class="viewcode-back" href="../../generated/brainprep.qc.parse_cat12vbm_roi.html#brainprep.qc.parse_cat12vbm_roi">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_cat12vbm_roi</span><span class="p">(</span>
         <span class="n">xml_filenames</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span>
         <span class="n">iterparse</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;neuromorphometrics&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">,</span> <span class="s2">&quot;Vgm&quot;</span><span class="p">,</span> <span class="s2">&quot;Vcsf&quot;</span><span class="p">]}):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Parse the cat12vbm xml generated rois files for all</span>
@@ -458,7 +472,10 @@
     <span class="k">return</span> <span class="n">output_file</span></div>
 
 
-<div class="viewcode-block" id="parse_cat12vbm_qc"><a class="viewcode-back" href="../../generated/brainprep.qc.parse_cat12vbm_qc.html#brainprep.qc.parse_cat12vbm_qc">[docs]</a><span class="k">def</span> <span class="nf">parse_cat12vbm_qc</span><span class="p">(</span><span class="n">qc_files</span><span class="p">):</span>
+
+<div class="viewcode-block" id="parse_cat12vbm_qc">
+<a class="viewcode-back" href="../../generated/brainprep.qc.parse_cat12vbm_qc.html#brainprep.qc.parse_cat12vbm_qc">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_cat12vbm_qc</span><span class="p">(</span><span class="n">qc_files</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Parse the CAT12 VBM generated quality control files for all</span>
 <span class="sd">    subjects.</span>
 
@@ -500,7 +517,10 @@
     <span class="k">return</span> <span class="n">df_scores</span></div>
 
 
-<div class="viewcode-block" id="parse_cat12vbm_report"><a class="viewcode-back" href="../../generated/brainprep.qc.parse_cat12vbm_report.html#brainprep.qc.parse_cat12vbm_report">[docs]</a><span class="k">def</span> <span class="nf">parse_cat12vbm_report</span><span class="p">(</span><span class="n">img_files</span><span class="p">,</span> <span class="n">cat12vbm_root</span><span class="p">):</span>
+
+<div class="viewcode-block" id="parse_cat12vbm_report">
+<a class="viewcode-back" href="../../generated/brainprep.qc.parse_cat12vbm_report.html#brainprep.qc.parse_cat12vbm_report">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_cat12vbm_report</span><span class="p">(</span><span class="n">img_files</span><span class="p">,</span> <span class="n">cat12vbm_root</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Parse the CAT12 VBM report files for all subjects.</span>
 
 <span class="sd">    Parameters</span>
@@ -548,6 +568,7 @@
                 <span class="n">reports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_path</span><span class="p">)</span>
                 <span class="k">break</span>
     <span class="k">return</span> <span class="n">reports</span></div>
+
 </pre></div>
                     </div>
                 <div class="spacer"></div>
@@ -564,8 +585,8 @@
 			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
 									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
 									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
-									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
-                                    <p>&copy; 2024, 
+									<a href="https://gaia.neurospin.fr"><i class="fa fa-link"></i></a>
+                                    <p>&copy; 2025, 
 brainprep developers
  <antoine.grigis@cea.fr></p>
 		                    	</div>

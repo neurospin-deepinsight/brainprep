@@ -44,6 +44,19 @@ Interface for fmriprep.
     * `brainprep.workflow.fmriprep.brainprep_fmriprep <brainprep.workflow.fmriprep.brainprep_fmriprep.html>`_
     * `brainprep.workflow.fmriprep.brainprep_fmriprep_conn <brainprep.workflow.fmriprep.brainprep_fmriprep_conn.html>`_
 
+brainprep.workflow.fsreconall
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Interface for FreeSurfer recon-all.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.workflow.fsreconall.brainprep_fsreconall <brainprep.workflow.fsreconall.brainprep_fsreconall.html>`_
+    * `brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal <brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal.html>`_
+    * `brainprep.workflow.fsreconall.brainprep_fsreconall_qc <brainprep.workflow.fsreconall.brainprep_fsreconall_qc.html>`_
+    * `brainprep.workflow.fsreconall.brainprep_fsreconall_summary <brainprep.workflow.fsreconall.brainprep_fsreconall_summary.html>`_
+
 brainprep.workflow.tbss
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -54,51 +67,6 @@ Interface for FSL TBSS.
   **Functions**:
     * `brainprep.workflow.tbss.brainprep_tbss <brainprep.workflow.tbss.brainprep_tbss.html>`_
     * `brainprep.workflow.tbss.brainprep_tbss_preproc <brainprep.workflow.tbss.brainprep_tbss_preproc.html>`_
-
-brainprep.workflow.deface
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Interface for brain imaging defacing.
-
-.. rst-class:: documentation-contents
-
-  **Functions**:
-    * `brainprep.workflow.deface.brainprep_deface <brainprep.workflow.deface.brainprep_deface.html>`_
-    * `brainprep.workflow.deface.brainprep_deface_qc <brainprep.workflow.deface.brainprep_deface_qc.html>`_
-
-brainprep.workflow.prequal
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Interface for prequal.
-
-.. rst-class:: documentation-contents
-
-  **Functions**:
-    * `brainprep.workflow.prequal.brainprep_prequal <brainprep.workflow.prequal.brainprep_prequal.html>`_
-    * `brainprep.workflow.prequal.brainprep_prequal_qc <brainprep.workflow.prequal.brainprep_prequal_qc.html>`_
-
-brainprep.workflow.quasiraw
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Interface for quasi-raw.
-
-.. rst-class:: documentation-contents
-
-  **Functions**:
-    * `brainprep.workflow.quasiraw.brainprep_quasiraw <brainprep.workflow.quasiraw.brainprep_quasiraw.html>`_
-    * `brainprep.workflow.quasiraw.brainprep_quasiraw_qc <brainprep.workflow.quasiraw.brainprep_quasiraw_qc.html>`_
-
-brainprep.workflow.cat12vbm
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Interface for CAT12 VBM.
-
-.. rst-class:: documentation-contents
-
-  **Functions**:
-    * `brainprep.workflow.cat12vbm.brainprep_cat12vbm <brainprep.workflow.cat12vbm.brainprep_cat12vbm.html>`_
-    * `brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc <brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc.html>`_
-    * `brainprep.workflow.cat12vbm.brainprep_cat12vbm_roi <brainprep.workflow.cat12vbm.brainprep_cat12vbm_roi.html>`_
 
 brainprep.workflow.mriqc
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -118,16 +86,48 @@ Interface for mriqc.
     * `brainprep.workflow.mriqc.plot_iqms <brainprep.workflow.mriqc.plot_iqms.html>`_
     * `brainprep.workflow.mriqc.query_api <brainprep.workflow.mriqc.query_api.html>`_
 
-brainprep.workflow.fsreconall
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+brainprep.workflow.cat12vbm
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Interface for FreeSurfer recon-all.
+Interface for CAT12 VBM.
 
 .. rst-class:: documentation-contents
 
   **Functions**:
-    * `brainprep.workflow.fsreconall.brainprep_fsreconall <brainprep.workflow.fsreconall.brainprep_fsreconall.html>`_
-    * `brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal <brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal.html>`_
-    * `brainprep.workflow.fsreconall.brainprep_fsreconall_qc <brainprep.workflow.fsreconall.brainprep_fsreconall_qc.html>`_
-    * `brainprep.workflow.fsreconall.brainprep_fsreconall_summary <brainprep.workflow.fsreconall.brainprep_fsreconall_summary.html>`_
+    * `brainprep.workflow.cat12vbm.brainprep_cat12vbm <brainprep.workflow.cat12vbm.brainprep_cat12vbm.html>`_
+    * `brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc <brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc.html>`_
+    * `brainprep.workflow.cat12vbm.brainprep_cat12vbm_roi <brainprep.workflow.cat12vbm.brainprep_cat12vbm_roi.html>`_
+
+brainprep.workflow.deface
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Interface for brain imaging defacing.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.workflow.deface.brainprep_deface <brainprep.workflow.deface.brainprep_deface.html>`_
+    * `brainprep.workflow.deface.brainprep_deface_qc <brainprep.workflow.deface.brainprep_deface_qc.html>`_
+
+brainprep.workflow.quasiraw
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Interface for quasi-raw.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.workflow.quasiraw.brainprep_quasiraw <brainprep.workflow.quasiraw.brainprep_quasiraw.html>`_
+    * `brainprep.workflow.quasiraw.brainprep_quasiraw_qc <brainprep.workflow.quasiraw.brainprep_quasiraw_qc.html>`_
+
+brainprep.workflow.prequal
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Interface for prequal.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.workflow.prequal.brainprep_prequal <brainprep.workflow.prequal.brainprep_prequal.html>`_
+    * `brainprep.workflow.prequal.brainprep_prequal_qc <brainprep.workflow.prequal.brainprep_prequal_qc.html>`_
 

@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../../_static/css/animate.css">
         <link rel="stylesheet" href="../../_static/css/style.css">
         <link rel="stylesheet" href="../../_static/css/jquery.mosaic.css">
-        <link rel="stylesheet" href="../../_static/gallery.css">
+        <link rel="stylesheet" href="../../_static/sg_gallery.css">
         <link rel="stylesheet" href="../../_static/css/media-queries.css">
         <link rel="stylesheet" href="../../_static/css/pygment.css">
 
@@ -43,9 +43,9 @@
 					<i class="fas fa-arrow-left"></i>
 				</div>
 				
-				<div class="logo"">
+				<!-- <div class="logo"">
 					<h3><a href="../../index.html">Sidebar Menu</a></h3>
-				</div>
+				</div> -->
 
                 <!-- info setup -->
                     <p class="doc-version">
@@ -76,10 +76,10 @@
 					<li>
 						<a href="../../generated/search.html"><i class="fas fa-search"></i> Search</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
 							<i class="fas fa-sync"></i>Sections Shortcuts
 						</a>
@@ -89,21 +89,21 @@
                             <li>API</li>
                             <li><a href="../../generated/brainprep.html">brainprep</a></li><li><a href="../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 				
                 <!-- go top page -->
-				<div class="to-top">
+				<!-- <div class="to-top">
 					<a class="btn btn-primary btn-customized-3" href="#" role="button">
 	                    <i class="fas fa-arrow-up"></i> Top
 	                </a>
-				</div>
+				</div> -->
 			
                 <!-- change color -->
-				<div class="dark-light-buttons">
+				<!-- <div class="dark-light-buttons">
 					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
 					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-				</div>
+				</div> -->
 			
 			</nav>
 			<!-- End sidebar -->
@@ -134,7 +134,7 @@
 		        </div>
                     
                     <div class="document">
-                        <h1>Source code for brainprep.tbss</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+                        <h1>Source code for brainprep.tbss</h1><div class='divider-1 wow fadeInUp' style='margin-top: -20px;'><span></span></div><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1">##########################################################################</span>
 <span class="c1"># NSAp - Copyright (C) CEA, 2021</span>
@@ -150,10 +150,10 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># Imports</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">check_command</span><span class="p">,</span> <span class="n">execute_command</span>
-<span class="kn">from</span> <span class="nn">.color_utils</span> <span class="kn">import</span> <span class="n">print_subtitle</span><span class="p">,</span> <span class="n">print_result</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_command</span><span class="p">,</span> <span class="n">execute_command</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.color_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_subtitle</span><span class="p">,</span> <span class="n">print_result</span>
 
 
 <span class="c1"># Global parameters</span>
@@ -165,7 +165,9 @@
 <span class="p">}</span>
 
 
-<div class="viewcode-block" id="dtifit"><a class="viewcode-back" href="../../generated/brainprep.tbss.dtifit.html#brainprep.dtifit">[docs]</a><span class="k">def</span> <span class="nf">dtifit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bvecs</span><span class="p">,</span> <span class="n">bvals</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">outname</span><span class="p">,</span> <span class="n">wls</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="dtifit">
+<a class="viewcode-back" href="../../generated/brainprep.tbss.dtifit.html#brainprep.dtifit">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">dtifit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bvecs</span><span class="p">,</span> <span class="n">bvals</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">outname</span><span class="p">,</span> <span class="n">wls</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Fit a diffusion tensor model (DTI) at each voxel of the mask using</span>
 <span class="sd">    FSL **dtifit**.</span>
 
@@ -255,7 +257,10 @@
             <span class="n">v2_file</span><span class="p">,</span> <span class="n">v3_file</span><span class="p">,</span> <span class="n">l1_file</span><span class="p">,</span> <span class="n">l2_file</span><span class="p">,</span> <span class="n">l3_file</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="tbss_1_preproc"><a class="viewcode-back" href="../../generated/brainprep.tbss_1_preproc.html#brainprep.tbss_1_preproc">[docs]</a><span class="k">def</span> <span class="nf">tbss_1_preproc</span><span class="p">(</span><span class="n">tbss_dir</span><span class="p">,</span> <span class="n">fa_file</span><span class="p">):</span>
+
+<div class="viewcode-block" id="tbss_1_preproc">
+<a class="viewcode-back" href="../../generated/brainprep.tbss_1_preproc.html#brainprep.tbss_1_preproc">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">tbss_1_preproc</span><span class="p">(</span><span class="n">tbss_dir</span><span class="p">,</span> <span class="n">fa_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Use FSL **tbss_1_preproc** to erode the FA images slightly and</span>
 <span class="sd">    zero the end slices: to remove likely outliers from the diffusion</span>
 <span class="sd">    tensor fitting.</span>
@@ -310,7 +315,10 @@
     <span class="k">return</span> <span class="n">fa_file</span><span class="p">,</span> <span class="n">tbss_fa_dir</span><span class="p">,</span> <span class="n">tbss_orig_dir</span></div>
 
 
-<div class="viewcode-block" id="tbss_2_reg"><a class="viewcode-back" href="../../generated/brainprep.tbss_2_reg.html#brainprep.tbss_2_reg">[docs]</a><span class="k">def</span> <span class="nf">tbss_2_reg</span><span class="p">(</span><span class="n">tbss_dir</span><span class="p">,</span> <span class="n">fa_file</span><span class="p">,</span> <span class="n">use_fmrib58_fa_1mm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">target_img</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="tbss_2_reg">
+<a class="viewcode-back" href="../../generated/brainprep.tbss_2_reg.html#brainprep.tbss_2_reg">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">tbss_2_reg</span><span class="p">(</span><span class="n">tbss_dir</span><span class="p">,</span> <span class="n">fa_file</span><span class="p">,</span> <span class="n">use_fmrib58_fa_1mm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">target_img</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Use FSL **tbss_2_reg** to non-linearly register the FA images</span>
 <span class="sd">    to a 1x1x1mm standard space or a template image or the best target from</span>
 <span class="sd">    all FA images.</span>
@@ -365,7 +373,10 @@
     <span class="k">return</span> <span class="n">norm_fa_file</span></div>
 
 
-<div class="viewcode-block" id="tbss_3_postreg"><a class="viewcode-back" href="../../generated/brainprep.tbss_3_postreg.html#brainprep.tbss_3_postreg">[docs]</a><span class="k">def</span> <span class="nf">tbss_3_postreg</span><span class="p">(</span><span class="n">tbss_dir</span><span class="p">,</span> <span class="n">use_fmrib58_fa_mean_and_skel</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="tbss_3_postreg">
+<a class="viewcode-back" href="../../generated/brainprep.tbss_3_postreg.html#brainprep.tbss_3_postreg">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">tbss_3_postreg</span><span class="p">(</span><span class="n">tbss_dir</span><span class="p">,</span> <span class="n">use_fmrib58_fa_mean_and_skel</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Use FSL **tbss_3_postreg** to apply the nonlinear transforms</span>
 <span class="sd">    found in the previous stage to all subjects to bring them into</span>
 <span class="sd">    standard space. Merge results into a single 4D image.</span>
@@ -416,7 +427,10 @@
     <span class="k">return</span> <span class="n">all_fa</span><span class="p">,</span> <span class="n">mean_fa</span><span class="p">,</span> <span class="n">mean_fa_mask</span><span class="p">,</span> <span class="n">mean_fa_skel</span></div>
 
 
-<div class="viewcode-block" id="tbss_4_prestats"><a class="viewcode-back" href="../../generated/brainprep.tbss_4_prestats.html#brainprep.tbss_4_prestats">[docs]</a><span class="k">def</span> <span class="nf">tbss_4_prestats</span><span class="p">(</span><span class="n">tbss_dir</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.2</span><span class="p">):</span>
+
+<div class="viewcode-block" id="tbss_4_prestats">
+<a class="viewcode-back" href="../../generated/brainprep.tbss_4_prestats.html#brainprep.tbss_4_prestats">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">tbss_4_prestats</span><span class="p">(</span><span class="n">tbss_dir</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Use FSL **tbss_4_prestats** to thresholds the mean FA skeleton</span>
 <span class="sd">    image at the chosen threshold, create a distance map, and project the</span>
 <span class="sd">    FA data onto the mean FA skeleton. To be used before any voxelwise</span>
@@ -464,6 +478,7 @@
         <span class="n">print_result</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">all_fa_skeletonized</span><span class="p">,</span> <span class="n">mean_fa_skel_mask</span><span class="p">,</span> <span class="n">mean_fa_skel_mask_dst</span><span class="p">,</span>
             <span class="n">thresh_file</span><span class="p">)</span></div>
+
 </pre></div>
                     </div>
                 <div class="spacer"></div>
@@ -480,8 +495,8 @@
 			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
 									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
 									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
-									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
-                                    <p>&copy; 2024, 
+									<a href="https://gaia.neurospin.fr"><i class="fa fa-link"></i></a>
+                                    <p>&copy; 2025, 
 brainprep developers
  <antoine.grigis@cea.fr></p>
 		                    	</div>

@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../../_static/css/animate.css">
         <link rel="stylesheet" href="../../_static/css/style.css">
         <link rel="stylesheet" href="../../_static/css/jquery.mosaic.css">
-        <link rel="stylesheet" href="../../_static/gallery.css">
+        <link rel="stylesheet" href="../../_static/sg_gallery.css">
         <link rel="stylesheet" href="../../_static/css/media-queries.css">
         <link rel="stylesheet" href="../../_static/css/pygment.css">
 
@@ -43,9 +43,9 @@
 					<i class="fas fa-arrow-left"></i>
 				</div>
 				
-				<div class="logo"">
+				<!-- <div class="logo"">
 					<h3><a href="../../index.html">Sidebar Menu</a></h3>
-				</div>
+				</div> -->
 
                 <!-- info setup -->
                     <p class="doc-version">
@@ -76,10 +76,10 @@
 					<li>
 						<a href="../../generated/search.html"><i class="fas fa-search"></i> Search</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
 							<i class="fas fa-sync"></i>Sections Shortcuts
 						</a>
@@ -89,21 +89,21 @@
                             <li>API</li>
                             <li><a href="../../generated/brainprep.html">brainprep</a></li><li><a href="../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 				
                 <!-- go top page -->
-				<div class="to-top">
+				<!-- <div class="to-top">
 					<a class="btn btn-primary btn-customized-3" href="#" role="button">
 	                    <i class="fas fa-arrow-up"></i> Top
 	                </a>
-				</div>
+				</div> -->
 			
                 <!-- change color -->
-				<div class="dark-light-buttons">
+				<!-- <div class="dark-light-buttons">
 					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
 					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-				</div>
+				</div> -->
 			
 			</nav>
 			<!-- End sidebar -->
@@ -134,7 +134,7 @@
 		        </div>
                     
                     <div class="document">
-                        <h1>Source code for brainprep.cortical</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+                        <h1>Source code for brainprep.cortical</h1><div class='divider-1 wow fadeInUp' style='margin-top: -20px;'><span></span></div><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1">##########################################################################</span>
 <span class="c1"># NSAp - Copyright (C) CEA, 2021</span>
@@ -150,15 +150,17 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># Imports</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">import</span> <span class="nn">tempfile</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">check_command</span><span class="p">,</span> <span class="n">execute_command</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_command</span><span class="p">,</span> <span class="n">execute_command</span>
 
 
-<div class="viewcode-block" id="recon_all"><a class="viewcode-back" href="../../generated/brainprep.recon_all.html#brainprep.cortical.recon_all">[docs]</a><span class="k">def</span> <span class="nf">recon_all</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">anatfile</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">reconstruction_stage</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">resume</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="recon_all">
+<a class="viewcode-back" href="../../generated/brainprep.recon_all.html#brainprep.cortical.recon_all">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">recon_all</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">anatfile</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">reconstruction_stage</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">resume</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
               <span class="n">t2file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flairfile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs all the FreeSurfer cortical reconstruction steps.</span>
 
@@ -215,7 +217,10 @@
     <span class="k">return</span> <span class="n">subjfsdir</span></div>
 
 
-<div class="viewcode-block" id="recon_all_custom_wm_mask"><a class="viewcode-back" href="../../generated/brainprep.recon_all_custom_wm_mask.html#brainprep.cortical.recon_all_custom_wm_mask">[docs]</a><span class="k">def</span> <span class="nf">recon_all_custom_wm_mask</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">wm</span><span class="p">):</span>
+
+<div class="viewcode-block" id="recon_all_custom_wm_mask">
+<a class="viewcode-back" href="../../generated/brainprep.recon_all_custom_wm_mask.html#brainprep.cortical.recon_all_custom_wm_mask">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">recon_all_custom_wm_mask</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">wm</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Assuming you have run recon-all (at least upto wm.mgz creation), this</span>
 <span class="sd">    function allows to rerun recon-all using a custom white matter mask.</span>
 
@@ -270,7 +275,10 @@
     <span class="k">return</span> <span class="n">subjfsdir</span></div>
 
 
-<div class="viewcode-block" id="recon_all_longitudinal"><a class="viewcode-back" href="../../generated/brainprep.recon_all_longitudinal.html#brainprep.cortical.recon_all_longitudinal">[docs]</a><span class="k">def</span> <span class="nf">recon_all_longitudinal</span><span class="p">(</span><span class="n">fsdirs</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">timepoints</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="recon_all_longitudinal">
+<a class="viewcode-back" href="../../generated/brainprep.recon_all_longitudinal.html#brainprep.cortical.recon_all_longitudinal">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">recon_all_longitudinal</span><span class="p">(</span><span class="n">fsdirs</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">timepoints</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Assuming you have run recon-all for all timepoints of a given subject,</span>
 <span class="sd">    and that the results are stored in one subject directory per timepoint,</span>
 <span class="sd">    this function will:</span>
@@ -346,7 +354,10 @@
     <span class="k">return</span> <span class="n">template_id</span><span class="p">,</span> <span class="n">long_sids</span></div>
 
 
-<div class="viewcode-block" id="interhemi_surfreg"><a class="viewcode-back" href="../../generated/brainprep.interhemi_surfreg.html#brainprep.cortical.interhemi_surfreg">[docs]</a><span class="k">def</span> <span class="nf">interhemi_surfreg</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">template_dir</span><span class="p">):</span>
+
+<div class="viewcode-block" id="interhemi_surfreg">
+<a class="viewcode-back" href="../../generated/brainprep.interhemi_surfreg.html#brainprep.cortical.interhemi_surfreg">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">interhemi_surfreg</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">template_dir</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Surface-based interhemispheric registration by applying an existing</span>
 <span class="sd">    atlas, the &#39;fsaverage_sym&#39;.</span>
 
@@ -411,7 +422,10 @@
     <span class="k">return</span> <span class="n">xhemidir</span><span class="p">,</span> <span class="n">spherefile</span></div>
 
 
-<div class="viewcode-block" id="interhemi_projection"><a class="viewcode-back" href="../../generated/brainprep.interhemi_projection.html#brainprep.cortical.interhemi_projection">[docs]</a><span class="k">def</span> <span class="nf">interhemi_projection</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">template_dir</span><span class="p">):</span>
+
+<div class="viewcode-block" id="interhemi_projection">
+<a class="viewcode-back" href="../../generated/brainprep.interhemi_projection.html#brainprep.cortical.interhemi_projection">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">interhemi_projection</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">template_dir</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Surface-based features projection to the &#39;fsaverage_sym&#39; atlas.</span>
 
 <span class="sd">    Parameters</span>
@@ -468,7 +482,10 @@
     <span class="k">return</span> <span class="n">xhemi_features</span></div>
 
 
-<div class="viewcode-block" id="mri_conversion"><a class="viewcode-back" href="../../generated/brainprep.mri_conversion.html#brainprep.cortical.mri_conversion">[docs]</a><span class="k">def</span> <span class="nf">mri_conversion</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">):</span>
+
+<div class="viewcode-block" id="mri_conversion">
+<a class="viewcode-back" href="../../generated/brainprep.mri_conversion.html#brainprep.cortical.mri_conversion">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mri_conversion</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Convert some modality in NiFTI format.</span>
 
 <span class="sd">    Parameters</span>
@@ -499,7 +516,10 @@
     <span class="k">return</span> <span class="n">niifiles</span></div>
 
 
-<div class="viewcode-block" id="localgi"><a class="viewcode-back" href="../../generated/brainprep.localgi.html#brainprep.cortical.localgi">[docs]</a><span class="k">def</span> <span class="nf">localgi</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">):</span>
+
+<div class="viewcode-block" id="localgi">
+<a class="viewcode-back" href="../../generated/brainprep.localgi.html#brainprep.cortical.localgi">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">localgi</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">sid</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes local measurements of pial-surface gyrification at thousands</span>
 <span class="sd">    of points over the cortical surface.</span>
 
@@ -530,7 +550,10 @@
     <span class="k">return</span> <span class="n">subjfsdir</span></div>
 
 
-<div class="viewcode-block" id="stats2table"><a class="viewcode-back" href="../../generated/brainprep.stats2table.html#brainprep.cortical.stats2table">[docs]</a><span class="k">def</span> <span class="nf">stats2table</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">outdir</span><span class="p">):</span>
+
+<div class="viewcode-block" id="stats2table">
+<a class="viewcode-back" href="../../generated/brainprep.stats2table.html#brainprep.cortical.stats2table">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">stats2table</span><span class="p">(</span><span class="n">fsdir</span><span class="p">,</span> <span class="n">outdir</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Generate text/ascii tables of freesurfer parcellation stats data</span>
 <span class="sd">    &#39;?h.aparc.stats&#39; for both templates (Desikan &amp; Destrieux) and</span>
 <span class="sd">    &#39;aseg.stats&#39;.</span>
@@ -596,6 +619,7 @@
     <span class="n">statfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">statfile</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">statfiles</span></div>
+
 </pre></div>
                     </div>
                 <div class="spacer"></div>
@@ -612,8 +636,8 @@
 			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
 									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
 									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
-									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
-                                    <p>&copy; 2024, 
+									<a href="https://gaia.neurospin.fr"><i class="fa fa-link"></i></a>
+                                    <p>&copy; 2025, 
 brainprep developers
  <antoine.grigis@cea.fr></p>
 		                    	</div>

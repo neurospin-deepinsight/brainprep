@@ -11,7 +11,8 @@ p {
 a { color: #f35b3f; border-bottom: 1px dashed #f35b3f; text-decoration: none; transition: all .3s; }
 a:hover, a:focus { color: #f35b3f; border: 0; text-decoration: none; }
 
-h1, h2 { margin-top: 10px; font-size: 38px; font-weight: 100; color: #555; line-height: 50px; }
+h1, h2 { margin-top: 10px; font-size: 28px; font-weight: 100; color: #555; line-height: 50px; }
+h1 { text-align: center; }
 h3 { font-size: 22px; font-weight: 300; color: #555; line-height: 30px; }
 h4 { font-size: 18px; font-weight: 300; color: #555; line-height: 26px; }
 
@@ -22,8 +23,13 @@ img { max-width: 100%; }
 ::-moz-selection { background: #f35b3f; color: #fff; text-shadow: none; }
 ::selection { background: #f35b3f; color: #fff; text-shadow: none; }
 
+
+.summary-carousel {
+    text-align: left;
+    padding: 0 80px 0 80px;
+}
 .summary-carousel ul {
-    list-style-type: none;
+    list-style-type: counter;
 }
 
 .document dd {
@@ -94,11 +100,11 @@ img { max-width: 100%; }
     border: 1px solid #eed3d7;
     border-radius: 4px;
     padding: .75rem 1.5rem;
-    margin: 1rem 1rem
+    margin: 1rem 1rem;
+    margin-top: 60px;
 }
 
 .citing {
-
     background-color: #FFFBE8;
     border: 1px solid #fbeed5;
     color: #AF8A4B;
@@ -118,6 +124,7 @@ img { max-width: 100%; }
 .dismiss {
 	width: 35px; height: 35px; position: absolute; top: 10px; right: 10px; transition: all .3s; 
 	background: #444; border-radius: 4px; text-align: center; line-height: 35px; cursor: pointer;
+    opacity: 0.8;
 }
 
 .dismiss:hover, .dismiss:focus { background: #555; color: #fff; }
@@ -133,7 +140,7 @@ img { max-width: 100%; }
 	text-indent: -999999px;
 }
 
-.sidebar ul.menu-elements { padding: 10px 0; border-bottom: 1px solid #444; transition: all .3s; }
+.sidebar ul.menu-elements { padding: 10px 0; transition: all .3s; }
 
 .sidebar ul li a {
 	display: block; padding: 10px 20px;
@@ -561,7 +568,8 @@ a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disa
 
 .section-description { margin-top: 35px; padding-bottom: 10px; }
 
-.section-description p { margin-top: 20px; padding: 0 120px; }
+.section-description { padding: 0 120px; }
+.section-description p { margin-top: 20px; }
 .section-container-image-bg .section-description p { opacity: 0.8; }
 
 .section-bottom-button { padding-top: 20px; }

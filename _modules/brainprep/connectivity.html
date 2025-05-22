@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../../_static/css/animate.css">
         <link rel="stylesheet" href="../../_static/css/style.css">
         <link rel="stylesheet" href="../../_static/css/jquery.mosaic.css">
-        <link rel="stylesheet" href="../../_static/gallery.css">
+        <link rel="stylesheet" href="../../_static/sg_gallery.css">
         <link rel="stylesheet" href="../../_static/css/media-queries.css">
         <link rel="stylesheet" href="../../_static/css/pygment.css">
 
@@ -43,9 +43,9 @@
 					<i class="fas fa-arrow-left"></i>
 				</div>
 				
-				<div class="logo"">
+				<!-- <div class="logo"">
 					<h3><a href="../../index.html">Sidebar Menu</a></h3>
-				</div>
+				</div> -->
 
                 <!-- info setup -->
                     <p class="doc-version">
@@ -76,10 +76,10 @@
 					<li>
 						<a href="../../generated/search.html"><i class="fas fa-search"></i> Search</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
 							<i class="fas fa-sync"></i>Sections Shortcuts
 						</a>
@@ -89,21 +89,21 @@
                             <li>API</li>
                             <li><a href="../../generated/brainprep.html">brainprep</a></li><li><a href="../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 				
                 <!-- go top page -->
-				<div class="to-top">
+				<!-- <div class="to-top">
 					<a class="btn btn-primary btn-customized-3" href="#" role="button">
 	                    <i class="fas fa-arrow-up"></i> Top
 	                </a>
-				</div>
+				</div> -->
 			
                 <!-- change color -->
-				<div class="dark-light-buttons">
+				<!-- <div class="dark-light-buttons">
 					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
 					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-				</div>
+				</div> -->
 			
 			</nav>
 			<!-- End sidebar -->
@@ -134,7 +134,7 @@
 		        </div>
                     
                     <div class="document">
-                        <h1>Source code for brainprep.connectivity</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+                        <h1>Source code for brainprep.connectivity</h1><div class='divider-1 wow fadeInUp' style='margin-top: -20px;'><span></span></div><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1">##########################################################################</span>
 <span class="c1"># NSAp - Copyright (C) CEA, 2022</span>
@@ -151,15 +151,15 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># Imports</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">plotting</span>
-<span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">clean_img</span>
-<span class="kn">from</span> <span class="nn">nilearn.maskers</span> <span class="kn">import</span> <span class="n">NiftiLabelsMasker</span>
-<span class="kn">from</span> <span class="nn">nilearn.connectome</span> <span class="kn">import</span> <span class="n">ConnectivityMeasure</span>
-<span class="kn">from</span> <span class="nn">nilearn.interfaces.fmriprep</span> <span class="kn">import</span> <span class="n">load_confounds</span>
-<span class="kn">from</span> <span class="nn">.color_utils</span> <span class="kn">import</span> <span class="n">print_subtitle</span><span class="p">,</span> <span class="n">print_result</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">plotting</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.image</span><span class="w"> </span><span class="kn">import</span> <span class="n">clean_img</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.maskers</span><span class="w"> </span><span class="kn">import</span> <span class="n">NiftiLabelsMasker</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.connectome</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConnectivityMeasure</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.interfaces.fmriprep</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_confounds</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.color_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_subtitle</span><span class="p">,</span> <span class="n">print_result</span>
 
 
 <span class="c1"># Define global parameters</span>
@@ -167,7 +167,9 @@
 <span class="n">ATLASES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;schaefer&quot;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="func_connectivity"><a class="viewcode-back" href="../../generated/brainprep.func_connectivity.html#brainprep.connectivity.func_connectivity">[docs]</a><span class="k">def</span> <span class="nf">func_connectivity</span><span class="p">(</span><span class="n">fmri_file</span><span class="p">,</span> <span class="n">counfounds_file</span><span class="p">,</span> <span class="n">mask_file</span><span class="p">,</span>
+<div class="viewcode-block" id="func_connectivity">
+<a class="viewcode-back" href="../../generated/brainprep.func_connectivity.html#brainprep.connectivity.func_connectivity">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">func_connectivity</span><span class="p">(</span><span class="n">fmri_file</span><span class="p">,</span> <span class="n">counfounds_file</span><span class="p">,</span> <span class="n">mask_file</span><span class="p">,</span>
                       <span class="n">tr</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">low_pass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">high_pass</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">scrub</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                       <span class="n">fd_threshold</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">std_dvars_threshold</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">detrend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                       <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_volumes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
@@ -356,6 +358,7 @@
             <span class="n">corrfiles</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="n">corr_file</span>
 
     <span class="k">return</span> <span class="n">corrfiles</span></div>
+
 </pre></div>
                     </div>
                 <div class="spacer"></div>
@@ -372,8 +375,8 @@
 			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
 									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
 									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
-									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
-                                    <p>&copy; 2024, 
+									<a href="https://gaia.neurospin.fr"><i class="fa fa-link"></i></a>
+                                    <p>&copy; 2025, 
 brainprep developers
  <antoine.grigis@cea.fr></p>
 		                    	</div>

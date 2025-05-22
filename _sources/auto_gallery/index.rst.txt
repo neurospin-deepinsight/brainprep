@@ -1,12 +1,31 @@
 :orphan:
 
-
-
-.. _sphx_glr_auto_gallery:
-
 Brain MRI PreProcessing Use Cases
 =================================
 
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Credit: A Grigis">
+
+.. only:: html
+
+  .. image:: /auto_gallery/images/thumb/sphx_glr_plot_mriqc_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_gallery_plot_mriqc.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">mriqc quality control use case</div>
+    </div>
 
 
 .. raw:: html
@@ -15,10 +34,69 @@ Brain MRI PreProcessing Use Cases
 
 .. only:: html
 
- .. figure:: /auto_gallery/images/thumb/sphx_glr_plot_mriqc_thumb.png
-     :alt: mriqc quality control use case
+  .. image:: /auto_gallery/images/thumb/sphx_glr_plot_cat12vbm_thumb.png
+    :alt:
 
-     :ref:`sphx_glr_auto_gallery_plot_mriqc.py`
+  :ref:`sphx_glr_auto_gallery_plot_cat12vbm.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">CAT12 VBM pre-processing use case</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Credit: A Grigis">
+
+.. only:: html
+
+  .. image:: /auto_gallery/images/thumb/sphx_glr_plot_quasiraw_thumb.jpg
+    :alt:
+
+  :ref:`sphx_glr_auto_gallery_plot_quasiraw.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Quasi RAW pre-processing use case</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Credit: A Grigis">
+
+.. only:: html
+
+  .. image:: /auto_gallery/images/thumb/sphx_glr_plot_fsreconall_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_gallery_plot_fsreconall.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">FreeSurfer pre-processing use case</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Credit: A Grigis">
+
+.. only:: html
+
+  .. image:: /auto_gallery/images/thumb/sphx_glr_plot_fmriprep_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_auto_gallery_plot_fmriprep.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">fmriprep pre-processing use case</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
 
 .. raw:: html
 
@@ -29,111 +107,23 @@ Brain MRI PreProcessing Use Cases
    :hidden:
 
    /auto_gallery/plot_mriqc
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Credit: A Grigis">
-
-.. only:: html
-
- .. figure:: /auto_gallery/images/thumb/sphx_glr_plot_cat12vbm_thumb.png
-     :alt: CAT12 VBM pre-processing use case
-
-     :ref:`sphx_glr_auto_gallery_plot_cat12vbm.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /auto_gallery/plot_cat12vbm
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Credit: A Grigis">
-
-.. only:: html
-
- .. figure:: /auto_gallery/images/thumb/sphx_glr_plot_quasiraw_thumb.jpg
-     :alt: Quasi RAW pre-processing use case
-
-     :ref:`sphx_glr_auto_gallery_plot_quasiraw.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /auto_gallery/plot_quasiraw
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Credit: A Grigis">
-
-.. only:: html
-
- .. figure:: /auto_gallery/images/thumb/sphx_glr_plot_fsreconall_thumb.png
-     :alt: FreeSurfer pre-processing use case
-
-     :ref:`sphx_glr_auto_gallery_plot_fsreconall.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /auto_gallery/plot_fsreconall
+   /auto_gallery/plot_fmriprep
 
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Credit: A Grigis">
 
 .. only:: html
 
- .. figure:: /auto_gallery/images/thumb/sphx_glr_plot_fmriprep_thumb.png
-     :alt: fmriprep pre-processing use case
+  .. container:: sphx-glr-footer sphx-glr-footer-gallery
 
-     :ref:`sphx_glr_auto_gallery_plot_fmriprep.py`
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-.. raw:: html
+      :download:`Download all examples in Python source code: auto_gallery_python.zip </auto_gallery/auto_gallery_python.zip>`
 
-    </div>
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-.. toctree::
-   :hidden:
-
-   /auto_gallery/plot_fmriprep
-.. raw:: html
-
-    <div class="sphx-glr-clear"></div>
-
-
-
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-gallery
-
-
-  .. container:: sphx-glr-download sphx-glr-download-python
-
-    :download:`Download all examples in Python source code: auto_gallery_python.zip </auto_gallery/auto_gallery_python.zip>`
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-    :download:`Download all examples in Jupyter notebooks: auto_gallery_jupyter.zip </auto_gallery/auto_gallery_jupyter.zip>`
+      :download:`Download all examples in Jupyter notebooks: auto_gallery_jupyter.zip </auto_gallery/auto_gallery_jupyter.zip>`
 
 
 .. only:: html

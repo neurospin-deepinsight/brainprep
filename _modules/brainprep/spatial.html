@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../../_static/css/animate.css">
         <link rel="stylesheet" href="../../_static/css/style.css">
         <link rel="stylesheet" href="../../_static/css/jquery.mosaic.css">
-        <link rel="stylesheet" href="../../_static/gallery.css">
+        <link rel="stylesheet" href="../../_static/sg_gallery.css">
         <link rel="stylesheet" href="../../_static/css/media-queries.css">
         <link rel="stylesheet" href="../../_static/css/pygment.css">
 
@@ -43,9 +43,9 @@
 					<i class="fas fa-arrow-left"></i>
 				</div>
 				
-				<div class="logo"">
+				<!-- <div class="logo"">
 					<h3><a href="../../index.html">Sidebar Menu</a></h3>
-				</div>
+				</div> -->
 
                 <!-- info setup -->
                     <p class="doc-version">
@@ -76,10 +76,10 @@
 					<li>
 						<a href="../../generated/search.html"><i class="fas fa-search"></i> Search</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
 							<i class="fas fa-sync"></i>Sections Shortcuts
 						</a>
@@ -89,21 +89,21 @@
                             <li>API</li>
                             <li><a href="../../generated/brainprep.html">brainprep</a></li><li><a href="../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 				
                 <!-- go top page -->
-				<div class="to-top">
+				<!-- <div class="to-top">
 					<a class="btn btn-primary btn-customized-3" href="#" role="button">
 	                    <i class="fas fa-arrow-up"></i> Top
 	                </a>
-				</div>
+				</div> -->
 			
                 <!-- change color -->
-				<div class="dark-light-buttons">
+				<!-- <div class="dark-light-buttons">
 					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
 					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-				</div>
+				</div> -->
 			
 			</nav>
 			<!-- End sidebar -->
@@ -134,7 +134,7 @@
 		        </div>
                     
                     <div class="document">
-                        <h1>Source code for brainprep.spatial</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+                        <h1>Source code for brainprep.spatial</h1><div class='divider-1 wow fadeInUp' style='margin-top: -20px;'><span></span></div><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1">##########################################################################</span>
 <span class="c1"># NSAp - Copyright (C) CEA, 2021</span>
@@ -149,13 +149,15 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># Imports</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">nibabel</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">check_version</span><span class="p">,</span> <span class="n">check_command</span><span class="p">,</span> <span class="n">execute_command</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_version</span><span class="p">,</span> <span class="n">check_command</span><span class="p">,</span> <span class="n">execute_command</span>
 
 
-<div class="viewcode-block" id="scale"><a class="viewcode-back" href="../../generated/brainprep.spatial.scale.html#brainprep.scale">[docs]</a><span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">scaledfile</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">check_pkg_version</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="scale">
+<a class="viewcode-back" href="../../generated/brainprep.spatial.scale.html#brainprep.scale">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">scaledfile</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">check_pkg_version</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Scale the MRI image.</span>
 
 <span class="sd">    .. note:: This function is based on FSL.</span>
@@ -185,7 +187,10 @@
     <span class="k">return</span> <span class="n">scaledfile</span><span class="p">,</span> <span class="n">trffile</span></div>
 
 
-<div class="viewcode-block" id="bet2"><a class="viewcode-back" href="../../generated/brainprep.spatial.bet2.html#brainprep.bet2">[docs]</a><span class="k">def</span> <span class="nf">bet2</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">brainfile</span><span class="p">,</span> <span class="n">frac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cleanup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check_pkg_version</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="bet2">
+<a class="viewcode-back" href="../../generated/brainprep.spatial.bet2.html#brainprep.bet2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">bet2</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">brainfile</span><span class="p">,</span> <span class="n">frac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cleanup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check_pkg_version</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Skull stripped the MRI image.</span>
 
 <span class="sd">    .. note:: This function is based on FSL.</span>
@@ -219,7 +224,10 @@
     <span class="k">return</span> <span class="n">brainfile</span><span class="p">,</span> <span class="n">maskfile</span></div>
 
 
-<div class="viewcode-block" id="reorient2std"><a class="viewcode-back" href="../../generated/brainprep.spatial.reorient2std.html#brainprep.reorient2std">[docs]</a><span class="k">def</span> <span class="nf">reorient2std</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">stdfile</span><span class="p">,</span> <span class="n">check_pkg_version</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="reorient2std">
+<a class="viewcode-back" href="../../generated/brainprep.spatial.reorient2std.html#brainprep.reorient2std">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">reorient2std</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">stdfile</span><span class="p">,</span> <span class="n">check_pkg_version</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Reorient the MRI image to match the approximate orientation of the</span>
 <span class="sd">    standard template images (MNI152).</span>
 
@@ -246,7 +254,10 @@
     <span class="k">return</span> <span class="n">stdfile</span></div>
 
 
-<div class="viewcode-block" id="biasfield"><a class="viewcode-back" href="../../generated/brainprep.spatial.biasfield.html#brainprep.biasfield">[docs]</a><span class="k">def</span> <span class="nf">biasfield</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">bfcfile</span><span class="p">,</span> <span class="n">maskfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nb_iterations</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+
+<div class="viewcode-block" id="biasfield">
+<a class="viewcode-back" href="../../generated/brainprep.spatial.biasfield.html#brainprep.biasfield">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">biasfield</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">bfcfile</span><span class="p">,</span> <span class="n">maskfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nb_iterations</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
               <span class="n">convergence_threshold</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">bspline_grid</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
               <span class="n">shrink_factor</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bspline_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
               <span class="n">histogram_sharpening</span><span class="o">=</span><span class="p">(</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">check_pkg_version</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -321,7 +332,10 @@
     <span class="k">return</span> <span class="n">bfcfile</span><span class="p">,</span> <span class="n">bffile</span></div>
 
 
-<div class="viewcode-block" id="register_affine"><a class="viewcode-back" href="../../generated/brainprep.spatial.register_affine.html#brainprep.register_affine">[docs]</a><span class="k">def</span> <span class="nf">register_affine</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">targetfile</span><span class="p">,</span> <span class="n">regfile</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cost</span><span class="o">=</span><span class="s2">&quot;normmi&quot;</span><span class="p">,</span>
+
+<div class="viewcode-block" id="register_affine">
+<a class="viewcode-back" href="../../generated/brainprep.spatial.register_affine.html#brainprep.register_affine">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_affine</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">targetfile</span><span class="p">,</span> <span class="n">regfile</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cost</span><span class="o">=</span><span class="s2">&quot;normmi&quot;</span><span class="p">,</span>
                     <span class="n">bins</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="s2">&quot;spline&quot;</span><span class="p">,</span> <span class="n">dof</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">check_pkg_version</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Register the MRI image to a target image using an affine transform</span>
 <span class="sd">    with 9 dofs.</span>
@@ -380,7 +394,10 @@
     <span class="k">return</span> <span class="n">regfile</span><span class="p">,</span> <span class="n">trffile</span></div>
 
 
-<div class="viewcode-block" id="apply_affine"><a class="viewcode-back" href="../../generated/brainprep.spatial.apply_affine.html#brainprep.apply_affine">[docs]</a><span class="k">def</span> <span class="nf">apply_affine</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">targetfile</span><span class="p">,</span> <span class="n">regfile</span><span class="p">,</span> <span class="n">affines</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="s2">&quot;spline&quot;</span><span class="p">,</span>
+
+<div class="viewcode-block" id="apply_affine">
+<a class="viewcode-back" href="../../generated/brainprep.spatial.apply_affine.html#brainprep.apply_affine">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_affine</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">targetfile</span><span class="p">,</span> <span class="n">regfile</span><span class="p">,</span> <span class="n">affines</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="s2">&quot;spline&quot;</span><span class="p">,</span>
                  <span class="n">check_pkg_version</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Apply affine transformations to an image.</span>
 
@@ -431,7 +448,10 @@
     <span class="k">return</span> <span class="n">regfile</span><span class="p">,</span> <span class="n">trffile</span></div>
 
 
-<div class="viewcode-block" id="apply_mask"><a class="viewcode-back" href="../../generated/brainprep.spatial.apply_mask.html#brainprep.apply_mask">[docs]</a><span class="k">def</span> <span class="nf">apply_mask</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">maskfile</span><span class="p">,</span> <span class="n">genfile</span><span class="p">):</span>
+
+<div class="viewcode-block" id="apply_mask">
+<a class="viewcode-back" href="../../generated/brainprep.spatial.apply_mask.html#brainprep.apply_mask">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_mask</span><span class="p">(</span><span class="n">imfile</span><span class="p">,</span> <span class="n">maskfile</span><span class="p">,</span> <span class="n">genfile</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Apply brain mask.</span>
 
 <span class="sd">    Parameters</span>
@@ -455,6 +475,7 @@
     <span class="n">gen_im</span> <span class="o">=</span> <span class="n">nibabel</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
     <span class="n">nibabel</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">gen_im</span><span class="p">,</span> <span class="n">genfile</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">genfile</span></div>
+
 </pre></div>
                     </div>
                 <div class="spacer"></div>
@@ -471,8 +492,8 @@
 			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
 									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
 									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
-									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
-                                    <p>&copy; 2024, 
+									<a href="https://gaia.neurospin.fr"><i class="fa fa-link"></i></a>
+                                    <p>&copy; 2025, 
 brainprep developers
  <antoine.grigis@cea.fr></p>
 		                    	</div>

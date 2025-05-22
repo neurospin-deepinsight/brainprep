@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../../../_static/css/animate.css">
         <link rel="stylesheet" href="../../../_static/css/style.css">
         <link rel="stylesheet" href="../../../_static/css/jquery.mosaic.css">
-        <link rel="stylesheet" href="../../../_static/gallery.css">
+        <link rel="stylesheet" href="../../../_static/sg_gallery.css">
         <link rel="stylesheet" href="../../../_static/css/media-queries.css">
         <link rel="stylesheet" href="../../../_static/css/pygment.css">
 
@@ -43,9 +43,9 @@
 					<i class="fas fa-arrow-left"></i>
 				</div>
 				
-				<div class="logo"">
+				<!-- <div class="logo"">
 					<h3><a href="../../../index.html">Sidebar Menu</a></h3>
-				</div>
+				</div> -->
 
                 <!-- info setup -->
                     <p class="doc-version">
@@ -76,10 +76,10 @@
 					<li>
 						<a href="../../../generated/search.html"><i class="fas fa-search"></i> Search</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
 							<i class="fas fa-sync"></i>Sections Shortcuts
 						</a>
@@ -89,21 +89,21 @@
                             <li>API</li>
                             <li><a href="../../../generated/brainprep.html">brainprep</a></li><li><a href="../../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 				
                 <!-- go top page -->
-				<div class="to-top">
+				<!-- <div class="to-top">
 					<a class="btn btn-primary btn-customized-3" href="#" role="button">
 	                    <i class="fas fa-arrow-up"></i> Top
 	                </a>
-				</div>
+				</div> -->
 			
                 <!-- change color -->
-				<div class="dark-light-buttons">
+				<!-- <div class="dark-light-buttons">
 					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
 					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-				</div>
+				</div> -->
 			
 			</nav>
 			<!-- End sidebar -->
@@ -134,7 +134,7 @@
 		        </div>
                     
                     <div class="document">
-                        <h1>Source code for brainprep.workflow.fmriprep</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+                        <h1>Source code for brainprep.workflow.fmriprep</h1><div class='divider-1 wow fadeInUp' style='margin-top: -20px;'><span></span></div><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1">##########################################################################</span>
 <span class="c1"># NSAp - Copyright (C) CEA, 2021 - 2022</span>
@@ -149,14 +149,16 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># System import</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">tempfile</span>
-<span class="kn">import</span> <span class="nn">brainprep</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">from</span> <span class="nn">brainprep.color_utils</span> <span class="kn">import</span> <span class="n">print_subtitle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">brainprep</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainprep.color_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_subtitle</span>
 
 
-<div class="viewcode-block" id="brainprep_fmriprep"><a class="viewcode-back" href="../../../generated/brainprep.workflow.fmriprep.brainprep_fmriprep.html#brainprep.workflow.brainprep_fmriprep">[docs]</a><span class="k">def</span> <span class="nf">brainprep_fmriprep</span><span class="p">(</span><span class="n">anatomical</span><span class="p">,</span> <span class="n">functionals</span><span class="p">,</span> <span class="n">subjid</span><span class="p">,</span> <span class="n">descfile</span><span class="p">,</span> <span class="n">fsdir</span><span class="p">,</span>
+<div class="viewcode-block" id="brainprep_fmriprep">
+<a class="viewcode-back" href="../../../generated/brainprep.workflow.fmriprep.brainprep_fmriprep.html#brainprep.workflow.brainprep_fmriprep">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">brainprep_fmriprep</span><span class="p">(</span><span class="n">anatomical</span><span class="p">,</span> <span class="n">functionals</span><span class="p">,</span> <span class="n">subjid</span><span class="p">,</span> <span class="n">descfile</span><span class="p">,</span> <span class="n">fsdir</span><span class="p">,</span>
                        <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;/out&quot;</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="s2">&quot;/work&quot;</span><span class="p">,</span> <span class="n">fmriprep</span><span class="o">=</span><span class="s2">&quot;fmriprep&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Define the fmriprep pre-processing workflow.</span>
 
@@ -220,7 +222,6 @@
                 <span class="s2">&quot;--fs-license-file&quot;</span><span class="p">,</span> <span class="s2">&quot;/code/freesurfer.txt&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;--skip_bids_validation&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;--force-bbr&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;--output-spaces&quot;</span><span class="p">,</span> <span class="s2">&quot;MNI152NLin6Asym:res-2&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;--cifti-output&quot;</span><span class="p">,</span> <span class="s2">&quot;91k&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;--output-spaces&quot;</span><span class="p">,</span> <span class="p">(</span>
                     <span class="s2">&quot;MNI152NLin2009cAsym MNI152NLin6Asym:res-2 &quot;</span>
@@ -232,7 +233,10 @@
             <span class="nb">open</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="brainprep_fmriprep_conn"><a class="viewcode-back" href="../../../generated/brainprep.workflow.fmriprep.brainprep_fmriprep_conn.html#brainprep.workflow.brainprep_fmriprep_conn">[docs]</a><span class="k">def</span> <span class="nf">brainprep_fmriprep_conn</span><span class="p">(</span><span class="n">fmri_file</span><span class="p">,</span> <span class="n">counfounds_file</span><span class="p">,</span> <span class="n">mask_file</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span>
+
+<div class="viewcode-block" id="brainprep_fmriprep_conn">
+<a class="viewcode-back" href="../../../generated/brainprep.workflow.fmriprep.brainprep_fmriprep_conn.html#brainprep.workflow.brainprep_fmriprep_conn">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">brainprep_fmriprep_conn</span><span class="p">(</span><span class="n">fmri_file</span><span class="p">,</span> <span class="n">counfounds_file</span><span class="p">,</span> <span class="n">mask_file</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span>
                             <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;/work&quot;</span><span class="p">,</span> <span class="n">low_pass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">high_pass</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
                             <span class="n">scrub</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">fd_threshold</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">std_dvars_threshold</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
                             <span class="n">fwhm</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
@@ -286,6 +290,7 @@
         <span class="n">high_pass</span><span class="o">=</span><span class="n">high_pass</span><span class="p">,</span> <span class="n">scrub</span><span class="o">=</span><span class="n">scrub</span><span class="p">,</span> <span class="n">fd_threshold</span><span class="o">=</span><span class="n">fd_threshold</span><span class="p">,</span>
         <span class="n">std_dvars_threshold</span><span class="o">=</span><span class="n">std_dvars_threshold</span><span class="p">,</span> <span class="n">detrend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_volumes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="n">fwhm</span><span class="p">)</span></div>
+
 </pre></div>
                     </div>
                 <div class="spacer"></div>
@@ -302,8 +307,8 @@
 			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
 									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
 									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
-									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
-                                    <p>&copy; 2024, 
+									<a href="https://gaia.neurospin.fr"><i class="fa fa-link"></i></a>
+                                    <p>&copy; 2025, 
 brainprep developers
  <antoine.grigis@cea.fr></p>
 		                    	</div>

@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../../_static/css/animate.css">
         <link rel="stylesheet" href="../../_static/css/style.css">
         <link rel="stylesheet" href="../../_static/css/jquery.mosaic.css">
-        <link rel="stylesheet" href="../../_static/gallery.css">
+        <link rel="stylesheet" href="../../_static/sg_gallery.css">
         <link rel="stylesheet" href="../../_static/css/media-queries.css">
         <link rel="stylesheet" href="../../_static/css/pygment.css">
 
@@ -43,9 +43,9 @@
 					<i class="fas fa-arrow-left"></i>
 				</div>
 				
-				<div class="logo"">
+				<!-- <div class="logo"">
 					<h3><a href="../../index.html">Sidebar Menu</a></h3>
-				</div>
+				</div> -->
 
                 <!-- info setup -->
                     <p class="doc-version">
@@ -76,10 +76,10 @@
 					<li>
 						<a href="../../generated/search.html"><i class="fas fa-search"></i> Search</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
 							<i class="fas fa-sync"></i>Sections Shortcuts
 						</a>
@@ -89,21 +89,21 @@
                             <li>API</li>
                             <li><a href="../../generated/brainprep.html">brainprep</a></li><li><a href="../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 				
                 <!-- go top page -->
-				<div class="to-top">
+				<!-- <div class="to-top">
 					<a class="btn btn-primary btn-customized-3" href="#" role="button">
 	                    <i class="fas fa-arrow-up"></i> Top
 	                </a>
-				</div>
+				</div> -->
 			
                 <!-- change color -->
-				<div class="dark-light-buttons">
+				<!-- <div class="dark-light-buttons">
 					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
 					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-				</div>
+				</div> -->
 			
 			</nav>
 			<!-- End sidebar -->
@@ -134,7 +134,7 @@
 		        </div>
                     
                     <div class="document">
-                        <h1>Source code for brainprep.utils</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+                        <h1>Source code for brainprep.utils</h1><div class='divider-1 wow fadeInUp' style='margin-top: -20px;'><span></span></div><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1">##########################################################################</span>
 <span class="c1"># NSAp - Copyright (C) CEA, 2021 - 2022</span>
@@ -149,18 +149,20 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># Imports</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">gzip</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">nibabel</span>
-<span class="kn">from</span> <span class="nn">.color_utils</span> <span class="kn">import</span> <span class="n">print_command</span><span class="p">,</span> <span class="n">print_error</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gzip</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.color_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_command</span><span class="p">,</span> <span class="n">print_error</span>
 
 
-<div class="viewcode-block" id="execute_command"><a class="viewcode-back" href="../../generated/brainprep.utils.execute_command.html#brainprep.execute_command">[docs]</a><span class="k">def</span> <span class="nf">execute_command</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+<div class="viewcode-block" id="execute_command">
+<a class="viewcode-back" href="../../generated/brainprep.utils.execute_command.html#brainprep.execute_command">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">execute_command</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Execute a command.</span>
 
 <span class="sd">    Parameters</span>
@@ -180,7 +182,10 @@
                              <span class="n">error</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">)))</span></div>
 
 
-<div class="viewcode-block" id="check_command"><a class="viewcode-back" href="../../generated/brainprep.utils.check_command.html#brainprep.check_command">[docs]</a><span class="k">def</span> <span class="nf">check_command</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+
+<div class="viewcode-block" id="check_command">
+<a class="viewcode-back" href="../../generated/brainprep.utils.check_command.html#brainprep.check_command">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_command</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Check if a command is installed.</span>
 
 <span class="sd">    .. note:: This function is based on which linux command.</span>
@@ -203,7 +208,10 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Impossible to locate command &#39;</span><span class="si">{0}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">command</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="check_version"><a class="viewcode-back" href="../../generated/brainprep.utils.check_version.html#brainprep.check_version">[docs]</a><span class="k">def</span> <span class="nf">check_version</span><span class="p">(</span><span class="n">package_name</span><span class="p">,</span> <span class="n">check_pkg_version</span><span class="p">):</span>
+
+<div class="viewcode-block" id="check_version">
+<a class="viewcode-back" href="../../generated/brainprep.utils.check_version.html#brainprep.check_version">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_version</span><span class="p">(</span><span class="n">package_name</span><span class="p">,</span> <span class="n">check_pkg_version</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Check installed version of a package.</span>
 
 <span class="sd">    .. note:: This function is based on dpkg linux command.</span>
@@ -237,7 +245,10 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> - </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package_name</span><span class="p">,</span> <span class="n">version</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="write_matlabbatch"><a class="viewcode-back" href="../../generated/brainprep.write_matlabbatch.html#brainprep.write_matlabbatch">[docs]</a><span class="k">def</span> <span class="nf">write_matlabbatch</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">nii_files</span><span class="p">,</span> <span class="n">tpm_file</span><span class="p">,</span> <span class="n">darteltpm_file</span><span class="p">,</span>
+
+<div class="viewcode-block" id="write_matlabbatch">
+<a class="viewcode-back" href="../../generated/brainprep.write_matlabbatch.html#brainprep.write_matlabbatch">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_matlabbatch</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">nii_files</span><span class="p">,</span> <span class="n">tpm_file</span><span class="p">,</span> <span class="n">darteltpm_file</span><span class="p">,</span>
                       <span class="n">session</span><span class="p">,</span> <span class="n">batch_file</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">model_long</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Complete matlab batch from template and unzip T1w file in the outdir.</span>
 <span class="sd">        Create the outdir.</span>
@@ -280,7 +291,10 @@
         <span class="n">of</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ungzip_file"><a class="viewcode-back" href="../../generated/brainprep.utils.ungzip_file.html#brainprep.ungzip_file">[docs]</a><span class="k">def</span> <span class="nf">ungzip_file</span><span class="p">(</span><span class="n">zfile</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ungzip_file">
+<a class="viewcode-back" href="../../generated/brainprep.utils.ungzip_file.html#brainprep.ungzip_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">ungzip_file</span><span class="p">(</span><span class="n">zfile</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Copy and ungzip the input file.</span>
 
 <span class="sd">    Parameters</span>
@@ -327,7 +341,10 @@
     <span class="k">return</span> <span class="n">unzfile</span></div>
 
 
-<div class="viewcode-block" id="get_bids_keys"><a class="viewcode-back" href="../../generated/brainprep.utils.get_bids_keys.html#brainprep.get_bids_keys">[docs]</a><span class="k">def</span> <span class="nf">get_bids_keys</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_bids_keys">
+<a class="viewcode-back" href="../../generated/brainprep.utils.get_bids_keys.html#brainprep.get_bids_keys">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_bids_keys</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Extract BIDS &#39;participant_id&#39;, &#39;session&#39; and &#39;run&#39; keys from a</span>
 <span class="sd">    filename.</span>
 
@@ -365,7 +382,10 @@
     <span class="k">return</span> <span class="n">keys</span></div>
 
 
-<div class="viewcode-block" id="load_images"><a class="viewcode-back" href="../../generated/brainprep.utils.load_images.html#brainprep.load_images">[docs]</a><span class="k">def</span> <span class="nf">load_images</span><span class="p">(</span><span class="n">img_files</span><span class="p">,</span> <span class="n">check_same_referential</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="load_images">
+<a class="viewcode-back" href="../../generated/brainprep.utils.load_images.html#brainprep.load_images">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_images</span><span class="p">(</span><span class="n">img_files</span><span class="p">,</span> <span class="n">check_same_referential</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Load a list of images in a BIDS organisation: check that all images</span>
 <span class="sd">    are in the same referential.</span>
 
@@ -408,7 +428,10 @@
     <span class="k">return</span> <span class="n">imgs_arr</span><span class="p">,</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="create_clickable"><a class="viewcode-back" href="../../generated/brainprep.utils.create_clickable.html#brainprep.create_clickable">[docs]</a><span class="k">def</span> <span class="nf">create_clickable</span><span class="p">(</span><span class="n">path_or_url</span><span class="p">):</span>
+
+<div class="viewcode-block" id="create_clickable">
+<a class="viewcode-back" href="../../generated/brainprep.utils.create_clickable.html#brainprep.create_clickable">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_clickable</span><span class="p">(</span><span class="n">path_or_url</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Foramt a path or a URL as a HTML href.</span>
 
 <span class="sd">    Parameters</span>
@@ -425,7 +448,10 @@
     <span class="k">return</span> <span class="n">url</span></div>
 
 
-<div class="viewcode-block" id="listify"><a class="viewcode-back" href="../../generated/brainprep.utils.listify.html#brainprep.listify">[docs]</a><span class="k">def</span> <span class="nf">listify</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+
+<div class="viewcode-block" id="listify">
+<a class="viewcode-back" href="../../generated/brainprep.utils.listify.html#brainprep.listify">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">listify</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Function to transform a coma separated string to a list of string.</span>
 
 <span class="sd">    Parameters</span>
@@ -442,6 +468,7 @@
         <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">obj</span></div>
+
 </pre></div>
                     </div>
                 <div class="spacer"></div>
@@ -458,8 +485,8 @@
 			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
 									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
 									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
-									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
-                                    <p>&copy; 2024, 
+									<a href="https://gaia.neurospin.fr"><i class="fa fa-link"></i></a>
+                                    <p>&copy; 2025, 
 brainprep developers
  <antoine.grigis@cea.fr></p>
 		                    	</div>

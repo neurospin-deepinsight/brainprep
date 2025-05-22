@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.utils.check_command
 
-.. minigallery:: brainprep.check_command brainprep.utils.check_command
+.. minigallery:: brainprep.utils.check_command brainprep.check_command
     :add-heading: Examples
     :heading-level: -
 

@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../../_static/css/animate.css">
         <link rel="stylesheet" href="../../_static/css/style.css">
         <link rel="stylesheet" href="../../_static/css/jquery.mosaic.css">
-        <link rel="stylesheet" href="../../_static/gallery.css">
+        <link rel="stylesheet" href="../../_static/sg_gallery.css">
         <link rel="stylesheet" href="../../_static/css/media-queries.css">
         <link rel="stylesheet" href="../../_static/css/pygment.css">
 
@@ -43,9 +43,9 @@
 					<i class="fas fa-arrow-left"></i>
 				</div>
 				
-				<div class="logo"">
+				<!-- <div class="logo"">
 					<h3><a href="../../index.html">Sidebar Menu</a></h3>
-				</div>
+				</div> -->
 
                 <!-- info setup -->
                     <p class="doc-version">
@@ -76,10 +76,10 @@
 					<li>
 						<a href="../../generated/search.html"><i class="fas fa-search"></i> Search</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
 							<i class="fas fa-sync"></i>Sections Shortcuts
 						</a>
@@ -89,21 +89,21 @@
                             <li>API</li>
                             <li><a href="../../generated/brainprep.html">brainprep</a></li><li><a href="../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 				
                 <!-- go top page -->
-				<div class="to-top">
+				<!-- <div class="to-top">
 					<a class="btn btn-primary btn-customized-3" href="#" role="button">
 	                    <i class="fas fa-arrow-up"></i> Top
 	                </a>
-				</div>
+				</div> -->
 			
                 <!-- change color -->
-				<div class="dark-light-buttons">
+				<!-- <div class="dark-light-buttons">
 					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
 					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-				</div>
+				</div> -->
 			
 			</nav>
 			<!-- End sidebar -->
@@ -134,7 +134,7 @@
 		        </div>
                     
                     <div class="document">
-                        <h1>Source code for brainprep.color_utils</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+                        <h1>Source code for brainprep.color_utils</h1><div class='divider-1 wow fadeInUp' style='margin-top: -20px;'><span></span></div><div class="highlight"><pre>
 <span></span><span class="c1"># coding: utf-8</span>
 <span class="c1">##########################################################################</span>
 <span class="c1"># Copyright (C) CEA, 2022</span>
@@ -149,8 +149,8 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># Imports</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
 
 <span class="n">IS_WINDOWS</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span>
@@ -171,7 +171,9 @@
     <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">}</span>
 
 
-<div class="viewcode-block" id="HEX"><a class="viewcode-back" href="../../generated/brainprep.color_utils.HEX.html#brainprep.color_utils.HEX">[docs]</a><span class="k">def</span> <span class="nf">HEX</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+<div class="viewcode-block" id="HEX">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.HEX.html#brainprep.color_utils.HEX">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">HEX</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
 
     <span class="n">xterm_colors</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="s2">&quot;#000000&quot;</span><span class="p">,</span>
@@ -437,9 +439,12 @@
     <span class="k">return</span> <span class="n">new_xterm_colors</span><span class="p">[</span><span class="n">color</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="colored"><a class="viewcode-back" href="../../generated/brainprep.color_utils.colored.html#brainprep.color_utils.colored">[docs]</a><span class="k">class</span> <span class="nc">colored</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<div class="viewcode-block" id="colored">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.colored.html#brainprep.color_utils.colored">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">colored</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ESC</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\x1b</span><span class="s2">[&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">END</span> <span class="o">=</span> <span class="s2">&quot;m&quot;</span>
@@ -709,7 +714,9 @@
             <span class="s2">&quot;grey_93&quot;</span><span class="p">:</span> <span class="s2">&quot;255&quot;</span><span class="p">,</span>
         <span class="p">}</span>
 
-<div class="viewcode-block" id="colored.attribute"><a class="viewcode-back" href="../../generated/brainprep.color_utils.colored.html#brainprep.color_utils.colored.attribute">[docs]</a>    <span class="k">def</span> <span class="nf">attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="colored.attribute">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.colored.html#brainprep.color_utils.colored.attribute">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set or reset attributes&quot;&quot;&quot;</span>
 
         <span class="n">paint</span> <span class="o">=</span> <span class="p">{</span>
@@ -742,7 +749,10 @@
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">paint</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="colored.foreground"><a class="viewcode-back" href="../../generated/brainprep.color_utils.colored.html#brainprep.color_utils.colored.foreground">[docs]</a>    <span class="k">def</span> <span class="nf">foreground</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="colored.foreground">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.colored.html#brainprep.color_utils.colored.foreground">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">foreground</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Print 256 foreground colors&quot;&quot;&quot;</span>
         <span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ESC</span> <span class="o">+</span> <span class="s2">&quot;38;5;&quot;</span>
         <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
@@ -754,7 +764,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">code</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">paint</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">END</span></div>
 
-<div class="viewcode-block" id="colored.background"><a class="viewcode-back" href="../../generated/brainprep.color_utils.colored.html#brainprep.color_utils.colored.background">[docs]</a>    <span class="k">def</span> <span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="colored.background">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.colored.html#brainprep.color_utils.colored.background">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Print 256 background colors&quot;&quot;&quot;</span>
         <span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ESC</span> <span class="o">+</span> <span class="s2">&quot;48;5;&quot;</span>
         <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
@@ -766,58 +779,87 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">code</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">paint</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">END</span></div>
 
-<div class="viewcode-block" id="colored.reverse_dict"><a class="viewcode-back" href="../../generated/brainprep.color_utils.colored.html#brainprep.color_utils.colored.reverse_dict">[docs]</a>    <span class="k">def</span> <span class="nf">reverse_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="colored.reverse_dict">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.colored.html#brainprep.color_utils.colored.reverse_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reverse_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;reverse dictionary&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reserve_paint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paint</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">paint</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reserve_paint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paint</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">paint</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span></div>
+</div>
 
 
-<div class="viewcode-block" id="stylize"><a class="viewcode-back" href="../../generated/brainprep.color_utils.stylize.html#brainprep.color_utils.stylize">[docs]</a><span class="k">def</span> <span class="nf">stylize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">styles</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="stylize">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.stylize.html#brainprep.color_utils.stylize">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">stylize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">styles</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Conveniently styles your text as and resets ANSI codes at its end.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">terminator</span> <span class="o">=</span> <span class="n">attr</span><span class="p">(</span><span class="s2">&quot;reset&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">reset</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
     <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">styles</span><span class="p">),</span> <span class="n">text</span><span class="p">,</span> <span class="n">terminator</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="fg"><a class="viewcode-back" href="../../generated/brainprep.color_utils.fg.html#brainprep.color_utils.fg">[docs]</a><span class="k">def</span> <span class="nf">fg</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+
+<div class="viewcode-block" id="fg">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.fg.html#brainprep.color_utils.fg">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fg</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Alias for colored().foreground().</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">colored</span><span class="p">(</span><span class="n">color</span><span class="p">)</span><span class="o">.</span><span class="n">foreground</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="attr"><a class="viewcode-back" href="../../generated/brainprep.color_utils.attr.html#brainprep.color_utils.attr">[docs]</a><span class="k">def</span> <span class="nf">attr</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+
+<div class="viewcode-block" id="attr">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.attr.html#brainprep.color_utils.attr">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">attr</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Alias for colored().attribute().</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">colored</span><span class="p">(</span><span class="n">color</span><span class="p">)</span><span class="o">.</span><span class="n">attribute</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="print_title"><a class="viewcode-back" href="../../generated/brainprep.color_utils.print_title.html#brainprep.color_utils.print_title">[docs]</a><span class="k">def</span> <span class="nf">print_title</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
+
+<div class="viewcode-block" id="print_title">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.print_title.html#brainprep.color_utils.print_title">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_title</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">IS_COLOR_TERM</span><span class="p">:</span>
         <span class="n">title</span> <span class="o">=</span> <span class="n">stylize</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fg</span><span class="p">(</span><span class="n">fg_colors</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="n">attr</span><span class="p">(</span><span class="s2">&quot;bold&quot;</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="print_subtitle"><a class="viewcode-back" href="../../generated/brainprep.color_utils.print_subtitle.html#brainprep.color_utils.print_subtitle">[docs]</a><span class="k">def</span> <span class="nf">print_subtitle</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
+
+<div class="viewcode-block" id="print_subtitle">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.print_subtitle.html#brainprep.color_utils.print_subtitle">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_subtitle</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">IS_COLOR_TERM</span><span class="p">:</span>
         <span class="n">title</span> <span class="o">=</span> <span class="n">stylize</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fg</span><span class="p">(</span><span class="n">fg_colors</span><span class="p">[</span><span class="s2">&quot;subtitle&quot;</span><span class="p">]))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="print_command"><a class="viewcode-back" href="../../generated/brainprep.color_utils.print_command.html#brainprep.color_utils.print_command">[docs]</a><span class="k">def</span> <span class="nf">print_command</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+
+<div class="viewcode-block" id="print_command">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.print_command.html#brainprep.color_utils.print_command">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_command</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">IS_COLOR_TERM</span><span class="p">:</span>
         <span class="n">command</span> <span class="o">=</span> <span class="n">stylize</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">fg</span><span class="p">(</span><span class="n">fg_colors</span><span class="p">[</span><span class="s2">&quot;command&quot;</span><span class="p">]))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">command</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="print_result"><a class="viewcode-back" href="../../generated/brainprep.color_utils.print_result.html#brainprep.color_utils.print_result">[docs]</a><span class="k">def</span> <span class="nf">print_result</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+
+<div class="viewcode-block" id="print_result">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.print_result.html#brainprep.color_utils.print_result">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_result</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">IS_COLOR_TERM</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">stylize</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">fg</span><span class="p">(</span><span class="n">fg_colors</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="print_error"><a class="viewcode-back" href="../../generated/brainprep.color_utils.print_error.html#brainprep.color_utils.print_error">[docs]</a><span class="k">def</span> <span class="nf">print_error</span><span class="p">(</span><span class="n">error</span><span class="p">):</span>
+
+<div class="viewcode-block" id="print_error">
+<a class="viewcode-back" href="../../generated/brainprep.color_utils.print_error.html#brainprep.color_utils.print_error">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_error</span><span class="p">(</span><span class="n">error</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">IS_COLOR_TERM</span><span class="p">:</span>
         <span class="n">error</span> <span class="o">=</span> <span class="n">stylize</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">fg</span><span class="p">(</span><span class="n">fg_colors</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">]))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
+
 </pre></div>
                     </div>
                 <div class="spacer"></div>
@@ -834,8 +876,8 @@
 			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
 									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
 									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
-									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
-                                    <p>&copy; 2024, 
+									<a href="https://gaia.neurospin.fr"><i class="fa fa-link"></i></a>
+                                    <p>&copy; 2025, 
 brainprep developers
  <antoine.grigis@cea.fr></p>
 		                    	</div>

@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.spatial.bet2
 
-.. minigallery:: brainprep.spatial.bet2 brainprep.bet2
+.. minigallery:: brainprep.bet2 brainprep.spatial.bet2
     :add-heading: Examples
     :heading-level: -
 

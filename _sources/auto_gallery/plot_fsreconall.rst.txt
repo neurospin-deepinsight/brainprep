@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_auto_gallery_plot_fsreconall.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_auto_gallery_plot_fsreconall.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -28,7 +28,7 @@ Singularity container.
 
 .. GENERATED FROM PYTHON SOURCE LINES 11-17
 
-.. code-block:: default
+.. code-block:: Python
 
     # sphinx_gallery_thumbnail_path = '_static/carousel/freesurfer.png'
 
@@ -49,7 +49,7 @@ Please tune these parameters: not that you need a valid FreeSurfer license.
 
 .. GENERATED FROM PYTHON SOURCE LINES 19-42
 
-.. code-block:: default
+.. code-block:: Python
 
 
     DATADIR = "/tmp/brainprep-data"
@@ -87,7 +87,7 @@ You can now execute this command.
 
 .. GENERATED FROM PYTHON SOURCE LINES 44-47
 
-.. code-block:: default
+.. code-block:: Python
 
 
     print(" ".join(cmd))
@@ -97,8 +97,6 @@ You can now execute this command.
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -110,30 +108,28 @@ You can now execute this command.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.311 seconds)
+   **Total running time of the script:** (0 minutes 0.304 seconds)
 
-**Estimated memory usage:**  8 MB
+**Estimated memory usage:**  68 MB
 
 
 .. _sphx_glr_download_auto_gallery_plot_fsreconall.py:
 
+.. only:: html
 
-.. only :: html
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
+      :download:`Download Jupyter notebook: plot_fsreconall.ipynb <plot_fsreconall.ipynb>`
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: plot_fsreconall.py <plot_fsreconall.py>`
 
-     :download:`Download Python source code: plot_fsreconall.py <plot_fsreconall.py>`
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: plot_fsreconall.ipynb <plot_fsreconall.ipynb>`
+      :download:`Download zipped: plot_fsreconall.zip <plot_fsreconall.zip>`
 
 
 .. only:: html

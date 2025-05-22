@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../../../_static/css/animate.css">
         <link rel="stylesheet" href="../../../_static/css/style.css">
         <link rel="stylesheet" href="../../../_static/css/jquery.mosaic.css">
-        <link rel="stylesheet" href="../../../_static/gallery.css">
+        <link rel="stylesheet" href="../../../_static/sg_gallery.css">
         <link rel="stylesheet" href="../../../_static/css/media-queries.css">
         <link rel="stylesheet" href="../../../_static/css/pygment.css">
 
@@ -43,9 +43,9 @@
 					<i class="fas fa-arrow-left"></i>
 				</div>
 				
-				<div class="logo"">
+				<!-- <div class="logo"">
 					<h3><a href="../../../index.html">Sidebar Menu</a></h3>
-				</div>
+				</div> -->
 
                 <!-- info setup -->
                     <p class="doc-version">
@@ -76,10 +76,10 @@
 					<li>
 						<a href="../../../generated/search.html"><i class="fas fa-search"></i> Search</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
 							<i class="fas fa-sync"></i>Sections Shortcuts
 						</a>
@@ -89,21 +89,21 @@
                             <li>API</li>
                             <li><a href="../../../generated/brainprep.html">brainprep</a></li><li><a href="../../../generated/brainprep.workflow.html">brainprep.workflow</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 				
                 <!-- go top page -->
-				<div class="to-top">
+				<!-- <div class="to-top">
 					<a class="btn btn-primary btn-customized-3" href="#" role="button">
 	                    <i class="fas fa-arrow-up"></i> Top
 	                </a>
-				</div>
+				</div> -->
 			
                 <!-- change color -->
-				<div class="dark-light-buttons">
+				<!-- <div class="dark-light-buttons">
 					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
 					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-				</div>
+				</div> -->
 			
 			</nav>
 			<!-- End sidebar -->
@@ -134,7 +134,7 @@
 		        </div>
                     
                     <div class="document">
-                        <h1>Source code for brainprep.workflow.tbss</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+                        <h1>Source code for brainprep.workflow.tbss</h1><div class='divider-1 wow fadeInUp' style='margin-top: -20px;'><span></span></div><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1">##########################################################################</span>
 <span class="c1"># NSAp - Copyright (C) CEA, 2021 - 2022</span>
@@ -149,14 +149,16 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># System import</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">import</span> <span class="nn">brainprep</span>
-<span class="kn">from</span> <span class="nn">brainprep.utils</span> <span class="kn">import</span> <span class="n">check_command</span><span class="p">,</span> <span class="n">execute_command</span>
-<span class="kn">from</span> <span class="nn">brainprep.color_utils</span> <span class="kn">import</span> <span class="n">print_title</span><span class="p">,</span> <span class="n">print_subtitle</span><span class="p">,</span> <span class="n">print_result</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">brainprep</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainprep.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_command</span><span class="p">,</span> <span class="n">execute_command</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainprep.color_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_title</span><span class="p">,</span> <span class="n">print_subtitle</span><span class="p">,</span> <span class="n">print_result</span>
 
 
-<div class="viewcode-block" id="brainprep_tbss_preproc"><a class="viewcode-back" href="../../../generated/brainprep.workflow.tbss.brainprep_tbss_preproc.html#brainprep.workflow.brainprep_tbss_preproc">[docs]</a><span class="k">def</span> <span class="nf">brainprep_tbss_preproc</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">fa_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bvecs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="brainprep_tbss_preproc">
+<a class="viewcode-back" href="../../../generated/brainprep.workflow.tbss.brainprep_tbss_preproc.html#brainprep.workflow.brainprep_tbss_preproc">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">brainprep_tbss_preproc</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">fa_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bvecs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                            <span class="n">bvals</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Define TBSS pre-processing workflow.</span>
 
@@ -217,7 +219,10 @@
     <span class="n">print_title</span><span class="p">(</span><span class="s2">&quot;Done.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="brainprep_tbss"><a class="viewcode-back" href="../../../generated/brainprep.workflow.tbss.brainprep_tbss.html#brainprep.workflow.brainprep_tbss">[docs]</a><span class="k">def</span> <span class="nf">brainprep_tbss</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">use_fmrib58_fa_mean_and_skel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="brainprep_tbss">
+<a class="viewcode-back" href="../../../generated/brainprep.workflow.tbss.brainprep_tbss.html#brainprep.workflow.brainprep_tbss">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">brainprep_tbss</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">use_fmrib58_fa_mean_and_skel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">target_skel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Define TBSS workflow.</span>
 
@@ -258,6 +263,7 @@
         <span class="n">check_command</span><span class="p">(</span><span class="s2">&quot;tbss_non_FA&quot;</span><span class="p">)</span>
         <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
     <span class="n">print_title</span><span class="p">(</span><span class="s2">&quot;Done.&quot;</span><span class="p">)</span></div>
+
 </pre></div>
                     </div>
                 <div class="spacer"></div>
@@ -274,8 +280,8 @@
 			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
 									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
 									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
-									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
-                                    <p>&copy; 2024, 
+									<a href="https://gaia.neurospin.fr"><i class="fa fa-link"></i></a>
+                                    <p>&copy; 2025, 
 brainprep developers
  <antoine.grigis@cea.fr></p>
 		                    	</div>

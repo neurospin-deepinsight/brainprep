@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../_static/css/animate.css">
         <link rel="stylesheet" href="../_static/css/style.css">
         <link rel="stylesheet" href="../_static/css/jquery.mosaic.css">
-        <link rel="stylesheet" href="../_static/gallery.css">
+        <link rel="stylesheet" href="../_static/sg_gallery.css">
         <link rel="stylesheet" href="../_static/css/media-queries.css">
         <link rel="stylesheet" href="../_static/css/pygment.css">
 
@@ -43,9 +43,9 @@
 					<i class="fas fa-arrow-left"></i>
 				</div>
 				
-				<div class="logo"">
+				<!-- <div class="logo"">
 					<h3><a href="../index.html">Sidebar Menu</a></h3>
-				</div>
+				</div> -->
 
                 <!-- info setup -->
                     <p class="doc-version">
@@ -59,6 +59,8 @@
 				
                 <!-- links -->
                 
+                
+                    
                 
 				<ul class="list-unstyled menu-elements">
 					<li class="active">
@@ -76,34 +78,54 @@
 					<li>
 						<a href="search.html"><i class="fas fa-search"></i> Search</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin webPage</a>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
 							<i class="fas fa-sync"></i>Sections Shortcuts
 						</a>
 						<ul class="collapse list-unstyled" id="otherSections">
                             <li>LINKS</li><li><a href='https://github.com/neurospin-deepinsight/deepinsight'>deepinsight</a></li>
                             
+                                
+                                
+                                    
+                                        
+                                        
+                                        
+                                    
+                                        
+                                        
+                                        
+                                    
+                                
+                                    
+                                        
+                                        
+                                        
+                                    
+                                
+                                
+                            
                             <li>API</li>
                             <li><a href="brainprep.html">brainprep</a></li><li><a href="brainprep.workflow.html">brainprep.workflow</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 				
                 <!-- go top page -->
-				<div class="to-top">
+				<!-- <div class="to-top">
 					<a class="btn btn-primary btn-customized-3" href="#" role="button">
 	                    <i class="fas fa-arrow-up"></i> Top
 	                </a>
-				</div>
+				</div> -->
 			
                 <!-- change color -->
-				<div class="dark-light-buttons">
+				<!-- <div class="dark-light-buttons">
 					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
 					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-				</div>
+				</div> -->
 			
 			</nav>
 			<!-- End sidebar -->
@@ -136,14 +158,14 @@
                     <div class="document">
                         <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This page is a reference documentation. It only explains the function signature, and not how to use it. Please refer to the <a class="reference internal" href="../auto_gallery/index.html#sphx-glr-auto-gallery"><span class="std std-ref">gallery</span></a> for the big picture.</p>
+<p>This page is a reference documentation. It only explains the function signature, and not how to use it. Please refer to the <span class="xref std std-ref">gallery</span> for the big picture.</p>
 </div>
 <dl class="py function">
-<dt id="brainprep.workflow.brainprep_fmriprep">
-<code class="sig-prename descclassname"><span class="pre">brainprep.workflow.</span></code><code class="sig-name descname"><span class="pre">brainprep_fmriprep</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">anatomical</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functionals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subjid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fsdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/out'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/work'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmriprep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fmriprep'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brainprep/workflow/fmriprep.html#brainprep_fmriprep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.workflow.brainprep_fmriprep" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainprep.workflow.brainprep_fmriprep">
+<span class="sig-prename descclassname"><span class="pre">brainprep.workflow.</span></span><span class="sig-name descname"><span class="pre">brainprep_fmriprep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">anatomical</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functionals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subjid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fsdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/out'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/work'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmriprep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fmriprep'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brainprep/workflow/fmriprep.html#brainprep_fmriprep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.workflow.brainprep_fmriprep" title="Link to this definition">¶</a></dt>
 <dd><p>Define the fmriprep pre-processing workflow.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>anatomical</strong> : str</p>
 <blockquote>
 <div><p>path to the anatomical T1w Nifti file.</p>
@@ -196,8 +218,8 @@
 			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
 									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
 									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
-									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
-                                    <p>&copy; 2024, 
+									<a href="https://gaia.neurospin.fr"><i class="fa fa-link"></i></a>
+                                    <p>&copy; 2025, 
 brainprep developers
  <antoine.grigis@cea.fr></p>
 		                    	</div>
