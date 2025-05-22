@@ -31,8 +31,8 @@ dependencies = [
 ]
 dynamic = ["version"]
 
-[project.scripts]
-brainprep = "brainprep/scripts/brainprep"
+#[project.scripts]
+#brainprep = "brainprep/scripts/brainprep"
 
 [project.urls]
 Source = "https://github.com/neurospin-deepinsight/brainprep"
