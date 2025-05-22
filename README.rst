@@ -72,52 +72,35 @@ amoung which the CEA Neurospin BAOBAB laboratory.
 
    
 Important links
-===============
+---------------
 
 * Official source code repo: https://github.com/neurospin-deepinsight/brainprep
-* HTML documentation (stable release): https://brainprep.readthedocs.io/en/v0.0.1
-* HTML documentation (latest release): https://brainprep.readthedocs.io/en/latest
+* HTML documentation (latest release): https://neurospin-deepinsight.github.io/brainprep
 * Release notes: https://github.com/neurospin-deepinsight/brainprep/blob/master/CHANGELOG.rst
 
 
-Dependencies
-============
+Where to start
+--------------
 
-`brainprep` requires the installation of the following system packages:
-
-* Python [>=3.6]
+Examples are available in the `gallery <https://neurospin-deepinsight.github.io/brainprep/auto_gallery/index.html>`_. You can also refer to the `API documentation <https://neurospin-deepinsight.github.io/brainprep/generated/documentation.html>`_.
 
 
 Install
-=======
+-------
 
-First make sure you have installed all the dependencies listed above.
-Then you can install `brainprep` by running the following command in a
-command prompt:
-
-.. code::
-
-    pip install -U --user brainprep
-
-More detailed instructions are available at https://brainprep.readthedocs.io/en/latest/generated/installation.html.
-
-
-Where to start
-==============
-
-The easiest way to get started is to:
-
-* browse available examples: https://brainprep.readthedocs.io/en/latest/auto_gallery/index.html.
-* refer to the list of available workflows: https://brainprep.readthedocs.io/en/latest/generated/brainprep.workflow.html.
-* refer to the module API documentation: https://brainprep.readthedocs.io/en/latest/generated/brainprep.html.
+The code is tested for the current stable PyTorch and torchvision versions, but should work with other versions as well. Make sure you have installed all the package dependencies. Complete instructions are available `here <https://neurospin-deepinsight.github.io/brainprep/generated/installation.html>`_.
 
 
 Contributing
-============
+------------
 
-If you want to contribute to `brainprep`, be sure to review the `contribution guidelines`_.
+If you want to contribute to brainprep, be sure to review the `contribution guidelines <./CONTRIBUTING.rst>`_.
 
-.. _contribution guidelines: ./CONTRIBUTING.rst
+
+License
+-------
+
+This project is under the following `LICENSE <./LICENSE.rst>`_.
 
 
 Citation
