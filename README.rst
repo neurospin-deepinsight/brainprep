@@ -1,6 +1,6 @@
 **Usage**
 
-|PythonVersion|_ |License|_ |PoweredBy|_
+|PythonVersion|_ |License| |PoweredBy|_
 
 **Development**
 
