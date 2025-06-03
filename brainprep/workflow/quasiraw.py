@@ -22,22 +22,38 @@ from brainprep.utils import load_images, create_clickable, listify
 from brainprep.color_utils import print_title, print_result
 from brainprep.qc import plot_pca, compute_mean_correlation, check_files
 from brainprep.plotting import plot_images, plot_hists
+from brainprep.spatial import reorient2std, apply_mask, scale, biasfield, register_affine, apply_affine, bet2
 
 
-def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
+def brainprep_quasiraw(anatomical, outdir, mask=None, target=None, no_bids=False):
     """ Define quasi-raw pre-processing workflow.
+
+    This includes:
+
+    1) Reorient the anatomical image to standard space (MNI152 by default).
+    2) Reorient the mask to standard space (if provided).
+    3) Apply the mask to the anatomical image (if provided).
+    4) Resample the image to 1mm isotropic voxel size.
+    5) Bias field correction.
+    6) Linearly register the image to a standard template (default MNI152 T1 1mm).
+    7) Apply the registration to the mask.
+    8) Apply the mask to the registered image.
+    9) Save the final image as a Nifti file and a numpy array.
+
 
     Parameters
     ----------
     anatomical: str
         path to the anatomical T1w Nifti file.
-    mask: str
-        a binary mask to be applied.
     outdir: str
         the destination folder.
-    target: str
+    mask: str, default=None
+        a binary mask to be applied.
+        If None, the mask is computed using BET2 (faster but less accurate than ANTs). 
+    target: str, default=None
         a custom target image for the registration.
-    no_bids: bool
+        If None, the default MNI152 T1 1mm template is used from ..resources/MNI152_T1_1mm_brain.nii.gz
+    no_bids: bool, default=False
         set this option if the input files are not named following the
         BIDS hierarchy.
     """
@@ -73,15 +89,20 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
     applyfile = basefile.format("6apply")
 
     print_title("Launch quasi-raw pre-processing...")
-    brainprep.reorient2std(imfile, stdfile)
-    brainprep.reorient2std(maskfile, stdmaskfile)
-    brainprep.apply_mask(stdfile, stdmaskfile, brainfile)
-    brainprep.scale(brainfile, scaledfile, scale=1)
-    brainprep.biasfield(scaledfile, bfcfile)
-    _, trffile = brainprep.register_affine(bfcfile, targetfile, regfile)
-    brainprep.apply_affine(stdmaskfile, regfile, regmaskfile, trffile,
-                           interp="nearestneighbour")
-    brainprep.apply_mask(regfile, regmaskfile, applyfile)
+    reorient2std(imfile, stdfile)
+    if maskfile is not None:
+        reorient2std(maskfile, stdmaskfile)
+        apply_mask(stdfile, stdmaskfile, brainfile)
+    else:
+        print_title("No mask provided, use BET2 to compute it...")
+        brainfile, stdmaskfile = bet2(stdfile, brainfile, frac=0.5, cleanup=True, save_brain_mask=True)
+
+    scale(brainfile, scaledfile, scale=1)
+    biasfield(scaledfile, bfcfile)
+    _, trffile = register_affine(bfcfile, targetfile, regfile)
+    apply_affine(stdmaskfile, regfile, regmaskfile, trffile,
+                 interp="nearestneighbour")
+    apply_mask(regfile, regmaskfile, applyfile)
 
     print_title("Make datasets...")
     if not os.path.exists(applyfile):

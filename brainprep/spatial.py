@@ -19,7 +19,7 @@ from .utils import check_version, check_command, execute_command
 
 
 def scale(imfile, scaledfile, scale, check_pkg_version=False):
-    """ Scale the MRI image.
+    """ Resample the MRI image to a new isotropic voxel size.
 
     .. note:: This function is based on FSL.
 
@@ -30,7 +30,7 @@ def scale(imfile, scaledfile, scale, check_pkg_version=False):
     scaledfile: str
         the path to the scaled input image.
     scale: int
-        the scale factor in all directions.
+        Desired isotropic voxel size in mm.
     check_pkg_version: bool, default False
         optionally check the package version using dpkg.
 
@@ -48,7 +48,7 @@ def scale(imfile, scaledfile, scale, check_pkg_version=False):
     return scaledfile, trffile
 
 
-def bet2(imfile, brainfile, frac=0.5, cleanup=True, check_pkg_version=False):
+def bet2(imfile, brainfile, frac=0.5, cleanup=True, save_brain_mask=True, check_pkg_version=False):
     """ Skull stripped the MRI image.
 
     .. note:: This function is based on FSL.
@@ -58,24 +58,30 @@ def bet2(imfile, brainfile, frac=0.5, cleanup=True, check_pkg_version=False):
     imfile: str
         the input image.
     brainfile: str
-        the path to the brain image file.
-    frac: float, default 0.5
+        the path to the output brain image file (with masked applied).
+    frac: float, default=0.5
         fractional intensity threshold (0->1);smaller values give larger brain
         outline estimates
-    cleanup: bool, default True
+    cleanup: bool, default=True
         optionnally add bias field & neck cleanup.
-    check_pkg_version: bool, default False
+    save_brain_mask: bool, default=True
+        optionnally save the brain mask with suffix "_mask.nii.gz".
+    check_pkg_version: bool, default=False
         optionally check the package version using dpkg.
 
     Returns
     -------
-    brainfile, maskfile: str
-        the generated files.
+    brainfile, maskfile: str, str or None
+        the generated files. 
+        If `save_brain_mask` is False, the maskfile will be None
     """
     check_version("fsl", check_pkg_version)
     check_command("bet")
-    maskfile = brainfile.split(".")[0] + "_mask.nii.gz"
-    cmd = ["bet", imfile, brainfile, "-f", str(frac), "-R", "-m"]
+    cmd = ["bet", imfile, brainfile, "-f", str(frac), "-R"]
+    maskfile = None
+    if save_brain_mask:
+        cmd.append("-m")
+        maskfile = brainfile.split(".")[0] + "_mask.nii.gz"
     if cleanup:
         cmd.append("-B")
     execute_command(cmd)
