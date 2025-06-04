@@ -305,3 +305,21 @@ def listify(obj):
         return obj.split(",")
     else:
         return obj
+
+
+def cp_file(src, dst):
+    """ Copy a file from src to dst.
+
+    Parameters
+    ----------
+    src: str
+        the source file.
+    dst: str
+        the destination file.
+    """
+    if not os.path.isfile(src):
+        raise ValueError("Source file '{}' does not exist.".format(src))
+    if not os.path.isdir(os.path.dirname(dst)):
+        raise ValueError("Destination directory '{}' does not exist."
+                         .format(os.path.dirname(dst)))
+    execute_command(["cp", src, dst])
