@@ -87,6 +87,39 @@ def bet2(imfile, brainfile, frac=0.5, cleanup=True, save_brain_mask=True, check_
     execute_command(cmd)
     return brainfile, maskfile
 
+def synthstrip(imfile, brainfile, save_brain_mask=True):
+    """
+    Skull strip the MRI image using SynthStrip (FreeSurfer).
+
+    Parameters
+    ----------
+    imfile: str
+        Input image (T1, T2, FLAIR, etc.)
+    brainfile: str
+        Output skull-stripped brain image file path.
+    save_brain_mask: bool, default=True
+        Optionally save the brain mask with suffix '_mask.nii.gz'.
+
+    Returns
+    -------
+    brainfile, maskfile: str, str or None
+        The skull-stripped image and mask file paths.
+        If `save_brain_mask` is False, maskfile is None.
+    """
+    check_command("mri_synthstrip")
+    
+    cmd = [
+        "mri_synthstrip",
+        "-i", imfile,
+        "-o", brainfile,
+        "--no-csf"
+    ]
+    maskfile = None
+    if save_brain_mask:
+        maskfile = brainfile.split(".")[0] + "_mask.nii.gz"
+        cmd.extend(["-m", maskfile])
+    execute_command(cmd)
+    return brainfile, maskfile
 
 def reorient2std(imfile, stdfile, check_pkg_version=False):
     """ Reorient the MRI image to match the approximate orientation of the
@@ -186,7 +219,13 @@ def biasfield(imfile, bfcfile, maskfile=None, nb_iterations=50,
         "-v"]
     if maskfile is not None:
         cmd += ["-x", maskfile]
-    execute_command(cmd)
+    try:
+        execute_command(cmd)
+    except Exception as e:
+        print(f"Error occurred while executing command: {e}")
+        cmd = ["cp", imfile, bfcfile]
+        execute_command(cmd)
+        print("Using the original image as the bias field corrected image.")
     return bfcfile, bffile
 
 
