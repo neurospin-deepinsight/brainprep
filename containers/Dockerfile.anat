@@ -134,8 +134,8 @@ ENV SPMROOT="/opt/spm"
 
 
 
-# Installing FreeSurfer v7.1.1
-RUN curl -sSL https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.1.1/freesurfer-linux-centos6_x86_64-7.1.1.tar.gz \
+# Installing FreeSurfer v7.4.1
+RUN curl -sSL https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.4.1/freesurfer-linux-ubuntu20_amd64-7.4.1.tar.gz \
     -o /tmp/freesurfer.tar.gz && \
     tar zxv --no-same-owner -C /opt -f /tmp/freesurfer.tar.gz \
     --exclude="freesurfer/diffusion" \
@@ -190,7 +190,7 @@ ENV HOME="/home/brainprep"
 
 # Define labels
 MAINTAINER Antoine Grigis <antoine.grigis@cea.fr>
-LABEL description="FSL 6.0.5.1, ANTS 2.6.1, FreeSurfer v7.1.1, MATLAB Compiler Runtime R2017b v9.3 and CAT12.8.2 r2166 standalone docker image for brainprep 0.0.0"
+LABEL description="FSL 6.0.5.1, ANTS 2.6.1, FreeSurfer v7.4.1, MATLAB Compiler Runtime R2017b v9.3 and CAT12.8.2 r2166 standalone docker image for brainprep 0.0.0"
 LABEL maintainer="antoine.grigis@cea.fr"
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="brainprep" \
