@@ -211,11 +211,11 @@ def biasfield(imfile, bfcfile, maskfile=None, nb_iterations=50,
         "-d", str(ndim),
         "-i", imfile,
         "-s", str(shrink_factor),
-        "-b", "[{0}, {1}]".format("x".join(bspline_grid), bspline_order),
-        "-c", "[{0}, {1}]".format(
+        "-b", "[{0},{1}]".format("x".join(bspline_grid), bspline_order),
+        "-c", "[{0},{1}]".format(
             "x".join([str(nb_iterations)] * 4), convergence_threshold),
         "-t", "[{0}]".format(", ".join(histogram_sharpening)),
-        "-o", "[{0}, {1}]".format(bfcfile, bffile),
+        "-o", "[{0},{1}]".format(bfcfile, bffile),
         "-v"]
     if maskfile is not None:
         cmd += ["-x", maskfile]
