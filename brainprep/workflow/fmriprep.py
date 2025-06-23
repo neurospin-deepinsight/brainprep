@@ -84,6 +84,7 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile, fsdir,
                 "--skip_bids_validation",
                 "--force bbr",
                 "--no-msm",
+                "--output-spaces", "MNI152NLin6Asym:res-2",
                 "--cifti-output", "91k",
                 "--output-spaces", (
                     "MNI152NLin2009cAsym MNI152NLin6Asym:res-2 "
