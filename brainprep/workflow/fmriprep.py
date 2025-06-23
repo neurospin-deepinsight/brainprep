@@ -82,7 +82,8 @@ def brainprep_fmriprep(anatomical, functionals, subjid, descfile, fsdir,
                 "--stop-on-first-crash",
                 "--fs-license-file", "/code/freesurfer.txt",
                 "--skip_bids_validation",
-                "--force-bbr",
+                "--force bbr",
+                "--no-msm",
                 "--cifti-output", "91k",
                 "--output-spaces", (
                     "MNI152NLin2009cAsym MNI152NLin6Asym:res-2 "
