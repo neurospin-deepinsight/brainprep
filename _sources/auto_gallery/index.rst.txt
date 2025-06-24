@@ -1,5 +1,7 @@
 :orphan:
 
+.. _sphx_glr_auto_gallery:
+
 Brain MRI PreProcessing Use Cases
 =================================
 

@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.cortical.interhemi_surfreg
 
-.. minigallery:: brainprep.cortical.interhemi_surfreg brainprep.interhemi_surfreg
+.. minigallery:: brainprep.interhemi_surfreg brainprep.cortical.interhemi_surfreg
     :add-heading: Examples
     :heading-level: -
 

@@ -94,23 +94,19 @@ This is the classes and functions reference in brainprep. Please refer to the ga
 
           `brainprep.write_matlabbatch <brainprep.utils.write_matlabbatch.html>`_
 
-          `brainprep.connectivity.func_connectivity <brainprep.connectivity.func_connectivity.html>`_
+          `brainprep.spatial.apply_affine <brainprep.spatial.apply_affine.html>`_
 
-          `brainprep.cortical.interhemi_projection <brainprep.cortical.interhemi_projection.html>`_
+          `brainprep.spatial.apply_mask <brainprep.spatial.apply_mask.html>`_
 
-          `brainprep.cortical.interhemi_surfreg <brainprep.cortical.interhemi_surfreg.html>`_
+          `brainprep.spatial.bet2 <brainprep.spatial.bet2.html>`_
 
-          `brainprep.cortical.localgi <brainprep.cortical.localgi.html>`_
+          `brainprep.spatial.biasfield <brainprep.spatial.biasfield.html>`_
 
-          `brainprep.cortical.mri_conversion <brainprep.cortical.mri_conversion.html>`_
+          `brainprep.spatial.register_affine <brainprep.spatial.register_affine.html>`_
 
-          `brainprep.cortical.recon_all <brainprep.cortical.recon_all.html>`_
+          `brainprep.spatial.reorient2std <brainprep.spatial.reorient2std.html>`_
 
-          `brainprep.cortical.recon_all_custom_wm_mask <brainprep.cortical.recon_all_custom_wm_mask.html>`_
-
-          `brainprep.cortical.recon_all_longitudinal <brainprep.cortical.recon_all_longitudinal.html>`_
-
-          `brainprep.cortical.stats2table <brainprep.cortical.stats2table.html>`_
+          `brainprep.spatial.scale <brainprep.spatial.scale.html>`_
 
           `brainprep.qc.check_files <brainprep.qc.check_files.html>`_
 
@@ -146,6 +142,26 @@ This is the classes and functions reference in brainprep. Please refer to the ga
 
           `brainprep.color_utils.stylize <brainprep.color_utils.stylize.html>`_
 
+          `brainprep.connectivity.func_connectivity <brainprep.connectivity.func_connectivity.html>`_
+
+          `brainprep.deface.deface <brainprep.deface.deface.html>`_
+
+          `brainprep.cortical.interhemi_projection <brainprep.cortical.interhemi_projection.html>`_
+
+          `brainprep.cortical.interhemi_surfreg <brainprep.cortical.interhemi_surfreg.html>`_
+
+          `brainprep.cortical.localgi <brainprep.cortical.localgi.html>`_
+
+          `brainprep.cortical.mri_conversion <brainprep.cortical.mri_conversion.html>`_
+
+          `brainprep.cortical.recon_all <brainprep.cortical.recon_all.html>`_
+
+          `brainprep.cortical.recon_all_custom_wm_mask <brainprep.cortical.recon_all_custom_wm_mask.html>`_
+
+          `brainprep.cortical.recon_all_longitudinal <brainprep.cortical.recon_all_longitudinal.html>`_
+
+          `brainprep.cortical.stats2table <brainprep.cortical.stats2table.html>`_
+
           `brainprep.plotting.get_fsreconall_masks <brainprep.plotting.get_fsreconall_masks.html>`_
 
           `brainprep.plotting.plot_fsreconall <brainprep.plotting.plot_fsreconall.html>`_
@@ -153,18 +169,6 @@ This is the classes and functions reference in brainprep. Please refer to the ga
           `brainprep.plotting.plot_hists <brainprep.plotting.plot_hists.html>`_
 
           `brainprep.plotting.plot_images <brainprep.plotting.plot_images.html>`_
-
-          `brainprep.tbss.dtifit <brainprep.tbss.dtifit.html>`_
-
-          `brainprep.tbss.tbss_1_preproc <brainprep.tbss.tbss_1_preproc.html>`_
-
-          `brainprep.tbss.tbss_2_reg <brainprep.tbss.tbss_2_reg.html>`_
-
-          `brainprep.tbss.tbss_3_postreg <brainprep.tbss.tbss_3_postreg.html>`_
-
-          `brainprep.tbss.tbss_4_prestats <brainprep.tbss.tbss_4_prestats.html>`_
-
-          `brainprep.deface.deface <brainprep.deface.deface.html>`_
 
           `brainprep.utils.check_command <brainprep.utils.check_command.html>`_
 
@@ -184,19 +188,15 @@ This is the classes and functions reference in brainprep. Please refer to the ga
 
           `brainprep.utils.write_matlabbatch <brainprep.utils.write_matlabbatch.html>`_
 
-          `brainprep.spatial.apply_affine <brainprep.spatial.apply_affine.html>`_
+          `brainprep.tbss.dtifit <brainprep.tbss.dtifit.html>`_
 
-          `brainprep.spatial.apply_mask <brainprep.spatial.apply_mask.html>`_
+          `brainprep.tbss.tbss_1_preproc <brainprep.tbss.tbss_1_preproc.html>`_
 
-          `brainprep.spatial.bet2 <brainprep.spatial.bet2.html>`_
+          `brainprep.tbss.tbss_2_reg <brainprep.tbss.tbss_2_reg.html>`_
 
-          `brainprep.spatial.biasfield <brainprep.spatial.biasfield.html>`_
+          `brainprep.tbss.tbss_3_postreg <brainprep.tbss.tbss_3_postreg.html>`_
 
-          `brainprep.spatial.register_affine <brainprep.spatial.register_affine.html>`_
-
-          `brainprep.spatial.reorient2std <brainprep.spatial.reorient2std.html>`_
-
-          `brainprep.spatial.scale <brainprep.spatial.scale.html>`_
+          `brainprep.tbss.tbss_4_prestats <brainprep.tbss.tbss_4_prestats.html>`_
 
     * `brainprep.workflow <brainprep.workflow.html>`_
         .. hidden-technical-block::
@@ -241,21 +241,27 @@ This is the classes and functions reference in brainprep. Please refer to the ga
 
           `brainprep.workflow.brainprep_tbss_preproc <brainprep.workflow.tbss.brainprep_tbss_preproc.html>`_
 
+          `brainprep.workflow.cat12vbm.brainprep_cat12vbm <brainprep.workflow.cat12vbm.brainprep_cat12vbm.html>`_
+
+          `brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc <brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc.html>`_
+
+          `brainprep.workflow.cat12vbm.brainprep_cat12vbm_roi <brainprep.workflow.cat12vbm.brainprep_cat12vbm_roi.html>`_
+
           `brainprep.workflow.fmriprep.brainprep_fmriprep <brainprep.workflow.fmriprep.brainprep_fmriprep.html>`_
 
           `brainprep.workflow.fmriprep.brainprep_fmriprep_conn <brainprep.workflow.fmriprep.brainprep_fmriprep_conn.html>`_
 
-          `brainprep.workflow.fsreconall.brainprep_fsreconall <brainprep.workflow.fsreconall.brainprep_fsreconall.html>`_
+          `brainprep.workflow.prequal.brainprep_prequal <brainprep.workflow.prequal.brainprep_prequal.html>`_
 
-          `brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal <brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal.html>`_
+          `brainprep.workflow.prequal.brainprep_prequal_qc <brainprep.workflow.prequal.brainprep_prequal_qc.html>`_
 
-          `brainprep.workflow.fsreconall.brainprep_fsreconall_qc <brainprep.workflow.fsreconall.brainprep_fsreconall_qc.html>`_
+          `brainprep.workflow.quasiraw.brainprep_quasiraw <brainprep.workflow.quasiraw.brainprep_quasiraw.html>`_
 
-          `brainprep.workflow.fsreconall.brainprep_fsreconall_summary <brainprep.workflow.fsreconall.brainprep_fsreconall_summary.html>`_
+          `brainprep.workflow.quasiraw.brainprep_quasiraw_qc <brainprep.workflow.quasiraw.brainprep_quasiraw_qc.html>`_
 
-          `brainprep.workflow.tbss.brainprep_tbss <brainprep.workflow.tbss.brainprep_tbss.html>`_
+          `brainprep.workflow.deface.brainprep_deface <brainprep.workflow.deface.brainprep_deface.html>`_
 
-          `brainprep.workflow.tbss.brainprep_tbss_preproc <brainprep.workflow.tbss.brainprep_tbss_preproc.html>`_
+          `brainprep.workflow.deface.brainprep_deface_qc <brainprep.workflow.deface.brainprep_deface_qc.html>`_
 
           `brainprep.workflow.mriqc.brainprep_mriqc <brainprep.workflow.mriqc.brainprep_mriqc.html>`_
 
@@ -275,22 +281,16 @@ This is the classes and functions reference in brainprep. Please refer to the ga
 
           `brainprep.workflow.mriqc.query_api <brainprep.workflow.mriqc.query_api.html>`_
 
-          `brainprep.workflow.cat12vbm.brainprep_cat12vbm <brainprep.workflow.cat12vbm.brainprep_cat12vbm.html>`_
+          `brainprep.workflow.fsreconall.brainprep_fsreconall <brainprep.workflow.fsreconall.brainprep_fsreconall.html>`_
 
-          `brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc <brainprep.workflow.cat12vbm.brainprep_cat12vbm_qc.html>`_
+          `brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal <brainprep.workflow.fsreconall.brainprep_fsreconall_longitudinal.html>`_
 
-          `brainprep.workflow.cat12vbm.brainprep_cat12vbm_roi <brainprep.workflow.cat12vbm.brainprep_cat12vbm_roi.html>`_
+          `brainprep.workflow.fsreconall.brainprep_fsreconall_qc <brainprep.workflow.fsreconall.brainprep_fsreconall_qc.html>`_
 
-          `brainprep.workflow.deface.brainprep_deface <brainprep.workflow.deface.brainprep_deface.html>`_
+          `brainprep.workflow.fsreconall.brainprep_fsreconall_summary <brainprep.workflow.fsreconall.brainprep_fsreconall_summary.html>`_
 
-          `brainprep.workflow.deface.brainprep_deface_qc <brainprep.workflow.deface.brainprep_deface_qc.html>`_
+          `brainprep.workflow.tbss.brainprep_tbss <brainprep.workflow.tbss.brainprep_tbss.html>`_
 
-          `brainprep.workflow.quasiraw.brainprep_quasiraw <brainprep.workflow.quasiraw.brainprep_quasiraw.html>`_
-
-          `brainprep.workflow.quasiraw.brainprep_quasiraw_qc <brainprep.workflow.quasiraw.brainprep_quasiraw_qc.html>`_
-
-          `brainprep.workflow.prequal.brainprep_prequal <brainprep.workflow.prequal.brainprep_prequal.html>`_
-
-          `brainprep.workflow.prequal.brainprep_prequal_qc <brainprep.workflow.prequal.brainprep_prequal_qc.html>`_
+          `brainprep.workflow.tbss.brainprep_tbss_preproc <brainprep.workflow.tbss.brainprep_tbss_preproc.html>`_
 
 

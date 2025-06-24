@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.spatial.apply_mask
 
-.. minigallery:: brainprep.spatial.apply_mask brainprep.apply_mask
+.. minigallery:: brainprep.apply_mask brainprep.spatial.apply_mask
     :add-heading: Examples
     :heading-level: -
 

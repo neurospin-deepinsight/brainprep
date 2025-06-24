@@ -231,23 +231,23 @@
                                     
 						                <li> <a href='#brainprep'>Brainprep</a> </li>                                    
                                     
-						                <li> <a href='#brainprep-connectivity'>Brainprep.connectivity</a> </li>                                    
-                                    
-						                <li> <a href='#brainprep-cortical'>Brainprep.cortical</a> </li>                                    
+						                <li> <a href='#brainprep-spatial'>Brainprep.spatial</a> </li>                                    
                                     
 						                <li> <a href='#brainprep-qc'>Brainprep.qc</a> </li>                                    
                                     
 						                <li> <a href='#brainprep-color-utils'>Brainprep.color_utils</a> </li>                                    
                                     
-						                <li> <a href='#brainprep-plotting'>Brainprep.plotting</a> </li>                                    
-                                    
-						                <li> <a href='#brainprep-tbss'>Brainprep.tbss</a> </li>                                    
+						                <li> <a href='#brainprep-connectivity'>Brainprep.connectivity</a> </li>                                    
                                     
 						                <li> <a href='#id1'>Brainprep.deface</a> </li>                                    
                                     
+						                <li> <a href='#brainprep-cortical'>Brainprep.cortical</a> </li>                                    
+                                    
+						                <li> <a href='#brainprep-plotting'>Brainprep.plotting</a> </li>                                    
+                                    
 						                <li> <a href='#brainprep-utils'>Brainprep.utils</a> </li>                                    
                                     
-						                <li> <a href='#brainprep-spatial'>Brainprep.spatial</a> </li>                                    
+						                <li> <a href='#brainprep-tbss'>Brainprep.tbss</a> </li>                                    
                                     
                                 
                             
@@ -336,30 +336,18 @@
 </dd>
 </dl>
 </section>
-<section id="brainprep-connectivity">
-<h2 style='text-decoration: underline overline #aF8A4B;'>brainprep.connectivity<a class="headerlink" href="#brainprep-connectivity" title="Link to this heading">¶</a></h2>
-<p>Import pre-processed images and confounds from fMRIPrep and generate
-connectivity matrices based on standard parcellations and metrics.</p>
+<section id="brainprep-spatial">
+<h2 style='text-decoration: underline overline #aF8A4B;'>brainprep.spatial<a class="headerlink" href="#brainprep-spatial" title="Link to this heading">¶</a></h2>
+<p>Common functions to spatialy normalize the data.</p>
 <dl class="simple documentation-contents">
 <dt><strong>Functions</strong>:</dt><dd><ul class="simple">
-<li><p><a class="reference external" href="brainprep.connectivity.func_connectivity.html">brainprep.connectivity.func_connectivity</a></p></li>
-</ul>
-</dd>
-</dl>
-</section>
-<section id="brainprep-cortical">
-<h2 style='text-decoration: underline overline #aF8A4B;'>brainprep.cortical<a class="headerlink" href="#brainprep-cortical" title="Link to this heading">¶</a></h2>
-<p>Common cortical functions.</p>
-<dl class="simple documentation-contents">
-<dt><strong>Functions</strong>:</dt><dd><ul class="simple">
-<li><p><a class="reference external" href="brainprep.cortical.interhemi_projection.html">brainprep.cortical.interhemi_projection</a></p></li>
-<li><p><a class="reference external" href="brainprep.cortical.interhemi_surfreg.html">brainprep.cortical.interhemi_surfreg</a></p></li>
-<li><p><a class="reference external" href="brainprep.cortical.localgi.html">brainprep.cortical.localgi</a></p></li>
-<li><p><a class="reference external" href="brainprep.cortical.mri_conversion.html">brainprep.cortical.mri_conversion</a></p></li>
-<li><p><a class="reference external" href="brainprep.cortical.recon_all.html">brainprep.cortical.recon_all</a></p></li>
-<li><p><a class="reference external" href="brainprep.cortical.recon_all_custom_wm_mask.html">brainprep.cortical.recon_all_custom_wm_mask</a></p></li>
-<li><p><a class="reference external" href="brainprep.cortical.recon_all_longitudinal.html">brainprep.cortical.recon_all_longitudinal</a></p></li>
-<li><p><a class="reference external" href="brainprep.cortical.stats2table.html">brainprep.cortical.stats2table</a></p></li>
+<li><p><a class="reference external" href="brainprep.spatial.apply_affine.html">brainprep.spatial.apply_affine</a></p></li>
+<li><p><a class="reference external" href="brainprep.spatial.apply_mask.html">brainprep.spatial.apply_mask</a></p></li>
+<li><p><a class="reference external" href="brainprep.spatial.bet2.html">brainprep.spatial.bet2</a></p></li>
+<li><p><a class="reference external" href="brainprep.spatial.biasfield.html">brainprep.spatial.biasfield</a></p></li>
+<li><p><a class="reference external" href="brainprep.spatial.register_affine.html">brainprep.spatial.register_affine</a></p></li>
+<li><p><a class="reference external" href="brainprep.spatial.reorient2std.html">brainprep.spatial.reorient2std</a></p></li>
+<li><p><a class="reference external" href="brainprep.spatial.scale.html">brainprep.spatial.scale</a></p></li>
 </ul>
 </dd>
 </dl>
@@ -402,29 +390,13 @@ connectivity matrices based on standard parcellations and metrics.</p>
 </dd>
 </dl>
 </section>
-<section id="brainprep-plotting">
-<h2 style='text-decoration: underline overline #aF8A4B;'>brainprep.plotting<a class="headerlink" href="#brainprep-plotting" title="Link to this heading">¶</a></h2>
-<p>Usefull plotting functions.</p>
+<section id="brainprep-connectivity">
+<h2 style='text-decoration: underline overline #aF8A4B;'>brainprep.connectivity<a class="headerlink" href="#brainprep-connectivity" title="Link to this heading">¶</a></h2>
+<p>Import pre-processed images and confounds from fMRIPrep and generate
+connectivity matrices based on standard parcellations and metrics.</p>
 <dl class="simple documentation-contents">
 <dt><strong>Functions</strong>:</dt><dd><ul class="simple">
-<li><p><a class="reference external" href="brainprep.plotting.get_fsreconall_masks.html">brainprep.plotting.get_fsreconall_masks</a></p></li>
-<li><p><a class="reference external" href="brainprep.plotting.plot_fsreconall.html">brainprep.plotting.plot_fsreconall</a></p></li>
-<li><p><a class="reference external" href="brainprep.plotting.plot_hists.html">brainprep.plotting.plot_hists</a></p></li>
-<li><p><a class="reference external" href="brainprep.plotting.plot_images.html">brainprep.plotting.plot_images</a></p></li>
-</ul>
-</dd>
-</dl>
-</section>
-<section id="brainprep-tbss">
-<h2 style='text-decoration: underline overline #aF8A4B;'>brainprep.tbss<a class="headerlink" href="#brainprep-tbss" title="Link to this heading">¶</a></h2>
-<p>FSL TBSS tools.</p>
-<dl class="simple documentation-contents">
-<dt><strong>Functions</strong>:</dt><dd><ul class="simple">
-<li><p><a class="reference external" href="brainprep.tbss.dtifit.html">brainprep.tbss.dtifit</a></p></li>
-<li><p><a class="reference external" href="brainprep.tbss.tbss_1_preproc.html">brainprep.tbss.tbss_1_preproc</a></p></li>
-<li><p><a class="reference external" href="brainprep.tbss.tbss_2_reg.html">brainprep.tbss.tbss_2_reg</a></p></li>
-<li><p><a class="reference external" href="brainprep.tbss.tbss_3_postreg.html">brainprep.tbss.tbss_3_postreg</a></p></li>
-<li><p><a class="reference external" href="brainprep.tbss.tbss_4_prestats.html">brainprep.tbss.tbss_4_prestats</a></p></li>
+<li><p><a class="reference external" href="brainprep.connectivity.func_connectivity.html">brainprep.connectivity.func_connectivity</a></p></li>
 </ul>
 </dd>
 </dl>
@@ -435,6 +407,36 @@ connectivity matrices based on standard parcellations and metrics.</p>
 <dl class="simple documentation-contents">
 <dt><strong>Functions</strong>:</dt><dd><ul class="simple">
 <li><p><a class="reference external" href="brainprep.deface.deface.html">brainprep.deface.deface</a></p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="brainprep-cortical">
+<h2 style='text-decoration: underline overline #aF8A4B;'>brainprep.cortical<a class="headerlink" href="#brainprep-cortical" title="Link to this heading">¶</a></h2>
+<p>Common cortical functions.</p>
+<dl class="simple documentation-contents">
+<dt><strong>Functions</strong>:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="brainprep.cortical.interhemi_projection.html">brainprep.cortical.interhemi_projection</a></p></li>
+<li><p><a class="reference external" href="brainprep.cortical.interhemi_surfreg.html">brainprep.cortical.interhemi_surfreg</a></p></li>
+<li><p><a class="reference external" href="brainprep.cortical.localgi.html">brainprep.cortical.localgi</a></p></li>
+<li><p><a class="reference external" href="brainprep.cortical.mri_conversion.html">brainprep.cortical.mri_conversion</a></p></li>
+<li><p><a class="reference external" href="brainprep.cortical.recon_all.html">brainprep.cortical.recon_all</a></p></li>
+<li><p><a class="reference external" href="brainprep.cortical.recon_all_custom_wm_mask.html">brainprep.cortical.recon_all_custom_wm_mask</a></p></li>
+<li><p><a class="reference external" href="brainprep.cortical.recon_all_longitudinal.html">brainprep.cortical.recon_all_longitudinal</a></p></li>
+<li><p><a class="reference external" href="brainprep.cortical.stats2table.html">brainprep.cortical.stats2table</a></p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="brainprep-plotting">
+<h2 style='text-decoration: underline overline #aF8A4B;'>brainprep.plotting<a class="headerlink" href="#brainprep-plotting" title="Link to this heading">¶</a></h2>
+<p>Usefull plotting functions.</p>
+<dl class="simple documentation-contents">
+<dt><strong>Functions</strong>:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="brainprep.plotting.get_fsreconall_masks.html">brainprep.plotting.get_fsreconall_masks</a></p></li>
+<li><p><a class="reference external" href="brainprep.plotting.plot_fsreconall.html">brainprep.plotting.plot_fsreconall</a></p></li>
+<li><p><a class="reference external" href="brainprep.plotting.plot_hists.html">brainprep.plotting.plot_hists</a></p></li>
+<li><p><a class="reference external" href="brainprep.plotting.plot_images.html">brainprep.plotting.plot_images</a></p></li>
 </ul>
 </dd>
 </dl>
@@ -457,18 +459,16 @@ connectivity matrices based on standard parcellations and metrics.</p>
 </dd>
 </dl>
 </section>
-<section id="brainprep-spatial">
-<h2 style='text-decoration: underline overline #aF8A4B;'>brainprep.spatial<a class="headerlink" href="#brainprep-spatial" title="Link to this heading">¶</a></h2>
-<p>Common functions to spatialy normalize the data.</p>
+<section id="brainprep-tbss">
+<h2 style='text-decoration: underline overline #aF8A4B;'>brainprep.tbss<a class="headerlink" href="#brainprep-tbss" title="Link to this heading">¶</a></h2>
+<p>FSL TBSS tools.</p>
 <dl class="simple documentation-contents">
 <dt><strong>Functions</strong>:</dt><dd><ul class="simple">
-<li><p><a class="reference external" href="brainprep.spatial.apply_affine.html">brainprep.spatial.apply_affine</a></p></li>
-<li><p><a class="reference external" href="brainprep.spatial.apply_mask.html">brainprep.spatial.apply_mask</a></p></li>
-<li><p><a class="reference external" href="brainprep.spatial.bet2.html">brainprep.spatial.bet2</a></p></li>
-<li><p><a class="reference external" href="brainprep.spatial.biasfield.html">brainprep.spatial.biasfield</a></p></li>
-<li><p><a class="reference external" href="brainprep.spatial.register_affine.html">brainprep.spatial.register_affine</a></p></li>
-<li><p><a class="reference external" href="brainprep.spatial.reorient2std.html">brainprep.spatial.reorient2std</a></p></li>
-<li><p><a class="reference external" href="brainprep.spatial.scale.html">brainprep.spatial.scale</a></p></li>
+<li><p><a class="reference external" href="brainprep.tbss.dtifit.html">brainprep.tbss.dtifit</a></p></li>
+<li><p><a class="reference external" href="brainprep.tbss.tbss_1_preproc.html">brainprep.tbss.tbss_1_preproc</a></p></li>
+<li><p><a class="reference external" href="brainprep.tbss.tbss_2_reg.html">brainprep.tbss.tbss_2_reg</a></p></li>
+<li><p><a class="reference external" href="brainprep.tbss.tbss_3_postreg.html">brainprep.tbss.tbss_3_postreg</a></p></li>
+<li><p><a class="reference external" href="brainprep.tbss.tbss_4_prestats.html">brainprep.tbss.tbss_4_prestats</a></p></li>
 </ul>
 </dd>
 </dl>

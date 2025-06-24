@@ -221,7 +221,8 @@
                 <span class="s2">&quot;--stop-on-first-crash&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;--fs-license-file&quot;</span><span class="p">,</span> <span class="s2">&quot;/code/freesurfer.txt&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;--skip_bids_validation&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;--force-bbr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;--force bbr&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;--no-msm&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;--cifti-output&quot;</span><span class="p">,</span> <span class="s2">&quot;91k&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;--output-spaces&quot;</span><span class="p">,</span> <span class="p">(</span>
                     <span class="s2">&quot;MNI152NLin2009cAsym MNI152NLin6Asym:res-2 &quot;</span>
@@ -245,14 +246,14 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    fmri_file: str</span>
-<span class="sd">        the fMRIPrep pre-processing file: **\*desc-preproc_bold.nii.gz**.</span>
+<span class="sd">        the fMRIPrep pre-processing file: ***desc-preproc_bold.nii.gz**.</span>
 <span class="sd">    counfounds_file: str</span>
 <span class="sd">        the path to the fMRIPrep counfounds file:</span>
-<span class="sd">        **\*desc-confounds_regressors.tsv**.</span>
+<span class="sd">        ***desc-confounds_regressors.tsv**.</span>
 <span class="sd">    mask_file: str</span>
 <span class="sd">        signal is only cleaned from voxels inside the mask. It should have the</span>
 <span class="sd">        same shape and affine as the ``fmri_file``:</span>
-<span class="sd">        **\*desc-brain_mask.nii.gz**.</span>
+<span class="sd">        ***desc-brain_mask.nii.gz**.</span>
 <span class="sd">    tr: float</span>
 <span class="sd">        the repetition time (TR) in seconds.</span>
 <span class="sd">    outdir: str</span>

@@ -40,33 +40,21 @@ Package that provides tools for brain MRI Deep Leanring PreProcessing.
     * `brainprep.tbss_4_prestats <brainprep.tbss.tbss_4_prestats.html>`_
     * `brainprep.write_matlabbatch <brainprep.utils.write_matlabbatch.html>`_
 
-brainprep.connectivity
-^^^^^^^^^^^^^^^^^^^^^^
+brainprep.spatial
+^^^^^^^^^^^^^^^^^
 
-Import pre-processed images and confounds from fMRIPrep and generate
-connectivity matrices based on standard parcellations and metrics.
-
-.. rst-class:: documentation-contents
-
-  **Functions**:
-    * `brainprep.connectivity.func_connectivity <brainprep.connectivity.func_connectivity.html>`_
-
-brainprep.cortical
-^^^^^^^^^^^^^^^^^^
-
-Common cortical functions.
+Common functions to spatialy normalize the data.
 
 .. rst-class:: documentation-contents
 
   **Functions**:
-    * `brainprep.cortical.interhemi_projection <brainprep.cortical.interhemi_projection.html>`_
-    * `brainprep.cortical.interhemi_surfreg <brainprep.cortical.interhemi_surfreg.html>`_
-    * `brainprep.cortical.localgi <brainprep.cortical.localgi.html>`_
-    * `brainprep.cortical.mri_conversion <brainprep.cortical.mri_conversion.html>`_
-    * `brainprep.cortical.recon_all <brainprep.cortical.recon_all.html>`_
-    * `brainprep.cortical.recon_all_custom_wm_mask <brainprep.cortical.recon_all_custom_wm_mask.html>`_
-    * `brainprep.cortical.recon_all_longitudinal <brainprep.cortical.recon_all_longitudinal.html>`_
-    * `brainprep.cortical.stats2table <brainprep.cortical.stats2table.html>`_
+    * `brainprep.spatial.apply_affine <brainprep.spatial.apply_affine.html>`_
+    * `brainprep.spatial.apply_mask <brainprep.spatial.apply_mask.html>`_
+    * `brainprep.spatial.bet2 <brainprep.spatial.bet2.html>`_
+    * `brainprep.spatial.biasfield <brainprep.spatial.biasfield.html>`_
+    * `brainprep.spatial.register_affine <brainprep.spatial.register_affine.html>`_
+    * `brainprep.spatial.reorient2std <brainprep.spatial.reorient2std.html>`_
+    * `brainprep.spatial.scale <brainprep.spatial.scale.html>`_
 
 brainprep.qc
 ^^^^^^^^^^^^
@@ -105,6 +93,44 @@ Utility methods to print the results in a terminal using term colors.
     * `brainprep.color_utils.print_title <brainprep.color_utils.print_title.html>`_
     * `brainprep.color_utils.stylize <brainprep.color_utils.stylize.html>`_
 
+brainprep.connectivity
+^^^^^^^^^^^^^^^^^^^^^^
+
+Import pre-processed images and confounds from fMRIPrep and generate
+connectivity matrices based on standard parcellations and metrics.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.connectivity.func_connectivity <brainprep.connectivity.func_connectivity.html>`_
+
+brainprep.deface
+^^^^^^^^^^^^^^^^
+
+Common defacing functions.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.deface.deface <brainprep.deface.deface.html>`_
+
+brainprep.cortical
+^^^^^^^^^^^^^^^^^^
+
+Common cortical functions.
+
+.. rst-class:: documentation-contents
+
+  **Functions**:
+    * `brainprep.cortical.interhemi_projection <brainprep.cortical.interhemi_projection.html>`_
+    * `brainprep.cortical.interhemi_surfreg <brainprep.cortical.interhemi_surfreg.html>`_
+    * `brainprep.cortical.localgi <brainprep.cortical.localgi.html>`_
+    * `brainprep.cortical.mri_conversion <brainprep.cortical.mri_conversion.html>`_
+    * `brainprep.cortical.recon_all <brainprep.cortical.recon_all.html>`_
+    * `brainprep.cortical.recon_all_custom_wm_mask <brainprep.cortical.recon_all_custom_wm_mask.html>`_
+    * `brainprep.cortical.recon_all_longitudinal <brainprep.cortical.recon_all_longitudinal.html>`_
+    * `brainprep.cortical.stats2table <brainprep.cortical.stats2table.html>`_
+
 brainprep.plotting
 ^^^^^^^^^^^^^^^^^^
 
@@ -117,30 +143,6 @@ Usefull plotting functions.
     * `brainprep.plotting.plot_fsreconall <brainprep.plotting.plot_fsreconall.html>`_
     * `brainprep.plotting.plot_hists <brainprep.plotting.plot_hists.html>`_
     * `brainprep.plotting.plot_images <brainprep.plotting.plot_images.html>`_
-
-brainprep.tbss
-^^^^^^^^^^^^^^
-
-FSL TBSS tools.
-
-.. rst-class:: documentation-contents
-
-  **Functions**:
-    * `brainprep.tbss.dtifit <brainprep.tbss.dtifit.html>`_
-    * `brainprep.tbss.tbss_1_preproc <brainprep.tbss.tbss_1_preproc.html>`_
-    * `brainprep.tbss.tbss_2_reg <brainprep.tbss.tbss_2_reg.html>`_
-    * `brainprep.tbss.tbss_3_postreg <brainprep.tbss.tbss_3_postreg.html>`_
-    * `brainprep.tbss.tbss_4_prestats <brainprep.tbss.tbss_4_prestats.html>`_
-
-brainprep.deface
-^^^^^^^^^^^^^^^^
-
-Common defacing functions.
-
-.. rst-class:: documentation-contents
-
-  **Functions**:
-    * `brainprep.deface.deface <brainprep.deface.deface.html>`_
 
 brainprep.utils
 ^^^^^^^^^^^^^^^
@@ -160,19 +162,17 @@ Module that contains some utility functions.
     * `brainprep.utils.ungzip_file <brainprep.utils.ungzip_file.html>`_
     * `brainprep.utils.write_matlabbatch <brainprep.utils.write_matlabbatch.html>`_
 
-brainprep.spatial
-^^^^^^^^^^^^^^^^^
+brainprep.tbss
+^^^^^^^^^^^^^^
 
-Common functions to spatialy normalize the data.
+FSL TBSS tools.
 
 .. rst-class:: documentation-contents
 
   **Functions**:
-    * `brainprep.spatial.apply_affine <brainprep.spatial.apply_affine.html>`_
-    * `brainprep.spatial.apply_mask <brainprep.spatial.apply_mask.html>`_
-    * `brainprep.spatial.bet2 <brainprep.spatial.bet2.html>`_
-    * `brainprep.spatial.biasfield <brainprep.spatial.biasfield.html>`_
-    * `brainprep.spatial.register_affine <brainprep.spatial.register_affine.html>`_
-    * `brainprep.spatial.reorient2std <brainprep.spatial.reorient2std.html>`_
-    * `brainprep.spatial.scale <brainprep.spatial.scale.html>`_
+    * `brainprep.tbss.dtifit <brainprep.tbss.dtifit.html>`_
+    * `brainprep.tbss.tbss_1_preproc <brainprep.tbss.tbss_1_preproc.html>`_
+    * `brainprep.tbss.tbss_2_reg <brainprep.tbss.tbss_2_reg.html>`_
+    * `brainprep.tbss.tbss_3_postreg <brainprep.tbss.tbss_3_postreg.html>`_
+    * `brainprep.tbss.tbss_4_prestats <brainprep.tbss.tbss_4_prestats.html>`_
 

@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.connectivity.func_connectivity
 
-.. minigallery:: brainprep.func_connectivity brainprep.connectivity.func_connectivity
+.. minigallery:: brainprep.connectivity.func_connectivity brainprep.func_connectivity
     :add-heading: Examples
     :heading-level: -
 

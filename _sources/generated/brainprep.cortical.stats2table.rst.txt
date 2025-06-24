@@ -8,7 +8,7 @@
 
 .. autofunction:: brainprep.cortical.stats2table
 
-.. minigallery:: brainprep.cortical.stats2table brainprep.stats2table
+.. minigallery:: brainprep.stats2table brainprep.cortical.stats2table
     :add-heading: Examples
     :heading-level: -
 
