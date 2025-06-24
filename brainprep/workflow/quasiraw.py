@@ -18,28 +18,48 @@ import nibabel
 import numpy as np
 from html import unescape
 import brainprep
-from brainprep.utils import load_images, create_clickable, listify
+from brainprep.utils import load_images, create_clickable, listify, cp_file
 from brainprep.color_utils import print_title, print_result
 from brainprep.qc import plot_pca, compute_mean_correlation, check_files
 from brainprep.plotting import plot_images, plot_hists
+from brainprep.spatial import reorient2std, apply_mask, scale, biasfield, register_affine, apply_affine, synthstrip
 
 
-def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
+def brainprep_quasiraw(anatomical, outdir, mask=None, 
+                       target=None, no_bids=False, cleanup=True):
     """ Define quasi-raw pre-processing workflow.
+
+    This includes:
+
+    1) Reorient the anatomical image to standard space (MNI152 by default).
+    2) Reorient the mask to standard space (if provided).
+    3) Apply the mask to the anatomical image (if provided).
+    4) Resample the image to 1mm isotropic voxel size.
+    5) Bias field correction.
+    6) Linearly register the image to a standard template (default MNI152 T1 1mm).
+    7) Apply the registration to the mask.
+    8) Apply the mask to the registered image.
+    9) Save the final image as a Nifti file with the suffix "_preproc-quasiraw_T1w" 
+        and the mask with the suffix "_preproc-quasiraw_T1w_mask" (if not provided).
 
     Parameters
     ----------
     anatomical: str
         path to the anatomical T1w Nifti file.
-    mask: str
-        a binary mask to be applied.
     outdir: str
         the destination folder.
-    target: str
+    mask: str, default=None
+        a binary mask to be applied.
+        If None, the mask is computed using SynthStrip (deep learning based). 
+    target: str, default=None
         a custom target image for the registration.
-    no_bids: bool
+        If None, the default MNI152 T1 1mm template is used from ..resources/MNI152_T1_1mm_brain.nii.gz
+    no_bids: bool, default=False
         set this option if the input files are not named following the
         BIDS hierarchy.
+    cleanup: bool, default=True
+        if True, the temporary files are removed after the workflow is completed.
+        If False, the temporary files are kept for further inspection.
     """
     print_title("Set outputs and default target if applicable...")
     if not os.path.isdir(outdir):
@@ -55,11 +75,17 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
     targetfile = target
     if no_bids:
         basename = os.path.basename(imfile).split(".")[0] + "_desc-{0}_T1w"
+        outfile = os.path.join(outdir, os.path.basename(imfile).split(".")[0] + \
+                    "_preproc-quasiraw_T1w.nii.gz") 
+        outmaskfile = os.path.join(outdir, os.path.basename(imfile).split(".")[0] + \
+                    "_preproc-quasiraw_T1w_mask.nii.gz")
     else:
         basename = os.path.basename(imfile).split(".")[0]
         if not basename.endswith("_T1w"):
             raise ValueError("The input file is not formatted in BIDS! "
                              "Please use the --no-bids parameter.")
+        outfile = os.path.join(outdir, basename.replace("_T1w", "_preproc-quasiraw_T1w.nii.gz"))
+        outmaskfile = os.path.join(outdir, basename.replace("_T1w", "_preproc-quasiraw_T1w_mask.nii.gz"))
         basename = basename.replace("_T1w", "_desc-{0}_T1w")
     basefile = os.path.join(outdir, basename + ".nii.gz")
     print("use base file name:", basefile)
@@ -73,24 +99,33 @@ def brainprep_quasiraw(anatomical, mask, outdir, target=None, no_bids=False):
     applyfile = basefile.format("6apply")
 
     print_title("Launch quasi-raw pre-processing...")
-    brainprep.reorient2std(imfile, stdfile)
-    brainprep.reorient2std(maskfile, stdmaskfile)
-    brainprep.apply_mask(stdfile, stdmaskfile, brainfile)
-    brainprep.scale(brainfile, scaledfile, scale=1)
-    brainprep.biasfield(scaledfile, bfcfile)
-    _, trffile = brainprep.register_affine(bfcfile, targetfile, regfile)
-    brainprep.apply_affine(stdmaskfile, regfile, regmaskfile, trffile,
-                           interp="nearestneighbour")
-    brainprep.apply_mask(regfile, regmaskfile, applyfile)
+    reorient2std(imfile, stdfile)
+    if maskfile is not None:
+        reorient2std(maskfile, stdmaskfile)
+        apply_mask(stdfile, stdmaskfile, brainfile)
+    else:
+        print_title("No mask provided, use SynthStrip to compute it...")
+        brainfile, stdmaskfile = synthstrip(stdfile, brainfile, save_brain_mask=True)
 
-    print_title("Make datasets...")
-    if not os.path.exists(applyfile):
-        raise ValueError("{0} file doesn't exists".format(applyfile))
-    nii_img = nibabel.load(applyfile)
-    nii_arr = nii_img.get_fdata()
-    nii_arr = nii_arr.astype(np.float32)
-    npy_mat = applyfile.replace(".nii.gz", ".npy")
-    np.save(npy_mat, nii_arr)
+    _, trfscalefile = scale(brainfile, scaledfile, scale=1)
+    _, bffile = biasfield(scaledfile, bfcfile)
+    _, trffile = register_affine(bfcfile, targetfile, regfile)
+    _, trfmaskfile = apply_affine(stdmaskfile, regfile, regmaskfile, trffile,
+                                  interp="nearestneighbour")
+    apply_mask(regfile, regmaskfile, applyfile)
+
+    if maskfile is None:
+        cp_file(regmaskfile, outmaskfile)
+    cp_file(applyfile, outfile)
+
+    if cleanup:
+        print_title("Cleanup temporary files...")
+        for item in [stdfile, stdmaskfile, brainfile, scaledfile, bfcfile,
+                     regfile, regmaskfile, trffile, trfscalefile, trfmaskfile, 
+                     bffile, applyfile]:
+            if os.path.isfile(item):
+                os.remove(item)
+
 
 
 def brainprep_quasiraw_qc(img_regex, outdir, brainmask_regex=None,

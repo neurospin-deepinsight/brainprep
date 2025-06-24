@@ -22,6 +22,7 @@ fire.Fire({
     "cat12vbm-qc": wf.brainprep_cat12vbm_qc,
     "cat12vbm-roi": wf.brainprep_cat12vbm_roi,
     "quasiraw": wf.brainprep_quasiraw,
+    "quasiraw-sitk": wf.brainprep_quasiraw_sitk,
     "quasiraw-qc": wf.brainprep_quasiraw_qc,
     "fmriprep": wf.brainprep_fmriprep,
     "fmriprep-conn": wf.brainprep_fmriprep_conn,

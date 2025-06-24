@@ -1,6 +1,7 @@
 # Use Ubuntu 20.04 LTS
 FROM ubuntu:focal-20210416
 
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies and prereqs
 RUN apt-get update \
@@ -14,12 +15,17 @@ RUN apt-get update \
         locales \
         curl \
         bzip2 \
-        python3.8 \
+        python3.9 \
+        python3.9-dev \
+        python3.9-distutils \
         python3-pip \
-        python3.8-dev \
         git \
         tcsh \
         locales \
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1 \
+    && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
+    && python3 get-pip.py \
+    && rm get-pip.py \
     && apt-get clean
 
 RUN locale-gen "en_US.UTF-8" \
@@ -34,7 +40,7 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 
 # Installing brainprep
-RUN pip install --no-cache-dir git+https://github.com/neurospin-deepinsight/brainprep.git
+RUN pip install --no-cache-dir git+https://github.com/Duplums/brainprep.git@extension
 
 
 # FSL-6.0.5.1
@@ -86,12 +92,13 @@ ENV FSLDIR="/opt/fsl-6.0.5.1" \
     LD_LIBRARY_PATH="/opt/fsl-6.0.5.1:$LD_LIBRARY_PATH"
 
 
-# Installing ANTs 2.3.4 (NeuroDocker build)
+# Installing ANTs 2.6.1 (Github release)
 ENV ANTSPATH="/usr/lib/ants" \
-    PATH="/usr/lib/ants:$PATH"
+    PATH="/usr/lib/ants/ants-2.6.1/bin:$PATH"
 WORKDIR $ANTSPATH
-RUN curl -sSL "https://dl.dropbox.com/s/gwf51ykkk5bifyj/ants-Linux-centos6_x86_64-v2.3.4.tar.gz" \
-    | tar -xzC $ANTSPATH --strip-components 1
+RUN curl -sSL -o /tmp/ants.zip "https://github.com/ANTsX/ANTs/releases/download/v2.6.1/ants-2.6.1-ubuntu20.04-X64-gcc.zip" && \
+    unzip -q /tmp/ants.zip -d $ANTSPATH && \
+    rm /tmp/ants.zip
 
 
 # Install Matlab MCR at /opt/mcr
@@ -127,9 +134,10 @@ ENV SPMROOT="/opt/spm"
 
 
 
-# Installing FreeSurfer v7.1.1
-RUN curl -sSL https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.1.1/freesurfer-linux-centos6_x86_64-7.1.1.tar.gz \
-    | tar zxv --no-same-owner -C /opt \
+# Installing FreeSurfer v7.4.1
+RUN curl -sSL https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.4.1/freesurfer-linux-ubuntu20_amd64-7.4.1.tar.gz \
+    -o /tmp/freesurfer.tar.gz && \
+    tar zxv --no-same-owner -C /opt -f /tmp/freesurfer.tar.gz \
     --exclude="freesurfer/diffusion" \
     --exclude="freesurfer/docs" \
     --exclude="freesurfer/fsfast" \
@@ -182,7 +190,7 @@ ENV HOME="/home/brainprep"
 
 # Define labels
 MAINTAINER Antoine Grigis <antoine.grigis@cea.fr>
-LABEL description="FSL 6.0.5.1, ANTS 2.3.4, FreeSurfer v7.1.1, MATLAB Compiler Runtime R2017b v9.3 and CAT12.8.2 r2166 standalone docker image for brainprep 0.0.0"
+LABEL description="FSL 6.0.5.1, ANTS 2.6.1, FreeSurfer v7.4.1, MATLAB Compiler Runtime R2017b v9.3 and CAT12.8.2 r2166 standalone docker image for brainprep 0.0.0"
 LABEL maintainer="antoine.grigis@cea.fr"
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="brainprep" \
