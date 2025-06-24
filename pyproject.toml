@@ -27,7 +27,8 @@ dependencies = [
     "seaborn",
     "requests",
     "progressbar2",
-    "fire"
+    "fire",
+    "simpleitk"
 ]
 dynamic = ["version"]
 

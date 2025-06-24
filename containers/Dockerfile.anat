@@ -40,7 +40,7 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 
 # Installing brainprep
-RUN pip install --no-cache-dir git+https://github.com/neurospin-deepinsight/brainprep.git
+RUN pip install --no-cache-dir git+https://github.com/Duplums/brainprep.git@extension
 
 
 # FSL-6.0.5.1

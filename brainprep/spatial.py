@@ -15,7 +15,8 @@ Common functions to spatialy normalize the data.
 import os
 import nibabel
 import numpy as np
-from .utils import check_version, check_command, execute_command
+import SimpleITK as sitk
+from .utils import check_version, check_command, execute_command, print_error, print_command
 
 
 def scale(imfile, scaledfile, scale, check_pkg_version=False):
@@ -147,7 +148,6 @@ def reorient2std(imfile, stdfile, check_pkg_version=False):
     execute_command(cmd)
     return stdfile
 
-
 def biasfield(imfile, bfcfile, maskfile=None, nb_iterations=50,
               convergence_threshold=0.001, bspline_grid=(1, 1, 1),
               shrink_factor=1, bspline_order=3,
@@ -228,6 +228,82 @@ def biasfield(imfile, bfcfile, maskfile=None, nb_iterations=50,
         print("Using the original image as the bias field corrected image.")
     return bfcfile, bffile
 
+def biasfield_sitk(imfile, bfcfile, maskfile=None, nb_iterations=50,
+                   convergence_threshold=0.001,
+                   shrink_factor=1, bspline_order=3,
+                   histogram_sharpening=(0.15, 0.01, 200)):
+    """
+    Perform MRI bias field correction using SimpleITK's N4 algorithm.
+    It is the SITK-equivalent of ANTS' N4 algorithm.
+
+    Parameters
+    ----------
+    imfile: str
+        the input image.
+    bfcfile: str
+        the bias fieled corrected file.
+    maskfile: str, default None
+        the brain mask image.
+    nb_iterations: int, default 50
+        Maximum number of iterations at each level of resolution. Larger
+        values will increase execution time, but may lead to better results.
+    convergence_threshold: float, default 0.001
+        Stopping criterion for the iterative bias estimation. Larger values
+        will lead to smaller execution time.
+    shrink_factor: int, default 1
+        Defines how much the image should be upsampled before estimating the
+        inhomogeneity field. Increase if you want to reduce the execution
+        time. 1 corresponds to the original resolution. Larger values will
+        significantly reduce the computation time.
+    bspline_order: int, default 3
+        Order of B-spline used in the approximation. Larger values will lead
+        to longer execution times, may result in overfitting and poor result.
+    histogram_sharpening: 3-uplate, default (0.15, 0.01, 200)
+        A vector of up to three values. Non-zero values correspond to Bias
+        Field Full Width at Half Maximum, Wiener filter noise, and Number of
+        histogram bins.
+
+    """
+    # Read input image
+    image = sitk.ReadImage(imfile, sitk.sitkFloat32)
+
+    # Read mask
+    if maskfile is not None:
+        mask = sitk.ReadImage(maskfile, sitk.sitkUInt8)
+    else:
+        mask = None
+
+    # Optionally shrink image and mask for faster processing
+    if shrink_factor > 1:
+        image = sitk.Shrink(image, [shrink_factor]*image.GetDimension())
+        if mask is not None:
+            mask = sitk.Shrink(mask, [shrink_factor]*mask.GetDimension())
+
+    # Set up the corrector
+    corrector = sitk.N4BiasFieldCorrectionImageFilter()
+    corrector.SetMaximumNumberOfIterations([nb_iterations]*4)
+    corrector.SetConvergenceThreshold(convergence_threshold)
+    corrector.SetSplineOrder(bspline_order)
+    corrector.SetBiasFieldFullWidthAtHalfMaximum(histogram_sharpening[0])
+    corrector.SetWienerFilterNoise(histogram_sharpening[1])
+    corrector.SetNumberOfHistogramBins(histogram_sharpening[2])
+
+    # Run correction
+    print_command([str(corrector)])
+    if mask is None:
+        corrected = corrector.Execute(image)
+    else:
+        corrected = corrector.Execute(image, mask)
+
+    # Write output
+    sitk.WriteImage(corrected, bfcfile)
+
+    # Get bias field as image
+    log_bias_field = corrector.GetLogBiasFieldAsImage(image)
+    bias_field = sitk.Exp(log_bias_field)
+    bffile = bfcfile.replace(".nii", "_field.nii")
+    sitk.WriteImage(bias_field, bffile)
+    return bfcfile, bffile
 
 def register_affine(imfile, targetfile, regfile, mask=None, cost="normmi",
                     bins=256, interp="spline", dof=9, check_pkg_version=False):
@@ -285,6 +361,116 @@ def register_affine(imfile, targetfile, regfile, mask=None, cost="normmi",
                              "bbr cost function.")
         cmd += ["-wmseg", mask]
     execute_command(cmd)
+    return regfile, trffile
+
+
+def register_affine_sitk(imfile, targetfile, regfile, maskfile=None, regmaskfile=None, 
+                         cost="mattesmi", bins=50, interp="spline"):
+    """
+    Register MRI image to target using an affine transform via SimpleITK.
+
+    Parameters
+    ----------
+    imfile: str
+        the input image.
+    targetfile: str
+        the target image.
+    regfile: str
+        the registered file.
+    maskfile: str, default=None
+        Brain mask to eventually register using the same transformation.
+    regmaskfile: str, default=None
+        Registered brain mask file name (only used if maskfile is given).
+    cost: str, default 'mattesmi'
+        Choose the most appropriate metric: 'mi', 'mattesmi', 'correlation',
+        'mse'.
+    bins: int, default 50
+        Number of histogram bins
+    interp: str, default 'spline'
+        Choose the most appropriate interpolation method: 'trilinear',
+        'nearestneighbour', 'spline'.
+    
+    Returns
+    -------
+    regfile, trffile: str
+        the generated files.
+    """
+
+    # Read fixed (target) and moving (input) images
+    fixed = sitk.ReadImage(targetfile, sitk.sitkFloat32)
+    moving = sitk.ReadImage(imfile, sitk.sitkFloat32)
+
+    # Set up initial transform: Affine with 12 DOF
+    transform = sitk.CenteredTransformInitializer(
+        fixed, 
+        moving, 
+        sitk.AffineTransform(fixed.GetDimension()), 
+        sitk.CenteredTransformInitializerFilter.GEOMETRY
+    )
+
+    # Configure registration method
+    registration = sitk.ImageRegistrationMethod()
+
+    # Cost SimpleITK metrics
+    if cost.lower() == "mi":
+        registration.SetMetricAsJointHistogramMutualInformation(
+            numberOfHistogramBins=bins, varianceForJointPDFSmoothing=1.5)
+    elif cost.lower() == "mattesmi":
+        registration.SetMetricAsMattesMutualInformation(numberOfHistogramBins=bins)
+    elif cost.lower() == "correlation":
+        registration.SetMetricAsCorrelation()
+    elif cost.lower() == "mse":
+        registration.SetMetricAsMeanSquares()
+    else:
+        raise ValueError(f"Unsupported cost function '{cost}' for SimpleITK.")
+    
+    registration.SetMetricSamplingStrategy(registration.RANDOM)
+    registration.SetMetricSamplingPercentage(0.01)
+
+    # Map interpolation methods
+    interp = interp.lower()
+    if interp == "trilinear":
+        registration.SetInterpolator(sitk.sitkLinear)
+    elif interp == "nearestneighbour":
+        registration.SetInterpolator(sitk.sitkNearestNeighbor)
+    elif interp == "spline":
+        registration.SetInterpolator(sitk.sitkBSpline)
+    else:
+        raise ValueError(f"Unsupported interpolation method '{interp}'.")
+
+    # Optimizer settings
+    registration.SetOptimizerAsGradientDescent(
+                learningRate=1.0, 
+                numberOfIterations=100, 
+                convergenceMinimumValue=1e-6, 
+                convergenceWindowSize=10)
+    registration.SetOptimizerScalesFromPhysicalShift()
+
+    registration.SetInitialTransform(transform)
+    registration.SetShrinkFactorsPerLevel([4, 2, 1])
+    registration.SetSmoothingSigmasPerLevel([2, 1, 0])
+    registration.SmoothingSigmasAreSpecifiedInPhysicalUnitsOn()
+    
+    # Execute registration
+    print_command([str(registration)])
+    final_transform = registration.Execute(fixed, moving)
+
+    # Resample and write output image
+    resampled = sitk.Resample(moving, fixed, final_transform,
+                              sitk.sitkLinear, 0.0, sitk.sitkFloat32)
+    sitk.WriteImage(resampled, regfile)
+
+    # Save transform to text file (ITK format)
+    trffile = regfile.rsplit(".", 1)[0] + ".txt"
+    sitk.WriteTransform(final_transform, trffile)
+
+    # Eventuall apply the transformation to mask
+    if maskfile is not None:
+        mask_img = sitk.ReadImage(maskfile, sitk.sitkUInt8)
+        mask_resampled = sitk.Resample(mask_img, fixed, final_transform,
+                                    sitk.sitkNearestNeighbor, 0, sitk.sitkUInt8)
+        sitk.WriteImage(mask_resampled, regmaskfile)
+
     return regfile, trffile
 
 
