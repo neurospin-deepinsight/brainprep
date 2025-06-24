@@ -29,7 +29,7 @@ def brainprep_tbss_preproc(outdir, fa_file=None, data=None, bvecs=None,
         the TBSS destination folder.
     data: str, default None
         diffusion weighted image data file named using BIDS rules - a 4D
-        serie of volumes: **\*_dwi.nii.gz**.
+        serie of volumes: ***_dwi.nii.gz**.
     bvecs: str, default None
         b-vectors file containing gradient directions: an ASCII text file
         containing a list of gradient directions applied during diffusion
