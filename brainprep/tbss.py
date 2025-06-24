@@ -129,7 +129,7 @@ def tbss_1_preproc(tbss_dir, fa_file):
     Parameters
     ----------
     tbss_dir: str
-        path to TBSS root directory containing all the FA **\*.nii.gz** file
+        path to TBSS root directory containing all the FA ***.nii.gz** file
         to be processed.
     fa_file: str
         path to the FA file.

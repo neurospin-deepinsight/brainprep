@@ -74,14 +74,14 @@ def func_connectivity(fmri_file, counfounds_file, mask_file,
     Parameters
     ----------
     fmri_file: str
-        the fMRIPrep pre-processing file: **\*desc-preproc_bold.nii.gz**.
+        the fMRIPrep pre-processing file: ***desc-preproc_bold.nii.gz**.
     counfounds_file: str
         the path to the fMRIPrep counfounds file:
-        **\*desc-confounds_regressors.tsv**.
+        ***desc-confounds_regressors.tsv**.
     mask_file: str
         signal is only cleaned from voxels inside the mask. It should have the
         same shape and affine as the ``fmri_file``:
-        **\*desc-brain_mask.nii.gz**.
+        ***desc-brain_mask.nii.gz**.
     tr: float
         the repetition time (TR) in seconds.
     outdir: str

@@ -47,7 +47,7 @@ def deface(anat_file, outdir):
     ----------
     anat_file: str
         input MRI T1w head image to be defaced: need to be named as
-        **\*T1w.<ext>**.
+        ***T1w.<ext>**.
     outdir: str
         the output folder.
 

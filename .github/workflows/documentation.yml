@@ -90,7 +90,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install --progress-bar off .
         python -m pip install git+https://github.com/AGrigis/pysphinxdoc.git
-        python -m pip install requests statsmodels
+        python -m pip install requests "scipy<=1.15" statsmodels
         python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
         python -m pip install git+https://github.com/neurospin-deepinsight/brainrise.git
     - name: Compute documentation
