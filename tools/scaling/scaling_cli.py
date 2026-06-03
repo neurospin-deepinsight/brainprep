@@ -310,7 +310,7 @@ def organize_longitudinal(
     """
     banner = r"""
     +----------------------------------+
-    |   Organize longitudianl data...  |
+    |   Organize longitudinal data...  |
     +----------------------------------+
     """
     print(banner)
@@ -482,7 +482,7 @@ def collect_config(
         else None
     )
     workflow_parameters = workflow_parameters.format_map(
-        SafeDict({"outdir": output_dir / "data"})
+        SafeDict({"outdir": working_dir / "data"})
     )
     print(f"- edited parameters: {workflow_parameters}")
 
@@ -497,7 +497,7 @@ def collect_config(
     if infra == "slurm":
         image_parameters = (
             f"--cleanenv --home {home_dir} --bind {bind_dir} "
-            f"--bind {output_dir} "
+            f"--bind {working_dir} "
         )
     else:
         image_parameters = ""
@@ -632,7 +632,7 @@ def scan_configs(
         print("No cache files found. Parsing data.")
         selected = None
     else:
-        print("Multiple cache files found:")
+        print("Cache file(s) found:")
         for idx, path in enumerate(cache_files, 1):
             print(f"{idx}. {path.name}")
         choice = input(
