@@ -520,12 +520,16 @@ def collect_config(
             index=False,
         )
 
+    commands = f'"brainprep {workflow_id} {workflow_parameters}"'
+    if "group" in workflow_id:
+        commands = f"[[{commands}]]"
+
     config_template = config_file.read_text()
     config_str = config_template.format(
         name=workflow_name,
         operator="TO UPDATE",
         date=str(datetime.now().date()),
-        commands=f'"brainprep {workflow_id} {workflow_parameters}"',
+        commands=commands,
         parameters=image_parameters,
         cluster=infra,
         partition=partition,
