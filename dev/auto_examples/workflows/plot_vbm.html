@@ -886,8 +886,8 @@ ________________________________________________________________________________
     rawdata_dir=PosixPath(&#39;/tmp/brainprep-data/rawdata&#39;),
 )
 [command] - sed -e s/\/tmp\/brainprep-vbm\/derivatives/DERIVATIVES/g -e
-s/\/tmp\/brainprep-data\/rawdata/RAWDATA/g -e s/runnervmeorf1/HOSTNAME/g -e
-s/10.1.0.58/X.X.X.X/g -e s/runner/USER/g -i
+s/\/tmp\/brainprep-data\/rawdata/RAWDATA/g -e s/runnervm5mmn9/HOSTNAME/g -e
+s/10.1.0.168/X.X.X.X/g -e s/runner/USER/g -i
 /tmp/brainprep-vbm/derivatives/vbm/subjects/sub-01/ses-study1/cat12vbm_matlabbat
 ch_run-15456.m
 [info] - checking output:
@@ -895,7 +895,7 @@ ch_run-15456.m
 ch_run-15456.m
 __________________________________________________________________0.00s, 0.00min
 [title] - Subject Level VBM done.
-__________________________________________________________________0.04s, 0.00min
+__________________________________________________________________0.03s, 0.00min
 [warn] - BIDS file name does not contain run key: sub-02_ses-study1_T1w.nii.gz
 [title] - Subject Level VBM...
 ________________________________________________________________________________
@@ -1012,8 +1012,8 @@ ________________________________________________________________________________
     rawdata_dir=PosixPath(&#39;/tmp/brainprep-data/rawdata&#39;),
 )
 [command] - sed -e s/\/tmp\/brainprep-vbm\/derivatives/DERIVATIVES/g -e
-s/\/tmp\/brainprep-data\/rawdata/RAWDATA/g -e s/runnervmeorf1/HOSTNAME/g -e
-s/10.1.0.58/X.X.X.X/g -e s/runner/USER/g -i
+s/\/tmp\/brainprep-data\/rawdata/RAWDATA/g -e s/runnervm5mmn9/HOSTNAME/g -e
+s/10.1.0.168/X.X.X.X/g -e s/runner/USER/g -i
 /tmp/brainprep-vbm/derivatives/vbm/subjects/sub-02/ses-study1/cat12vbm_matlabbat
 ch_run-38141.m
 [info] - checking output:
@@ -1124,7 +1124,7 @@ __________________________________________________________________0.00s, 0.00min
 [info] - checking output:
 /tmp/brainprep-vbm/derivatives/vbm/longitudinal/subjects/sub-01/cat12vbm_matlabb
 atch.m
-__________________________________________________________________0.01s, 0.00min
+__________________________________________________________________0.02s, 0.00min
 [command] - brainprep interface cat12vbm-wf -t1-files
 /tmp/brainprep-data/rawdata/sub-01/ses-study1/anat/sub-01_ses-study1_T1w.nii.gz,
 /tmp/brainprep-data/rawdata/sub-01/ses-study2/anat/sub-01_ses-study2_T1w.nii.gz
@@ -1189,8 +1189,8 @@ ts/sub-01/cat12vbm_matlabbatch.m&#39;),
     rawdata_dir=PosixPath(&#39;/tmp/brainprep-data/rawdata&#39;),
 )
 [command] - sed -e s/\/tmp\/brainprep-vbm\/derivatives/DERIVATIVES/g -e
-s/\/tmp\/brainprep-data\/rawdata/RAWDATA/g -e s/runnervmeorf1/HOSTNAME/g -e
-s/10.1.0.58/X.X.X.X/g -e s/runner/USER/g -i
+s/\/tmp\/brainprep-data\/rawdata/RAWDATA/g -e s/runnervm5mmn9/HOSTNAME/g -e
+s/10.1.0.168/X.X.X.X/g -e s/runner/USER/g -i
 /tmp/brainprep-vbm/derivatives/vbm/longitudinal/subjects/sub-01/cat12vbm_matlabb
 atch.m
 [info] - checking output:
@@ -1370,7 +1370,7 @@ _stats.tsv&#39;),
 /tmp/brainprep-vbm/derivatives/vbm/figures/histogram_IQR.png
 __________________________________________________________________0.00s, 0.00min
 [title] - Group Level VBM done.
-__________________________________________________________________0.05s, 0.00min
+__________________________________________________________________0.04s, 0.00min
 [title] - Group Level VBM...
 ________________________________________________________________________________
 [call] brainprep.workflow.vbm.brainprep_group_vbm(
@@ -1562,7 +1562,7 @@ s&#39;),
 /tmp/brainprep-vbm/derivatives/vbm/longitudinal/figures/histogram_IQR.png
 __________________________________________________________________0.00s, 0.00min
 [title] - Group Level VBM done.
-__________________________________________________________________0.04s, 0.00min
+__________________________________________________________________0.05s, 0.00min
 </pre></div>
 </div>
 </section>
@@ -1663,8 +1663,8 @@ In practice, this means that once the CLI has produced the appropriate
 instructions, you can simply copy and run them inside the container to
 achieve the intended results. You can find the BrainPrep images on Docker
 Hub: <a class="reference external" href="https://hub.docker.com/u/neurospin">Neurospin Docker Hub</a>.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.592 seconds)</p>
-<p><strong>Estimated memory usage:</strong>  113 MB</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.535 seconds)</p>
+<p><strong>Estimated memory usage:</strong>  110 MB</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-workflows-plot-vbm-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/8c329b1e7bcfc54b9c7ca7f0889b2f0e/plot_vbm.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_vbm.ipynb</span></code></a></p>

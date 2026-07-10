@@ -1493,7 +1493,7 @@ sulc.fsaverage_sym.mgh
 [info] - checking output:
 /tmp/brainprep-sbm/derivatives/sbm/subjects/sub-01/ses-study1/run-15456/surf/rh.
 sulc.fsaverage_sym.mgh
-__________________________________________________________________0.08s, 0.00min
+__________________________________________________________________0.09s, 0.00min
 [command] - brainprep interface mgz-to-nii -output-dir
 /tmp/brainprep-sbm/derivatives/sbm/subjects/sub-01/ses-study1 -entities
 sub-01_ses-study1_modality-T1w_mod-T1w_run-15456 -verbose True -dryrun True
@@ -2516,7 +2516,7 @@ sulc.fsaverage_sym.mgh
 [info] - checking output:
 /tmp/brainprep-sbm/derivatives/sbm/subjects/sub-01/ses-study2/run-27245/surf/rh.
 sulc.fsaverage_sym.mgh
-__________________________________________________________________0.08s, 0.00min
+__________________________________________________________________0.09s, 0.00min
 [command] - brainprep interface mgz-to-nii -output-dir
 /tmp/brainprep-sbm/derivatives/sbm/subjects/sub-01/ses-study2 -entities
 sub-01_ses-study2_modality-T1w_mod-T1w_run-27245 -verbose True -dryrun True
@@ -2840,7 +2840,7 @@ ses-study2/workspace_27245/csf_run-27245.nii.gz&#39;),
 -study2_run-27245_brainparc.png
 __________________________________________________________________0.00s, 0.00min
 [title] - Subject Level SBM done.
-__________________________________________________________________0.21s, 0.00min
+__________________________________________________________________0.22s, 0.00min
 [warn] - BIDS file name does not contain run key: sub-02_ses-study1_T1w.nii.gz
 [title] - Subject Level SBM...
 ________________________________________________________________________________
@@ -3539,7 +3539,7 @@ sulc.fsaverage_sym.mgh
 [info] - checking output:
 /tmp/brainprep-sbm/derivatives/sbm/subjects/sub-02/ses-study1/run-38141/surf/rh.
 sulc.fsaverage_sym.mgh
-__________________________________________________________________0.08s, 0.00min
+__________________________________________________________________0.09s, 0.00min
 [command] - brainprep interface mgz-to-nii -output-dir
 /tmp/brainprep-sbm/derivatives/sbm/subjects/sub-02/ses-study1 -entities
 sub-02_ses-study1_modality-T1w_mod-T1w_run-38141 -verbose True -dryrun True
@@ -3863,7 +3863,7 @@ ses-study1/workspace_38141/csf_run-38141.nii.gz&#39;),
 -study1_run-38141_brainparc.png
 __________________________________________________________________0.00s, 0.00min
 [title] - Subject Level SBM done.
-__________________________________________________________________0.21s, 0.00min
+__________________________________________________________________0.22s, 0.00min
 [warn] - BIDS file name does not contain run key: sub-02_ses-study2_T1w.nii.gz
 [title] - Subject Level SBM...
 ________________________________________________________________________________
@@ -4562,7 +4562,7 @@ sulc.fsaverage_sym.mgh
 [info] - checking output:
 /tmp/brainprep-sbm/derivatives/sbm/subjects/sub-02/ses-study2/run-13661/surf/rh.
 sulc.fsaverage_sym.mgh
-__________________________________________________________________0.08s, 0.00min
+__________________________________________________________________0.09s, 0.00min
 [command] - brainprep interface mgz-to-nii -output-dir
 /tmp/brainprep-sbm/derivatives/sbm/subjects/sub-02/ses-study2 -entities
 sub-02_ses-study2_modality-T1w_mod-T1w_run-13661 -verbose True -dryrun True
@@ -4886,7 +4886,7 @@ ses-study2/workspace_13661/csf_run-13661.nii.gz&#39;),
 -study2_run-13661_brainparc.png
 __________________________________________________________________0.00s, 0.00min
 [title] - Subject Level SBM done.
-__________________________________________________________________0.21s, 0.00min
+__________________________________________________________________0.22s, 0.00min
 [title] - Group Level SBM...
 ________________________________________________________________________________
 [call] brainprep.workflow.sbm.brainprep_group_sbm(
@@ -4912,7 +4912,7 @@ ________________________________________________________________________________
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi lh -measure area
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi lh -measure area
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -4923,30 +4923,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;area&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas area --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-are
-a_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-are
+a_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas area
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
-s-area_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+s-area_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-are
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-are
 a_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
 s-area_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi lh -measure volume
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi lh -measure volume
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -4957,30 +4957,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;volume&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas volume --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-vol
-ume_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-vol
+ume_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas volume
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
-s-volume_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+s-volume_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-vol
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-vol
 ume_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
 s-volume_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi lh -measure thickness
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi lh -measure thickness
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -4991,30 +4991,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;thickness&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas thickness --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-thi
-ckness_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-thi
+ckness_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas thickness
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
 s-thickness_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661 sub-01_run-27245
+sub-01_run-15456 sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-thi
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-thi
 ckness_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
 s-thickness_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi lh -measure thicknessstd
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi lh -measure thicknessstd
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5025,30 +5025,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;thicknessstd&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas thicknessstd --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-thi
-cknessstd_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-thi
+cknessstd_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas thicknessstd
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
 s-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661 sub-01_run-27245
+sub-01_run-15456 sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-thi
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-thi
 cknessstd_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
 s-thicknessstd_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi lh -measure meancurv
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi lh -measure meancurv
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5059,30 +5059,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;meancurv&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas meancurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-mea
-ncurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-mea
+ncurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas meancurv
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
-s-meancurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+s-meancurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-mea
 ncurv_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
 s-meancurv_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi lh -measure gauscurv
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi lh -measure gauscurv
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5093,30 +5093,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;gauscurv&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas gauscurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-gau
-scurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-gau
+scurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas gauscurv
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
-s-gauscurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+s-gauscurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-gau
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-gau
 scurv_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
 s-gauscurv_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi lh -measure foldind
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi lh -measure foldind
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5127,30 +5127,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;foldind&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas foldind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-fol
-dind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-fol
+dind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas foldind
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
-s-foldind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+s-foldind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-fol
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-fol
 dind_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
 s-foldind_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi lh -measure curvind
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi lh -measure curvind
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5161,30 +5161,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;curvind&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas curvind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-cur
-vind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-cur
+vind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas curvind
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
-s-curvind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+s-curvind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-cur
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-cur
 vind_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
 s-curvind_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi rh -measure area
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi rh -measure area
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5195,30 +5195,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;area&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas area --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-are
-a_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-are
+a_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas area
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
-s-area_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+s-area_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-are
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-are
 a_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
 s-area_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi rh -measure volume
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi rh -measure volume
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5229,30 +5229,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;volume&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas volume --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-vol
-ume_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-vol
+ume_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas volume
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
-s-volume_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+s-volume_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-vol
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-vol
 ume_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
 s-volume_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi rh -measure thickness
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi rh -measure thickness
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5263,30 +5263,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;thickness&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas thickness --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-thi
-ckness_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-thi
+ckness_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas thickness
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
 s-thickness_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661 sub-01_run-27245
+sub-01_run-15456 sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-thi
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-thi
 ckness_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
 s-thickness_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi rh -measure thicknessstd
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi rh -measure thicknessstd
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5297,30 +5297,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;thicknessstd&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas thicknessstd --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-thi
-cknessstd_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-thi
+cknessstd_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas thicknessstd
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
 s-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661 sub-01_run-27245
+sub-01_run-15456 sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-thi
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-thi
 cknessstd_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
 s-thicknessstd_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi rh -measure meancurv
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi rh -measure meancurv
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5331,30 +5331,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;meancurv&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas meancurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-mea
-ncurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-mea
+ncurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas meancurv
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
-s-meancurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+s-meancurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-mea
 ncurv_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
 s-meancurv_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi rh -measure gauscurv
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi rh -measure gauscurv
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5365,30 +5365,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;gauscurv&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas gauscurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-gau
-scurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-gau
+scurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas gauscurv
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
-s-gauscurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+s-gauscurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-gau
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-gau
 scurv_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
 s-gauscurv_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi rh -measure foldind
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi rh -measure foldind
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5399,30 +5399,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;foldind&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas foldind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-fol
-dind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-fol
+dind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas foldind
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
-s-foldind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+s-foldind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-fol
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-fol
 dind_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
 s-foldind_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -hemi rh -measure curvind
+sub-01_run-15456,sub-02_run-38141 -session study1 -hemi rh -measure curvind
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5433,30 +5433,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;curvind&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas curvind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-cur
-vind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-cur
+vind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas curvind
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
-s-curvind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-13661
-sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+s-curvind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-15456
+sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-cur
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-cur
 vind_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
 s-curvind_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface asegstats2table -subjects
-sub-02_run-13661,sub-01_run-27245 -session study2 -output-dir
+sub-01_run-15456,sub-02_run-38141 -session study1 -output-dir
 /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun True
 -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5467,18 +5467,18 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.asegstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;, &#39;sub-01_run-27245&#39;],
-    session=&#39;study2&#39;,
+    subjects=[&#39;sub-01_run-15456&#39;, &#39;sub-02_run-38141&#39;],
+    session=&#39;study1&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - asegstats2table --meas volume --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aseg_ses-study2_stats.csv
---delimiter comma --subjects sub-02_run-13661 sub-01_run-27245
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aseg_ses-study1_stats.csv
+--delimiter comma --subjects sub-01_run-15456 sub-02_run-38141
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aseg_ses-study2_stats.csv
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aseg_ses-study1_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi lh -measure area
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi lh -measure area
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5489,30 +5489,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;area&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas area --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-are
-a_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-are
+a_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas area
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
-s-area_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+s-area_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-are
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-are
 a_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
 s-area_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi lh -measure volume
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi lh -measure volume
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5523,30 +5523,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;volume&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas volume --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-vol
-ume_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-vol
+ume_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas volume
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
-s-volume_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+s-volume_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-vol
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-vol
 ume_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
 s-volume_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi lh -measure thickness
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi lh -measure thickness
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5557,30 +5557,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;thickness&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas thickness --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-thi
-ckness_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-thi
+ckness_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas thickness
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
 s-thickness_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-38141 sub-01_run-15456
+sub-01_run-27245 sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-thi
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-thi
 ckness_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
 s-thickness_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi lh -measure thicknessstd
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi lh -measure thicknessstd
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5591,30 +5591,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;thicknessstd&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas thicknessstd --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-thi
-cknessstd_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-thi
+cknessstd_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas thicknessstd
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
 s-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-38141 sub-01_run-15456
+sub-01_run-27245 sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-thi
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-thi
 cknessstd_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
 s-thicknessstd_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi lh -measure meancurv
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi lh -measure meancurv
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5625,30 +5625,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;meancurv&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas meancurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-mea
-ncurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-mea
+ncurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas meancurv
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
-s-meancurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+s-meancurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-mea
 ncurv_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
 s-meancurv_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi lh -measure gauscurv
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi lh -measure gauscurv
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5659,30 +5659,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;gauscurv&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas gauscurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-gau
-scurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-gau
+scurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas gauscurv
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
-s-gauscurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+s-gauscurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-gau
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-gau
 scurv_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
 s-gauscurv_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi lh -measure foldind
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi lh -measure foldind
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5693,30 +5693,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;foldind&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas foldind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-fol
-dind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-fol
+dind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas foldind
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
-s-foldind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+s-foldind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-fol
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-fol
 dind_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
 s-foldind_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi lh -measure curvind
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi lh -measure curvind
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5727,30 +5727,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;lh&#39;,
     measure=&#39;curvind&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi lh --meas curvind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-cur
-vind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-cur
+vind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas curvind
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
-s-curvind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
+s-curvind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-lh_meas-cur
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-lh_meas-cur
 vind_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-lh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-lh_mea
 s-curvind_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi rh -measure area
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi rh -measure area
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5761,30 +5761,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;area&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas area --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-are
-a_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-are
+a_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas area
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
-s-area_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+s-area_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-are
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-are
 a_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
 s-area_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi rh -measure volume
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi rh -measure volume
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5795,30 +5795,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;volume&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas volume --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-vol
-ume_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-vol
+ume_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas volume
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
-s-volume_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+s-volume_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-vol
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-vol
 ume_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
 s-volume_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi rh -measure thickness
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi rh -measure thickness
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5829,30 +5829,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;thickness&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas thickness --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-thi
-ckness_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-thi
+ckness_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas thickness
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
 s-thickness_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-38141 sub-01_run-15456
+sub-01_run-27245 sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-thi
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-thi
 ckness_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
 s-thickness_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi rh -measure thicknessstd
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi rh -measure thicknessstd
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5863,30 +5863,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;thicknessstd&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas thicknessstd --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-thi
-cknessstd_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-thi
+cknessstd_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas thicknessstd
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
 s-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-38141 sub-01_run-15456
+sub-01_run-27245 sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-thi
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-thi
 cknessstd_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
 s-thicknessstd_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi rh -measure meancurv
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi rh -measure meancurv
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5897,30 +5897,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;meancurv&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas meancurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-mea
-ncurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-mea
+ncurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas meancurv
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
-s-meancurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+s-meancurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-mea
 ncurv_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
 s-meancurv_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi rh -measure gauscurv
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi rh -measure gauscurv
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5931,30 +5931,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;gauscurv&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas gauscurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-gau
-scurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-gau
+scurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas gauscurv
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
-s-gauscurv_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+s-gauscurv_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-gau
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-gau
 scurv_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
 s-gauscurv_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi rh -measure foldind
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi rh -measure foldind
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5965,30 +5965,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;foldind&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas foldind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-fol
-dind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-fol
+dind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas foldind
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
-s-foldind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+s-foldind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-fol
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-fol
 dind_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
 s-foldind_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -hemi rh -measure curvind
+sub-01_run-27245,sub-02_run-13661 -session study2 -hemi rh -measure curvind
 -output-dir /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun
 True -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -5999,30 +5999,30 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     hemi=&#39;rh&#39;,
     measure=&#39;curvind&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - aparcstats2table --hemi rh --meas curvind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-cur
-vind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-cur
+vind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas curvind
 --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
-s-curvind_stats.csv --delimiter comma --parcid-only --subjects sub-02_run-38141
-sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
+s-curvind_stats.csv --delimiter comma --parcid-only --subjects sub-01_run-27245
+sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study1_hemi-rh_meas-cur
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc_ses-study2_hemi-rh_meas-cur
 vind_stats.csv
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study1_hemi-rh_mea
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aparc2009s_ses-study2_hemi-rh_mea
 s-curvind_stats.csv
 __________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface asegstats2table -subjects
-sub-02_run-38141,sub-01_run-15456 -session study1 -output-dir
+sub-01_run-27245,sub-02_run-13661 -session study2 -output-dir
 /tmp/brainprep-sbm/derivatives/sbm/morphometry -verbose True -dryrun True
 -no-color False -skip-run-check False -cat12-file
 /opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
@@ -6033,17 +6033,17 @@ in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
 /opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
 ________________________________________________________________________________
 [call] brainprep.interfaces.freesurfer.asegstats2table(
-    subjects=[&#39;sub-02_run-38141&#39;, &#39;sub-01_run-15456&#39;],
-    session=&#39;study1&#39;,
+    subjects=[&#39;sub-01_run-27245&#39;, &#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/morphometry&#39;),
 )
 [command] - asegstats2table --meas volume --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aseg_ses-study1_stats.csv
---delimiter comma --subjects sub-02_run-38141 sub-01_run-15456
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aseg_ses-study2_stats.csv
+--delimiter comma --subjects sub-01_run-27245 sub-02_run-13661
 [info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/morphometry/aseg_ses-study1_stats.csv
+/tmp/brainprep-sbm/derivatives/sbm/morphometry/aseg_ses-study2_stats.csv
 __________________________________________________________________0.00s, 0.00min
-__________________________________________________________________0.24s, 0.00min
+__________________________________________________________________0.25s, 0.00min
 [command] - brainprep interface euler-numbers -output-dir
 /tmp/brainprep-sbm/derivatives/sbm -euler-threshold -217 -dryrun False -verbose
 True -dryrun True -no-color False -skip-run-check False -cat12-file
@@ -6085,7 +6085,7 @@ _numbers.tsv&#39;),
 /tmp/brainprep-sbm/derivatives/sbm/figures/histogram_euler_number.png
 __________________________________________________________________0.00s, 0.00min
 [title] - Group Level SBM done.
-__________________________________________________________________0.27s, 0.00min
+__________________________________________________________________0.28s, 0.00min
 [warn] - BIDS file name does not contain run key: sub-02_ses-study1_T1w.nii.gz
 [warn] - BIDS file name does not contain run key: sub-02_ses-study2_T1w.nii.gz
 [title] - Longitudinal SBM...
@@ -6282,7 +6282,7 @@ ts/sub-02/template&#39;),
 /tmp/brainprep-sbm/derivatives/sbm/longitudinal/subjects/sub-02/template
 __________________________________________________________________0.00s, 0.00min
 [title] - Longitudinal SBM done.
-__________________________________________________________________0.05s, 0.00min
+__________________________________________________________________0.06s, 0.00min
 [title] - Group Level SBM...
 ________________________________________________________________________________
 [call] brainprep.workflow.sbm.brainprep_group_sbm(
@@ -6310,590 +6310,6 @@ kspace&#39;),
     output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
 metry&#39;),
 )
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi lh -measure area -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;lh&#39;,
-    measure=&#39;area&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi lh --meas area --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-area_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas area
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-area_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-area_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-area_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi lh -measure volume -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;lh&#39;,
-    measure=&#39;volume&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi lh --meas volume --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-volume_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas volume
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-volume_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-volume_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-volume_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi lh -measure thickness -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;lh&#39;,
-    measure=&#39;thickness&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi lh --meas thickness --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-thickness_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas thickness
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-thickness_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-thickness_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-thickness_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi lh -measure thicknessstd -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;lh&#39;,
-    measure=&#39;thicknessstd&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi lh --meas thicknessstd --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas thicknessstd
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-thicknessstd_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-thicknessstd_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi lh -measure meancurv -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;lh&#39;,
-    measure=&#39;meancurv&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi lh --meas meancurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-meancurv_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas meancurv
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-meancurv_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-meancurv_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-meancurv_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi lh -measure gauscurv -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;lh&#39;,
-    measure=&#39;gauscurv&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi lh --meas gauscurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-gauscurv_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas gauscurv
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-gauscurv_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-gauscurv_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-gauscurv_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi lh -measure foldind -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;lh&#39;,
-    measure=&#39;foldind&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi lh --meas foldind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-foldind_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas foldind
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-foldind_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-foldind_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-foldind_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi lh -measure curvind -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;lh&#39;,
-    measure=&#39;curvind&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi lh --meas curvind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-curvind_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas curvind
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-curvind_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-lh_meas-curvind_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-lh_meas-curvind_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi rh -measure area -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;rh&#39;,
-    measure=&#39;area&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi rh --meas area --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-area_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas area
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-area_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-area_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-area_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi rh -measure volume -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;rh&#39;,
-    measure=&#39;volume&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi rh --meas volume --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-volume_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas volume
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-volume_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-volume_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-volume_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi rh -measure thickness -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;rh&#39;,
-    measure=&#39;thickness&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi rh --meas thickness --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-thickness_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas thickness
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-thickness_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-thickness_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-thickness_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi rh -measure thicknessstd -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;rh&#39;,
-    measure=&#39;thicknessstd&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi rh --meas thicknessstd --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas thicknessstd
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-thicknessstd_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-thicknessstd_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi rh -measure meancurv -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;rh&#39;,
-    measure=&#39;meancurv&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi rh --meas meancurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-meancurv_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas meancurv
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-meancurv_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-meancurv_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-meancurv_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi rh -measure gauscurv -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;rh&#39;,
-    measure=&#39;gauscurv&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi rh --meas gauscurv --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-gauscurv_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas gauscurv
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-gauscurv_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-gauscurv_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-gauscurv_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi rh -measure foldind -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;rh&#39;,
-    measure=&#39;foldind&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi rh --meas foldind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-foldind_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas foldind
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-foldind_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-foldind_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-foldind_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
--session study2 -hemi rh -measure curvind -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.aparcstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    hemi=&#39;rh&#39;,
-    measure=&#39;curvind&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - aparcstats2table --hemi rh --meas curvind --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-curvind_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas curvind
---tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-curvind_stats.csv --delimiter comma --parcid-only --subjects
-sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
-i-rh_meas-curvind_stats.csv
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
-2_hemi-rh_meas-curvind_stats.csv
-__________________________________________________________________0.00s, 0.00min
-[command] - brainprep interface asegstats2table -subjects sub-02_run-13661
--session study2 -output-dir
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
--dryrun True -no-color False -skip-run-check False -cat12-file
-/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
-/opt/MCR-2017b/v93 -tpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
-/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
-in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
-/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
-________________________________________________________________________________
-[call] brainprep.interfaces.freesurfer.asegstats2table(
-    subjects=[&#39;sub-02_run-13661&#39;],
-    session=&#39;study2&#39;,
-    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
-metry&#39;),
-)
-[command] - asegstats2table --meas volume --tablefile
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aseg_ses-study2_stat
-s.csv --delimiter comma --subjects sub-02_run-13661
-[info] - checking output:
-/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aseg_ses-study2_stat
-s.csv
-__________________________________________________________________0.00s, 0.00min
 [command] - brainprep interface aparcstats2table -subjects sub-02_run-38141
 -session study1 -hemi lh -measure area -output-dir
 /tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
@@ -7478,9 +6894,593 @@ s.csv --delimiter comma --subjects sub-02_run-38141
 /tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aseg_ses-study1_stat
 s.csv
 __________________________________________________________________0.00s, 0.00min
-__________________________________________________________________0.23s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi lh -measure area -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;lh&#39;,
+    measure=&#39;area&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi lh --meas area --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-area_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas area
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-area_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-area_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-area_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi lh -measure volume -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;lh&#39;,
+    measure=&#39;volume&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi lh --meas volume --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-volume_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas volume
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-volume_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-volume_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-volume_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi lh -measure thickness -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;lh&#39;,
+    measure=&#39;thickness&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi lh --meas thickness --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-thickness_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas thickness
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-thickness_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-thickness_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-thickness_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi lh -measure thicknessstd -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;lh&#39;,
+    measure=&#39;thicknessstd&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi lh --meas thicknessstd --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas thicknessstd
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-thicknessstd_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-thicknessstd_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi lh -measure meancurv -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;lh&#39;,
+    measure=&#39;meancurv&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi lh --meas meancurv --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-meancurv_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas meancurv
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-meancurv_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-meancurv_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-meancurv_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi lh -measure gauscurv -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;lh&#39;,
+    measure=&#39;gauscurv&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi lh --meas gauscurv --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-gauscurv_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas gauscurv
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-gauscurv_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-gauscurv_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-gauscurv_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi lh -measure foldind -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;lh&#39;,
+    measure=&#39;foldind&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi lh --meas foldind --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-foldind_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas foldind
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-foldind_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-foldind_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-foldind_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi lh -measure curvind -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;lh&#39;,
+    measure=&#39;curvind&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi lh --meas curvind --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-curvind_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi lh --meas curvind
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-curvind_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-lh_meas-curvind_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-lh_meas-curvind_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi rh -measure area -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;rh&#39;,
+    measure=&#39;area&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi rh --meas area --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-area_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas area
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-area_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-area_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-area_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi rh -measure volume -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;rh&#39;,
+    measure=&#39;volume&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi rh --meas volume --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-volume_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas volume
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-volume_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-volume_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-volume_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi rh -measure thickness -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;rh&#39;,
+    measure=&#39;thickness&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi rh --meas thickness --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-thickness_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas thickness
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-thickness_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-thickness_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-thickness_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi rh -measure thicknessstd -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;rh&#39;,
+    measure=&#39;thicknessstd&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi rh --meas thicknessstd --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas thicknessstd
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-thicknessstd_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-thicknessstd_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-thicknessstd_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi rh -measure meancurv -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;rh&#39;,
+    measure=&#39;meancurv&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi rh --meas meancurv --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-meancurv_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas meancurv
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-meancurv_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-meancurv_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-meancurv_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi rh -measure gauscurv -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;rh&#39;,
+    measure=&#39;gauscurv&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi rh --meas gauscurv --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-gauscurv_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas gauscurv
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-gauscurv_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-gauscurv_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-gauscurv_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi rh -measure foldind -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;rh&#39;,
+    measure=&#39;foldind&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi rh --meas foldind --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-foldind_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas foldind
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-foldind_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-foldind_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-foldind_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface aparcstats2table -subjects sub-02_run-13661
+-session study2 -hemi rh -measure curvind -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.aparcstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    hemi=&#39;rh&#39;,
+    measure=&#39;curvind&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - aparcstats2table --hemi rh --meas curvind --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-curvind_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[command] - aparcstats2table --parc aparc.a2009s --hemi rh --meas curvind
+--tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-curvind_stats.csv --delimiter comma --parcid-only --subjects
+sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc_ses-study2_hem
+i-rh_meas-curvind_stats.csv
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aparc2009s_ses-study
+2_hemi-rh_meas-curvind_stats.csv
+__________________________________________________________________0.00s, 0.00min
+[command] - brainprep interface asegstats2table -subjects sub-02_run-13661
+-session study2 -output-dir
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry -verbose True
+-dryrun True -no-color False -skip-run-check False -cat12-file
+/opt/cat12/standalone/cat_standalone.sh -spm12-dir /opt/cat12 -matlab-dir
+/opt/MCR-2017b/v93 -tpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/tpm/TPM.nii -darteltpm-file
+/opt/cat12/spm12_mcr/home/gaser/gaser/spm/spm12/toolbox/cat12/templates_MNI152NL
+in2009cAsym/Template_1_Dartel.nii -mni-2iso-file
+/opt/fsl/data/standard/MNI152_T1_2mm.nii.gz -geolab-atlas-dir /opt/geolab/atlas
+________________________________________________________________________________
+[call] brainprep.interfaces.freesurfer.asegstats2table(
+    subjects=[&#39;sub-02_run-13661&#39;],
+    session=&#39;study2&#39;,
+    output_dir=PosixPath(&#39;/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morpho
+metry&#39;),
+)
+[command] - asegstats2table --meas volume --tablefile
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aseg_ses-study2_stat
+s.csv --delimiter comma --subjects sub-02_run-13661
+[info] - checking output:
+/tmp/brainprep-sbm/derivatives/sbm/longitudinal/morphometry/aseg_ses-study2_stat
+s.csv
+__________________________________________________________________0.00s, 0.00min
+__________________________________________________________________0.26s, 0.00min
 [title] - Group Level SBM done.
-__________________________________________________________________0.25s, 0.00min
+__________________________________________________________________0.28s, 0.00min
 </pre></div>
 </div>
 </section>
@@ -7653,8 +7653,8 @@ In practice, this means that once the CLI has produced the appropriate
 instructions, you can simply copy and run them inside the container to
 achieve the intended results. You can find the BrainPrep images on Docker
 Hub: <a class="reference external" href="https://hub.docker.com/u/neurospin">Neurospin Docker Hub</a>.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 3.852 seconds)</p>
-<p><strong>Estimated memory usage:</strong>  144 MB</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 3.607 seconds)</p>
+<p><strong>Estimated memory usage:</strong>  111 MB</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-workflows-plot-sbm-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/e57010386164a5d7eee2d657a0ab0114/plot_sbm.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_sbm.ipynb</span></code></a></p>

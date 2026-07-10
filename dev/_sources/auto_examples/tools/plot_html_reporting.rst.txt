@@ -123,9 +123,9 @@ Now let's generate the HTML report.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.407 seconds)
+   **Total running time of the script:** (0 minutes 0.543 seconds)
 
-**Estimated memory usage:**  115 MB
+**Estimated memory usage:**  112 MB
 
 
 .. _sphx_glr_download_auto_examples_tools_plot_html_reporting.py:

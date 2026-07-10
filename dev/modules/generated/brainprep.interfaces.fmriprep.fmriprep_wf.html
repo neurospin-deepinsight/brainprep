@@ -687,7 +687,7 @@ function signature, and not how to use it. Please refer to the
 <h1>brainprep.interfaces.fmriprep.fmriprep_wf<a class="headerlink" href="#brainprep-interfaces-fmriprep-fmriprep-wf" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="brainprep.interfaces.fmriprep.fmriprep_wf">
-<span class="sig-prename descclassname"><span class="pre">brainprep.interfaces.fmriprep.</span></span><span class="sig-name descname"><span class="pre">fmriprep_wf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t1_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_description_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freesurfer_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workspace_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entities</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/9f5a24d/brainprep/interfaces/fmriprep.py#L47"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.interfaces.fmriprep.fmriprep_wf" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">brainprep.interfaces.fmriprep.</span></span><span class="sig-name descname"><span class="pre">fmriprep_wf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t1_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_description_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freesurfer_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workspace_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entities</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/interfaces/fmriprep.py#L49"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.interfaces.fmriprep.fmriprep_wf" title="Link to this definition">¶</a></dt>
 <dd><p>Compute fMRI prep-processing using fMRIPrep.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -736,8 +736,13 @@ and fsLR23k.</p></li>
 <p class="rubric">Notes</p>
 <ul class="simple">
 <li><p>Creates BIDS subject specific working directory using copy in
-‘rawdata’.</p></li>
+‘rawdata’ folder.</p></li>
+<li><p>Create FreeSurfer subject directory using copy in ‘freesurfer’ folder.</p></li>
+<li><p>To avoid paths that are too long and not allowed by FreeSurfer, use the
+‘/tmp’ directory. To prevent data leakage, please bind ‘/tmp’ to a
+secure location.</p></li>
 <li><p>Store intermediate pre-processing outputs in ‘work’.</p></li>
+<li><p>Use as many CPUs as available.</p></li>
 </ul>
 </dd></dl>
 

@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:01.268** total execution time for 1 file **from auto_examples/tutorials**:
+**00:01.263** total execution time for 1 file **from auto_examples/tutorials**:
 
 .. container::
 
@@ -33,5 +33,5 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_tutorials_plot_iqms.py` (``plot_iqms.py``)
-     - 00:01.268
-     - 129.4
+     - 00:01.263
+     - 127.1

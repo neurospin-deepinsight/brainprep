@@ -167,7 +167,7 @@ number of IQMs, we display only a selected subset here.
  .. code-block:: none
 
 
-    <seaborn.axisgrid.PairGrid object at 0x7fc190d16ab0>
+    <seaborn.axisgrid.PairGrid object at 0x7fcbbd7c9b80>
 
 
 
@@ -303,9 +303,9 @@ The metrics should not be too strongly correlated.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.268 seconds)
+   **Total running time of the script:** (0 minutes 1.263 seconds)
 
-**Estimated memory usage:**  129 MB
+**Estimated memory usage:**  127 MB
 
 
 .. _sphx_glr_download_auto_examples_tutorials_plot_iqms.py:

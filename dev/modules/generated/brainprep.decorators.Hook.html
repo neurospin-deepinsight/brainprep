@@ -689,7 +689,7 @@ signature, and not how to use it. Please refer to the
 <h1>brainprep.decorators.Hook<a class="headerlink" href="#brainprep-decorators-hook" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="brainprep.decorators.Hook">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">brainprep.decorators.</span></span><span class="sig-name descname"><span class="pre">Hook</span></span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/9f5a24d/brainprep/decorators.py#L55"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">brainprep.decorators.</span></span><span class="sig-name descname"><span class="pre">Hook</span></span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/decorators.py#L55"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Base class for decorator hooks.</p>
 <p>Hooks used with the decorator must inherit from this class and
@@ -718,13 +718,13 @@ overridden, the default implementation simply returns its argument
 unchanged.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="brainprep.decorators.Hook.after_call">
-<span class="sig-name descname"><span class="pre">after_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/9f5a24d/brainprep/decorators.py#L93"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook.after_call" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">after_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/decorators.py#L93"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook.after_call" title="Link to this definition">¶</a></dt>
 <dd><p>Transform and inspect outputs after the function call.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="brainprep.decorators.Hook.before_call">
-<span class="sig-name descname"><span class="pre">before_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/9f5a24d/brainprep/decorators.py#L85"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook.before_call" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">before_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/decorators.py#L85"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook.before_call" title="Link to this definition">¶</a></dt>
 <dd><p>Transform and inspect inputs before the function call.</p>
 </dd></dl>
 
