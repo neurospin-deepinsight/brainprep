@@ -14,6 +14,7 @@ fMRIprep functions.
 import json
 import os
 import shutil
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -40,6 +41,7 @@ from ..typing import (
     File,
 )
 from ..utils import (
+    print_warn,
     sidecar_from_file,
 )
 
@@ -106,14 +108,33 @@ def fmriprep_wf(
     Notes
     -----
     - Creates BIDS subject specific working directory using copy in
-      'rawdata'.
+      'rawdata' folder.
+    - Create FreeSurfer subject directory using copy in 'freesurfer' folder.
+    - To avoid paths that are too long and not allowed by FreeSurfer, use the
+      '/tmp' directory. To prevent data leakage, please bind '/tmp' to a
+      secure location.
     - Store intermediate pre-processing outputs in 'work'.
+    - Use as many CPUs as available.
     """
     rawdata_dir = workspace_dir / "rawdata"
     anat_dir = rawdata_dir / "anat"
     func_dir = rawdata_dir / "func"
     work_dir = workspace_dir / "work"
-    for path in (anat_dir, func_dir, work_dir):
+    work_freesurfer_dir = workspace_dir / "freesurfer"
+    tmp_dir = Path(tempfile.TemporaryDirectory().name)
+    work_tmp_dir = tmp_dir / "work"
+    print_warn(
+        "To avoid paths that are too long and not allowed by FreeSurfer, we "
+        "use the '/tmp' directory. To prevent data leakage, please bind "
+        "'/tmp' to a secure location. Current temporary directory: "
+        f"{tmp_dir}."
+    )
+    for path in (
+            anat_dir,
+            func_dir,
+            work_freesurfer_dir,
+            work_tmp_dir,
+        ):
         path.mkdir(parents=True, exist_ok=True)
     subject, session = entities["sub"], entities["ses"]
     fshome_dir = os.getenv("FREESURFER_HOME")
@@ -122,6 +143,8 @@ def fmriprep_wf(
             "You must define the 'FREESURFER_HOME' environment variable."
         )
     fshome_dir = Path(fshome_dir)
+    fssubject_dir = freesurfer_dir / f"sub-{subject}"
+    fssubject_local_dir = work_freesurfer_dir / f"sub-{subject}_ses-{session}"
 
     for source_file, target_dir in zip(
             [t1_file, *func_files],
@@ -174,10 +197,18 @@ def fmriprep_wf(
             (
                 fmriprep_dir /
                 "func" /
-                f"{basename}_space-{template}_den-91k_bold.dtseries.nii",
+                f"{basename}_hemi-L_space-fsnative_bold.func.gii",
+            ),
+            (
+                fmriprep_dir /
+                "func" /
+                f"{basename}_hemi-R_space-fsnative_bold.func.gii",
+            ),
+            (
+                fmriprep_dir /
+                "func" /
+                f"{basename}_space-fsLR_den-91k_bold.dtseries.nii",
             )
-            for template in ("fsnative",
-                             "fsLR")
         ]
         confounds_file = (
             fmriprep_dir /
@@ -191,30 +222,49 @@ def fmriprep_wf(
             confounds_file,
         ])
 
-    command = [
-        "fmriprep",
-        str(rawdata_dir),
-        str(output_dir.parent.parent),
-        "participant",
-        "--fs-subjects-dir", str(freesurfer_dir),
-        "--work-dir", str(work_dir),
-        "--n-cpus", str(os.cpu_count()),
-        "--stop-on-first-crash",
-        "--fs-license-file", str(fshome_dir / "license.txt"),
-        "--skip-bids-validation",
-        "--fs-no-reconall",
-        "--fs-no-resume",
-        "--force", "bbr", "syn-sdc",
-        "--no-msm",
-        "--cifti-output", "91k",
-        "--output-spaces",
-        "T1w", "MNI152NLin2009cAsym", "MNI152NLin2009cAsym:res-2",
-        "fsnative", "fsLR",
-        "--ignore", "slicetiming",
-        "--participant-label", subject,
+    commands = [
+        [
+            "cp",
+            "-r",
+            str(fssubject_dir),
+            str(fssubject_local_dir),
+        ],
+        [
+            "fmriprep",
+            str(rawdata_dir),
+            str(output_dir.parent.parent),
+            "participant",
+            "--notrack",
+            "--skip-bids-validation",
+            "--stop-on-first-crash",
+            "--n-cpus", str(os.cpu_count()),
+            "--fs-license-file", str(fshome_dir / "license.txt"),
+            "--fs-subjects-dir", str(work_freesurfer_dir),
+            "--work-dir", str(work_tmp_dir),
+            "--fs-no-resume",
+            "--force", "bbr", "syn-sdc",
+            "--no-msm",
+            "--cifti-output", "91k",
+            "--output-spaces",
+            "T1w", "MNI152NLin2009cAsym", "MNI152NLin2009cAsym:res-2",
+            "fsnative", "fsLR",
+            "--ignore", "slicetiming",
+            "--participant-label", subject,
+        ],
+        [
+            "cp",
+            "-r",
+            str(work_tmp_dir),
+            str(work_dir.parent),
+        ],
+        [
+            "rm",
+            "-r",
+            str(tmp_dir),
+        ],
     ]
 
-    return command, (rfmri_outputs, qc_file)
+    return commands, (rfmri_outputs, qc_file)
 
 
 @step(
