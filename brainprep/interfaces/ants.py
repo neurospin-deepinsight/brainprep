@@ -71,7 +71,7 @@ def biasfield(
         "N4BiasFieldCorrection",
         "-d", "3",
         "-i", str(image_file),
-        "-s", "1",
+        "-s", "4",
         "-b", "[1x1x1,3]",
         "-c", "[50x50x50x50,0.001]",
         "-t", "[0.15,0.01,200]",

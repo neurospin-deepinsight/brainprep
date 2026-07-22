@@ -172,6 +172,7 @@ def brainprep_quasiraw(
         1,
         workspace_dir / "05-scale",
         entities,
+        interp="nearestneighbour"
     )
     bc_anatomical_file, _ = interfaces.biasfield(
         scaled_anatomical_file,
