@@ -206,7 +206,8 @@ def scale(
         image_file: File,
         scale: int,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+        interp: str | None = None) -> tuple[list[str], tuple[File]]:
     """
     Apply an isotropic resampling transformation to a BIDS-compliant image
     file using FSL's `flirt`.
@@ -221,6 +222,10 @@ def scale(
         Directory where the scaled image will be saved.
     entities : dict
         A dictionary of parsed BIDS entities including modality.
+    interp : str, default=None
+        Interpolation method used by `flirt`. One of "trilinear",
+        "nearestneighbour", "sinc" or "spline". If None, `flirt`'s
+        default ("trilinear") is used.
 
     Returns
     -------
@@ -244,6 +249,10 @@ def scale(
         "-omat", str(transform_file),
         "-verbose", "1",
     ]
+    if interp is not None:
+        command += [
+            "-interp", interp
+        ]
 
     return command, (scaled_anatomical_file, transform_file)
 
@@ -302,6 +311,9 @@ def affine(
         "-bins", "256",
         "-interp", "trilinear",
         "-dof", "9",
+        "-searchrx", "-30", "30",
+        "-searchry", "-30", "30",
+        "-searchrz", "-30", "30",
         "-out", str(aligned_anatomical_file),
         "-omat", str(transform_file),
         "-verbose", "1"
