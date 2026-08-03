@@ -65,16 +65,6 @@ class Hook:
     ``before_call`` returns the inputs unchanged, and ``after_call`` returns
     the outputs unchanged.
 
-    Methods
-    -------
-    before_call(func, inputs)
-        Hook executed before the wrapped function is called.
-        Must return a dictionary of (possibly modified) inputs.
-
-    after_call(func, outputs)
-        Hook executed after the wrapped function returns.
-        Must return the (possibly modified) output value.
-
     Notes
     -----
     Subclasses may override one or both methods. If a method is not
@@ -87,14 +77,22 @@ class Hook:
             func: Callable,
             inputs: dict[str, Any],
         ) -> dict[str, Any]:
-        """Transform and inspect inputs before the function call."""
+        """
+        Hook executed before the wrapped function is called.
+        Transform and/or inspect inputs.
+        Must return a dictionary of (possibly modified) inputs.
+        """
         return inputs
 
     def after_call(
             self,
             outputs: Any,
         ) -> Any:
-        """Transform and inspect outputs after the function call."""
+        """
+        Hook executed after the wrapped function returns.
+        Transform and/or inspect outputs.
+        Must return the (possibly modified) output value.
+        """
         return outputs
 
 

@@ -94,8 +94,9 @@ def print_color(color: str, text: str, end: str = "\n") -> None:
         Name of the color style to apply.
     text : str
         The message to display.
-    end : str, optional
-        String appended after the message. Default ``"\\n"``.
+    end : str
+        String appended after the message.
+        Default ``"\\n"``.
 
     Notes
     -----
