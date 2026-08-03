@@ -40,7 +40,8 @@ def biasfield(
         image_file: File,
         mask_file: File,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+        quick: bool = False) -> tuple[list[str], tuple[File]]:
     """
     Bias field correction of a BIDS-compliant anatomical image using ANTs's
     `N4BiasFieldCorrection`.
@@ -55,6 +56,10 @@ def biasfield(
         Directory where the reoriented image will be saved.
     entities : dict
         A dictionary of parsed BIDS entities including modality.
+    quick : bool
+        Increased shrink factor from `1` to `4`, which downsamples the image
+        before estimating the bias field.
+        Default False.
 
     Returns
     -------
@@ -73,7 +78,7 @@ def biasfield(
         "N4BiasFieldCorrection",
         "-d", "3",
         "-i", str(image_file),
-        "-s", "4",
+        "-s", "4" if quick else "1",
         "-b", "[1x1x1,3]",
         "-c", "[50x50x50x50,0.001]",
         "-t", "[0.15,0.01,200]",

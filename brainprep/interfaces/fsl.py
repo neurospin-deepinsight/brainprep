@@ -207,7 +207,7 @@ def scale(
         scale: int,
         output_dir: Directory,
         entities: dict,
-        interp: str | None = None) -> tuple[list[str], tuple[File]]:
+        interpolation: str = "spline") -> tuple[list[str], tuple[File]]:
     """
     Apply an isotropic resampling transformation to a BIDS-compliant image
     file using FSL's `flirt`.
@@ -222,10 +222,10 @@ def scale(
         Directory where the scaled image will be saved.
     entities : dict
         A dictionary of parsed BIDS entities including modality.
-    interp : str, default=None
-        Interpolation method used by `flirt`. One of "trilinear",
-        "nearestneighbour", "sinc" or "spline". If None, `flirt`'s
-        default ("trilinear") is used.
+    interpolation: str
+        The interpolation method: 'trilinear', 'nearestneighbour', 'sinc', or
+        'spline'.
+        Default 'spline'.
 
     Returns
     -------
@@ -245,14 +245,11 @@ def scale(
         "-in", str(image_file),
         "-ref", str(image_file),
         "-applyisoxfm", str(scale),
+        "-interp", interpolation,
         "-out", str(scaled_anatomical_file),
         "-omat", str(transform_file),
         "-verbose", "1",
     ]
-    if interp is not None:
-        command += [
-            "-interp", interp
-        ]
 
     return command, (scaled_anatomical_file, transform_file)
 
@@ -272,7 +269,8 @@ def affine(
         anatomical_file: File,
         template_file: File,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+        quick: bool = False) -> tuple[list[str], tuple[File]]:
     """
     Affinely register a BIDS-compliant anatomical image to a template file
     using FSL's `flirt`.
@@ -287,6 +285,9 @@ def affine(
         Directory where the affine transformation will be saved.
     entities : dict
         A dictionary of parsed BIDS entities including modality.
+    quick : bool
+        Restricted rotation search range to +/-30° on all three axes.
+        Default False.
 
     Returns
     -------
@@ -311,13 +312,16 @@ def affine(
         "-bins", "256",
         "-interp", "trilinear",
         "-dof", "9",
-        "-searchrx", "-30", "30",
-        "-searchry", "-30", "30",
-        "-searchrz", "-30", "30",
         "-out", str(aligned_anatomical_file),
         "-omat", str(transform_file),
         "-verbose", "1"
     ]
+    if quick:
+        command += [
+            "-searchrx", "-30", "30",
+            "-searchry", "-30", "30",
+            "-searchrz", "-30", "30",
+        ]
 
     return command, (aligned_anatomical_file, transform_file)
 
@@ -358,7 +362,8 @@ def applyaffine(
         A dictionary of parsed BIDS entities including modality.
     interpolation: str
         The interpolation method: 'trilinear', 'nearestneighbour', 'sinc', or
-        'spline'. Default 'spline'.
+        'spline'.
+        Default 'spline'.
 
     Returns
     -------
@@ -376,7 +381,7 @@ def applyaffine(
         "-in", str(image_file),
         "-ref", str(template_file),
         "-init", str(transform_file),
-        "-interp", str(interpolation),
+        "-interp", interpolation,
         "-applyxfm",
         "-out", str(aligned_image_file),
     ]

@@ -52,6 +52,7 @@ from ..utils import (
 def brainprep_quasiraw(
         anatomical_file: File,
         output_dir: Directory,
+        quick: bool = False,
         keep_intermediate: bool = False,
         **kwargs: dict) -> Bunch:
     """
@@ -73,11 +74,15 @@ def brainprep_quasiraw(
 
     Parameters
     ----------
-    anatomical_file: File
+    anatomical_file : File
         Path to the input image file.
-    output_dir: Directory
+    output_dir : Directory
         Directory where the outputs will be saved (i.e., the root of your
         dataset).
+    quick : bool
+        Speed up processing by applying optimizations that trade accuracy
+        for computational efficiency. This is particularly useful for
+        large-scale batch processing where speed is prioritized.
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
         for debugging. Default False.
@@ -104,7 +109,12 @@ def brainprep_quasiraw(
 
     Notes
     -----
-    This workflow assumes the anatomical image is organized in BIDS.
+    This workflow assumes the anatomical image is organized in BIDS and applies
+    the following optimizations in `quick` mode:
+
+    - **flirt**: Restricted rotation search range to +/-30° on all three axes.
+    - **N4BiasFieldCorrection**: Increased shrink factor from `1` to `4`,
+      which downsamples the image before estimating the bias field.
 
     References
     ----------
@@ -167,25 +177,28 @@ def brainprep_quasiraw(
         1,
         workspace_dir / "04-scale",
         entities,
+        interpolation="spline",
     )
     scaled_mask_file, _ = interfaces.scale(
         mask_file,
         1,
         workspace_dir / "05-scale",
         entities,
-        interp="nearestneighbour"
+        interpolation="nearestneighbour",
     )
     bc_anatomical_file, _ = interfaces.biasfield(
         scaled_anatomical_file,
         scaled_mask_file,
         workspace_dir / "06-biasfield",
         entities,
+        quick=quick,
     )
     _, affine_transform_file = interfaces.affine(
         bc_anatomical_file,
         template_file,
         workspace_dir / "07-affine",
         entities,
+        quick=quick,
     )
     aligned_anatomical_file = interfaces.applyaffine(
         bc_anatomical_file,
