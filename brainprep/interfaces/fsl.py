@@ -270,6 +270,7 @@ def affine(
         template_file: File,
         output_dir: Directory,
         entities: dict,
+        rigid: bool = False,
         quick: bool = False) -> tuple[list[str], tuple[File]]:
     """
     Affinely register a BIDS-compliant anatomical image to a template file
@@ -285,6 +286,12 @@ def affine(
         Directory where the affine transformation will be saved.
     entities : dict
         A dictionary of parsed BIDS entities including modality.
+    rigid : bool
+        Estimate a 6 DOF transformation that maintains the original size and
+        shape of the brain. By default a 9 DOF transformation allows for
+        additional scaling in the x, y, and z directions, adjusting the size
+        and shape of the brain during the alignment process.
+        Default False.
     quick : bool
         Restricted rotation search range to +/-30° on all three axes.
         Default False.
@@ -311,7 +318,7 @@ def affine(
         "-anglerep", "euler",
         "-bins", "256",
         "-interp", "trilinear",
-        "-dof", "9",
+        "-dof", "6" if rigid else "9",
         "-out", str(aligned_anatomical_file),
         "-omat", str(transform_file),
         "-verbose", "1"
