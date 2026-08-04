@@ -77,25 +77,29 @@ def brainmask(
     command : list[str]
         Skull-stripping command-line.
     outputs : tuple[File]
-        - mask_file : File - Skull-stripped brain image file.
+        -brain_file : File - Skull-stripped brain image file.
+        -mask_file : File - Binary brain mask image file.
 
     References
     ----------
 
     .. footbibliography::
     """
-    basename = "sub-{sub}_ses-{ses}_run-{run}_mod-{mod}_brainmask".format(
+    basename = "sub-{sub}_ses-{ses}_run-{run}_mod-{mod}".format(
         **entities)
-    mask_file = output_dir / f"{basename}.nii.gz"
+    brain_file = output_dir / f"{basename}_brain.nii.gz"
+    mask_file = output_dir / f"{basename}_brainmask.nii.gz"
 
     command = [
         "mri_synthstrip",
         "-i", str(image_file),
+        "-o", str(brain_file),
         "-m", str(mask_file),
+        "-f", "0",
         "--no-csf",
     ]
 
-    return command, (mask_file, )
+    return command, (brain_file, mask_file, )
 
 
 @step(
