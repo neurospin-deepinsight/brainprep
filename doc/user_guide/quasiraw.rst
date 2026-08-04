@@ -89,7 +89,8 @@ The structure is organized following the :ref:`brainprep ontology <ontology>`.
        └── sub-01
            └── ses-01
                ├── log
-               │   └── report_<timestamp>.rst
+               │   ├── report_<timestamp>.rst
+               │   └── commands_<timestamp>.rst
                ├── sub-01_ses-01_run-01_mod-T1w_affine.txt
                ├── sub-01_ses-01_run-01_mod-T1w_brainmask.nii.gz
                └── sub-01_ses-01_run-01_T1w.nii.gz
@@ -110,16 +111,18 @@ The structure is organized following the :ref:`brainprep ontology <ontology>`.
   table includes a binary ``qc`` column indicating the quality control result.
 - ``quality_check/pca.tsv``  
   Table containing information on the first two PCA components.
-- ``subjects/sub-<id>/ses-<id>/log/report_<timestamp>.rst``  
+- ``subjects/sub-<id>/ses-<id>/log/report_<timestamp>.rst``
   Contains subject-level workflow steps and parameters.
+- ``subjects/sub-<id>/ses-<id>/log/commands_<timestamp>.rst``
+  Contains subject-level executed commands.
 - ``subjects/sub-<id>/ses-<id>/sub-01_ses-01_run-01_mod-T1w_affine.txt`` 
   Affine transformation parameters (9 DOF) used to align the T1w image to
   the MNI template.
 - ``subjects/sub-<id>/ses-<id>/sub-01_ses-01_run-01_mod-T1w_brainmask.nii.gz``
   Brain mask generated during skull stripping (e.g., via SynthStrip).
 - ``subjects/sub-<id>/ses-<id>/sub-01_ses-01_run-01_T1w.nii.gz``
-  The minimally preprocessed T1w image, including skull stripping, bias
-  correction, and affine alignment.
+  The minimally preprocessed T1w image in a 1mm space, including skull
+  stripping, bias correction, and affine alignment.
 
 Featured examples
 -----------------
