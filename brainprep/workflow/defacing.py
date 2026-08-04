@@ -143,7 +143,7 @@ def brainprep_defacing(
         workspace_dir,
         entities,
     )
-    brainmask_file = interfaces.brainmask(
+    _, brainmask_file = interfaces.brainmask(
         reoriented_t1_file,
         workspace_dir,
         entities,
