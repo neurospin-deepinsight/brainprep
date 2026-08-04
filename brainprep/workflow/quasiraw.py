@@ -52,6 +52,7 @@ from ..utils import (
 def brainprep_quasiraw(
         anatomical_file: File,
         output_dir: Directory,
+        rigid: bool = False,
         quick: bool = False,
         keep_intermediate: bool = False,
         **kwargs: dict) -> Bunch:
@@ -62,15 +63,14 @@ def brainprep_quasiraw(
     :footcite:p:`dufumier2022openbhb`. This includes:
 
     1) Reorient the anatomical image to standard MNI152 template space.
-    2) Compute a brain mask using a skull-stripping tool.
-    3) Apply the brain mask to the anatomical image.
+    2) Compute a brain / brain mask using a skull-stripping tool.
+    3) Perform N4 bias field correction.
     4) Resample the anatomical image to 1mm isotropic voxel size.
-    5) Resample the brain mask image to 1mm isotropic voxel size.
-    6) Perform N4 bias field correction.
-    7) Linearly (9 dof) register the image to the MNI152 1mm template space.
-    8) Apply the registration to the antomical image.
-    9) Apply the registration to the brain mask image.
-    10) Apply the brain mask to the registered anatomical image.
+    5) Linearly register the image to the MNI152 1mm template space (6 or 9
+       DOF).
+    6) Apply the registration to the bias field corrected antomical image.
+    7) Apply the registration to the brain mask image.
+    8) Apply the brain mask to the registered anatomical image.
 
     Parameters
     ----------
@@ -79,13 +79,21 @@ def brainprep_quasiraw(
     output_dir : Directory
         Directory where the outputs will be saved (i.e., the root of your
         dataset).
+    rigid : bool
+        Estimate a 6 DOF transformation that maintains the original size and
+        shape of the brain. By default a 9 DOF transformation allows for
+        additional scaling in the x, y, and z directions, adjusting the size
+        of the brain during the alignment process.
+        Default False.
     quick : bool
         Speed up processing by applying optimizations that trade accuracy
         for computational efficiency. This is particularly useful for
         large-scale batch processing where speed is prioritized.
+        Default False.
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
     **kwargs : dict
         entities: dict
             Dictionary of parsed BIDS entities.
@@ -95,9 +103,9 @@ def brainprep_quasiraw(
     Bunch
         A dictionary-like object containing:
 
-        - aligned_anatomical_file : File - path to the aligned anatomical
+        - aligned_anatomical_file : File - path to the aligned 1 mm anatomical
           image - a Nifti file with the suffix "_T1w".
-        - aligned_mask_file : File - path to the aligned mask image - a
+        - aligned_mask_file : File - path to the aligned 1 mm mask image - a
           Nifti file with the suffix "_mod-T1w_brainmask".
         - transform_file : File - path to the 9 dof affine transformation - a
           text file with the suffix "_mod-T1w_affine".
@@ -112,9 +120,12 @@ def brainprep_quasiraw(
     This workflow assumes the anatomical image is organized in BIDS and applies
     the following optimizations in `quick` mode:
 
-    - **flirt**: Restricted rotation search range to +/-30° on all three axes.
-    - **N4BiasFieldCorrection**: Increased shrink factor from `1` to `4`,
-      which downsamples the image before estimating the bias field.
+    - **Use a coarser resolution**: Increase the shrink factor from `1` to `4`
+      to downsample the image before estimating the bias field, employ the
+      MNI152 2mm template as the reference image and scale data to a 2mm
+      space.
+    - **Use a Coarser Search Space**: Restricted rotation search range to
+      +/-30° on all three axes for the registration.
 
     References
     ----------
@@ -151,6 +162,7 @@ def brainprep_quasiraw(
 
     resource_dir = Path(interfaces.__file__).parent.parent / "resources"
     template_file = resource_dir / "MNI152_T1_1mm_brain.nii.gz"
+    lowres_template_file = resource_dir / "MNI152_T1_2mm_brain.nii.gz"
     print_info(f"setting template file: {template_file}")
     workspace_dir = output_dir / f"workspace_{entities['run']}"
     workspace_dir.mkdir(parents=True, exist_ok=True)
@@ -161,50 +173,38 @@ def brainprep_quasiraw(
         workspace_dir / "01-reorient",
         entities,
     )
-    mask_file = interfaces.brainmask(
+    masked_anatomical_file, mask_file = interfaces.brainmask(
         reoriented_anatomical_file,
         workspace_dir / "02-brainmask",
         entities,
     )
-    masked_anatomical_file = interfaces.applymask(
-        reoriented_anatomical_file,
-        mask_file,
-        workspace_dir / "03-applymask",
-        entities,
-    )
-    scaled_anatomical_file, _ = interfaces.scale(
-        masked_anatomical_file,
-        1,
-        workspace_dir / "04-scale",
-        entities,
-        interpolation="spline",
-    )
-    scaled_mask_file, _ = interfaces.scale(
-        mask_file,
-        1,
-        workspace_dir / "05-scale",
-        entities,
-        interpolation="nearestneighbour",
-    )
     bc_anatomical_file, _ = interfaces.biasfield(
-        scaled_anatomical_file,
-        scaled_mask_file,
-        workspace_dir / "06-biasfield",
+        masked_anatomical_file,
+        mask_file,
+        workspace_dir / "03-biasfield",
         entities,
         quick=quick,
     )
-    _, affine_transform_file = interfaces.affine(
+    scaled_anatomical_file, _ = interfaces.scale(
         bc_anatomical_file,
-        template_file,
-        workspace_dir / "07-affine",
+        2 if quick else 1,
+        workspace_dir / "04-scale",
         entities,
+        interpolation="trilinear" if quick else "spline",
+    )
+    _, affine_transform_file = interfaces.affine(
+        scaled_anatomical_file,
+        lowres_template_file if quick else template_file,
+        workspace_dir / "05-affine",
+        entities,
+        rigid=rigid,
         quick=quick,
     )
     aligned_anatomical_file = interfaces.applyaffine(
         bc_anatomical_file,
         template_file,
         affine_transform_file,
-        workspace_dir / "08-applyaffine",
+        workspace_dir / "06-applyaffine",
         entities,
         interpolation="spline",
     )
@@ -212,14 +212,14 @@ def brainprep_quasiraw(
         mask_file,
         template_file,
         affine_transform_file,
-        workspace_dir / "09-applyaffine",
+        workspace_dir / "07-applyaffine",
         entities,
         interpolation="nearestneighbour",
     )
     aligned_anatomical_file = interfaces.applymask(
         aligned_anatomical_file,
         aligned_mask_file,
-        workspace_dir / "10-applymask",
+        workspace_dir / "08-applymask",
         entities,
     )
 
