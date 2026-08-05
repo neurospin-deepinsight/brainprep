@@ -10,12 +10,12 @@ NEW
 ---
 
 - :bdg-success:`Enhancement` Add the dmriprep workflow.
-- :bdg-success:`Enhancement` Add the mrophologist workflow.
+- :bdg-success:`Enhancement` Add the morphologist workflow.
 
 Fixes
 -----
 
-- :bdg-danger:`Deprecation` Fix the containers that are using mri_synthstrip.
+- :bdg-danger:`Deprecation` Fix the containers that are using `mri_synthstrip`.
 - :bdg-danger:`Deprecation` The run mapping file has been moved to avoid
   conflicts with FreeSurfer.
 
@@ -24,9 +24,13 @@ Enhancements
 
 - :bdg-success:`Enhancement` Add signature hook.
 - :bdg-success:`Enhancement` Add live comand line monitoring support.
+- :bdg-success:`Enhancement` Support multi-modality in Quasi-Raw workflow.
+- :bdg-success:`Enhancement` Add `quick` mode in Quasi-Raw workflow.
 
 Changes
 -------
+
+- :bdg-danger:`Deprecation` Optimize the Quasi-Raw workflow steps.
 
 
 2.0.0
