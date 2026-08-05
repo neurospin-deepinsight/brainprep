@@ -70,7 +70,6 @@ def brainprep_quasiraw(
        DOF).
     6) Apply the registration to the bias field corrected antomical image.
     7) Apply the registration to the brain mask image.
-    8) Apply the brain mask to the registered anatomical image.
 
     Parameters
     ----------
@@ -179,14 +178,20 @@ def brainprep_quasiraw(
         entities,
     )
     bc_anatomical_file, _ = interfaces.biasfield(
-        masked_anatomical_file,
+        reoriented_anatomical_file,
         mask_file,
         workspace_dir / "03-biasfield",
         entities,
         quick=quick,
     )
-    scaled_anatomical_file, _ = interfaces.scale(
+    bc_brain_file = interfaces.applymask(
         bc_anatomical_file,
+        mask_file,
+        workspace_dir / "03-biasfield",
+        entities,
+    )
+    scaled_anatomical_file, _ = interfaces.scale(
+        bc_brain_file,
         2 if quick else 1,
         workspace_dir / "04-scale",
         entities,
@@ -215,12 +220,6 @@ def brainprep_quasiraw(
         workspace_dir / "07-applyaffine",
         entities,
         interpolation="nearestneighbour",
-    )
-    aligned_anatomical_file = interfaces.applymask(
-        aligned_anatomical_file,
-        aligned_mask_file,
-        workspace_dir / "08-applymask",
-        entities,
     )
 
     mod = entities["mod"]
