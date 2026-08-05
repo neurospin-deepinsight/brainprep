@@ -269,10 +269,11 @@ def mean_correlation(
         atlas_file: File,
         output_dir: Directory,
         correlation_threshold: float = 0.5,
+        suffix: str | None = None,
         dryrun: bool = False) -> tuple[File]:
     """
     Compute the mean Pearson correlation between a reference image and a list
-    of other images.
+    of input images.
 
     Parameters
     ----------
@@ -285,9 +286,14 @@ def mean_correlation(
         Directory where a TSV file containing the mean correlation values is
         created.
     correlation_threshold : float
-        Quality control threshold on the correlation score. Default 0.5.
+        Quality control threshold on the correlation score.
+        Default 0.5.
+    suffix : str | None
+        Suffix added to the generated TSV file.
+        Default None.
     dryrun : bool
-        If True, skip actual computation and file writing. Default False.
+        If True, skip actual computation and file writing.
+        Default False.
 
     Returns
     -------
@@ -310,7 +316,7 @@ def mean_correlation(
     ``qc = 1`` if ``mean_correlation > correlation_threshold``,
     otherwise ``qc = 0``.
     """
-    correlations_file = output_dir / "mean_correlations.tsv"
+    correlations_file = output_dir / f"mean_correlations{suffix or ''}.tsv"
 
     if dryrun:
         return (correlations_file, )
@@ -384,6 +390,7 @@ def incremental_pca(
         image_files_regex: str,
         output_dir: Directory,
         batch_size: int = 10,
+        suffix: str | None = None,
         dryrun: bool = False) -> tuple[File]:
     """
     Perform an Incremental PCA with 2 components on a collection of images
@@ -410,6 +417,9 @@ def incremental_pca(
     batch_size : int
         Number of images to use in each batch. If None, a single batch is used.
         Default is 10.
+    suffix : str | None
+        Suffix added to the generated TSV file.
+        Default None.
     dryrun : bool
         If True, skip actual computation and file writing. Default False.
 
@@ -425,7 +435,7 @@ def incremental_pca(
         If the dataset contains fewer than 2 images, which prevents PCA
         computation.
     """
-    pca_file = output_dir / "pca.tsv"
+    pca_file = output_dir / f"pca{suffix or ''}.tsv"
 
     if dryrun:
         return (pca_file, )

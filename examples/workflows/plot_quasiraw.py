@@ -4,13 +4,13 @@ Quasi-RAW
 
 Simple example.
 
-Example on how to run the brain parcellation pre-processing using BrainPrep.
+Example on how to run the quasiraw pre-processing using BrainPrep.
 See :ref:`user guide <quasiraw>` for details.
 
 Data
 ----
 
-Let's first get some anatomical data.
+Let's first get some anatomical data: T1w, T2w and FLAIR.
 """
 
 from pathlib import Path
@@ -20,18 +20,20 @@ from brainprep.datasets import OpenMSDataset
 datadir = Path("/tmp/brainprep-data")
 datadir.mkdir(parents=True, exist_ok=True)
 dataset = OpenMSDataset(datadir)
-data = Bunch(
-    sub01=dataset.fetch(
-        subject="01",
-        modality="T1w",
-        dtype="cross_sectional",
-    ),
-    sub02=dataset.fetch(
-        subject="02",
-        modality="T1w",
-        dtype="cross_sectional",
-    ),
-)
+data = Bunch()
+for modality in ("T1w", "T2w", "FLAIR"):
+    data[modality] = Bunch(
+        sub01=dataset.fetch(
+            subject="01",
+            modality=modality,
+            dtype="cross_sectional",
+        ),
+        sub02=dataset.fetch(
+            subject="02",
+            modality=modality,
+            dtype="cross_sectional",
+        ),
+    )
 print(data)
 
 
@@ -57,17 +59,17 @@ if outdir.is_dir():
     shutil.rmtree(outdir)
 outdir.mkdir(parents=True, exist_ok=True)
 with Config(dryrun=True, verbose=True):
-    for subject_data in data.values():
-        report = RSTReport()
-        brainprep_quasiraw(
-            anatomical_file=subject_data.anat,
+    for modality, modality_data in data.items():
+        for subject_data in modality_data.values():
+            brainprep_quasiraw(
+                anatomical_file=subject_data.anat,
+                output_dir=outdir,
+                keep_intermediate=True,
+            )
+        outputs = brainprep_group_quasiraw(
+            modality=modality,
             output_dir=outdir,
-            keep_intermediate=True,
         )
-        print(report)
-    outputs = brainprep_group_quasiraw(
-        output_dir=outdir,
-    )
 
 
 # %%
@@ -88,15 +90,19 @@ commands.append(
             "--anatomical_file", str(subject_data.anat),
             "--output-dir", str(outdir),
             "--keep-intermediate",
-        ] for subject_data in data.values()
+        ]
+        for modality_data in data.values()
+        for subject_data in modality_data.values()
     ]
 )
 commands.append(
     [
         [
             "brainprep", "group-level-quasiraw",
+            "--modality", modality,
             "--output-dir", str(outdir),
         ]
+        for modality in data.keys()
     ]
 )
 pprint(commands)
