@@ -12,6 +12,7 @@ FSL functions.
 """
 
 import os
+from pathlib import Path
 
 from ..decorators import (
     CoerceparamsHook,
@@ -61,7 +62,7 @@ def reorient(
     outputs : tuple[File]
         - reorient_image_file : File - Reoriented input image file.
     """
-    basename = "sub-{sub}_ses-{ses}_run-{run}_mod-T1w_reorient".format(
+    basename = "sub-{sub}_ses-{ses}_run-{run}_mod-{mod}_reorient".format(
         **entities)
     reorient_image_file = output_dir / f"{basename}.nii.gz"
 
@@ -109,7 +110,8 @@ def deface(
     outputs : tuple[File | list[File]]
         - deface_file : File - Defaced input T1w image file.
         - mask_file : File - Defacing binary mask.
-        - vol_files : list[File] - Defacing 3d rendering.
+        - transform_file : File - Affine transformation from original space to
+          MNI152 space.
 
     Raises
     ------
@@ -126,17 +128,29 @@ def deface(
         **entities)
     deface_file = output_dir / f"{basename}.nii.gz"
     mask_file = output_dir / f"{basename}mask.nii.gz"
+    transform_file = output_dir / f"{basename}affine.mat"
 
-    command = [
-        "fsl_deface",
-        str(t1_file),
-        str(deface_file),
-        "-d", str(mask_file),
-        "-f", "0.5",
-        "-B",
+    resource_dir = Path(__file__).parent.parent / "resources"
+    bigfov_transfrom_file = resource_dir / "MNI_BigFov_to_MNI.mat"
+
+    commands = [
+        [
+            "fsl_deface",
+            str(t1_file),
+            str(deface_file),
+            "-d", str(mask_file),
+            "-m13", str(transform_file),
+            "-f", "0.5",
+            "-B",
+        ],
+        [
+            "convert_xfm",
+            "-omat", str(transform_file),
+            "-concat", str(bigfov_transfrom_file), str(transform_file),
+        ]
     ]
 
-    return command, (deface_file, mask_file, )
+    return commands, (deface_file, mask_file, transform_file)
 
 
 @step(
@@ -206,7 +220,8 @@ def scale(
         image_file: File,
         scale: int,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+        interpolation: str = "spline") -> tuple[list[str], tuple[File]]:
     """
     Apply an isotropic resampling transformation to a BIDS-compliant image
     file using FSL's `flirt`.
@@ -221,6 +236,10 @@ def scale(
         Directory where the scaled image will be saved.
     entities : dict
         A dictionary of parsed BIDS entities including modality.
+    interpolation: str
+        The interpolation method: 'trilinear', 'nearestneighbour', 'sinc', or
+        'spline'.
+        Default 'spline'.
 
     Returns
     -------
@@ -240,6 +259,7 @@ def scale(
         "-in", str(image_file),
         "-ref", str(image_file),
         "-applyisoxfm", str(scale),
+        "-interp", interpolation,
         "-out", str(scaled_anatomical_file),
         "-omat", str(transform_file),
         "-verbose", "1",
@@ -263,7 +283,9 @@ def affine(
         anatomical_file: File,
         template_file: File,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+        rigid: bool = False,
+        quick: bool = False) -> tuple[list[str], tuple[File]]:
     """
     Affinely register a BIDS-compliant anatomical image to a template file
     using FSL's `flirt`.
@@ -278,6 +300,15 @@ def affine(
         Directory where the affine transformation will be saved.
     entities : dict
         A dictionary of parsed BIDS entities including modality.
+    rigid : bool
+        Estimate a 6 DOF transformation that maintains the original size and
+        shape of the brain. By default a 9 DOF transformation allows for
+        additional scaling in the x, y, and z directions, adjusting the size
+        and shape of the brain during the alignment process.
+        Default False.
+    quick : bool
+        Restricted rotation search range to +/-30° on all three axes.
+        Default False.
 
     Returns
     -------
@@ -301,11 +332,17 @@ def affine(
         "-anglerep", "euler",
         "-bins", "256",
         "-interp", "trilinear",
-        "-dof", "9",
+        "-dof", "6" if rigid else "9",
         "-out", str(aligned_anatomical_file),
         "-omat", str(transform_file),
         "-verbose", "1"
     ]
+    if quick:
+        command += [
+            "-searchrx", "-30", "30",
+            "-searchry", "-30", "30",
+            "-searchrz", "-30", "30",
+        ]
 
     return command, (aligned_anatomical_file, transform_file)
 
@@ -346,7 +383,8 @@ def applyaffine(
         A dictionary of parsed BIDS entities including modality.
     interpolation: str
         The interpolation method: 'trilinear', 'nearestneighbour', 'sinc', or
-        'spline'. Default 'spline'.
+        'spline'.
+        Default 'spline'.
 
     Returns
     -------
@@ -364,7 +402,7 @@ def applyaffine(
         "-in", str(image_file),
         "-ref", str(template_file),
         "-init", str(transform_file),
-        "-interp", str(interpolation),
+        "-interp", interpolation,
         "-applyxfm",
         "-out", str(aligned_image_file),
     ]

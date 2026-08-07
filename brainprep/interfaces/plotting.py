@@ -13,6 +13,7 @@ Plotting functions.
 import itertools
 import warnings
 
+import matplotlib.lines as mlines
 import matplotlib.pyplot as plt
 import nibabel
 import numpy as np
@@ -145,7 +146,7 @@ def plot_defacing_mosaic(
     mosaic_file : File
         Path to the saved mosaic image.
     """
-    basename = "sub-{sub}_ses-{ses}_run-{run}_mod-T1w_deface".format(
+    basename = "sub-{sub}_ses-{ses}_run-{run}_mod-{mod}_deface".format(
         **entities)
     mosaic_file = output_dir / f"{basename}mosaic.png"
 
@@ -193,6 +194,7 @@ def plot_histogram(
         col_name: str,
         output_dir: Directory,
         bar_coords: list[float] | None = None,
+        suffix: str | None = None,
         dryrun: bool = False) -> tuple[File]:
     """
     Generates a histogram image with optional vertical bars.
@@ -206,7 +208,11 @@ def plot_histogram(
     output_dir : Directory
         Directory where the image with the histogram will be saved.
     bar_coords: list[float] | None
-        Coordianates of vertical lines to be displayed in red. Default None.
+        Coordianates of vertical lines to be displayed in red.
+        Default None.
+    suffix : str | None
+        Suffix added to the generated PNG file.
+        Default None.
     dryrun : bool
         If True, skip actual computation and file writing. Default False.
 
@@ -215,7 +221,7 @@ def plot_histogram(
     histogram_file : File
         Generated image with the histogram.
     """
-    histogram_file = output_dir / f"histogram_{col_name}.png"
+    histogram_file = output_dir / f"histogram_{col_name}{suffix or ''}.png"
 
     if dryrun:
         return (histogram_file, )
@@ -242,7 +248,6 @@ def plot_histogram(
         ax.axvline(x=x_coord, color="red")
     ax.spines["right"].set_visible(False)
     ax.spines["top"].set_visible(False)
-    ax.legend()
 
     plt.savefig(histogram_file)
 
@@ -362,6 +367,7 @@ def plot_brainparc(
 def plot_pca(
         pca_file: File,
         output_dir: Directory,
+        suffix: str | None = None,
         dryrun: bool = False) -> tuple[File]:
     """
     Plot the two first PCA components.
@@ -374,6 +380,9 @@ def plot_pca(
         and ``run``.
     output_dir : Directory
         Directory where the result image will be saved.
+    suffix : str | None
+        Suffix added to the generated PNG file.
+        Default None.
     dryrun : bool
         If True, skip actual computation and file writing. Default False.
 
@@ -382,7 +391,7 @@ def plot_pca(
     pca_image_file : File
         Generated image with the two first PCA components.
     """
-    pca_image_file = output_dir / f"pca.png"
+    pca_image_file = output_dir / f"pca{suffix or ''}.png"
 
     if dryrun:
         return (pca_image_file, )
@@ -391,15 +400,35 @@ def plot_pca(
 
     fig, ax = plt.subplots(figsize=(20, 10))
     ax.scatter(df.pc1, df.pc2)
-    for idx in range(len(df)):
-        ax.annotate(
-            f"{df.participant_id[idx]}-{df.session[idx]}-{df.run[idx]}",
-            xy=(df.pc1[idx], df.pc2[idx]),
+    df.apply(
+        lambda row: ax.annotate(
+            f"{row.participant_id}-{row.session}-{row.run}",
+            xy=(row.pc1, row.pc2),
             xytext=(4, 4),
-            textcoords="offset pixels"
-        )
-    plt.xlabel(f"PC1 (var={df.explained_variance_ratio_pc1[0]:.2f})")
-    plt.ylabel(f"PC2 (var={df.explained_variance_ratio_pc2[1]:.2f})")
+            textcoords="offset pixels",
+            fontsize=9,
+        ),
+        axis=1,
+    )
+    annotation_desc = mlines.Line2D(
+        [],
+        [],
+        color="none",
+        label="Participant - Session - Run",
+    )
+    ax.legend(
+        handles=[annotation_desc],
+        loc="upper right",
+        frameon=True,
+        facecolor="#f9f9f9",
+        edgecolor="gray",
+    )
+    plt.xlabel(
+        fr"$\mathbf{{PC1}}$ (var={df.explained_variance_ratio_pc1[0]:.2f})"
+    )
+    plt.ylabel(
+        fr"$\mathbf{{PC2}}$ (var={df.explained_variance_ratio_pc2[1]:.2f})"
+    )
     plt.axis("equal")
     ax.spines["right"].set_visible(False)
     ax.spines["top"].set_visible(False)

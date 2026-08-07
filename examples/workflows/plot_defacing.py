@@ -10,20 +10,30 @@ See :ref:`user guide <defacing>` for details.
 Data
 ----
 
-Let's first get some anatomical data.
+Let's first get some anatomical data: T1w, T2w and FLAIR..
 """
 
 from pathlib import Path
+from brainprep.utils import Bunch
 from brainprep.datasets import OpenMSDataset
 
 datadir = Path("/tmp/brainprep-data")
 datadir.mkdir(parents=True, exist_ok=True)
 dataset = OpenMSDataset(datadir)
-data = dataset.fetch(
-    subject="01",
-    modality="T1w",
-    dtype="cross_sectional",
-)
+data = Bunch()
+for modality in ("T1w", "T2w", "FLAIR"):
+    data[modality] = Bunch(
+        sub01=dataset.fetch(
+            subject="01",
+            modality=modality,
+            dtype="cross_sectional",
+        ),
+        sub02=dataset.fetch(
+            subject="02",
+            modality=modality,
+            dtype="cross_sectional",
+        ),
+    )
 print(data)
 
 
@@ -42,23 +52,25 @@ from brainprep.workflow import (
     brainprep_group_defacing,
 )
 from brainprep.config import Config
-from brainprep.reporting import RSTReport
 
 outdir = Path("/tmp/brainprep-defacing")
 if outdir.is_dir():
     shutil.rmtree(outdir)
 outdir.mkdir(parents=True, exist_ok=True)
 with Config(dryrun=True, verbose=True):
-    report = RSTReport()
-    brainprep_defacing(
-        t1_file=data.anat,
-        output_dir=outdir,
-        keep_intermediate=True,
-    )
-    print(report)
-    brainprep_group_defacing(
-        output_dir=outdir,
-    )
+    for modality, modality_data in data.items():
+        for subject_data in modality_data.values():
+            outputs = brainprep_defacing(
+                anatomical_file=subject_data.anat,
+                output_dir=outdir,
+                keep_intermediate=True,
+            )
+            outputs.deface_anatomical_file.touch(exist_ok=True)
+            outputs.mask_file.touch(exist_ok=True)
+        outputs = brainprep_group_defacing(
+            modality=modality,
+            output_dir=outdir,
+        )
 
 
 # %%
@@ -76,18 +88,33 @@ commands.append(
     [
         [
             "brainprep", "subject-level-defacing",
-            "--t1_file", str(data.anat),
+            "--anatomical_file", str(subject_data.anat),
             "--output-dir", str(outdir),
             "--keep-intermediate",
         ]
+        for subject_data in data["T1w"].values()
+    ]
+)
+commands.append(
+    [
+        [
+            "brainprep", "subject-level-defacing",
+            "--anatomical_file", str(subject_data.anat),
+            "--output-dir", str(outdir),
+            "--keep-intermediate",
+        ]
+        for mod in ("T2w", "FLAIR")
+        for subject_data in data[mod].values()
     ]
 )
 commands.append(
     [
         [
             "brainprep", "group-level-defacing",
+            "--modality", modality,
             "--output-dir", str(outdir),
         ]
+        for modality in data.keys()
     ]
 )
 pprint(commands)

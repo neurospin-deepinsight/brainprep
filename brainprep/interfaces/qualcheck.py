@@ -160,6 +160,7 @@ def mask_overlap(
         maskdiff_files_regex: str,
         output_dir: Directory,
         overlap_threshold: float = 0.05,
+        suffix: str | None = None,
         dryrun: bool = False) -> tuple[File]:
     """
     Compute overlap ratios between mask pairs from `maskdiff` summary files.
@@ -180,9 +181,14 @@ def mask_overlap(
         Directory where a TSV file containing the mean correlation values is
         created.
     overlap_threshold : float
-        Quality control threshold applied on the overalp score. Default 0.05.
+        Quality control threshold applied on the overalp score.
+        Default 0.05.
+    suffix : str | None
+        Suffix added to the generated TSV file.
+        Default None.
     dryrun : bool
-        If True, skip actual computation and file writing. Default False.
+        If True, skip actual computation and file writing.
+        Default False.
 
     Returns
     -------
@@ -199,7 +205,7 @@ def mask_overlap(
     indicating whether the overlap score do not exceeds the threshold:
     ``qc = 1`` if ``overlap < overlap_threshold``, otherwise ``qc = 0``.
     """
-    overlap_file = output_dir / "mask_overlap.tsv"
+    overlap_file = output_dir / f"mask_overlap{suffix or ''}.tsv"
 
     if dryrun:
         return (overlap_file, )
@@ -265,29 +271,44 @@ def mask_overlap(
     ]
 )
 def mean_correlation(
-        image_files_regex: str,
-        atlas_file: File,
+        data_files_regex: str,
+        atlas_file: File | None,
         output_dir: Directory,
-        correlation_threshold: float = 0.5,
+        correlation_threshold: float | None = 0.5,
+        suffix: str | None = None,
         dryrun: bool = False) -> tuple[File]:
     """
     Compute the mean Pearson correlation between a reference image and a list
-    of other images.
+    of input images.
+
+    It can use pre-computed correlation data for each subject or compute the
+    correlation internally.
+    If the correlaton is computed internally, individual pre-computed
+    correlation data are saved in the ``subjects`` directory.
+    Additionally, it performs quality control based on a specified correlation
+    threshold.
 
     Parameters
     ----------
-    image_files_regex : str
+    data_files_regex : str
         A REGEX to image files, each representing an image of the same shape
-        and geometry as `atlas_file`.
-    atlas_file : File
-        An file representing the reference image.
+        and geometry as `atlas_file` or pre-computed TSV correlation data.
+    atlas_file : File | None
+        A file representing the reference image. If None, expect pre-computed
+        correlation data.
     output_dir : Directory
         Directory where a TSV file containing the mean correlation values is
         created.
-    correlation_threshold : float
-        Quality control threshold on the correlation score. Default 0.5.
+    correlation_threshold : float | None
+        Quality control threshold on the correlation score.
+        If None do not add the ``qc`` column.
+        Default 0.5.
+    suffix : str | None
+        Suffix added to the generated TSV file.
+        Default None.
     dryrun : bool
-        If True, skip actual computation and file writing. Default False.
+        If True, skip actual computation and file writing.
+        Default False.
 
     Returns
     -------
@@ -302,6 +323,7 @@ def mean_correlation(
     ------
     ValueError
         If the atlas and an image have incompatible shape or geometry.
+        If invalid pre-computed correlation data are provided.
 
     Notes
     -----
@@ -310,17 +332,18 @@ def mean_correlation(
     ``qc = 1`` if ``mean_correlation > correlation_threshold``,
     otherwise ``qc = 0``.
     """
-    correlations_file = output_dir / "mean_correlations.tsv"
+    correlations_file = output_dir / f"mean_correlations{suffix or ''}.tsv"
 
     if dryrun:
         return (correlations_file, )
 
     image_files = coerce_to_path(
-        glob.glob(str(image_files_regex)),
+        glob.glob(str(data_files_regex)),
         expected_type=list[File],
     )
-    atlas_im = nibabel.load(atlas_file)
-    atlas_arr = atlas_im.get_fdata()
+    if atlas_file is not None:
+        atlas_im = nibabel.load(atlas_file)
+        atlas_arr = atlas_im.get_fdata()
 
     scores = pd.DataFrame(
         columns=(
@@ -332,30 +355,55 @@ def mean_correlation(
     )
     for path in image_files:
         entities = parse_bids_keys(path)
-        im = nibabel.load(path)
-        arr = atlas_im.get_fdata()
-        if atlas_arr.shape != arr.shape:
-            raise ValueError(
-                f"Atlas and image have incompatible shape: {path}"
+        if atlas_file is not None:
+            im = nibabel.load(path)
+            arr = atlas_im.get_fdata()
+            if atlas_arr.shape != arr.shape:
+                raise ValueError(
+                    f"Atlas and image have incompatible shape: {path}"
+                )
+            if not np.allclose(atlas_im.affine, im.affine):
+                raise ValueError(
+                    f"Atlas and image have incompatible orientation: {path}"
+                )
+            corr, _ = pearsonr(
+                atlas_arr.flatten(),
+                arr.flatten(),
             )
-        if not np.allclose(atlas_im.affine, im.affine):
-            raise ValueError(
-                f"Atlas and image have incompatible orientation: {path}"
-            )
-        corr, _ = pearsonr(
-            atlas_arr.flatten(),
-            arr.flatten(),
-        )
+        else:
+            df_ = pd.read_csv(path, sep="\t")
+            if len(df_) != 1:
+                raise ValueError(
+                    f"Invalid pre-computed correlation data: {path}"
+                )
+            corr = df_.iloc[0]["mean_correlation"]
         scores.loc[len(scores)] = [
             entities["sub"],
             entities["ses"],
             entities["run"],
-            corr,
+            float(corr),
         ]
+        if atlas_file is not None:
+            individual_score = scores.iloc[[-1]]
+            basename = "sub-{sub}_ses-{ses}_run-{run}_mod-{mod}".format(
+                **entities
+            )
+            individual_score_file = (
+                path.parent /
+                "quality_check" /
+                f"{basename}_corr.tsv"
+            )
+            individual_score_file.parent.mkdir(parents=True, exist_ok=True)
+            individual_score.to_csv(
+                individual_score_file,
+                sep="\t",
+                index=False,
+            )
 
-    scores["qc"] = (
-        scores["mean_correlation"] > correlation_threshold
-    ).astype(int)
+    if correlation_threshold is not None:
+        scores["qc"] = (
+            scores["mean_correlation"] > correlation_threshold
+        ).astype(int)
     scores = scores.sort_values(by=["participant_id", "session", "run"])
     scores.to_csv(
         correlations_file,
@@ -364,6 +412,114 @@ def mean_correlation(
     )
 
     return (correlations_file, )
+
+
+@step(
+    hooks=[
+        CoerceparamsHook(),
+        OutputdirHook(
+            quality_check=True
+        ),
+        LogRuntimeHook(
+            bunched=False
+        ),
+        PythonWrapperHook(),
+        SignatureHook(),
+    ]
+)
+def maskdiff(
+        mask1_file: File,
+        mask2_file: File,
+        output_dir: Directory,
+        entities: dict,
+        inv_mask1: bool = False,
+        inv_mask2: bool = False,
+        dryrun: bool = False) -> tuple[File]:
+    """
+    Compute summary statistics comparing two binary masks.
+
+    This function loads two binary mask images, verifies that they share
+    the same spatial dimensions and affine transformation, computes their
+    voxel-wise intersection, and writes a summary table containing voxel
+    counts and physical volumes (in mm³) for each mask and their intersection.
+
+    Parameters
+    ----------
+    mask1_file : File
+        Path to the first binary mask image.
+    mask2_file : File
+        Path to the second binary mask image.
+    output_dir : Directory
+        Directory where the defacing mask will be saved.
+    entities : dict
+        A dictionary of parsed BIDS entities including modality.
+    inv_mask1 : bool
+        If True, the first mask is inverted before comparison. This is
+        useful when the mask represents an exclusion region rather than an
+        inclusion region. Default False.
+    inv_mask2 : bool
+        If True, the second mask is inverted before comparison. This is
+        useful when the mask represents an exclusion region rather than an
+        inclusion region. Default False.
+    dryrun : bool
+        If True, skip actual computation and file writing. Default False.
+
+    Returns
+    -------
+    summary_file : File
+        Path to the generated summary TSV file.
+
+    Raises
+    ------
+    ValueError
+        If both masks have not identical shapes and affines.
+    """
+    basename = "sub-{sub}_ses-{ses}_run-{run}_mod-{mod}_maskdiff".format(
+        **entities)
+    summary_file = output_dir / f"{basename}.tsv"
+
+    if not dryrun:
+
+        mask1_im = nibabel.load(mask1_file)
+        mask2_im = nibabel.load(mask2_file)
+        mask1 = mask1_im.get_fdata().astype(bool)
+        mask2 = mask2_im.get_fdata().astype(bool)
+
+        if inv_mask1:
+            mask1 = ~mask1
+        if inv_mask2:
+            mask1 = ~mask2
+
+        if mask1.shape != mask2.shape:
+            raise ValueError(
+                f"Mask shapes differ: {mask1.shape} vs {mask2.shape}. "
+                "Resampling is required."
+            )
+        if not np.allclose(mask1_im.affine, mask2_im.affine):
+            raise ValueError(
+                "Mask affines differ. Resampling is required before "
+                "intersection."
+            )
+
+        intersection = np.logical_and(mask1, mask2)
+        voxel_volume = np.abs(np.linalg.det(mask1_im.affine[:3, :3]))
+
+        summary_df = pd.DataFrame({
+            "mask": ["mask1", "mask2", "intersection"],
+            "voxels": [
+                mask1.sum(),
+                mask2.sum(),
+                intersection.sum(),
+            ],
+            "volume_mm3": [
+                mask1.sum() * voxel_volume,
+                mask2.sum() * voxel_volume,
+                intersection.sum() * voxel_volume,
+            ]
+        })
+        summary_df.to_csv(summary_file, sep="\t", index=False)
+
+    return (summary_file, )
 
 
 @step(
@@ -384,6 +540,7 @@ def incremental_pca(
         image_files_regex: str,
         output_dir: Directory,
         batch_size: int = 10,
+        suffix: str | None = None,
         dryrun: bool = False) -> tuple[File]:
     """
     Perform an Incremental PCA with 2 components on a collection of images
@@ -410,6 +567,9 @@ def incremental_pca(
     batch_size : int
         Number of images to use in each batch. If None, a single batch is used.
         Default is 10.
+    suffix : str | None
+        Suffix added to the generated TSV file.
+        Default None.
     dryrun : bool
         If True, skip actual computation and file writing. Default False.
 
@@ -425,7 +585,7 @@ def incremental_pca(
         If the dataset contains fewer than 2 images, which prevents PCA
         computation.
     """
-    pca_file = output_dir / "pca.tsv"
+    pca_file = output_dir / f"pca{suffix or ''}.tsv"
 
     if dryrun:
         return (pca_file, )
