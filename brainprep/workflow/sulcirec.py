@@ -110,8 +110,8 @@ def brainprep_sulcirec(
     ...     )
     >>> outputs
     Bunch(
-        sulci_graphs_files=[PosixPath('...'), PosixPath('...')],
-        qc_file=PosixPath('...')
+        sulci_graphs_files: [PosixPath('...'), PosixPath('...')]
+        qc_file: PosixPath('...')
     )
     """
     entities = kwargs.get("entities", {})
@@ -207,7 +207,7 @@ def brainprep_group_sulcirec(
     ...     )
     >>> outputs
     Bunch(
-        morphometry_files: [PosixPath('...'), PosixPath('...')],
+        morphometry_files: [PosixPath('...'), PosixPath('...')]
         group_stats_file: PosixPath('...')
     )
     """

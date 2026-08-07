@@ -91,9 +91,11 @@ def brainprep_defacing(
         - deface_anatomical_file : File - path to the defaced image.
         - mask_file : File - path to the defacing mask.
         - mosaic_file : File - path to defacing snapshots.
-        - summary_file : File - a TSV file containing voxel counts and
+        - maskdiff_file : File - a TSV file containing voxel counts and
           physical volumes (in mm³) for the brain/defacing masks and
           their intersection.
+        - correlations_file : File - a TSV file containing mean correlation
+          of aligned input image to the reference image.
         - transform_file : File - path to the 12 dof (T1w) or 6 dof (T2w and
           FLAIR coregistration) affine transformation.
 
@@ -122,7 +124,7 @@ def brainprep_defacing(
     >>>
     >>> with Config(dryrun=True, verbose=False):
     ...     outputs = brainprep_defacing(
-    ...         t1_file=(
+    ...         anatomical_file=(
     ...             "/tmp/dataset/rawdata/sub-01/ses-01/anat/"
     ...             "sub-01_ses-01_run-01_T1w.nii.gz"
     ...         ),
@@ -130,10 +132,12 @@ def brainprep_defacing(
     ...     )
     >>> outputs
     Bunch(
-      deface_t1_file: PosixPath('...')
+      deface_anatomical_file: PosixPath('...')
       mask_file: PosixPath('...')
       mosaic_file: PosixPath('...')
-      summary_file: PosixPath('...')
+      maskdiff_file: PosixPath('...')
+      correlation_file: PosixPath('...')
+      transform_file: PosixPath('...')
     )
     """
     entities = kwargs.get("entities", {})
@@ -376,10 +380,13 @@ def brainprep_group_defacing(
     >>>
     >>> with Config(dryrun=True, verbose=False):
     ...     outputs = brainprep_group_defacing(
+    ...         modality="T1w",
     ...         output_dir="/tmp/dataset/derivatives",
     ...     )
     >>> outputs
     Bunch(
+        correlations_file: PosixPath('...')
+        correlation_histogram_file: PosixPath('...')
         overlap_file: PosixPath('...')
         overalp_histogram_file: PosixPath('...')
     )

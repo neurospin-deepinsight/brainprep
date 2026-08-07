@@ -13,12 +13,15 @@ import unittest
 import runpy
 from pathlib import Path
 
+from brainprep.reporting import RSTReport
+
 
 class TestGalleryExamples(unittest.TestCase):
 
     def setUp(self, test_interfaces=True):
         self.test_interfaces = test_interfaces
         self.examples_dir = Path(__file__).parent.parent.parent / "examples"
+        self.report = RSTReport()
 
     @staticmethod
     def run_cmd(cmd):

@@ -62,6 +62,7 @@ class SingletonReport(type):
     >>> class Report(metaclass=SingletonReport):
     ...     def __init__(self):
     ...         self._registry = {}
+    ...         self._commands = {}
 
     >>> r1 = Report()
     >>> r2 = Report()
@@ -100,6 +101,7 @@ class SingletonReport(type):
         if not is_reloadable:
             inst._count = 0
             inst._registry.clear()
+            inst._commands.clear()
         if is_increment:
             inst._count += 1
         inst._reloadable = is_reloadable
@@ -214,8 +216,14 @@ class RSTReport(metaclass=SingletonReport):
         if identifier not in self._registry:
             self._registry[identifier] = Bunch()
         if name in self._registry[identifier]:
+            items_str = [
+                f"-  {name_}\n"
+                for name_ in self._registry[identifier]
+            ]
             raise ValueError(
-                "Duplicated name in registry."
+                f"Duplicated name in registry: {name}\n"
+                f">> {identifier}\n"
+                f"{''.join(items_str)}"
             )
         if not (isinstance(data, Bunch) or
                 (isinstance(data, str) and name in self._str_fields)
