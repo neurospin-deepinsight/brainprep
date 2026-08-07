@@ -79,7 +79,7 @@ The structure is organized following the :ref:`brainprep ontology <ontology>`.
     ├── dataset_description.json
     ├── figures
     │   ├── histogram_mean_correlation_<T1w|T2w|FLAIR>.png
-    │   └── pca.png
+    │   └── pca_<T1w|T2w|FLAIR>.png
     ├── log
     │   ├── report_<timestamp>.rst
     │   └── commands_<timestamp>.rst
@@ -92,6 +92,8 @@ The structure is organized following the :ref:`brainprep ontology <ontology>`.
                ├── log
                │   ├── report_<timestamp>.rst
                │   └── commands_<timestamp>.rst
+               ├── quality_check
+               │   └── sub-01_ses-01_run-01_mod-<T1w|T2w|FLAIR>_corr.tsv
                ├── sub-01_ses-01_run-01_mod-<T1w|T2w|FLAIR>_affine.txt
                ├── sub-01_ses-01_run-01_mod-<T1w|T2w|FLAIR>_brainmask.nii.gz
                └── sub-01_ses-01_run-01_<T1w|T2w|FLAIR>.nii.gz
@@ -118,6 +120,8 @@ The structure is organized following the :ref:`brainprep ontology <ontology>`.
   Contains subject-level workflow steps and parameters.
 - ``subjects/sub-<id>/ses-<id>/log/commands_<timestamp>.rst``
   Contains subject-level executed commands.
+- ``subjects/sub-<id>/ses-<id>/quality_check/sub-01_ses-01_run-01_mod-<T1w|T2w|FLAIR>_corr.tsv``
+  Table containing the correlation score.
 - ``subjects/sub-<id>/ses-<id>/sub-01_ses-01_run-01_mod-<T1w|T2w|FLAIR>_affine.txt`` 
   Affine transformation parameters (9 DOF) used to align the T1w, T2w or FLAIR
   image to the MNI 1 mm template.

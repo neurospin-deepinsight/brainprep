@@ -79,6 +79,7 @@ from .qualcheck import (
     fmriprep_metrics,
     incremental_pca,
     mask_overlap,
+    maskdiff,
     mean_correlation,
     mriqc_metrics,
     network_entropy,
@@ -91,7 +92,6 @@ from .tractseg import (
 from .utils import (
     anonfile,
     copyfiles,
-    maskdiff,
     movedir,
     ungzfile,
     write_uuid_mapping,

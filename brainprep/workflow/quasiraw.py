@@ -64,7 +64,7 @@ def brainprep_quasiraw(
     MRI images. This includes:
 
     1) Reorient the anatomical image to standard MNI152 template space.
-    2) Compute a brain / brain mask using a skull-stripping tool.
+    2) Compute a brain mask using a skull-stripping tool.
     3) Perform N4 bias field correction.
     4) Resample the anatomical image to 1mm isotropic voxel size.
     5) Linearly register the image to the MNI152 1mm template space (6 or 9
@@ -75,7 +75,7 @@ def brainprep_quasiraw(
     Parameters
     ----------
     anatomical_file : File
-        Path to the input image file.
+        Path to the input image file: T1w, T2w or FLAIR.
     output_dir : Directory
         Directory where the outputs will be saved (i.e., the root of your
         dataset).
@@ -236,8 +236,16 @@ def brainprep_quasiraw(
     output_mask_file = output_dir / f"{basename}_mod-{mod}_brainmask.nii.gz"
     output_transform_file = output_dir / f"{basename}_mod-{mod}_affine.txt"
     interfaces.copyfiles(
-        [aligned_anatomical_file, aligned_mask_file, affine_transform_file],
-        [output_anatomical_file, output_mask_file, output_transform_file],
+        [
+            aligned_anatomical_file,
+            aligned_mask_file,
+            affine_transform_file,
+        ],
+        [
+            output_anatomical_file,
+            output_mask_file,
+            output_transform_file,
+        ],
         output_dir,
     )
 
@@ -278,7 +286,7 @@ def brainprep_group_quasiraw(
     This includes:
 
     1) Generate a TSV file containing the mean correlation of each image to
-       the template.
+       the template. The optimal scenario is when the correlation is maximized.
     2) Apply threshold-based quality checks on the selected quality metrics.
     3) Generate a histogram showing the distribution of these quality metrics.
     4) Compute a PCA embedding of the images.
@@ -324,15 +332,12 @@ def brainprep_group_quasiraw(
     -----
     This workflow assumes the subject-level analyses have already been
     performed.
-
     A ``qc`` column is added to the ``correlations_file`` output table.
     It contains a binary flag indicating whether the produced results should
     be kept: ``qc = 1`` if the result passes the thresholds, otherwise
     ``qc = 0``.
-
-    The associated histograms in the ``correlation_histogram_file`` file help
-    verify that the chosen thresholds are neither too restrictive nor too
-    permissive.
+    The associated PNG histograms help verify that the chosen thresholds
+    are neither too restrictive nor too permissive.
 
     Examples
     --------
