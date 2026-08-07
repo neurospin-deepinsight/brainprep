@@ -26,6 +26,7 @@ Enhancements
 - :bdg-success:`Enhancement` Add live comand line monitoring support.
 - :bdg-success:`Enhancement` Support multi-modality in Quasi-Raw workflow.
 - :bdg-success:`Enhancement` Add `quick` mode in Quasi-Raw workflow.
+- :bdg-success:`Enhancement` Support multi-modality in Deface workflow.
 
 Changes
 -------

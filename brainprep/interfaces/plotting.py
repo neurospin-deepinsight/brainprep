@@ -146,7 +146,7 @@ def plot_defacing_mosaic(
     mosaic_file : File
         Path to the saved mosaic image.
     """
-    basename = "sub-{sub}_ses-{ses}_run-{run}_mod-T1w_deface".format(
+    basename = "sub-{sub}_ses-{ses}_run-{run}_mod-{mod}_deface".format(
         **entities)
     mosaic_file = output_dir / f"{basename}mosaic.png"
 

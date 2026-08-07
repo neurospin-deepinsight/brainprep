@@ -52,7 +52,6 @@ from brainprep.workflow import (
     brainprep_group_quasiraw,
 )
 from brainprep.config import Config
-from brainprep.reporting import RSTReport
 
 outdir = Path("/tmp/brainprep-quasiraw")
 if outdir.is_dir():
@@ -61,7 +60,7 @@ outdir.mkdir(parents=True, exist_ok=True)
 with Config(dryrun=True, verbose=True):
     for modality, modality_data in data.items():
         for subject_data in modality_data.values():
-            brainprep_quasiraw(
+            outputs = brainprep_quasiraw(
                 anatomical_file=subject_data.anat,
                 output_dir=outdir,
                 keep_intermediate=True,
