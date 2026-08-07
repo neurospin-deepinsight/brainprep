@@ -399,6 +399,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.fmriprep_metrics.html">brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.incremental_pca.html">brainprep.interfaces.qualcheck.incremental_pca</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.mask_overlap.html">brainprep.interfaces.qualcheck.mask_overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.maskdiff.html">brainprep.interfaces.qualcheck.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.mean_correlation.html">brainprep.interfaces.qualcheck.mean_correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.mriqc_metrics.html">brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.network_entropy.html">brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -473,7 +474,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../modules/brainprep.interfaces.utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">brainprep.interfaces.utils</span></code>: Utils functions.</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of brainprep.interfaces.utils: Utils functions.</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.anonfile.html">brainprep.interfaces.utils.anonfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.copyfiles.html">brainprep.interfaces.utils.copyfiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.maskdiff.html">brainprep.interfaces.utils.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.movedir.html">brainprep.interfaces.utils.movedir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.ungzfile.html">brainprep.interfaces.utils.ungzfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.write_uuid_mapping.html">brainprep.interfaces.utils.write_uuid_mapping</a></li>
@@ -856,7 +856,7 @@ __________________________________________________________________0.03s, 0.00min
 Bunch(
   step1: Bunch(
     module: &#39;brainprep.workflow.sulcirec.brainprep_sulcirec&#39;
-    description: &#39;\n    Subject level sulci reconstruction.\n\n    Applies morphologist tool :footcite:p:`fischer2012morphologist` for\n    cortical sulci extraction and identification.\n\n    Parameters\n    ----------\n    t1_file : File\n        Path to the input T1w image file.\n    output_dir : Directory\n        Directory where the prep-processing related outputs will be saved\n        (i.e., the root of your dataset).\n    keep_intermediate : bool\n        If True, retains intermediate results (i.e., the workspace); useful\n        for debugging. Default False.\n    **kwargs : dict\n        entities: dict\n            Dictionary of parsed BIDS entities.\n\n    Returns\n    -------\n    Bunch\n        A dictionary-like object containing:\n\n        - sulci_graphs_files : list[File] - Left and right hemispheres sulci.\n        - qc_file : File - QC TSV file.\n\n    Raises\n    ------\n    ValueError\n        If the input T1w file is not BIDS-compliant.\n\n    Notes\n    -----\n    This workflow assumes the T1w image is organized in BIDS.\n\n    References\n    ----------\n\n    .. footbibliography::\n\n    Examples\n    --------\n    &gt;&gt;&gt; from brainprep.config import Config\n    &gt;&gt;&gt; from brainprep.workflow import brainprep_sulcirec\n    &gt;&gt;&gt;\n    &gt;&gt;&gt; with Config(dryrun=True, verbose=False):\n    ...     outputs = brainprep_sulcirec(\n    ...         t1_file=(\n    ...             &quot;/tmp/dataset/rawdata/sub-01/ses-01/anat/&quot;\n    ...             &quot;sub-01_ses-01_run-01_T1w.nii.gz&quot;\n    ...         ),\n    ...         output_dir=&quot;/tmp/dataset/derivatives&quot;,\n    ...     )\n    &gt;&gt;&gt; outputs\n    Bunch(\n        sulci_graphs_files=[PosixPath(\&#39;...\&#39;), PosixPath(\&#39;...\&#39;)],\n        qc_file=PosixPath(\&#39;...\&#39;)\n    )\n    &#39;
+    description: &#39;\n    Subject level sulci reconstruction.\n\n    Applies morphologist tool :footcite:p:`fischer2012morphologist` for\n    cortical sulci extraction and identification.\n\n    Parameters\n    ----------\n    t1_file : File\n        Path to the input T1w image file.\n    output_dir : Directory\n        Directory where the prep-processing related outputs will be saved\n        (i.e., the root of your dataset).\n    keep_intermediate : bool\n        If True, retains intermediate results (i.e., the workspace); useful\n        for debugging. Default False.\n    **kwargs : dict\n        entities: dict\n            Dictionary of parsed BIDS entities.\n\n    Returns\n    -------\n    Bunch\n        A dictionary-like object containing:\n\n        - sulci_graphs_files : list[File] - Left and right hemispheres sulci.\n        - qc_file : File - QC TSV file.\n\n    Raises\n    ------\n    ValueError\n        If the input T1w file is not BIDS-compliant.\n\n    Notes\n    -----\n    This workflow assumes the T1w image is organized in BIDS.\n\n    References\n    ----------\n\n    .. footbibliography::\n\n    Examples\n    --------\n    &gt;&gt;&gt; from brainprep.config import Config\n    &gt;&gt;&gt; from brainprep.workflow import brainprep_sulcirec\n    &gt;&gt;&gt;\n    &gt;&gt;&gt; with Config(dryrun=True, verbose=False):\n    ...     outputs = brainprep_sulcirec(\n    ...         t1_file=(\n    ...             &quot;/tmp/dataset/rawdata/sub-01/ses-01/anat/&quot;\n    ...             &quot;sub-01_ses-01_run-01_T1w.nii.gz&quot;\n    ...         ),\n    ...         output_dir=&quot;/tmp/dataset/derivatives&quot;,\n    ...     )\n    &gt;&gt;&gt; outputs\n    Bunch(\n        sulci_graphs_files: [PosixPath(\&#39;...\&#39;), PosixPath(\&#39;...\&#39;)]\n        qc_file: PosixPath(\&#39;...\&#39;)\n    )\n    &#39;
     inputs: Bunch(
       t1_file: PosixPath(&#39;/tmp/brainprep-data/rawdata/sub-01/ses-00/anat/sub-01_ses-00_T1w.nii.gz&#39;)
       output_dir: PosixPath(&#39;/tmp/brainprep-sulcirec/derivatives/sulcirec/subjects/sub-01/ses-00&#39;)
@@ -868,12 +868,12 @@ Bunch(
       qc_file: PosixPath(&#39;/tmp/brainprep-sulcirec/derivatives/sulcirec/subjects/sub-01/ses-00/run-28236/qc.tsv&#39;)
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:17:11.245635&#39;
-      end: &#39;2026-07-10 14:17:11.269354&#39;
-      execution_time: 6.588611111111111e-06
+      start: &#39;2026-08-07 14:36:53.065709&#39;
+      end: &#39;2026-08-07 14:36:53.092945&#39;
+      execution_time: 7.565555555555555e-06
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -903,12 +903,12 @@ Bunch(
       outputs: ([PosixPath(&#39;/tmp/brainprep-sulcirec/derivatives/sulcirec/subjects/sub-01/ses-00/run-28236/anat/folds/3.1/sub-01_ses-00_run-28236_hemi-L.arg&#39;), PosixPath(&#39;/tmp/brainprep-sulcirec/derivatives/sulcirec/subjects/sub-01/ses-00/run-28236/anat/folds/3.1/sub-01_ses-00_run-28236_hemi-R.arg&#39;)], PosixPath(&#39;/tmp/brainprep-sulcirec/derivatives/sulcirec/subjects/sub-01/ses-00/run-28236/qc.tsv&#39;))
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:17:11.251403&#39;
-      end: &#39;2026-07-10 14:17:11.268372&#39;
-      execution_time: 4.7136111111111115e-06
+      start: &#39;2026-08-07 14:36:53.072232&#39;
+      end: &#39;2026-08-07 14:36:53.091778&#39;
+      execution_time: 5.429444444444445e-06
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -938,12 +938,12 @@ Bunch(
       outputs: [&#39;morphologist-wrapper&#39;, &#39;/tmp/brainprep-data/rawdata/sub-01/ses-00/anat/sub-01_ses-00_T1w.nii.gz&#39;, &#39;/tmp/brainprep-sulcirec/derivatives/sulcirec/subjects/sub-01/ses-00/workspace_28236&#39;, &#39;--subject&#39;, &#39;01&#39;]
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:17:11.257157&#39;
-      end: &#39;2026-07-10 14:17:11.260007&#39;
-      execution_time: 7.916666666666667e-07
+      start: &#39;2026-08-07 14:36:53.078565&#39;
+      end: &#39;2026-08-07 14:36:53.081692&#39;
+      execution_time: 8.686111111111111e-07
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -973,12 +973,12 @@ Bunch(
       outputs: ([PosixPath(&#39;/tmp/brainprep-sulcirec/derivatives/sulcirec/subjects/sub-01/ses-00/run-28236/anat/folds/3.1/sub-01_ses-00_run-28236_hemi-L.arg&#39;), PosixPath(&#39;/tmp/brainprep-sulcirec/derivatives/sulcirec/subjects/sub-01/ses-00/run-28236/anat/folds/3.1/sub-01_ses-00_run-28236_hemi-R.arg&#39;)], PosixPath(&#39;/tmp/brainprep-sulcirec/derivatives/sulcirec/subjects/sub-01/ses-00/run-28236/qc.tsv&#39;))
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:17:11.263569&#39;
-      end: &#39;2026-07-10 14:17:11.266524&#39;
-      execution_time: 8.208333333333333e-07
+      start: &#39;2026-08-07 14:36:53.086395&#39;
+      end: &#39;2026-08-07 14:36:53.089535&#39;
+      execution_time: 8.722222222222222e-07
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -1042,7 +1042,7 @@ heck&#39;),
 /tmp/brainprep-sulcirec/derivatives/sulcirec/quality_check/group_stats.tsv
 __________________________________________________________________0.00s, 0.00min
 [title] - Group Level Sulci Reconstruction done.
-__________________________________________________________________0.01s, 0.00min
+__________________________________________________________________0.02s, 0.00min
 </pre></div>
 </div>
 </section>
@@ -1098,8 +1098,8 @@ In practice, this means that once the CLI has produced the appropriate
 instructions, you can simply copy and run them inside the container to
 achieve the intended results. You can find the BrainPrep images on Docker
 Hub: <a class="reference external" href="https://hub.docker.com/u/neurospin">Neurospin Docker Hub</a>.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.444 seconds)</p>
-<p><strong>Estimated memory usage:</strong>  110 MB</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.480 seconds)</p>
+<p><strong>Estimated memory usage:</strong>  111 MB</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-workflows-plot-sulcirec-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/61d6ac23dec125416f620bf31be55b8d/plot_sulcirec.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_sulcirec.ipynb</span></code></a></p>

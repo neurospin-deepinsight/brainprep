@@ -20,7 +20,6 @@ Functions
 
     anonfile
     copyfiles
-    maskdiff
     movedir
     ungzfile
     write_uuid_mapping

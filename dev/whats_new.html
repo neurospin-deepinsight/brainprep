@@ -7,10 +7,10 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https:///github.com.github.io/whats_new.html" />
 <meta property="og:site_name" content="brainprep" />
-<meta property="og:description" content="2.1.0.dev: HIGHLIGHTS: NEW: Enhancement Add the dmriprep workflow., Enhancement Add the mrophologist workflow.. Fixes: Deprecation Fix the containers that are using mri_synthstrip., Deprecation The..." />
+<meta property="og:description" content="2.1.0.dev: HIGHLIGHTS: NEW: Enhancement Add the dmriprep workflow., Enhancement Add the morphologist workflow.. Fixes: Deprecation Fix the containers that are using mri_synthstrip., Deprecation The..." />
 <meta property="og:image" content="https:/github.com.github.io/brainprepdesk/_static/brainprep-logo.png" />
 <meta property="og:image:alt" content="brainprep" />
-<meta name="description" content="2.1.0.dev: HIGHLIGHTS: NEW: Enhancement Add the dmriprep workflow., Enhancement Add the mrophologist workflow.. Fixes: Deprecation Fix the containers that are using mri_synthstrip., Deprecation The..." />
+<meta name="description" content="2.1.0.dev: HIGHLIGHTS: NEW: Enhancement Add the dmriprep workflow., Enhancement Add the morphologist workflow.. Fixes: Deprecation Fix the containers that are using mri_synthstrip., Deprecation The..." />
 <link rel="search" title="Search" href="search.html" /><link rel="next" title="People" href="authors.html" /><link rel="prev" title="Maintenance" href="maintenance.html" />
         <link rel="prefetch" href="_static/brainprep-transparent.png" as="image" />
 
@@ -399,6 +399,7 @@
 <li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.qualcheck.fmriprep_metrics.html">brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.qualcheck.incremental_pca.html">brainprep.interfaces.qualcheck.incremental_pca</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.qualcheck.mask_overlap.html">brainprep.interfaces.qualcheck.mask_overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.qualcheck.maskdiff.html">brainprep.interfaces.qualcheck.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.qualcheck.mean_correlation.html">brainprep.interfaces.qualcheck.mean_correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.qualcheck.mriqc_metrics.html">brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.qualcheck.network_entropy.html">brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -473,7 +474,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="modules/brainprep.interfaces.utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">brainprep.interfaces.utils</span></code>: Utils functions.</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of brainprep.interfaces.utils: Utils functions.</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.utils.anonfile.html">brainprep.interfaces.utils.anonfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.utils.copyfiles.html">brainprep.interfaces.utils.copyfiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.utils.maskdiff.html">brainprep.interfaces.utils.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.utils.movedir.html">brainprep.interfaces.utils.movedir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.utils.ungzfile.html">brainprep.interfaces.utils.ungzfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/generated/brainprep.interfaces.utils.write_uuid_mapping.html">brainprep.interfaces.utils.write_uuid_mapping</a></li>
@@ -690,13 +690,13 @@
 <h3>NEW<a class="headerlink" href="#new" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><span class="sd-sphinx-override sd-badge sd-bg-success sd-bg-text-success">Enhancement</span> Add the dmriprep workflow.</p></li>
-<li><p><span class="sd-sphinx-override sd-badge sd-bg-success sd-bg-text-success">Enhancement</span> Add the mrophologist workflow.</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-bg-success sd-bg-text-success">Enhancement</span> Add the morphologist workflow.</p></li>
 </ul>
 </section>
 <section id="fixes">
 <h3>Fixes<a class="headerlink" href="#fixes" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><span class="sd-sphinx-override sd-badge sd-bg-danger sd-bg-text-danger">Deprecation</span> Fix the containers that are using mri_synthstrip.</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-bg-danger sd-bg-text-danger">Deprecation</span> Fix the containers that are using <cite>mri_synthstrip</cite>.</p></li>
 <li><p><span class="sd-sphinx-override sd-badge sd-bg-danger sd-bg-text-danger">Deprecation</span> The run mapping file has been moved to avoid
 conflicts with FreeSurfer.</p></li>
 </ul>
@@ -706,10 +706,16 @@ conflicts with FreeSurfer.</p></li>
 <ul class="simple">
 <li><p><span class="sd-sphinx-override sd-badge sd-bg-success sd-bg-text-success">Enhancement</span> Add signature hook.</p></li>
 <li><p><span class="sd-sphinx-override sd-badge sd-bg-success sd-bg-text-success">Enhancement</span> Add live comand line monitoring support.</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-bg-success sd-bg-text-success">Enhancement</span> Support multi-modality in Quasi-Raw workflow.</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-bg-success sd-bg-text-success">Enhancement</span> Add <cite>quick</cite> mode in Quasi-Raw workflow.</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-bg-success sd-bg-text-success">Enhancement</span> Support multi-modality in Deface workflow.</p></li>
 </ul>
 </section>
 <section id="changes">
 <h3>Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><span class="sd-sphinx-override sd-badge sd-bg-danger sd-bg-text-danger">Deprecation</span> Optimize the Quasi-Raw workflow steps.</p></li>
+</ul>
 </section>
 </section>
 <section id="id2">

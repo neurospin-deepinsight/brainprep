@@ -397,6 +397,7 @@
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.fmriprep_metrics.html">brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.incremental_pca.html">brainprep.interfaces.qualcheck.incremental_pca</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mask_overlap.html">brainprep.interfaces.qualcheck.mask_overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.maskdiff.html">brainprep.interfaces.qualcheck.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mean_correlation.html">brainprep.interfaces.qualcheck.mean_correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mriqc_metrics.html">brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.network_entropy.html">brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -471,7 +472,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../brainprep.interfaces.utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">brainprep.interfaces.utils</span></code>: Utils functions.</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of brainprep.interfaces.utils: Utils functions.</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.anonfile.html">brainprep.interfaces.utils.anonfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.copyfiles.html">brainprep.interfaces.utils.copyfiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.maskdiff.html">brainprep.interfaces.utils.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.movedir.html">brainprep.interfaces.utils.movedir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.ungzfile.html">brainprep.interfaces.utils.ungzfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.write_uuid_mapping.html">brainprep.interfaces.utils.write_uuid_mapping</a></li>
@@ -687,20 +687,24 @@ function signature, and not how to use it. Please refer to the
 <h1>brainprep.workflow.defacing.brainprep_defacing<a class="headerlink" href="#brainprep-workflow-defacing-brainprep-defacing" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="brainprep.workflow.defacing.brainprep_defacing">
-<span class="sig-prename descclassname"><span class="pre">brainprep.workflow.defacing.</span></span><span class="sig-name descname"><span class="pre">brainprep_defacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t1_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_intermediate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/workflow/defacing.py#L35"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.workflow.defacing.brainprep_defacing" title="Link to this definition">¶</a></dt>
-<dd><p>Defacing pre-processing workflow for anatomical T1-weighted images.</p>
+<span class="sig-prename descclassname"><span class="pre">brainprep.workflow.defacing.</span></span><span class="sig-name descname"><span class="pre">brainprep_defacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">anatomical_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_intermediate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/workflow/defacing.py#L36"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.workflow.defacing.brainprep_defacing" title="Link to this definition">¶</a></dt>
+<dd><p>Defacing pre-processing workflow for anatomical images.</p>
 <p>Applies FSL’s <cite>fsl_deface</cite> tool <a class="footnote-reference brackets" href="#footcite-almagro2018deface" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> with
-default settings to remove facial features (face and ears) from the input
-image. This includes:</p>
+default settings to remove facial features (face and ears) from an input
+T1-weighted MRI image. Apply defacing mask to T2-weighted or FLAIR MRI
+images. This includes:</p>
 <ol class="arabic simple">
-<li><p>Reorient the T1w image to standard MNI152 template space.</p></li>
-<li><p>Deface the T1w image.</p></li>
-<li><p>Generate a mosaic image of the defaced T1w image.</p></li>
+<li><p>Reorient the anatomical image to standard MNI152 template space.</p></li>
+<li><p>Compute a brain mask using a skull-stripping tool.</p></li>
+<li><p>Deface the T1w image or apply defacing to T2w and FLAIR images using
+coregistration.</p></li>
+<li><p>Compute brain mask and defacing mask intersection.</p></li>
+<li><p>Generate a mosaic image of the defaced anatomical image.</p></li>
 </ol>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>t1_file</strong><span class="classifier">File</span></dt><dd><p>Path to the input T1w anatomical image file.</p>
+<dt><strong>anatomical_file</strong><span class="classifier">File</span></dt><dd><p>Path to the input image file: T1w, T2w or FLAIR.</p>
 </dd>
 <dt><strong>output_dir</strong><span class="classifier">Directory</span></dt><dd><p>Directory where the defaced image and related outputs will be saved
 (i.e., the root of your dataset).</p>
@@ -719,26 +723,33 @@ for debugging. Default False.</p>
 <dd class="field-even"><dl class="simple">
 <dt>Bunch</dt><dd><p>A dictionary-like object containing:</p>
 <ul class="simple">
-<li><p>deface_t1_file : File - path to the defaced image.</p></li>
+<li><p>deface_anatomical_file : File - path to the defaced image.</p></li>
 <li><p>mask_file : File - path to the defacing mask.</p></li>
 <li><p>mosaic_file : File - path to defacing snapshots.</p></li>
-<li><p>summary_file : File - a TSV file containing voxel counts and
+<li><p>maskdiff_file : File - a TSV file containing voxel counts and
 physical volumes (in mm³) for the brain/defacing masks and
 their intersection.</p></li>
+<li><p>correlations_file : File - a TSV file containing mean correlation
+of aligned input image to the reference image.</p></li>
+<li><p>transform_file : File - path to the 12 dof (T1w) or 6 dof (T2w and
+FLAIR coregistration) affine transformation.</p></li>
 </ul>
 </dd>
 </dl>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>If the T1w file do not follow BIDS convention.</p>
+<dt>ValueError</dt><dd><p>If the input anatomical file do not follow BIDS convention.
+If the input modality is not supported.
+If a T1w image in the same session has not already been faced for
+T2w or FLAIR processings.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>This workflow assumes the input image is a valid T1-weighted anatomical
-scan.</p>
+<p>This workflow assumes a T1w image in the same session has already
+been defaced for T2w or FLAIR processings.</p>
 <p class="rubric">References</p>
 <div class="docutils container" id="id2">
 <aside class="footnote-list brackets">
@@ -750,13 +761,11 @@ scan.</p>
 </div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">brainprep.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">brainprep.reporting</span><span class="w"> </span><span class="kn">import</span> <span class="n">RSTReport</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">brainprep.workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">brainprep_defacing</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">Config</span><span class="p">(</span><span class="n">dryrun</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">report</span> <span class="o">=</span> <span class="n">RSTReport</span><span class="p">()</span>
 <span class="gp">... </span>    <span class="n">outputs</span> <span class="o">=</span> <span class="n">brainprep_defacing</span><span class="p">(</span>
-<span class="gp">... </span>        <span class="n">t1_file</span><span class="o">=</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">anatomical_file</span><span class="o">=</span><span class="p">(</span>
 <span class="gp">... </span>            <span class="s2">&quot;/tmp/dataset/rawdata/sub-01/ses-01/anat/&quot;</span>
 <span class="gp">... </span>            <span class="s2">&quot;sub-01_ses-01_run-01_T1w.nii.gz&quot;</span>
 <span class="gp">... </span>        <span class="p">),</span>
@@ -764,10 +773,12 @@ scan.</p>
 <span class="gp">... </span>    <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">outputs</span>
 <span class="go">Bunch(</span>
-<span class="go">  deface_t1_file: PosixPath(&#39;...&#39;)</span>
+<span class="go">  deface_anatomical_file: PosixPath(&#39;...&#39;)</span>
 <span class="go">  mask_file: PosixPath(&#39;...&#39;)</span>
 <span class="go">  mosaic_file: PosixPath(&#39;...&#39;)</span>
-<span class="go">  summary_file: PosixPath(&#39;...&#39;)</span>
+<span class="go">  maskdiff_file: PosixPath(&#39;...&#39;)</span>
+<span class="go">  correlation_file: PosixPath(&#39;...&#39;)</span>
+<span class="go">  transform_file: PosixPath(&#39;...&#39;)</span>
 <span class="go">)</span>
 </pre></div>
 </div>

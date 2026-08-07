@@ -78,48 +78,57 @@ The structure is organized following the :ref:`brainprep ontology <ontology>`.
     quasiraw/
     ├── dataset_description.json
     ├── figures
-    │   ├── histogram_mean_correlation.png
-    │   └── pca.png
+    │   ├── histogram_mean_correlation_<T1w|T2w|FLAIR>.png
+    │   └── pca_<T1w|T2w|FLAIR>.png
     ├── log
-    │   └── report_<timestamp>.rst
+    │   ├── report_<timestamp>.rst
+    │   └── commands_<timestamp>.rst
     ├── quality_check
-    │   ├── mean_correlations.tsv
-    │   └── pca.tsv
+    │   ├── mean_correlations_<T1w|T2w|FLAIR>.tsv
+    │   └── pca_<T1w|T2w|FLAIR>.tsv
     └── subjects
        └── sub-01
            └── ses-01
                ├── log
-               │   └── report_<timestamp>.rst
-               ├── sub-01_ses-01_run-01_mod-T1w_affine.txt
-               ├── sub-01_ses-01_run-01_mod-T1w_brainmask.nii.gz
-               └── sub-01_ses-01_run-01_T1w.nii.gz
+               │   ├── report_<timestamp>.rst
+               │   └── commands_<timestamp>.rst
+               ├── quality_check
+               │   └── sub-01_ses-01_run-01_mod-<T1w|T2w|FLAIR>_corr.tsv
+               ├── sub-01_ses-01_run-01_mod-<T1w|T2w|FLAIR>_affine.txt
+               ├── sub-01_ses-01_run-01_mod-<T1w|T2w|FLAIR>_brainmask.nii.gz
+               └── sub-01_ses-01_run-01_<T1w|T2w|FLAIR>.nii.gz
 
 **Description of contents**:
 
 - ``dataset_description.json``  
   Metadata describing the process, including versioning and processing
   information.
-- ``figures/histogram_mean_correlation.png``  
+- ``figures/histogram_mean_correlation_<T1w|T2w|FLAIR>.png``  
   Image correlation-to-template distribution and applied threshold.
-- ``figures/pca.png``  
+- ``figures/pca_<T1w|T2w|FLAIR>.png``  
   Display of the first two PCA components of the generated images.
 - ``log/report_<timestamp>.rst``  
   Contains group-level workflow steps and parameters.
-- ``quality_check/mask_overlap.tsv``  
+- ``log/commands_<timestamp>.rst``
+  Contains group-level executed commands.
+- ``quality_check/mean_correlations_<T1w|T2w|FLAIR>.tsv``  
   Table containing the correlation score for each subject/session/run. The
   table includes a binary ``qc`` column indicating the quality control result.
-- ``quality_check/pca.tsv``  
+- ``quality_check/pca_<T1w|T2w|FLAIR>.tsv``  
   Table containing information on the first two PCA components.
-- ``subjects/sub-<id>/ses-<id>/log/report_<timestamp>.rst``  
+- ``subjects/sub-<id>/ses-<id>/log/report_<timestamp>.rst``
   Contains subject-level workflow steps and parameters.
-- ``subjects/sub-<id>/ses-<id>/sub-01_ses-01_run-01_mod-T1w_affine.txt`` 
-  Affine transformation parameters (9 DOF) used to align the T1w image to
-  the MNI template.
-- ``subjects/sub-<id>/ses-<id>/sub-01_ses-01_run-01_mod-T1w_brainmask.nii.gz``
+- ``subjects/sub-<id>/ses-<id>/log/commands_<timestamp>.rst``
+  Contains subject-level executed commands.
+- ``subjects/sub-<id>/ses-<id>/quality_check/sub-01_ses-01_run-01_mod-<T1w|T2w|FLAIR>_corr.tsv``
+  Table containing the correlation score.
+- ``subjects/sub-<id>/ses-<id>/sub-01_ses-01_run-01_mod-<T1w|T2w|FLAIR>_affine.txt`` 
+  Affine transformation parameters (9 DOF) used to align the T1w, T2w or FLAIR
+  image to the MNI 1 mm template.
+- ``subjects/sub-<id>/ses-<id>/sub-01_ses-01_run-01_mod-<T1w|T2w|FLAIR>_brainmask.nii.gz``
   Brain mask generated during skull stripping (e.g., via SynthStrip).
-- ``subjects/sub-<id>/ses-<id>/sub-01_ses-01_run-01_T1w.nii.gz``
-  The minimally preprocessed T1w image, including skull stripping, bias
-  correction, and affine alignment.
+- ``subjects/sub-<id>/ses-<id>/sub-01_ses-01_run-01_<T1w|T2w|FLAIR>.nii.gz``
+  The minimally preprocessed T1w, T2w or FLAIR image in the MNI 1mm space.
 
 Featured examples
 -----------------

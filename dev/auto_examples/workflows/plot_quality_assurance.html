@@ -399,6 +399,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.fmriprep_metrics.html">brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.incremental_pca.html">brainprep.interfaces.qualcheck.incremental_pca</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.mask_overlap.html">brainprep.interfaces.qualcheck.mask_overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.maskdiff.html">brainprep.interfaces.qualcheck.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.mean_correlation.html">brainprep.interfaces.qualcheck.mean_correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.mriqc_metrics.html">brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.network_entropy.html">brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -473,7 +474,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../modules/brainprep.interfaces.utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">brainprep.interfaces.utils</span></code>: Utils functions.</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of brainprep.interfaces.utils: Utils functions.</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.anonfile.html">brainprep.interfaces.utils.anonfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.copyfiles.html">brainprep.interfaces.utils.copyfiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.maskdiff.html">brainprep.interfaces.utils.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.movedir.html">brainprep.interfaces.utils.movedir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.ungzfile.html">brainprep.interfaces.utils.ungzfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.write_uuid_mapping.html">brainprep.interfaces.utils.write_uuid_mapping</a></li>
@@ -922,12 +922,12 @@ Bunch(
       iqm_files: [PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-01/ses-00/anat/sub-01_ses-00_T1w.json&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-01/ses-00/func/sub-01_ses-00_task-ArchiStandard_dir-pa_bold.json&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-01/ses-00/dwi/sub-01_ses-00_dwi.json&#39;)]
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:17:05.210698&#39;
-      end: &#39;2026-07-10 14:17:05.222874&#39;
-      execution_time: 3.382222222222222e-06
+      start: &#39;2026-08-07 14:36:46.054268&#39;
+      end: &#39;2026-08-07 14:36:46.067743&#39;
+      execution_time: 3.743055555555556e-06
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -956,12 +956,12 @@ Bunch(
       outputs: ([&#39;mriqc&#39;, &#39;/tmp/brainprep-data/rawdata&#39;, &#39;/tmp/brainprep-qa/derivatives/quality_assurance&#39;, &#39;participant&#39;, &#39;-w&#39;, &#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-01/ses-00/workspace&#39;, &#39;--no-sub&#39;, &#39;--no-datalad-get&#39;, &#39;--notrack&#39;, &#39;--participant-label&#39;, &#39;01&#39;], ([PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-01/ses-00/anat/sub-01_ses-00_T1w.json&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-01/ses-00/func/sub-01_ses-00_task-ArchiStandard_dir-pa_bold.json&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-01/ses-00/dwi/sub-01_ses-00_dwi.json&#39;)],))
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:17:05.216787&#39;
-      end: &#39;2026-07-10 14:17:05.220168&#39;
-      execution_time: 9.391666666666666e-07
+      start: &#39;2026-08-07 14:36:46.061595&#39;
+      end: &#39;2026-08-07 14:36:46.065121&#39;
+      execution_time: 9.794444444444445e-07
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -1058,12 +1058,12 @@ Bunch(
       iqm_files: [PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-02/ses-00/anat/sub-02_ses-00_T1w.json&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-02/ses-00/func/sub-02_ses-00_task-ArchiStandard_dir-pa_bold.json&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-02/ses-00/dwi/sub-02_ses-00_dwi.json&#39;)]
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:17:05.231453&#39;
-      end: &#39;2026-07-10 14:17:05.242673&#39;
-      execution_time: 3.1166666666666668e-06
+      start: &#39;2026-08-07 14:36:46.080002&#39;
+      end: &#39;2026-08-07 14:36:46.092279&#39;
+      execution_time: 3.4102777777777778e-06
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -1092,12 +1092,12 @@ Bunch(
       outputs: ([&#39;mriqc&#39;, &#39;/tmp/brainprep-data/rawdata&#39;, &#39;/tmp/brainprep-qa/derivatives/quality_assurance&#39;, &#39;participant&#39;, &#39;-w&#39;, &#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-02/ses-00/workspace&#39;, &#39;--no-sub&#39;, &#39;--no-datalad-get&#39;, &#39;--notrack&#39;, &#39;--participant-label&#39;, &#39;02&#39;], ([PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-02/ses-00/anat/sub-02_ses-00_T1w.json&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-02/ses-00/func/sub-02_ses-00_task-ArchiStandard_dir-pa_bold.json&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/sub-02/ses-00/dwi/sub-02_ses-00_dwi.json&#39;)],))
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:17:05.237015&#39;
-      end: &#39;2026-07-10 14:17:05.240253&#39;
-      execution_time: 8.994444444444444e-07
+      start: &#39;2026-08-07 14:36:46.086462&#39;
+      end: &#39;2026-08-07 14:36:46.089790&#39;
+      execution_time: 9.244444444444444e-07
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -1189,12 +1189,12 @@ Bunch(
       iqm_files: [PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/group_T1w.tsv&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/group_bold.tsv&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/group_dwi.tsv&#39;)]
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:17:05.251471&#39;
-      end: &#39;2026-07-10 14:17:05.266316&#39;
-      execution_time: 4.123611111111111e-06
+      start: &#39;2026-08-07 14:36:46.102646&#39;
+      end: &#39;2026-08-07 14:36:46.119474&#39;
+      execution_time: 4.6744444444444445e-06
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -1222,12 +1222,12 @@ Bunch(
       outputs: ([&#39;mriqc&#39;, &#39;/tmp/brainprep-qa/rawdata&#39;, &#39;/tmp/brainprep-qa/derivatives/quality_assurance&#39;, &#39;group&#39;, &#39;--no-sub&#39;, &#39;--no-datalad-get&#39;, &#39;--notrack&#39;], ([PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/group_T1w.tsv&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/group_bold.tsv&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/group_dwi.tsv&#39;)],))
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:17:05.255032&#39;
-      end: &#39;2026-07-10 14:17:05.257067&#39;
-      execution_time: 5.652777777777777e-07
+      start: &#39;2026-08-07 14:36:46.106942&#39;
+      end: &#39;2026-08-07 14:36:46.109077&#39;
+      execution_time: 5.930555555555556e-07
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -1256,12 +1256,12 @@ Bunch(
       outputs: ([PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/group_T1w.tsv&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/group_bold.tsv&#39;), PosixPath(&#39;/tmp/brainprep-qa/derivatives/quality_assurance/group_dwi.tsv&#39;)],)
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:17:05.261923&#39;
-      end: &#39;2026-07-10 14:17:05.264714&#39;
-      execution_time: 7.752777777777778e-07
+      start: &#39;2026-08-07 14:36:46.114905&#39;
+      end: &#39;2026-08-07 14:36:46.117736&#39;
+      execution_time: 7.863888888888889e-07
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -1346,8 +1346,8 @@ In practice, this means that once the CLI has produced the appropriate
 instructions, you can simply copy and run them inside the container to
 achieve the intended results. You can find the BrainPrep images on Docker
 Hub: <a class="reference external" href="https://hub.docker.com/u/neurospin">Neurospin Docker Hub</a>.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 32.590 seconds)</p>
-<p><strong>Estimated memory usage:</strong>  597 MB</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 22.327 seconds)</p>
+<p><strong>Estimated memory usage:</strong>  609 MB</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-workflows-plot-quality-assurance-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/9ac6428d4ef34797b64caa815d028589/plot_quality_assurance.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_quality_assurance.ipynb</span></code></a></p>

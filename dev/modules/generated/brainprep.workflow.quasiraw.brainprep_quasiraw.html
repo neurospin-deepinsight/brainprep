@@ -397,6 +397,7 @@
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.fmriprep_metrics.html">brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.incremental_pca.html">brainprep.interfaces.qualcheck.incremental_pca</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mask_overlap.html">brainprep.interfaces.qualcheck.mask_overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.maskdiff.html">brainprep.interfaces.qualcheck.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mean_correlation.html">brainprep.interfaces.qualcheck.mean_correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mriqc_metrics.html">brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.network_entropy.html">brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -471,7 +472,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../brainprep.interfaces.utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">brainprep.interfaces.utils</span></code>: Utils functions.</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of brainprep.interfaces.utils: Utils functions.</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.anonfile.html">brainprep.interfaces.utils.anonfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.copyfiles.html">brainprep.interfaces.utils.copyfiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.maskdiff.html">brainprep.interfaces.utils.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.movedir.html">brainprep.interfaces.utils.movedir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.ungzfile.html">brainprep.interfaces.utils.ungzfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.write_uuid_mapping.html">brainprep.interfaces.utils.write_uuid_mapping</a></li>
@@ -687,32 +687,43 @@ function signature, and not how to use it. Please refer to the
 <h1>brainprep.workflow.quasiraw.brainprep_quasiraw<a class="headerlink" href="#brainprep-workflow-quasiraw-brainprep-quasiraw" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="brainprep.workflow.quasiraw.brainprep_quasiraw">
-<span class="sig-prename descclassname"><span class="pre">brainprep.workflow.quasiraw.</span></span><span class="sig-name descname"><span class="pre">brainprep_quasiraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">anatomical_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_intermediate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/workflow/quasiraw.py#L36"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.workflow.quasiraw.brainprep_quasiraw" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">brainprep.workflow.quasiraw.</span></span><span class="sig-name descname"><span class="pre">brainprep_quasiraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">anatomical_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rigid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quick</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_intermediate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/workflow/quasiraw.py#L36"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.workflow.quasiraw.brainprep_quasiraw" title="Link to this definition">¶</a></dt>
 <dd><p>Quasi-RAW pre-processing.</p>
 <p>Applies the Quasi-RAW pre-processing described in
-<a class="footnote-reference brackets" href="#footcite-dufumier2022openbhb" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. This includes:</p>
+<a class="footnote-reference brackets" href="#footcite-dufumier2022openbhb" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> to T1-weighted, T2-weighted and FLAIR
+MRI images. This includes:</p>
 <ol class="arabic simple">
 <li><p>Reorient the anatomical image to standard MNI152 template space.</p></li>
 <li><p>Compute a brain mask using a skull-stripping tool.</p></li>
-<li><p>Apply the brain mask to the anatomical image.</p></li>
-<li><p>Resample the anatomical image to 1mm isotropic voxel size.</p></li>
-<li><p>Resample the brain mask image to 1mm isotropic voxel size.</p></li>
 <li><p>Perform N4 bias field correction.</p></li>
-<li><p>Linearly (9 dof) register the image to the MNI152 1mm template space.</p></li>
-<li><p>Apply the registration to the antomical image.</p></li>
+<li><p>Resample the anatomical image to 1mm isotropic voxel size.</p></li>
+<li><p>Linearly register the image to the MNI152 1mm template space (6 or 9
+DOF).</p></li>
+<li><p>Apply the registration to the bias field corrected antomical image.</p></li>
 <li><p>Apply the registration to the brain mask image.</p></li>
-<li><p>Apply the brain mask to the registered anatomical image.</p></li>
 </ol>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>anatomical_file: File</strong></dt><dd><p>Path to the input image file.</p>
+<dt><strong>anatomical_file</strong><span class="classifier">File</span></dt><dd><p>Path to the input image file: T1w, T2w or FLAIR.</p>
 </dd>
-<dt><strong>output_dir: Directory</strong></dt><dd><p>Directory where the outputs will be saved (i.e., the root of your
+<dt><strong>output_dir</strong><span class="classifier">Directory</span></dt><dd><p>Directory where the outputs will be saved (i.e., the root of your
 dataset).</p>
 </dd>
+<dt><strong>rigid</strong><span class="classifier">bool</span></dt><dd><p>Estimate a 6 DOF transformation that maintains the original size and
+shape of the brain. By default a 9 DOF transformation allows for
+additional scaling in the x, y, and z directions, adjusting the size
+of the brain during the alignment process.
+Default False.</p>
+</dd>
+<dt><strong>quick</strong><span class="classifier">bool</span></dt><dd><p>Speed up processing by applying optimizations that trade accuracy
+for computational efficiency. This is particularly useful for
+large-scale batch processing where speed is prioritized.
+Default False.</p>
+</dd>
 <dt><strong>keep_intermediate</strong><span class="classifier">bool</span></dt><dd><p>If True, retains intermediate results (i.e., the workspace); useful
-for debugging. Default False.</p>
+for debugging.
+Default False.</p>
 </dd>
 <dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><dl class="simple">
 <dt>entities: dict</dt><dd><p>Dictionary of parsed BIDS entities.</p>
@@ -725,9 +736,9 @@ for debugging. Default False.</p>
 <dd class="field-even"><dl class="simple">
 <dt>Bunch</dt><dd><p>A dictionary-like object containing:</p>
 <ul class="simple">
-<li><p>aligned_anatomical_file : File - path to the aligned anatomical
+<li><p>aligned_anatomical_file : File - path to the aligned 1 mm anatomical
 image - a Nifti file with the suffix “_T1w”.</p></li>
-<li><p>aligned_mask_file : File - path to the aligned mask image - a
+<li><p>aligned_mask_file : File - path to the aligned 1 mm mask image - a
 Nifti file with the suffix “_mod-T1w_brainmask”.</p></li>
 <li><p>transform_file : File - path to the 9 dof affine transformation - a
 text file with the suffix “_mod-T1w_affine”.</p></li>
@@ -737,13 +748,23 @@ text file with the suffix “_mod-T1w_affine”.</p></li>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>If the input anatomical file is not BIDS-compliant.</p>
+<dt>ValueError</dt><dd><p>If the input anatomical file is not BIDS-compliant or if the input
+modality is not supported.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>This workflow assumes the anatomical image is organized in BIDS.</p>
+<p>This workflow assumes the anatomical image is organized in BIDS and applies
+the following optimizations in <cite>quick</cite> mode:</p>
+<ul class="simple">
+<li><p><strong>Use a coarser resolution</strong>: Increase the shrink factor from <cite>1</cite> to <cite>4</cite>
+to downsample the image before estimating the bias field, employ the
+MNI152 2mm template as the reference image and scale data to a 2mm
+space.</p></li>
+<li><p><strong>Use a Coarser Search Space</strong>: Restricted rotation search range to
++/-30° on all three axes for the registration.</p></li>
+</ul>
 <p class="rubric">References</p>
 <div class="docutils container" id="id2">
 <aside class="footnote-list brackets">

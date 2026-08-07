@@ -129,6 +129,7 @@ the :ref:`user guide <user_guide>` for more information and usage examples.
       <li><a href='generated/brainprep.interfaces.qualcheck.fmriprep_metrics.html'>brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
       <li><a href='generated/brainprep.interfaces.qualcheck.incremental_pca.html'>brainprep.interfaces.qualcheck.incremental_pca</a></li>
       <li><a href='generated/brainprep.interfaces.qualcheck.mask_overlap.html'>brainprep.interfaces.qualcheck.mask_overlap</a></li>
+      <li><a href='generated/brainprep.interfaces.qualcheck.maskdiff.html'>brainprep.interfaces.qualcheck.maskdiff</a></li>
       <li><a href='generated/brainprep.interfaces.qualcheck.mean_correlation.html'>brainprep.interfaces.qualcheck.mean_correlation</a></li>
       <li><a href='generated/brainprep.interfaces.qualcheck.mriqc_metrics.html'>brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
       <li><a href='generated/brainprep.interfaces.qualcheck.network_entropy.html'>brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -146,7 +147,6 @@ the :ref:`user guide <user_guide>` for more information and usage examples.
       <li><a href='generated/brainprep.interfaces.ungzfile.html'>brainprep.interfaces.ungzfile</a></li>
       <li><a href='generated/brainprep.interfaces.utils.anonfile.html'>brainprep.interfaces.utils.anonfile</a></li>
       <li><a href='generated/brainprep.interfaces.utils.copyfiles.html'>brainprep.interfaces.utils.copyfiles</a></li>
-      <li><a href='generated/brainprep.interfaces.utils.maskdiff.html'>brainprep.interfaces.utils.maskdiff</a></li>
       <li><a href='generated/brainprep.interfaces.utils.movedir.html'>brainprep.interfaces.utils.movedir</a></li>
       <li><a href='generated/brainprep.interfaces.utils.ungzfile.html'>brainprep.interfaces.utils.ungzfile</a></li>
       <li><a href='generated/brainprep.interfaces.utils.write_uuid_mapping.html'>brainprep.interfaces.utils.write_uuid_mapping</a></li>

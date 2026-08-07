@@ -7,14 +7,14 @@
    :ref:`user guide <user_guide>` for the big picture.
 
 
-brainprep.interfaces.utils.maskdiff
-===================================
+brainprep.interfaces.qualcheck.maskdiff
+=======================================
 
-.. currentmodule:: brainprep.interfaces.utils
+.. currentmodule:: brainprep.interfaces.qualcheck
 
 .. autofunction:: maskdiff
 
-.. include:: brainprep.interfaces.utils.maskdiff.examples
+.. include:: brainprep.interfaces.qualcheck.maskdiff.examples
 
 .. raw:: html
 

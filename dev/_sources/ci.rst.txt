@@ -131,4 +131,3 @@ To run this check locally from the `doc` folder:
 .. code-block:: bash
 
   $ nosetests --with-coverage --cover-package=brainprep --verbosity=2
-    --with-doctest --doctest-options='+ELLIPSIS,+NORMALIZE_WHITESPACE'

@@ -7,10 +7,10 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https:///github.com.github.io/modules/generated/brainprep.reporting.RSTReport.html" />
 <meta property="og:site_name" content="brainprep" />
-<meta property="og:description" content="Examples using brainprep.reporting.RSTReport: RST reporting Defacing Quality Assurance Quasi-RAW Sulci Reconstruction VBM fMRI" />
+<meta property="og:description" content="Examples using brainprep.reporting.RSTReport: RST reporting Quality Assurance Sulci Reconstruction VBM fMRI" />
 <meta property="og:image" content="https:///github.com.github.io/_images/sphx_glr_plot_rst_reporting_thumb.png" />
 <meta property="og:image:alt" content="" />
-<meta name="description" content="Examples using brainprep.reporting.RSTReport: RST reporting Defacing Quality Assurance Quasi-RAW Sulci Reconstruction VBM fMRI" />
+<meta name="description" content="Examples using brainprep.reporting.RSTReport: RST reporting Quality Assurance Sulci Reconstruction VBM fMRI" />
 <link rel="search" title="Search" href="../../search.html" /><link rel="next" title="brainprep.reporting.generate_qc_report" href="brainprep.reporting.generate_qc_report.html" /><link rel="prev" title="brainprep.reporting: Module that implements reporting tools." href="../brainprep.reporting.html" />
         <link rel="prefetch" href="../../_static/brainprep-transparent.png" as="image" />
 
@@ -399,6 +399,7 @@
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.fmriprep_metrics.html">brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.incremental_pca.html">brainprep.interfaces.qualcheck.incremental_pca</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mask_overlap.html">brainprep.interfaces.qualcheck.mask_overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.maskdiff.html">brainprep.interfaces.qualcheck.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mean_correlation.html">brainprep.interfaces.qualcheck.mean_correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mriqc_metrics.html">brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.network_entropy.html">brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -473,7 +474,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../brainprep.interfaces.utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">brainprep.interfaces.utils</span></code>: Utils functions.</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of brainprep.interfaces.utils: Utils functions.</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.anonfile.html">brainprep.interfaces.utils.anonfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.copyfiles.html">brainprep.interfaces.utils.copyfiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.maskdiff.html">brainprep.interfaces.utils.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.movedir.html">brainprep.interfaces.utils.movedir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.ungzfile.html">brainprep.interfaces.utils.ungzfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.write_uuid_mapping.html">brainprep.interfaces.utils.write_uuid_mapping</a></li>
@@ -689,7 +689,7 @@ signature, and not how to use it. Please refer to the
 <h1>brainprep.reporting.RSTReport<a class="headerlink" href="#brainprep-reporting-rstreport" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="brainprep.reporting.RSTReport">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">brainprep.reporting.</span></span><span class="sig-name descname"><span class="pre">RSTReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/reporting/rst_reporting.py#L110"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">brainprep.reporting.</span></span><span class="sig-name descname"><span class="pre">RSTReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/reporting/rst_reporting.py#L112"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Render structured report content using reStructuredText (RST) format.</p>
 <p>This class collects and organizes data using <cite>Bunch</cite> objects and renders
@@ -754,12 +754,12 @@ Default False.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="brainprep.reporting.RSTReport.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reloadable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">increment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/reporting/rst_reporting.py#L180"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport.__init__" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reloadable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">increment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/reporting/rst_reporting.py#L182"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport.__init__" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="brainprep.reporting.RSTReport.register">
-<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/reporting/rst_reporting.py#L188"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport.register" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/reporting/rst_reporting.py#L190"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport.register" title="Link to this definition">¶</a></dt>
 <dd><p>Add a new data entry to the report under a given identifier and name.</p>
 <p>Two data types are supported:
 - string for the ‘module’, ‘trace’ and ‘description’ data elements.
@@ -786,7 +786,7 @@ Default False.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="brainprep.reporting.RSTReport.register_command">
-<span class="sig-name descname"><span class="pre">register_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/reporting/rst_reporting.py#L228"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport.register_command" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">register_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/reporting/rst_reporting.py#L236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport.register_command" title="Link to this definition">¶</a></dt>
 <dd><p>Add a new command entry to the report.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -806,7 +806,7 @@ Default False.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="brainprep.reporting.RSTReport.save_as_rst">
-<span class="sig-name descname"><span class="pre">save_as_rst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/reporting/rst_reporting.py#L254"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport.save_as_rst" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">save_as_rst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/reporting/rst_reporting.py#L262"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport.save_as_rst" title="Link to this definition">¶</a></dt>
 <dd><p>Save the report content to a reStructuredText (.rst) file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -820,7 +820,7 @@ Default False.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="brainprep.reporting.RSTReport.save_commands_as_rst">
-<span class="sig-name descname"><span class="pre">save_commands_as_rst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/reporting/rst_reporting.py#L285"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport.save_commands_as_rst" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">save_commands_as_rst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/reporting/rst_reporting.py#L293"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.reporting.RSTReport.save_commands_as_rst" title="Link to this definition">¶</a></dt>
 <dd><p>Save the commands list to a reStructuredText (.rst) file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -839,15 +839,9 @@ Default False.</p>
 <div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Simple example."><img alt="" src="../../_images/sphx_glr_plot_rst_reporting_thumb.png" />
 <p><a class="reference internal" href="../../auto_examples/tools/plot_rst_reporting.html#sphx-glr-auto-examples-tools-plot-rst-reporting-py"><span class="std std-ref">RST reporting</span></a></p>
   <div class="sphx-glr-thumbnail-title">RST reporting</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Simple example."><img alt="" src="../../_images/sphx_glr_plot_defacing_thumb.png" />
-<p><a class="reference internal" href="../../auto_examples/workflows/plot_defacing.html#sphx-glr-auto-examples-workflows-plot-defacing-py"><span class="std std-ref">Defacing</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Defacing</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Simple example."><img alt="" src="../../_images/sphx_glr_plot_quality_assurance_thumb.png" />
 <p><a class="reference internal" href="../../auto_examples/workflows/plot_quality_assurance.html#sphx-glr-auto-examples-workflows-plot-quality-assurance-py"><span class="std std-ref">Quality Assurance</span></a></p>
   <div class="sphx-glr-thumbnail-title">Quality Assurance</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Simple example."><img alt="" src="../../_images/sphx_glr_plot_quasiraw_thumb.png" />
-<p><a class="reference internal" href="../../auto_examples/workflows/plot_quasiraw.html#sphx-glr-auto-examples-workflows-plot-quasiraw-py"><span class="std std-ref">Quasi-RAW</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Quasi-RAW</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Simple example."><img alt="" src="../../_images/sphx_glr_plot_sulcirec_thumb.png" />
 <p><a class="reference internal" href="../../auto_examples/workflows/plot_sulcirec.html#sphx-glr-auto-examples-workflows-plot-sulcirec-py"><span class="std std-ref">Sulci Reconstruction</span></a></p>
   <div class="sphx-glr-thumbnail-title">Sulci Reconstruction</div>

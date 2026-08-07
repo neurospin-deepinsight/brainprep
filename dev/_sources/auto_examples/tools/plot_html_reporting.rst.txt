@@ -123,7 +123,7 @@ Now let's generate the HTML report.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.543 seconds)
+   **Total running time of the script:** (0 minutes 0.554 seconds)
 
 **Estimated memory usage:**  112 MB
 

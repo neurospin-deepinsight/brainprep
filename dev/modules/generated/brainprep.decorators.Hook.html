@@ -399,6 +399,7 @@
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.fmriprep_metrics.html">brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.incremental_pca.html">brainprep.interfaces.qualcheck.incremental_pca</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mask_overlap.html">brainprep.interfaces.qualcheck.mask_overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.maskdiff.html">brainprep.interfaces.qualcheck.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mean_correlation.html">brainprep.interfaces.qualcheck.mean_correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mriqc_metrics.html">brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.network_entropy.html">brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -473,7 +474,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../brainprep.interfaces.utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">brainprep.interfaces.utils</span></code>: Utils functions.</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of brainprep.interfaces.utils: Utils functions.</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.anonfile.html">brainprep.interfaces.utils.anonfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.copyfiles.html">brainprep.interfaces.utils.copyfiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.maskdiff.html">brainprep.interfaces.utils.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.movedir.html">brainprep.interfaces.utils.movedir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.ungzfile.html">brainprep.interfaces.utils.ungzfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.write_uuid_mapping.html">brainprep.interfaces.utils.write_uuid_mapping</a></li>
@@ -689,7 +689,7 @@ signature, and not how to use it. Please refer to the
 <h1>brainprep.decorators.Hook<a class="headerlink" href="#brainprep-decorators-hook" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="brainprep.decorators.Hook">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">brainprep.decorators.</span></span><span class="sig-name descname"><span class="pre">Hook</span></span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/decorators.py#L55"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">brainprep.decorators.</span></span><span class="sig-name descname"><span class="pre">Hook</span></span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/decorators.py#L55"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Base class for decorator hooks.</p>
 <p>Hooks used with the decorator must inherit from this class and
@@ -699,33 +699,24 @@ is executed.</p>
 <p>By default, both methods implement pass-through behavior:
 <code class="docutils literal notranslate"><span class="pre">before_call</span></code> returns the inputs unchanged, and <code class="docutils literal notranslate"><span class="pre">after_call</span></code> returns
 the outputs unchanged.</p>
-<p class="rubric">Methods</p>
-<div class="table-wrapper docutils container">
-<table class="docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><strong>before_call(func, inputs)</strong></p></td>
-<td><p>Hook executed before the wrapped function is called. Must return a dictionary of (possibly modified) inputs.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>after_call(func, outputs)</strong></p></td>
-<td><p>Hook executed after the wrapped function returns. Must return the (possibly modified) output value.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <p class="rubric">Notes</p>
 <p>Subclasses may override one or both methods. If a method is not
 overridden, the default implementation simply returns its argument
 unchanged.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="brainprep.decorators.Hook.after_call">
-<span class="sig-name descname"><span class="pre">after_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/decorators.py#L93"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook.after_call" title="Link to this definition">¶</a></dt>
-<dd><p>Transform and inspect outputs after the function call.</p>
+<span class="sig-name descname"><span class="pre">after_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/decorators.py#L87"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook.after_call" title="Link to this definition">¶</a></dt>
+<dd><p>Hook executed after the wrapped function returns.
+Transform and/or inspect outputs.
+Must return the (possibly modified) output value.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="brainprep.decorators.Hook.before_call">
-<span class="sig-name descname"><span class="pre">before_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/decorators.py#L85"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook.before_call" title="Link to this definition">¶</a></dt>
-<dd><p>Transform and inspect inputs before the function call.</p>
+<span class="sig-name descname"><span class="pre">before_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/decorators.py#L75"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.decorators.Hook.before_call" title="Link to this definition">¶</a></dt>
+<dd><p>Hook executed before the wrapped function is called.
+Transform and/or inspect inputs.
+Must return a dictionary of (possibly modified) inputs.</p>
 </dd></dl>
 
 </dd></dl>

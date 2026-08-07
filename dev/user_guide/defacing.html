@@ -399,6 +399,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.qualcheck.fmriprep_metrics.html">brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.qualcheck.incremental_pca.html">brainprep.interfaces.qualcheck.incremental_pca</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.qualcheck.mask_overlap.html">brainprep.interfaces.qualcheck.mask_overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.qualcheck.maskdiff.html">brainprep.interfaces.qualcheck.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.qualcheck.mean_correlation.html">brainprep.interfaces.qualcheck.mean_correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.qualcheck.mriqc_metrics.html">brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.qualcheck.network_entropy.html">brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -473,7 +474,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../modules/brainprep.interfaces.utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">brainprep.interfaces.utils</span></code>: Utils functions.</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of brainprep.interfaces.utils: Utils functions.</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.utils.anonfile.html">brainprep.interfaces.utils.anonfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.utils.copyfiles.html">brainprep.interfaces.utils.copyfiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.utils.maskdiff.html">brainprep.interfaces.utils.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.utils.movedir.html">brainprep.interfaces.utils.movedir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.utils.ungzfile.html">brainprep.interfaces.utils.ungzfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../modules/generated/brainprep.interfaces.utils.write_uuid_mapping.html">brainprep.interfaces.utils.write_uuid_mapping</a></li>
@@ -711,7 +711,7 @@ these features while preserving brain anatomy for analysis.</p>
 <p><strong>Processing Steps</strong></p>
 <ul class="simple">
 <li><p><strong>Defacing T1w image</strong>
-We use the UK-Biobank defacing method that is provided as part of the
+We use the defacing method that is provided as part of the
 standard FSL distribution under the command <code class="docutils literal notranslate"><span class="pre">fsl_deface</span></code>
 <a class="footnote-reference brackets" href="#footcite-almagro2018deface" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. Similar to other established defacing
 tools, such as <code class="docutils literal notranslate"><span class="pre">mri_deface</span></code> <a class="footnote-reference brackets" href="#footcite-bischoff2007deface" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>
@@ -721,11 +721,18 @@ this mask are then set to zero to remove identifiable facial features.
 A key distinction of <code class="docutils literal notranslate"><span class="pre">fsl_deface</span></code> compared with <code class="docutils literal notranslate"><span class="pre">mri_deface</span></code> and
 <code class="docutils literal notranslate"><span class="pre">pydeface</span></code> is that it additionally removes the ears, providing a more
 comprehensive anonymization of head anatomy.
-This workflow is applied to T1-weighted (T1w) structural images and can be
-propagated to other modalities through rigid alignement.</p></li>
+This workflow is applied to T1-weighted structural images.</p></li>
+<li><p><strong>Defacing T2w and FLAIR images</strong>
+The defacing mask obtained from the T1w image is propagated to other
+modalities through rigid alignement.</p></li>
 </ul>
 <p><strong>Quality Control</strong></p>
 <ul class="simple">
+<li><p><strong>Correlation score</strong>
+For each aligned image, we compute its correlation with the MNI for T1w or
+to T1w for T2w and FLAIR reference image. Images are then sorted in
+ascending order of this score, allowing potential outliers to be easily
+identified.</p></li>
 <li><p><strong>Overlap score</strong>
 For each image, we compute the overlap ratio between the brain mask
 extracted using FreeSurfer’s deep‑learning–based <code class="docutils literal notranslate"><span class="pre">mri_synthstrip</span></code>
@@ -739,9 +746,13 @@ visual inspection of the defaced image and verification that facial/ear
 structures have been successfully removed. The most obvious outliers are
 thus removed.</p></li>
 <li><p><strong>Thresholding</strong>
+The correlation score is thresholded at 0.5, meaning that if an image is not
+roughly registered to the template, the preprocessing is considered invalid.
 The overlap score is thresholded at 5%, meaning that if the defacing mask
 removes a substantial portion of the brain, the preprocessing is considered
-invalid. Images with an overlap greater than 5% are flagged as low‑quality.</p></li>
+invalid.
+Images with a correlation lower than 0.5 or an overlap greater than 5% are
+flagged as low‑quality.</p></li>
 </ul>
 </section>
 <section id="outputs">
@@ -752,21 +763,29 @@ The structure is organized following the <a class="reference internal" href="ont
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>defacing/
 ├── dataset_description.json
 ├── figures
-│   └── histogram_overlap.png
+│   ├── histogram_mean_correlation_&lt;T1w|T2w|FLAIR&gt;.png
+│   └── histogram_overlap_&lt;T1w|T2w|FLAIR.png
 ├── log
-│   └── report_&lt;timestamp&gt;.rst
+│   ├── report_&lt;timestamp&gt;.rst
+│   └── commands_&lt;timestamp&gt;.rst
 ├── quality_check
-│   └── mask_overlap.tsv
+│   ├── mask_overlap_&lt;T1w|T2w|FLAIR&gt;.tsv
+│   └── mean_correlations_&lt;T1w|T2w|FLAIR&gt;.tsv
 └── subjects
     └── sub-01
         └── ses-01
             ├── figures
-            │   └── sub-01_ses-01_run-01_mod-T1w_defacemosaic.png
+            │   └── sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;_defacemosaic.png
             ├── log
-            │   └── report_&lt;timestamp&gt;.rst
-            ├── sub-01_ses-01_run-01_mod-T1w_defacemask.nii.gz
-            ├── sub-01_ses-01_run-01_mod-T1w_defacemask.tsv
-            └── sub-01_ses-01_run-01_mod-T1w_deface.nii.gz
+            │   ├── report_&lt;timestamp&gt;.rst
+            │   └── commands_&lt;timestamp&gt;.rst
+            ├── quality_check
+            │   ├── sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;_corr.tsv
+            │   └── sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;_maskdiff.tsv
+            ├── sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;_affine.mat
+            ├── sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;_defacemask.nii.gz
+            ├── sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;_maskdiff.tsv
+            └── sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;.nii.gz
 </pre></div>
 </div>
 <p><strong>Description of contents</strong>:</p>
@@ -774,24 +793,39 @@ The structure is organized following the <a class="reference internal" href="ont
 <li><p><code class="docutils literal notranslate"><span class="pre">dataset_description.json</span></code>
 Metadata describing the process, including versioning and processing
 information.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">figures/histogram_overlap.png</span></code>
+<li><p><code class="docutils literal notranslate"><span class="pre">figures/histogram_mean_correlation_&lt;T1w|T2w|FLAIR&gt;.png</span></code>
+Image correlation-to-reference image distribution and applied threshold.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">figures/histogram_overlap_&lt;T1w|T2w|FLAIR&gt;.png</span></code>
 Image overlap distribution and applied threshold.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">logs/report_&lt;timestamp&gt;.rst</span></code>
 Contains group-level workflow steps and parameters.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">quality_check/mask_overlap.tsv</span></code>
+<li><p><code class="docutils literal notranslate"><span class="pre">log/commands_&lt;timestamp&gt;.rst</span></code>
+Contains group-level executed commands.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quality_check/mask_overlap_&lt;T1w|T2w|FLAIR&gt;.tsv</span></code>
 Table containing the overlap score for each subject/session/run. The table
 includes a binary <code class="docutils literal notranslate"><span class="pre">qc</span></code> column indicating the quality control result.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/figures/sub-01_ses-01_run-01_mod-T1w_defacemosaic.png</span></code>
+<li><p><code class="docutils literal notranslate"><span class="pre">quality_check/mean_correlations_&lt;T1w|T2w|FLAIR&gt;.tsv</span></code>
+Table containing the correlation score for each subject/session/run. The
+table includes a binary <code class="docutils literal notranslate"><span class="pre">qc</span></code> column indicating the quality control result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/figures/sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;_defacemosaic.png</span></code>
 A visual mosaic showing defacing masks on some slices for quick quality check.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/logs/report_&lt;timestamp&gt;.rst</span></code>
 Contains subject-level workflow steps and parameters.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/sub-01_ses-01_run-01_mod-T1w_defacemask.nii.gz</span></code>
-The binary mask identifying voxels removed during defacing (face and ears).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/sub-01_ses-01_run-01_mod-T1w_defacemask.tsv</span></code>
+<li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/log/commands_&lt;timestamp&gt;.rst</span></code>
+Contains subject-level executed commands.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/quality_check/sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;_corr.tsv</span></code>
+Table containing the correlation score.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/quality_check/sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;_maskdiff.tsv</span></code>
 A table containing voxel counts and physical volumes (in mm³) for the
 brain/defacing masks and their intersection.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/sub-01_ses-01_run-01_mod-T1w_deface.nii.gz</span></code>
-The final defaced T1w image with facial/ear structures removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;_affine.txt</span></code>
+Affine transformation parameters (12 DOF) used to align the T1w image to the
+MNI template or rigid transformation parameters (6 DOF) used to coregister
+the T2w or FLAIR image to the T1w image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;_defacemask.nii.gz</span></code>
+The binary mask identifying voxels removed during defacing (face and ears).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subjects/sub-&lt;id&gt;/ses-&lt;id&gt;/sub-01_ses-01_run-01_mod-&lt;T1w|T2w|FLAIR&gt;.nii.gz</span></code>
+The final defaced T1w, T2w or FLAIR image with facial/ear structures removed.</p></li>
 </ul>
 </section>
 <section id="featured-examples">

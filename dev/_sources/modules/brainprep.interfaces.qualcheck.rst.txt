@@ -22,6 +22,7 @@ Functions
     fmriprep_metrics
     incremental_pca
     mask_overlap
+    maskdiff
     mean_correlation
     mriqc_metrics
     network_entropy

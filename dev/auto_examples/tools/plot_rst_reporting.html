@@ -399,6 +399,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.fmriprep_metrics.html">brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.incremental_pca.html">brainprep.interfaces.qualcheck.incremental_pca</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.mask_overlap.html">brainprep.interfaces.qualcheck.mask_overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.maskdiff.html">brainprep.interfaces.qualcheck.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.mean_correlation.html">brainprep.interfaces.qualcheck.mean_correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.mriqc_metrics.html">brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.qualcheck.network_entropy.html">brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -473,7 +474,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../modules/brainprep.interfaces.utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">brainprep.interfaces.utils</span></code>: Utils functions.</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of brainprep.interfaces.utils: Utils functions.</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.anonfile.html">brainprep.interfaces.utils.anonfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.copyfiles.html">brainprep.interfaces.utils.copyfiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.maskdiff.html">brainprep.interfaces.utils.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.movedir.html">brainprep.interfaces.utils.movedir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.ungzfile.html">brainprep.interfaces.utils.ungzfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../modules/generated/brainprep.interfaces.utils.write_uuid_mapping.html">brainprep.interfaces.utils.write_uuid_mapping</a></li>
@@ -779,12 +779,12 @@ Bunch(
       val: 1
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:16:29.698456&#39;
-      end: &#39;2026-07-10 14:16:29.698483&#39;
-      execution_time: 7.5e-09
+      start: &#39;2026-08-07 14:36:18.202622&#39;
+      end: &#39;2026-08-07 14:36:18.202647&#39;
+      execution_time: 6.944444444444445e-09
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -816,12 +816,12 @@ Bunch(
       val: 4
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:16:29.706635&#39;
-      end: &#39;2026-07-10 14:16:29.710027&#39;
-      execution_time: 9.422222222222223e-07
+      start: &#39;2026-08-07 14:36:18.211339&#39;
+      end: &#39;2026-08-07 14:36:18.214723&#39;
+      execution_time: 9.4e-07
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -847,12 +847,12 @@ Bunch(
       val2: 4
     )
     runtime: Bunch(
-      start: &#39;2026-07-10 14:16:29.709985&#39;
-      end: &#39;2026-07-10 14:16:29.709994&#39;
+      start: &#39;2026-08-07 14:36:18.214664&#39;
+      end: &#39;2026-08-07 14:36:18.214673&#39;
       execution_time: 2.5e-09
       brainprep_version: &#39;2.1.0.dev&#39;
-      platform: &#39;Linux-6.17.0-1018-azure-x86_64-with-glibc2.39&#39;
-      hostname: &#39;runnervm5mmn9&#39;
+      platform: &#39;Linux-6.17.0-1020-azure-x86_64-with-glibc2.39&#39;
+      hostname: &#39;runnervmvrwv9&#39;
     )
     config: Bunch(
       verbose: True
@@ -871,8 +871,8 @@ Bunch(
 )
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.382 seconds)</p>
-<p><strong>Estimated memory usage:</strong>  111 MB</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.410 seconds)</p>
+<p><strong>Estimated memory usage:</strong>  112 MB</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-tools-plot-rst-reporting-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/da60a37f2eb8721245dec959041093a0/plot_rst_reporting.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_rst_reporting.ipynb</span></code></a></p>

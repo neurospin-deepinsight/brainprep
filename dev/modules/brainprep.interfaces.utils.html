@@ -399,6 +399,7 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.qualcheck.fmriprep_metrics.html">brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.qualcheck.incremental_pca.html">brainprep.interfaces.qualcheck.incremental_pca</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.qualcheck.mask_overlap.html">brainprep.interfaces.qualcheck.mask_overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.qualcheck.maskdiff.html">brainprep.interfaces.qualcheck.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.qualcheck.mean_correlation.html">brainprep.interfaces.qualcheck.mean_correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.qualcheck.mriqc_metrics.html">brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.qualcheck.network_entropy.html">brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -473,7 +474,6 @@
 <li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">brainprep.interfaces.utils</span></code>: Utils functions.</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of brainprep.interfaces.utils: Utils functions.</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.utils.anonfile.html">brainprep.interfaces.utils.anonfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.utils.copyfiles.html">brainprep.interfaces.utils.copyfiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.utils.maskdiff.html">brainprep.interfaces.utils.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.utils.movedir.html">brainprep.interfaces.utils.movedir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.utils.ungzfile.html">brainprep.interfaces.utils.ungzfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/brainprep.interfaces.utils.write_uuid_mapping.html">brainprep.interfaces.utils.write_uuid_mapping</a></li>
@@ -690,19 +690,16 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/brainprep.interfaces.utils.anonfile.html#brainprep.interfaces.utils.anonfile" title="brainprep.interfaces.utils.anonfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anonfile</span></code></a>(input_file, derivatives_dir, ...)</p></td>
 <td><p>Anonymize a text file using sed.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/brainprep.interfaces.utils.copyfiles.html#brainprep.interfaces.utils.copyfiles" title="brainprep.interfaces.utils.copyfiles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copyfiles</span></code></a>(source_image_files, ...[, dryrun])</p></td>
-<td><p>Copy input image files.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/brainprep.interfaces.utils.copyfiles.html#brainprep.interfaces.utils.copyfiles" title="brainprep.interfaces.utils.copyfiles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copyfiles</span></code></a>(source_files, destination_files, ...)</p></td>
+<td><p>Copy or move input files to a specified destination.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/brainprep.interfaces.utils.maskdiff.html#brainprep.interfaces.utils.maskdiff" title="brainprep.interfaces.utils.maskdiff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maskdiff</span></code></a>(mask1_file, mask2_file, output_dir, ...)</p></td>
-<td><p>Compute summary statistics comparing two binary masks.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/brainprep.interfaces.utils.movedir.html#brainprep.interfaces.utils.movedir" title="brainprep.interfaces.utils.movedir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movedir</span></code></a>(source_dir, output_dir[, content, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/brainprep.interfaces.utils.movedir.html#brainprep.interfaces.utils.movedir" title="brainprep.interfaces.utils.movedir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">movedir</span></code></a>(source_dir, output_dir[, content, ...])</p></td>
 <td><p>Move input directory.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/brainprep.interfaces.utils.ungzfile.html#brainprep.interfaces.utils.ungzfile" title="brainprep.interfaces.utils.ungzfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ungzfile</span></code></a>(input_file, output_file, output_dir)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/brainprep.interfaces.utils.ungzfile.html#brainprep.interfaces.utils.ungzfile" title="brainprep.interfaces.utils.ungzfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ungzfile</span></code></a>(input_file, output_file, output_dir)</p></td>
 <td><p>Ungzip input file.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/brainprep.interfaces.utils.write_uuid_mapping.html#brainprep.interfaces.utils.write_uuid_mapping" title="brainprep.interfaces.utils.write_uuid_mapping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_uuid_mapping</span></code></a>(input_file, output_dir, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/brainprep.interfaces.utils.write_uuid_mapping.html#brainprep.interfaces.utils.write_uuid_mapping" title="brainprep.interfaces.utils.write_uuid_mapping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_uuid_mapping</span></code></a>(input_file, output_dir, ...)</p></td>
 <td><p>Create a TSV file that records a deterministic  UUID-based mapping.</p></td>
 </tr>
 </tbody>

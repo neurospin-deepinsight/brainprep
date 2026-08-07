@@ -399,6 +399,7 @@
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.fmriprep_metrics.html">brainprep.interfaces.qualcheck.fmriprep_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.incremental_pca.html">brainprep.interfaces.qualcheck.incremental_pca</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mask_overlap.html">brainprep.interfaces.qualcheck.mask_overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.maskdiff.html">brainprep.interfaces.qualcheck.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mean_correlation.html">brainprep.interfaces.qualcheck.mean_correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.mriqc_metrics.html">brainprep.interfaces.qualcheck.mriqc_metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.qualcheck.network_entropy.html">brainprep.interfaces.qualcheck.network_entropy</a></li>
@@ -473,7 +474,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../brainprep.interfaces.utils.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">brainprep.interfaces.utils</span></code>: Utils functions.</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of brainprep.interfaces.utils: Utils functions.</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.anonfile.html">brainprep.interfaces.utils.anonfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.copyfiles.html">brainprep.interfaces.utils.copyfiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.maskdiff.html">brainprep.interfaces.utils.maskdiff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.movedir.html">brainprep.interfaces.utils.movedir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.ungzfile.html">brainprep.interfaces.utils.ungzfile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="brainprep.interfaces.utils.write_uuid_mapping.html">brainprep.interfaces.utils.write_uuid_mapping</a></li>
@@ -689,22 +689,32 @@ function signature, and not how to use it. Please refer to the
 <h1>brainprep.workflow.brainprep_group_defacing<a class="headerlink" href="#brainprep-workflow-brainprep-group-defacing" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="brainprep.workflow.brainprep_group_defacing">
-<span class="sig-prename descclassname"><span class="pre">brainprep.workflow.</span></span><span class="sig-name descname"><span class="pre">brainprep_group_defacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_intermediate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/e9f7f43/brainprep/workflow/defacing.py#L182"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.workflow.brainprep_group_defacing" title="Link to this definition">¶</a></dt>
-<dd><p>Group level defacing pre-processing.</p>
-<p>Applies the following quality control procedure:</p>
+<span class="sig-prename descclassname"><span class="pre">brainprep.workflow.</span></span><span class="sig-name descname"><span class="pre">brainprep_group_defacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modality</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correlation_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_intermediate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/brainprepdesk/brainprep/blob/988a688/brainprep/workflow/defacing.py#L296"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#brainprep.workflow.brainprep_group_defacing" title="Link to this definition">¶</a></dt>
+<dd><p>Group-level defacing pre-processing.</p>
+<p>This function applies a quality control procedure to defaced images at
+the group level. It includes the following steps:</p>
 <ol class="arabic simple">
 <li><p>Generate a TSV table containing the intersection between the brain and
-defacing masks.</p></li>
+defacing masks. The optimal scenario is when there is no intersection.</p></li>
+<li><p>Generate a TSV file containing the mean correlation of each image to
+the reference image (MNI for T1w or T1w for T2w and FLAIR). The optimal
+scenario is when the correlation is maximized.</p></li>
 <li><p>Apply threshold-based quality checks on the selected quality metrics.</p></li>
 <li><p>Generate a histogram showing the distribution of these quality metrics.</p></li>
 </ol>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>output_dir</strong><span class="classifier">Directory</span></dt><dd><p>Directory where the quality assurance related outputs will be saved
+<dt><strong>modality</strong><span class="classifier">str</span></dt><dd><p>Modality: T1w, T2w or FLAIR.</p>
+</dd>
+<dt><strong>output_dir</strong><span class="classifier">Directory</span></dt><dd><p>Directory where the defacing related outputs will be saved
 (i.e., the root of your dataset).</p>
 </dd>
-<dt><strong>overlap_threshold</strong><span class="classifier">float</span></dt><dd><p>Quality control threshold on the overalp score. Default 0.05.</p>
+<dt><strong>overlap_threshold</strong><span class="classifier">float</span></dt><dd><p>Quality control threshold on the overalp score.
+Default 0.05.</p>
+</dd>
+<dt><strong>correlation_threshold</strong><span class="classifier">float</span></dt><dd><p>Quality control threshold on the correlation score.
+Default 0.5.</p>
 </dd>
 <dt><strong>keep_intermediate</strong><span class="classifier">bool</span></dt><dd><p>If True, retains intermediate results (no effect on this workflow).
 Default False.</p>
@@ -715,35 +725,46 @@ Default False.</p>
 <dd class="field-even"><dl class="simple">
 <dt>Bunch</dt><dd><p>A dictionary-like object containing:</p>
 <ul class="simple">
+<li><p>correlations_file : File - a TSV file containing mean correlation
+of each input image to the reference image.</p></li>
+<li><p>correlation_histogram_file : File - a PNG file containing the
+histogram of the computed mean correlations.</p></li>
 <li><p>overalp_file : File - a TSV file containing brain/defacing masks
-intersection quality check (QC) data.</p></li>
+intersections.</p></li>
 <li><p>overalp_histogram_file : File - PNG file containing the
 histogram of the computed overlaps.</p></li>
 </ul>
 </dd>
 </dl>
 </dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If the input modality is not supported.</p>
+</dd>
+</dl>
+</dd>
 </dl>
 <p class="rubric">Notes</p>
 <p>This workflow assumes the subject-level analyses have already been
-performed.</p>
-<p>A <code class="docutils literal notranslate"><span class="pre">qc</span></code> column is added to the TSV QC output table. It contains a
+performed.
+A <code class="docutils literal notranslate"><span class="pre">qc</span></code> column is added to the TSV QC output table. It contains a
 binary flag indicating whether the produced results should be kept:
-<code class="docutils literal notranslate"><span class="pre">qc</span> <span class="pre">=</span> <span class="pre">1</span></code> if the result passes the thresholds, otherwise <code class="docutils literal notranslate"><span class="pre">qc</span> <span class="pre">=</span> <span class="pre">0</span></code>.</p>
-<p>The associated PNG histograms help verify that the chosen thresholds
+<code class="docutils literal notranslate"><span class="pre">qc</span> <span class="pre">=</span> <span class="pre">1</span></code> if the result passes the thresholds, otherwise <code class="docutils literal notranslate"><span class="pre">qc</span> <span class="pre">=</span> <span class="pre">0</span></code>.
+The associated PNG histograms help verify that the chosen thresholds
 are neither too restrictive nor too permissive.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">brainprep.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">brainprep.reporting</span><span class="w"> </span><span class="kn">import</span> <span class="n">RSTReport</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">brainprep.workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">brainprep_group_defacing</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">Config</span><span class="p">(</span><span class="n">dryrun</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">report</span> <span class="o">=</span> <span class="n">RSTReport</span><span class="p">()</span>
 <span class="gp">... </span>    <span class="n">outputs</span> <span class="o">=</span> <span class="n">brainprep_group_defacing</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">modality</span><span class="o">=</span><span class="s2">&quot;T1w&quot;</span><span class="p">,</span>
 <span class="gp">... </span>        <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;/tmp/dataset/derivatives&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">outputs</span>
 <span class="go">Bunch(</span>
+<span class="go">    correlations_file: PosixPath(&#39;...&#39;)</span>
+<span class="go">    correlation_histogram_file: PosixPath(&#39;...&#39;)</span>
 <span class="go">    overlap_file: PosixPath(&#39;...&#39;)</span>
 <span class="go">    overalp_histogram_file: PosixPath(&#39;...&#39;)</span>
 <span class="go">)</span>
