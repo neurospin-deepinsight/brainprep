@@ -324,8 +324,8 @@ def brainprep_group_defacing(
     2) Generate a TSV file containing the mean correlation of each image to
        the reference image (MNI for T1w or T1w for T2w and FLAIR). The optimal
        scenario is when the correlation is maximized.
-    2) Apply threshold-based quality checks on the selected quality metrics.
-    3) Generate a histogram showing the distribution of these quality metrics.
+    3) Apply threshold-based quality checks on the selected quality metrics.
+    4) Generate a histogram showing the distribution of these quality metrics.
 
     Parameters
     ----------
