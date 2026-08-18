@@ -317,37 +317,41 @@ def organize_longitudinal(
 
     record = {}
     for modality, df in data.items():
+        try:
+            df = df.sort_values(["subject", "session"]).reset_index(drop=True)
+            files_wide = df.pivot(
+                index="subject",
+                columns="session",
+                values=modality,
+            )
+            hashes_wide = df.pivot(
+                index="subject",
+                columns="session",
+                values=f"{modality}_{htype}_hash",
+            )
+            files_wide.columns = [
+                f"{modality}-{ses}"
+                for ses in files_wide.columns
+            ]
+            hashes_wide.columns = [
+                f"{modality}_{htype}_hash-{ses}"
+                for ses in hashes_wide.columns
+            ]
+            merged = pd.concat([files_wide, hashes_wide], axis=1).reset_index()
+            merged = merged[[
+                "subject",
+                *sorted([
+                    name
+                    for name in merged.columns
+                    if name != "subject"
+                ])
+            ]]
 
-        df = df.sort_values(["subject", "session"]).reset_index(drop=True)
-        files_wide = df.pivot(
-            index="subject",
-            columns="session",
-            values=modality,
-        )
-        hashes_wide = df.pivot(
-            index="subject",
-            columns="session",
-            values=f"{modality}_{htype}_hash",
-        )
-        files_wide.columns = [
-            f"{modality}-{ses}"
-            for ses in files_wide.columns
-        ]
-        hashes_wide.columns = [
-            f"{modality}_{htype}_hash-{ses}"
-            for ses in hashes_wide.columns
-        ]
-        merged = pd.concat([files_wide, hashes_wide], axis=1).reset_index()
-        merged = merged[[
-            "subject",
-            *sorted([
-                name
-                for name in merged.columns
-                if name != "subject"
-            ])
-        ]]
+            record[modality] = merged
 
-        record[modality] = merged
+        except ValueError as err:
+            print(f"Error for {modality}: {err}\n")
+            record[modality] = None
 
     print(f"- longitudinal dataset: {1 if len(record) > 0 else 0}")
 
@@ -655,7 +659,6 @@ def scan_configs(
         dfs = organize_bids_tab(tab_file=selected, with_hash=with_hash)
         htype = "md5"
     long_dfs = organize_longitudinal(dfs, htype=htype)
-    print(long_dfs)
 
     # Scan workflows
     workflows = workflow_resource["brainprep"]["workflow"]
