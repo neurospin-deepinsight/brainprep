@@ -18,8 +18,7 @@ from brainprep.reporting import RSTReport
 
 class TestGalleryExamples(unittest.TestCase):
 
-    def setUp(self, test_interfaces=True):
-        self.test_interfaces = test_interfaces
+    def setUp(self):
         self.examples_dir = Path(__file__).parent.parent.parent / "examples"
         self.report = RSTReport()
 
@@ -36,10 +35,10 @@ class TestGalleryExamples(unittest.TestCase):
         except subprocess.CalledProcessError as e:
             return f"Command failed: {' '.join(cmd)}"
 
-    def _test_interface_commands(self, env):
-        if not self.test_interfaces:
-            return
+    def _test_example(self, script_path):
+        return runpy.run_path(str(script_path))
 
+    def _test_interface_commands(self, env):
         outdir = Path(env["outdir"])
         commands, commands_files = [], []
         for commands_file in outdir.rglob("commands_*.rst"):
@@ -81,8 +80,8 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_quality_assurance.py"
         )
-        env = runpy.run_path(str(script_path))
-        # self._test_interface_commands(env)
+        env = self._test_example(script_path)
+        self._test_interface_commands(env)
 
     def test_defacing(self):
         script_path = (
@@ -90,8 +89,8 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_defacing.py"
         )
-        env = runpy.run_path(str(script_path))
-        # self._test_interface_commands(env)
+        env = self._test_example(script_path)
+        self._test_interface_commands(env)
 
     def test_quasiraw(self):
         script_path = (
@@ -99,8 +98,8 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_quasiraw.py"
         )
-        env = runpy.run_path(str(script_path))
-        # self._test_interface_commands(env)
+        env = self._test_example(script_path)
+        self._test_interface_commands(env)
 
     def test_sbm(self):
         script_path = (
@@ -108,7 +107,7 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_sbm.py"
         )
-        env = runpy.run_path(str(script_path))
+        env = self._test_example(script_path)
         # self._test_interface_commands(env)
 
     def test_vbm(self):
@@ -117,8 +116,8 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_vbm.py"
         )
-        env = runpy.run_path(str(script_path))
-        # self._test_interface_commands(env)
+        env = self._test_example(script_path)
+        self._test_interface_commands(env)
 
     def test_fmriprep(self):
         script_path = (
@@ -126,8 +125,8 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_fmriprep.py"
         )
-        env = runpy.run_path(str(script_path))
-        # self._test_interface_commands(env)
+        env = self._test_example(script_path)
+        self._test_interface_commands(env)
 
 
 if __name__ == "__main__":

@@ -17,6 +17,7 @@ carousel of two images.
 
 import pandas as pd
 from pathlib import Path
+from PIL import Image, ImageOps
 
 from brainprep.datasets import git_download
 
@@ -35,23 +36,68 @@ git_download(
          "dev/doc/logos/brainprep.png"),
     destination=working_dir / "im2.png",
 )
+image = Image.open(working_dir / "im2.png")
+inverted_image = ImageOps.invert(image)
+inverted_image.save(working_dir / "im2.png")
 
 data = [
-  {
-    "name": "Step 1",
-    "content": working_dir / "im1.png",
-    "overlay": working_dir / "im2.png",
-    "tables": pd.DataFrame(
-        data={'col1': [1, 2], 'col2': [4, 3]}
-    ),
-  },
-  {
-    "name": "Step 2",
-    "content": [
-        working_dir / "im1.png",
-        working_dir / "im2.png",
-    ],
-  },
+    {
+        "name": "Step 1",
+        "images": {
+            "WithOverlay": {
+                "record": [
+                    working_dir / "im1.png",
+                ],
+                "overlays": [
+                    working_dir / "im2.png",
+                ],
+            },
+            "WithoutOverlay": {
+                "record": [
+                    working_dir / "im1.png",
+                    working_dir / "im2.png",
+                ],
+            }
+        },
+        "tables": {
+            "TwoTables": {
+                "record": [
+                    pd.DataFrame(
+                        data={'col1': [1, 2], 'col2': [4, 3]}
+                    ),
+                    pd.DataFrame(
+                        data={'col1': [1, 2], 'col2': [4, 3]}
+                    ),
+                ],
+            }
+        },
+    },
+    {
+        "name": "Step 2",
+        "carousels": {
+            "Carousel": {
+                "record": [
+                    working_dir / "im1.png",
+                    working_dir / "im2.png",
+                ],
+                "labels": [
+                    "Im1",
+                    "Im2",
+                ],
+            }
+        },
+        "scatters": {
+            "Scatter": {
+                "record": [
+                    {"x": 0, "y": 0, "img": "im1.png"},
+                    {"x": 1, "y": 1, "img": "im2.png"},
+                ],
+                "x_label": "x",
+                "y_label": "y",
+                "with_img": True,
+            },
+        },
+    },
 ]
 
 
@@ -64,13 +110,7 @@ data = [
 from brainprep.reporting import generate_qc_report
 
 report = generate_qc_report(
-  title="Simple QC Example",
-  docstring="""
-  This is a simple example.
-  
-  ..note::
-      Please adapt this code.
-  """,
+  title="Simple Example",
   version="0.0.0",
   date="01.01.2000",
   data=data,

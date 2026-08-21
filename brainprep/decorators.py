@@ -599,13 +599,16 @@ class OutputdirHook(Hook):
     ----------
     plotting : bool
         If True, add a ``figures`` upper level directory in the output
-        directory. Default False.
+        directory.
+        Default False.
     quality_check : bool
         If True, add a ``quality_check`` upper level directory in the output
-        directory. Default False.
+        directory.
+        Default False.
     morphometry : bool
         If True, add a ``morphometry`` upper level directory in the output
-        directory. Default False.
+        directory.
+        Default False.
 
     Examples
     --------
@@ -719,13 +722,19 @@ class LogRuntimeHook(Hook):
     Parameters
     ----------
     title : str | None
-        A title to display. Default None.
+        A title to display.
+        Default None.
+    clear : bool
+        If True, the `RSTReport` will be empty.
+        Default False.
     bunched : bool
-        Return a bunch object with a default 'outputs' key. Default True.
+        Return a bunch object with a default 'outputs' key.
+        Default True.
     parent : bool
         Indicates that at least one OutputdirHook parameter has been set to
         True. When enabled, the parent output directory is included in the
-        interface logging mechanism. Default False.
+        interface logging mechanism.
+        Default False.
 
     Notes
     -----
@@ -779,10 +788,12 @@ class LogRuntimeHook(Hook):
     def __init__(
             self,
             title: str | None = None,
+            clear: bool = False,
             bunched: bool = True,
             parent: bool = False,
         ) -> None:
         self.title = title
+        self.clear = clear
         self.bunched = bunched
         self.parent = parent
 
@@ -812,7 +823,7 @@ class LogRuntimeHook(Hook):
             comma-separated strings into lists.
         """
         report = RSTReport(
-            reloadable=True,
+            reloadable=not self.clear,
             increment=True,
         )
 

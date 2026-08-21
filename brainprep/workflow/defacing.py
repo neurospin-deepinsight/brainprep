@@ -40,10 +40,11 @@ from ..utils import (
             process="defacing",
             bids_file="anatomical_file",
             add_subjects=True,
-            container="neurospin/brainprep-deface"
+            container="neurospin/brainprep-deface",
         ),
         LogRuntimeHook(
-            title="Subject Level Defacing"
+            title="Subject Level Defacing",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -53,7 +54,8 @@ def brainprep_defacing(
         anatomical_file: File,
         output_dir: Directory,
         keep_intermediate: bool = False,
-        **kwargs: dict) -> Bunch:
+        **kwargs: dict,
+    ) -> Bunch:
     """
     Defacing pre-processing workflow for anatomical images.
 
@@ -78,7 +80,8 @@ def brainprep_defacing(
         (i.e., the root of your dataset).
     keep_intermediate : bool
         If True, retains intermediate results (e.g., reoriented image); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
     **kwargs : dict
         entities: dict
             Dictionary of parsed BIDS entities.
@@ -298,10 +301,11 @@ def brainprep_defacing(
         CoerceparamsHook(),
         BidsHook(
             process="defacing",
-            container="neurospin/brainprep-deface"
+            container="neurospin/brainprep-deface",
         ),
         LogRuntimeHook(
-            title="Group Level Defacing"
+            title="Group Level Defacing",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -312,7 +316,8 @@ def brainprep_group_defacing(
         output_dir: Directory,
         overlap_threshold: float = 0.05,
         correlation_threshold: float = 0.5,
-        keep_intermediate: bool = False) -> Bunch:
+        keep_intermediate: bool = False,
+    ) -> Bunch:
     """
     Group-level defacing pre-processing.
 

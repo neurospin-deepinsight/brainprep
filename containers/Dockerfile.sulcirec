@@ -17,7 +17,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
     && chmod 777 /opt && chmod a+s /opt
 
 # Parameters
-ENV MORPHOLOGIST_VERSION="6.0.13"
+ENV MORPHOLOGIST_VERSION="6.0.19"
 
 # Install: pixi
 RUN curl -fsSL https://pixi.sh/install.sh | bash

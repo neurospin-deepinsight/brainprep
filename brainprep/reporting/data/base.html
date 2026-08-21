@@ -74,7 +74,7 @@
         <div class="container">
           <div class="row align-items-center">
             <div class="col-2">
-              <h1 class="my-0 site-logo"><a href="#workflow-details-{{ uuid }}">Home</a></h1>
+              <h1 class="my-0 site-logo"><a href="#">Home</a></h1>
             </div>
             <div class="col-10">
               <nav class="site-navigation text-right" role="navigation">
@@ -93,7 +93,6 @@
       </div>
     </div>
     
-
     <div class="hero"></div>
 
     <div class="pure-g d-flex justify-content-center my-1">
@@ -125,11 +124,67 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
       {{ js }}
+    </script>
+    <script>
       {% for workflow in workflows %}
-        {% if workflow.content and workflow.content|length > 1 %}
-          document.addEventListener("DOMContentLoaded", function () {
-            new Carousel("{{ workflow.id }}-{{ uuid }}", {{ range(1, workflow.content|length + 1) | list }});
-          });
+        {% if workflow.carousels %}
+          {% for name, data in workflow.carousels|dictsort %}
+            {% if data.labels %}
+              document.addEventListener("DOMContentLoaded", function () {
+                new Carousel("{{ workflow.id }}-{{ uuid }}-{{ loop.index0 }}", {{ data.labels | list }});
+              });
+            {% else %}
+              document.addEventListener("DOMContentLoaded", function () {
+                new Carousel("{{ workflow.id }}-{{ uuid }}-{{ loop.index0 }}", {{ range(1, data.record|length + 1) | list }});
+              });
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </script>
+    <script>
+      {% for workflow in workflows %}
+        {% if workflow.scatters %}
+          {% for name, data in workflow.scatters|dictsort %}
+
+            {% set xValues = data.record | map(attribute="x") | list %}
+            {% set yValues = data.record | map(attribute="y") | list %}
+            {% set minX = xValues | min %}
+            {% set maxX = xValues | max %}
+            {% set minY = yValues | min %}
+            {% set maxY = yValues | max %}
+            {% set EPSILON = 0.001 %}
+
+            {% if (maxX - minX) | abs < EPSILON %}
+                {% set padX = 1 if (maxX - minX) == 0 else (maxX - minX) | abs * 2 %}
+                {% set minX = minX - padX %}
+                {% set maxX = maxX + padX %}
+            {% endif %}
+
+            {% if (maxY - minY) | abs < EPSILON %}
+                {% set padY = 1 if (maxY - minY) == 0 else (maxY - minY) | abs * 2 %}
+                {% set minY = minY - padY %}
+                {% set maxY = maxY + padY %}
+            {% endif %}
+
+            createInteractiveChart({
+              canvasId: "{{ workflow.id }}-{{ uuid }}-{{ loop.index0 }}",
+              data: {{ data.record|tojson }},
+              domTargets: {
+                imgId: "{{ workflow.id }}-{{ uuid }}-{{ loop.index0 }}-image",
+                placeholderId: "{{ workflow.id }}-{{ uuid }}-{{ loop.index0 }}-placeholder",
+                popupId: "{{ workflow.id }}-{{ uuid }}-{{ loop.index0 }}-popup"
+              },
+              limits: {
+                minX: {{ minX }},
+                maxX: {{ maxX }},
+                minY: {{ minY }},
+                maxY: {{ maxY }}
+              },
+              xLabel: "{{ data.x_label }}",
+              yLabel: "{{ data.y_label }}"
+            });
+          {% endfor %}
         {% endif %}
       {% endfor %}
     </script>

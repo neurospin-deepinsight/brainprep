@@ -41,10 +41,11 @@ from ..utils import (
             process="fmriprep",
             bids_file="t1_file",
             add_subjects=True,
-            container="neurospin/brainprep-fmriprep"
+            container="neurospin/brainprep-fmriprep",
         ),
         LogRuntimeHook(
-            title="Subject Level fMRI PreProcessing"
+            title="Subject Level fMRI PreProcessing",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -56,7 +57,8 @@ def brainprep_fmriprep(
         freesurfer_dir: Directory,
         output_dir: Directory,
         keep_intermediate: bool = False,
-        **kwargs: dict) -> Bunch:
+        **kwargs: dict,
+    ) -> Bunch:
     """
     Subject level functional MRI pre-processing.
 
@@ -114,7 +116,8 @@ def brainprep_fmriprep(
         (i.e., the root of your dataset).
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
     **kwargs : dict
         entities: dict
             Dictionary of parsed BIDS entities.
@@ -261,10 +264,11 @@ def brainprep_fmriprep(
         CoerceparamsHook(),
         BidsHook(
             process="fmriprep",
-            container="neurospin/brainprep-fmriprep"
+            container="neurospin/brainprep-fmriprep",
         ),
         LogRuntimeHook(
-            title="Group Level fMRI PreProcessing"
+            title="Group Level fMRI PreProcessing",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -275,7 +279,8 @@ def brainprep_group_fmriprep(
         fd_mean_threshold: float = 0.2,
         dvars_std_threshold: float = 1.5,
         entropy_threshold: float = 12,
-        keep_intermediate: bool = False) -> Bunch:
+        keep_intermediate: bool = False,
+    ) -> Bunch:
     """
     Group level functional MRI pre-processing.
 
@@ -307,7 +312,8 @@ def brainprep_group_fmriprep(
         Default 12.
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
 
     Returns
     -------

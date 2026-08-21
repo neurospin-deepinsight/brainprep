@@ -38,10 +38,11 @@ from ..utils import (
         BidsHook(
             process="quality_assurance",
             bids_file="image_files",
-            container="neurospin/brainprep-quality_assurance"
+            container="neurospin/brainprep-quality_assurance",
         ),
         LogRuntimeHook(
-            title="Subject Level Quality Assurance"
+            title="Subject Level Quality Assurance",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -51,7 +52,8 @@ def brainprep_quality_assurance(
         image_files: list[File],
         output_dir: Directory,
         keep_intermediate: bool = False,
-        **kwargs: dict) -> Bunch:
+        **kwargs: dict,
+    ) -> Bunch:
     """
     Subject level quality assurance pre-processing workflow for MRI images.
 
@@ -67,7 +69,8 @@ def brainprep_quality_assurance(
         (i.e., the root of your dataset).
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
     **kwargs : dict
         entities: list[dict]
             Dictionaries of parsed BIDS entities.
@@ -136,10 +139,11 @@ def brainprep_quality_assurance(
         CoerceparamsHook(),
         BidsHook(
             process="quality_assurance",
-            container="neurospin/brainprep-quality_assurance"
+            container="neurospin/brainprep-quality_assurance",
         ),
         LogRuntimeHook(
-            title="Group Level Quality Assurance"
+            title="Group Level Quality Assurance",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -148,7 +152,8 @@ def brainprep_quality_assurance(
 def brainprep_group_quality_assurance(
         modalities: list[str],
         output_dir: Directory,
-        keep_intermediate: bool = False) -> Bunch:
+        keep_intermediate: bool = False,
+    ) -> Bunch:
     """
     Group-level quality assurance pre-processing.
 

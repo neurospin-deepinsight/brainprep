@@ -86,12 +86,18 @@ from .qualcheck import (
     sulcirec_metrics,
     vbm_metrics,
 )
+from .reporting import (
+    parse_defacing,
+    parse_quality_assurance,
+    parse_quasiraw,
+)
 from .tractseg import (
     tractseg_parcellation,
 )
 from .utils import (
     anonfile,
     copyfiles,
+    htmlmin,
     movedir,
     ungzfile,
     write_uuid_mapping,
@@ -123,6 +129,7 @@ __all__ = [
     "func_vol_connectivity",
     "geolab_parcellation",
     "group_level_qa",
+    "htmlmin",
     "incremental_pca",
     "localgi",
     "mask_overlap",
@@ -137,6 +144,9 @@ __all__ = [
     "network_entropy",
     "nextbrain",
     "noddi_fit",
+    "parse_defacing",
+    "parse_quality_assurance",
+    "parse_quasiraw",
     "plot_brainparc",
     "plot_defacing_mosaic",
     "plot_histogram",

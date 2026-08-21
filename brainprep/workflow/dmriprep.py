@@ -39,10 +39,11 @@ from ..utils import (
             process="dmriprep",
             bids_file="t1_file",
             add_subjects=True,
-            container="neurospin/brainprep-dmriprep"
+            container="neurospin/brainprep-dmriprep",
         ),
         LogRuntimeHook(
-            title="Subject Level dMRI PreProcessing"
+            title="Subject Level dMRI PreProcessing",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -53,7 +54,8 @@ def brainprep_dmriprep(
         dwi_files: list[File],
         output_dir: Directory,
         keep_intermediate: bool = False,
-        **kwargs: dict) -> Bunch:
+        **kwargs: dict,
+    ) -> Bunch:
     """
     Subject level diffusion MRI pre-processing.
 
@@ -81,7 +83,8 @@ def brainprep_dmriprep(
         (i.e., the root of your dataset).
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
     **kwargs : dict
         entities: dict
             Dictionary of parsed BIDS entities.

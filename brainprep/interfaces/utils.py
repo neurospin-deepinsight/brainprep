@@ -51,7 +51,8 @@ def copyfiles(
         destination_files: list[File],
         output_dir: Directory,
         move_files: bool = False,
-        dryrun: bool = False) -> None:
+        dryrun: bool = False,
+    ) -> None:
     """
     Copy or move input files to a specified destination.
 
@@ -71,14 +72,16 @@ def copyfiles(
         If True, skip actual computation and file writing.
         Default False.
     """
-    if not dryrun:
-        for src_path, dest_path in zip(source_files,
-                                       destination_files,
-                                       strict=True):
-            if move_files:
-                shutil.move(src_path, dest_path)
-            else:
-                shutil.copy(src_path, dest_path)
+    if dryrun:
+        return
+
+    for src_path, dest_path in zip(source_files,
+                                   destination_files,
+                                   strict=True):
+        if move_files:
+            shutil.move(src_path, dest_path)
+        else:
+            shutil.copy(src_path, dest_path)
 
 
 @step(
@@ -98,7 +101,8 @@ def movedir(
         content: bool = False,
         copy: bool = False,
         add_source_basename: bool = True,
-        dryrun: bool = False) -> tuple[Directory]:
+        dryrun: bool = False,
+    ) -> tuple[Directory]:
     """
     Move input directory.
 
@@ -109,14 +113,18 @@ def movedir(
     output_dir : Directory
         Directory where the folder is moved.
     content : bool
-        If True, move the content of the source directory. Default False.
+        If True, move the content of the source directory.
+        Default False.
     copy : bool
-        If True, copy the content of the source directory. Default False.
+        If True, copy the content of the source directory.
+        Default False.
     add_source_basename : bool
         If True, add the source directory basename to output directory. Only
-        valid when content is False. Default True.
+        valid when content is False.
+        Default True.
     dryrun : bool
-        If True, skip actual computation and file writing. Default False.
+        If True, skip actual computation and file writing.
+        Default False.
 
     Returns
     -------
@@ -191,7 +199,8 @@ def ungzfile(
         input_file: File,
         output_file: File,
         output_dir: Directory,
-        dryrun: bool = False) -> tuple[File]:
+        dryrun: bool = False,
+    ) -> tuple[File]:
     """
     Ungzip input file.
 
@@ -204,7 +213,8 @@ def ungzfile(
     output_dir : Directory
         Directory where the unzip file is created.
     dryrun : bool
-        If True, skip actual computation and file writing. Default False.
+        If True, skip actual computation and file writing.
+        Default False.
 
     Returns
     -------
@@ -243,7 +253,8 @@ def write_uuid_mapping(
         output_dir: Directory,
         entities: dict,
         name: str = "uuid_mapping",
-        full_path: bool = False) -> File:
+        full_path: bool = False,
+    ) -> File:
     """
     Create a TSV file that records a deterministic  UUID-based mapping.
 
@@ -264,7 +275,8 @@ def write_uuid_mapping(
         Name of the TSV file to write. Default is "uuid_mapping.tsv".
     full_path: bool
         If True, extract entities from the full input path rather than
-        only the filename. Default is False.
+        only the filename.
+        Default is False.
 
     Returns
     -------
@@ -302,7 +314,8 @@ def write_uuid_mapping(
 def anonfile(
         input_file: File,
         derivatives_dir: Directory | None,
-        rawdata_dir: Directory | None) -> tuple[list[str], File]:
+        rawdata_dir: Directory | None,
+    ) -> tuple[list[str], File]:
     """
     Anonymize a text file using sed.
 
@@ -345,6 +358,44 @@ def anonfile(
         "sed",
         *patterns,
         "-i", str(input_file)
+    ]
+
+    return command, (input_file, )
+
+
+@step(
+    hooks=[
+        CoerceparamsHook(),
+        LogRuntimeHook(
+            bunched=False
+        ),
+        CommandLineWrapperHook(),
+        SignatureHook(),
+    ]
+)
+def htmlmin(
+        input_file: File,
+    ) -> File:
+    """
+    Minify HTML code.
+
+    Removes unnecessary whitespace, comments, and other elements.
+    If a path to an HTML file is given, the operations are performed inplace.
+
+    Parameters
+    ----------
+    input_file : File
+        The HTML code to be minified.
+
+    Returns
+    -------
+    input_file : File
+        The minified HTML code.
+    """
+    command = [
+        "minify",
+        "-o", str(input_file),
+        str(input_file),
     ]
 
     return command, (input_file, )

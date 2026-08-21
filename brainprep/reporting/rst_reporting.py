@@ -63,6 +63,9 @@ class SingletonReport(type):
     ...     def __init__(self):
     ...         self._registry = {}
     ...         self._commands = {}
+    ...     def clear(self):
+    ...         self._registry = {}
+    ...         self._commands = {}
 
     >>> r1 = Report()
     >>> r2 = Report()
@@ -75,7 +78,8 @@ class SingletonReport(type):
     def __call__(
             cls: type[Self],
             *args: Any,
-            **kwargs: Any) -> Self:
+            **kwargs: Any,
+        ) -> Self:
         """
         Return the singleton instance of `SingletonReport`.
 
@@ -99,9 +103,7 @@ class SingletonReport(type):
             )
         inst = cls._instance
         if not is_reloadable:
-            inst._count = 0
-            inst._registry.clear()
-            inst._commands.clear()
+            inst.clear()
         if is_increment:
             inst._count += 1
         inst._reloadable = is_reloadable
@@ -182,7 +184,8 @@ class RSTReport(metaclass=SingletonReport):
     def __init__(
             self,
             reloadable: bool = False,
-            increment: bool = False) -> None:
+            increment: bool = False,
+        ) -> None:
         self._reloadable = reloadable
         self._increment = increment
         self._count = 0
@@ -191,7 +194,8 @@ class RSTReport(metaclass=SingletonReport):
             self,
             identifier: str,
             name: str,
-            data: str | Bunch) -> None:
+            data: str | Bunch,
+        ) -> None:
         """
         Add a new data entry to the report under a given identifier and name.
 
@@ -235,7 +239,8 @@ class RSTReport(metaclass=SingletonReport):
 
     def register_command(
             self,
-            cmd: str) -> None:
+            cmd: str,
+        ) -> None:
         """
         Add a new command entry to the report.
 
@@ -261,7 +266,8 @@ class RSTReport(metaclass=SingletonReport):
 
     def save_as_rst(
             self,
-            file_name: File) -> None:
+            file_name: File,
+        ) -> None:
         """
         Save the report content to a reStructuredText (.rst) file.
 
@@ -292,7 +298,8 @@ class RSTReport(metaclass=SingletonReport):
 
     def save_commands_as_rst(
             self,
-            file_name: File) -> None:
+            file_name: File,
+        ) -> None:
         """
         Save the commands list to a reStructuredText (.rst) file.
 
@@ -306,9 +313,20 @@ class RSTReport(metaclass=SingletonReport):
             report += f"{cmd}\n"
         Path(file_name).write_text(report)
 
+    def clear(
+            self,
+        ) -> None:
+        """
+        Clear internal storage and counter.
+        """
+        self._count = 0
+        self._registry.clear()
+        self._commands.clear()
+
 
 def trace_module_calls(
-        root_module_names: tuple[str] = ("workflow", "interfaces")) -> str:
+        root_module_names: tuple[str] = ("workflow", "interfaces"),
+    ) -> str:
     """
     Return the trace of function calls from the specified module and
     its submodules.

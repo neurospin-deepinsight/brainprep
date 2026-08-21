@@ -39,10 +39,11 @@ from ..utils import (
             process="sulcirec",
             bids_file="t1_file",
             add_subjects=True,
-            container="neurospin/brainprep-sulcirec"
+            container="neurospin/brainprep-sulcirec",
         ),
         LogRuntimeHook(
-            title="Subject Level Sulci Reconstruction"
+            title="Subject Level Sulci Reconstruction",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -52,7 +53,8 @@ def brainprep_sulcirec(
         t1_file: File,
         output_dir: Directory,
         keep_intermediate: bool = False,
-        **kwargs: dict) -> Bunch:
+        **kwargs: dict,
+    ) -> Bunch:
     """
     Subject level sulci reconstruction.
 
@@ -68,7 +70,8 @@ def brainprep_sulcirec(
         (i.e., the root of your dataset).
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
     **kwargs : dict
         entities: dict
             Dictionary of parsed BIDS entities.
@@ -146,10 +149,11 @@ def brainprep_sulcirec(
         CoerceparamsHook(),
         BidsHook(
             process="sulcirec",
-            container="neurospin/brainprep-sulcirec"
+            container="neurospin/brainprep-sulcirec",
         ),
         LogRuntimeHook(
-            title="Group Level Sulci Reconstruction"
+            title="Group Level Sulci Reconstruction",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -157,7 +161,8 @@ def brainprep_sulcirec(
 )
 def brainprep_group_sulcirec(
         output_dir: Directory,
-        keep_intermediate: bool = False) -> Bunch:
+        keep_intermediate: bool = False,
+    ) -> Bunch:
     """
     Group level sulci reconstruction pre-processing.
 

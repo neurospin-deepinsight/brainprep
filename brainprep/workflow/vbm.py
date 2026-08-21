@@ -42,10 +42,11 @@ from ..utils import (
             process="vbm",
             bids_file="t1_file",
             add_subjects=True,
-            container="neurospin/brainprep-vbm"
+            container="neurospin/brainprep-vbm",
         ),
         LogRuntimeHook(
-            title="Subject Level VBM"
+            title="Subject Level VBM",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -55,7 +56,8 @@ def brainprep_vbm(
         t1_file: File,
         output_dir: Directory,
         keep_intermediate: bool = False,
-        **kwargs: dict) -> Bunch:
+        **kwargs: dict,
+    ) -> Bunch:
     """
     Voxel-based morphometry (VBM) pre-processing.
 
@@ -70,7 +72,8 @@ def brainprep_vbm(
         Path to the output directory.
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
     **kwargs : dict
         entities: dict
             Dictionary of parsed BIDS entities.
@@ -138,10 +141,11 @@ def brainprep_vbm(
             bids_file="t1_files",
             add_subjects=True,
             longitudinal=True,
-            container="neurospin/brainprep-vbm"
+            container="neurospin/brainprep-vbm",
         ),
         LogRuntimeHook(
-            title="Longitudinal VBM"
+            title="Longitudinal VBM",
+            clear=True,
         ),
         SaveRuntimeHook(
             parent=True,
@@ -154,7 +158,8 @@ def brainprep_longitudinal_vbm(
         model: int,
         output_dir: Directory,
         keep_intermediate: bool = False,
-        **kwargs: dict) -> Bunch:
+        **kwargs: dict,
+    ) -> Bunch:
     """
     Longitudinal voxel based morphometry (VBM) pre-processing.
 
@@ -172,7 +177,8 @@ def brainprep_longitudinal_vbm(
         Path to the output directory.
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
     **kwargs : dict
         entities: list[dict]
             Dictionaries of parsed BIDS entities.
@@ -239,10 +245,11 @@ def brainprep_longitudinal_vbm(
         CoerceparamsHook(),
         BidsHook(
             process="vbm",
-            container="neurospin/brainprep-vbm"
+            container="neurospin/brainprep-vbm",
         ),
         LogRuntimeHook(
-            title="Group Level VBM"
+            title="Group Level VBM",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -254,7 +261,8 @@ def brainprep_group_vbm(
         iqr_threshold: float = 4.5,
         correlation_threshold: float = 0.5,
         longitudinal: bool = False,
-        keep_intermediate: bool = False) -> Bunch:
+        keep_intermediate: bool = False,
+    ) -> Bunch:
     """
     Group-level VBM pre-processing.
 
@@ -286,16 +294,21 @@ def brainprep_group_vbm(
     output_dir : Directory
         Working directory containing all the subjects.
     ncr_threshold : float
-         Quality control threshold on the NCR scores. Default 4.5.
+        Quality control threshold on the NCR scores.
+        Default 4.5.
     iqr_threshold : float
-         Quality control threshold on the IQR scores. Default 4.5.
+        Quality control threshold on the IQR scores.
+        Default 4.5.
     correlation_threshold : float
-        Quality control threshold on the correlation score. Default 0.5.
+        Quality control threshold on the correlation score.
+        Default 0.5.
     longitudinal : bool
-        If True, consider the longitudinal data as inputs.  Default False.
+        If True, consider the longitudinal data as inputs.
+        Default False.
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
 
     Returns
     -------
