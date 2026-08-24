@@ -14,6 +14,7 @@ import datetime
 import inspect
 import json
 import platform
+import pprint
 import time
 from collections.abc import Callable, Iterable
 from pathlib import Path
@@ -281,10 +282,12 @@ class CommandLineWrapperHook(Hook):
             )
 
         if not is_list_str(command) and not is_list_list_str(command):
-            raise ValueError(
+            msg = (
                 "Invalid command format: expected a list of strings or a "
-                "list of list of string for multiple commands."
+                "list of list of string for multiple commands.\n"
             )
+            msg += pprint.pformat(command)
+            raise ValueError(msg)
         commands = [command] if is_list_str(command) else command
 
         for cmd in commands:

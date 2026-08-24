@@ -20,6 +20,10 @@ import nibabel
 import numpy as np
 import pandas as pd
 
+from ..config import (
+    DEFAULT_OPTIONS,
+    brainprep_options,
+)
 from ..decorators import (
     CoerceparamsHook,
     CommandLineWrapperHook,
@@ -53,7 +57,8 @@ from ..utils import (
 def brainmask(
         image_file: File,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Skull-strip a BIDS-compliant anatomical image using FreeSurfer's
     `mri_synthstrip`.
@@ -119,7 +124,8 @@ def reconall(
         entities: dict,
         t2_file: File | None = None,
         flair_file: File | None = None,
-        resume: bool = False) -> tuple[list[str], tuple[File]]:
+        resume: bool = False,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Brain parcellation using FreeSurfer's `recon-all`.
 
@@ -145,7 +151,8 @@ def reconall(
         Default None.
     resume : bool
         If True, try to resume `recon-all`. This option is particularly useful
-        when a custom segmentation is used in `recon-all`. Default False.
+        when a custom segmentation is used in `recon-all`.
+        Default False.
 
     Returns
     -------
@@ -200,7 +207,8 @@ def reconall(
 def reconall_longitudinal(
         workspace_dir: Directory,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File | list[File]]]:
+        entities: dict,
+    ) -> tuple[list[list[str]], tuple[File | list[File]]]:
     """
     Longitudinal brain parcellation using FreeSurfer's `recon-all`.
 
@@ -208,8 +216,8 @@ def reconall_longitudinal(
     and that the results are stored in one subject directory per timepoint,
     this function will:
 
-    1) generate a template for this subject using `recon-all`.
-    2) parcellation refinements using `recon-all` and the new generated
+    1) Generate a template for this subject using `recon-all`.
+    2) Parcellation refinements using `recon-all` and the new generated
        template.
 
     Parameters
@@ -224,8 +232,8 @@ def reconall_longitudinal(
 
     Returns
     -------
-    command : list[str]
-        Brain parcellation command-line.
+    commands : list[list[str]]
+        Brain parcellation command-lines.
     outputs : tuple[File | list[File]]
         - log_template_file : File - Generated log file for the template
           creation step.
@@ -319,10 +327,11 @@ def reconall_longitudinal(
         SignatureHook(),
     ]
 )
-def freesurfer_command_status(
+def freesurfer_status(
         log_file: File,
         command: str,
-        dryrun: bool = False) -> None:
+        dryrun: bool = False,
+    ) -> None:
     """
     Check the status of a FreeSurfer `recon-all` process from its log file.
 
@@ -334,7 +343,8 @@ def freesurfer_command_status(
         The name of the command-line that produces the log file - used as
         a selector to define the success phrase.
     dryrun : bool
-        If True, skip actual computation and file writing. Default False.
+        If True, skip actual computation and file writing.
+        Default False.
 
     Raises
     ------
@@ -354,39 +364,40 @@ def freesurfer_command_status(
     - This function raises exceptions to signal failure or ambiguity, and
       does not return any value.
     """
-    if not dryrun:
+    if dryrun:
+        return
 
-        if not log_file.is_file():
-            raise FileNotFoundError(f"Log file not found: {log_file}")
+    if not log_file.is_file():
+        raise FileNotFoundError(f"Log file not found: {log_file}")
 
-        if command == "recon-all":
-            success_phrase = "finished without error"
-        elif command == "xhemireg":
-            success_phrase = "xhemireg done"
-        else:
-            raise ValueError(
-                "Command line not supported."
-            )
-        error_keywords = ["ERROR:", "FATAL:"]
-
-        lines = log_file.read_text().splitlines()
-        last_lines = lines[-20:]
-
-        if any(success_phrase in line for line in last_lines):
-            return
-        errors = [
-            line
-            for line in lines
-            if any(err in line for err in error_keywords)
-        ]
-        if errors:
-            raise RuntimeError(
-                f"Recon-all failed. Found {len(errors)} error(s):\n" +
-                "\n".join(errors)
-            )
-        raise RuntimeError(
-            "Recon-all status unclear. No success or error markers found."
+    if command == "recon-all":
+        success_phrase = "finished without error"
+    elif command == "xhemireg":
+        success_phrase = "xhemireg done"
+    else:
+        raise ValueError(
+            "Command line not supported."
         )
+    error_keywords = ["ERROR:", "FATAL:"]
+
+    lines = log_file.read_text().splitlines()
+    last_lines = lines[-20:]
+
+    if any(success_phrase in line for line in last_lines):
+        return
+    errors = [
+        line
+        for line in lines
+        if any(err in line for err in error_keywords)
+    ]
+    if errors:
+        raise RuntimeError(
+            f"Recon-all failed. Found {len(errors)} error(s):\n" +
+            "\n".join(errors)
+        )
+    raise RuntimeError(
+        "Recon-all status unclear. No success or error markers found."
+    )
 
 
 @step(
@@ -400,9 +411,10 @@ def freesurfer_command_status(
         SignatureHook(),
     ]
 )
-def localgi(
+def reconall_localgi(
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Local Gyrification Index (localGI or lGI).
 
@@ -444,20 +456,10 @@ def localgi(
     return command, (left_lgi_file, right_lgi_file)
 
 
-@step(
-    hooks=[
-        CoerceparamsHook(),
-        OutputdirHook(),
-        LogRuntimeHook(
-            bunched=False
-        ),
-        CommandLineWrapperHook(),
-        SignatureHook(),
-    ]
-)
 def surfreg(
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+    ) -> tuple[list[list[str]], tuple[File]]:
     """
     Surface-based registration to `fsaverage_sym` symmetric template.
 
@@ -476,8 +478,8 @@ def surfreg(
 
     Returns
     -------
-    command : list[str]
-        Registration command-line.
+    commands : list[list[str]]
+        Registration command-lines.
     outputs : tuple[File]
         - left_reg_file : File - Left hemisphere registered to `fsaverage_sym`
           symmetric template.
@@ -521,20 +523,10 @@ def surfreg(
     return commands, (left_reg_file, right_reg_file)
 
 
-@step(
-    hooks=[
-        CoerceparamsHook(),
-        OutputdirHook(),
-        LogRuntimeHook(
-            bunched=False
-        ),
-        CommandLineWrapperHook(),
-        SignatureHook(),
-    ]
-)
 def xhemireg(
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Symmetric mapping of the right hemisphere to the left hemisphere space.
     within the subject's own space.
@@ -575,12 +567,14 @@ def xhemireg(
         LogRuntimeHook(
             bunched=False
         ),
+        CommandLineWrapperHook(),
         SignatureHook(),
     ]
 )
-def fsaveragesym_surfreg(
+def reconall_surfreg(
         output_dir: Directory,
-        entities: dict) -> tuple[File, File]:
+        entities: dict,
+    ) -> tuple[list[list[str]], tuple[File]]:
     """
     Interhemispheric surface-based registration using the `fsaverage_sym`
     template, and FreeSurfer's `xhemireg` and `surfreg`.
@@ -605,11 +599,14 @@ def fsaveragesym_surfreg(
 
     Returns
     -------
-    left_reg_file : File
-        Left hemisphere registered to `fsaverage_sym` symmetric template.
-    right_reg_file : File
-        Right hemisphere registered to `fsaverage_sym` symmetric template
-        via xhemi.
+    commands : list[list[str]]
+        Registration command-lines.
+    outputs : tuple[File]
+        - left_reg_file : File - Left hemisphere registered to `fsaverage_sym`
+          symmetric template.
+        - right_reg_file : File - Right hemisphere registered to
+          `fsaverage_sym` symmetric template via xhemi.
+        - log_file : File - Generated log file.
 
     Notes
     -----
@@ -627,37 +624,28 @@ def fsaveragesym_surfreg(
     subject = f"run-{entities['run']}"
     os.environ["SUBJECTS_DIR"] = str(output_dir)
 
-    _left_log_file, right_log_file = xhemireg(
+    cmd, (_left_log_file, right_log_file) = xhemireg(
         output_dir,
         entities,
     )
-    freesurfer_command_status(
-        right_log_file,
-        command="xhemireg",
-    )
-    left_reg_file, right_reg_file = surfreg(
+    cmds, (left_reg_file, right_reg_file) = surfreg(
         output_dir,
         entities,
     )
-
-    return (left_reg_file, right_reg_file)
-
-
-@step(
-    hooks=[
-        CoerceparamsHook(),
-        LogRuntimeHook(
-            bunched=False
-        ),
-        CommandLineWrapperHook(),
-        SignatureHook(),
+    commands = [
+        cmd,
+        *cmds,
     ]
-)
+
+    return commands, (left_reg_file, right_reg_file, right_log_file)
+
+
 def mris_apply_reg(
         src_file: File,
         trg_file: File,
         srcreg_file: File,
-        targreg_file: File) -> tuple[list[str], tuple[File]]:
+        targreg_file: File,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Apply a surface-based registration to a cortical surface data file.
 
@@ -699,16 +687,16 @@ def mris_apply_reg(
         LogRuntimeHook(
             bunched=False
         ),
-        PythonWrapperHook(),
+        CommandLineWrapperHook(),
         SignatureHook(),
     ]
 )
-def fsaveragesym_projection(
+def reconall_projection(
         left_reg_file: File,
         right_reg_file: File,
         output_dir: Directory,
         entities: dict,
-        dryrun: bool = False) -> tuple[File]:
+    ) -> tuple[list[list[str]], tuple[File]]:
     """
     Project the different cortical features to the 'fsaverage_sym' template
     space using FreeSurfer's `mris_apply_reg`.
@@ -732,12 +720,12 @@ def fsaveragesym_projection(
         FreeSurfer working directory containing all the subjects.
     entities : dict
         A dictionary of parsed BIDS entities including modality.
-    dryrun : bool
-        If True, skip actual computation and file writing. Default False.
 
     Returns
     -------
-    features: tuple[File]
+    commands : list[list[str]]
+        Projections command-lines.
+    outputs : tuple[File]
         A tuple containing features in the `fsaverage_sym` symmetric template.
         Each feature file is a MGH file with the suffix "fsaverage_sym". The
         features are returned in the following order:
@@ -765,7 +753,10 @@ def fsaveragesym_projection(
         "template": template_dir / "surf" / "lh.sphere.reg"
     }
 
-    features = []
+    opts = brainprep_options.get()
+    dryrun = opts.get("dryrun", DEFAULT_OPTIONS["dryrun"])
+
+    commands, features = [], []
     for name in ("thickness", "curv", "area", "pial_lgi", "sulc"):
         for hemi in ("lh", "rh"):
             src_feature_file = (
@@ -782,31 +773,26 @@ def fsaveragesym_projection(
             )
             if trg_feature_file.is_file():
                 print_warn(f"overwrite file: {trg_feature_file}")
-            mris_apply_reg(
-                src_feature_file,
-                trg_feature_file,
-                reg_map[hemi],
-                reg_map["template"],
+            commands.append(
+                mris_apply_reg(
+                    src_feature_file,
+                    trg_feature_file,
+                    reg_map[hemi],
+                    reg_map["template"],
+                )[0]
             )
-            features.append(trg_feature_file)
+            features.append(
+                trg_feature_file
+            )
 
-    return tuple(features)
+    return commands, tuple(features)
 
 
-@step(
-    hooks=[
-        CoerceparamsHook(),
-        LogRuntimeHook(
-            bunched=False
-        ),
-        CommandLineWrapperHook(),
-        SignatureHook(),
-    ]
-)
 def mri_convert(
         src_file: File,
         trg_file: File,
-        reference_file: File) -> tuple[list[str], tuple[File]]:
+        reference_file: File,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Convert a source image and resample it to match the resolution,
     orientation, and voxel grid of a reference image using FreeSurfer's
@@ -846,12 +832,14 @@ def mri_convert(
         LogRuntimeHook(
             bunched=False
         ),
+        CommandLineWrapperHook(),
         SignatureHook(),
     ]
 )
-def mgz_to_nii(
+def convertmgz(
         output_dir: Directory,
-        entities: dict) -> tuple[File]:
+        entities: dict,
+    ) -> tuple[list[list[str]], tuple[File]]:
     """
     Convert FreeSurfer images back to original Nifti space.
 
@@ -875,7 +863,9 @@ def mgz_to_nii(
 
     Returns
     -------
-    images: tuple[File]
+    commands : list[list[str]]
+        Conversion command-lines.
+    outputs : tuple[File]
         A tuple containing converted images. The images are returned in the
         following order:
         - aparc_aseg_file
@@ -889,37 +879,32 @@ def mgz_to_nii(
     subject = f"run-{entities['run']}"
     reference_file = output_dir / subject / "mri" / "rawavg.mgz"
 
-    images = []
+    commands, images = [], []
     for name in ("aparc+aseg", "aparc.a2009s+aseg", "aseg", "wm", "rawavg",
                  "ribbon", "brain"):
         src_file = output_dir / subject / "mri" / f"{name}.mgz"
         trg_file = output_dir / subject / "mri" / f"{name}.nii.gz"
-        mri_convert(
-            src_file,
-            trg_file,
-            reference_file,
+        commands.append(
+            mri_convert(
+                src_file,
+                trg_file,
+                reference_file,
+            )[0]
         )
-        images.append(trg_file)
+        images.append(
+            trg_file
+        )
 
-    return tuple(images)
+    return commands, tuple(images)
 
 
-@step(
-    hooks=[
-        CoerceparamsHook(),
-        LogRuntimeHook(
-            bunched=False
-        ),
-        CommandLineWrapperHook(),
-        SignatureHook(),
-    ]
-)
 def aparcstats2table(
         subjects: list[str],
         session: str,
         hemi: str,
         measure: str,
-        output_dir: Directory) -> tuple[list[str], tuple[File]]:
+        output_dir: Directory,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Summarizes the stats data '?h.aparc.stats' for both templates (Desikan &
     Destrieux) using FreeSurfer's `aparcstats2table`.
@@ -982,20 +967,11 @@ def aparcstats2table(
     return commands, (desikan_stat_file, destrieux_stat_file)
 
 
-@step(
-    hooks=[
-        CoerceparamsHook(),
-        LogRuntimeHook(
-            bunched=False
-        ),
-        CommandLineWrapperHook(),
-        SignatureHook(),
-    ]
-)
 def asegstats2table(
         subjects: list[str],
         session: str,
-        output_dir: Directory) -> tuple[list[str], tuple[File]]:
+        output_dir: Directory,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Summarizes the volumetric data for subcortical brain structures
     'aseg.stats' using FreeSurfer's `asegstats2table`.
@@ -1041,12 +1017,14 @@ def asegstats2table(
             bunched=False,
             parent=True
         ),
+        CommandLineWrapperHook(),
         SignatureHook(),
     ]
 )
-def freesurfer_features_summary(
+def reconall_summary(
         workspace_dir: Directory,
-        output_dir: Directory) -> tuple[File]:
+        output_dir: Directory,
+    ) -> tuple[list[list[str]], tuple[File]]:
     """
     Summarizes the generated FreeSurfer features for all subjects.
 
@@ -1073,7 +1051,9 @@ def freesurfer_features_summary(
 
     Returns
     -------
-    statfiles: tuple[File]
+    commands : list[list[str]]
+        Summary command-lines.
+    outputs : tuple[File]
         A tuple containing FreeSurfer summary stats. The data are returned in
         the following order (the results for each timepoint are stacked):
         - desikan_stat_lh_<meas>_file
@@ -1114,7 +1094,7 @@ def freesurfer_features_summary(
             os.symlink(source_dir, target_dir)
         fs_subjects.setdefault(ses, []).append(f"{sub}_{run}")
 
-    summary_files = []
+    commands, summary_files = [], []
     measures = [
         "area", "volume", "thickness", "thicknessstd",
         "meancurv", "gauscurv", "foldind", "curvind"
@@ -1125,24 +1105,31 @@ def freesurfer_features_summary(
 
         for hemi in ["lh", "rh"]:
             for meas in measures:
-                desikan_stat_file, destrieux_stat_file = aparcstats2table(
+                cmds, stat_files = aparcstats2table(
                     fs_subjects[ses],
                     ses.replace("ses-", ""),
                     hemi,
                     meas,
                     output_dir,
                 )
-                summary_files.extend([
-                    desikan_stat_file,
-                    destrieux_stat_file,
-                ])
+                commands.extend(
+                    cmds
+                )
+                summary_files.extend(
+                    stat_files
+                )
 
-        volume_stat_file = asegstats2table(
+        cmd, volume_stat_file = asegstats2table(
             fs_subjects[ses],
             ses.replace("ses-", ""),
             output_dir,
         )
-        summary_files.append(volume_stat_file)
+        commands.append(
+            cmd
+        )
+        summary_files.append(
+            volume_stat_file
+        )
 
     output_files = output_dir.glob("*")
     seps = {".csv": ",", ".tsv": "\t"}
@@ -1155,7 +1142,7 @@ def freesurfer_features_summary(
         df = df.sort_values(by=first_col)
         df.to_csv(table_file, sep=sep, index=False)
 
-    return summary_files
+    return commands, summary_files
 
 
 @step(
@@ -1169,12 +1156,13 @@ def freesurfer_features_summary(
         SignatureHook(),
     ]
 )
-def freesurfer_tissues(
+def reconall_tissues(
         workspace_dir: Directory,
         output_dir: Directory,
         entities: dict,
         include_cerebellum: bool = False,
-        dryrun: bool = False) -> tuple[File, File, File, File]:
+        dryrun: bool = False,
+    ) -> tuple[File, File, File, File]:
     """
     Binary masks for white matter (WM), gray matter (GM), cerebrospinal
     fluid (CSF), and whole brain based on FreeSurfer ribbon and wmparc
@@ -1210,9 +1198,11 @@ def freesurfer_tissues(
     entities : dict
         A dictionary of parsed BIDS entities including modality.
     include_cerebellum : bool
-        If False, omit cerebellum and brain stem. Default False.
+        If False, omit cerebellum and brain stem.
+        Default False.
     dryrun : bool
-        If True, skip actual computation and file writing. Default False.
+        If True, skip actual computation and file writing.
+        Default False.
 
     Returns
     -------
@@ -1238,82 +1228,93 @@ def freesurfer_tissues(
     csf_mask_file = workspace_dir / f"csf_{subject}.nii.gz"
     brain_mask_file = workspace_dir / f"brain_{subject}.nii.gz"
 
-    if not dryrun:
+    if dryrun:
+        return (
+            wm_mask_file,
+            gm_mask_file,
+            csf_mask_file,
+            brain_mask_file,
+        )
 
-        ribbon_file = output_dir / subject / "mri" / "ribbon.mgz"
-        wmparc_file = output_dir / subject / "mri" / "wmparc.mgz"
+    ribbon_file = output_dir / subject / "mri" / "ribbon.mgz"
+    wmparc_file = output_dir / subject / "mri" / "wmparc.mgz"
 
-        ribbon_wm_structures = [
-            2, 41
+    ribbon_wm_structures = [
+        2, 41
+    ]
+    ribbon_gm_structures = [
+        3, 42
+    ]
+    wmparc_cc_structures = [
+        250, 251, 252, 253, 254, 255
+    ]
+    wmparc_csf_structures = [
+        4, 5, 14, 15, 24, 31, 43, 44, 63
+    ]
+    if include_cerebellum:
+        wmparc_wm_structures = [
+            7, 16, 46
         ]
-        ribbon_gm_structures = [
-            3, 42
+        wmparc_gm_structures = [
+            8, 47, 10, 11, 12, 13, 17, 18, 26, 28, 49, 50,
+            51, 52, 53, 54, 58, 60
         ]
-        wmparc_cc_structures = [
-            250, 251, 252, 253, 254, 255
+    else:
+        wmparc_wm_structures = [
         ]
-        wmparc_csf_structures = [
-            4, 5, 14, 15, 24, 31, 43, 44, 63
+        wmparc_gm_structures = [
+            10, 11, 12, 13, 17, 18, 26, 28, 49, 50, 51,
+            52, 53, 54, 58, 60
         ]
-        if include_cerebellum:
-            wmparc_wm_structures = [
-                7, 16, 46
-            ]
-            wmparc_gm_structures = [
-                8, 47, 10, 11, 12, 13, 17, 18, 26, 28, 49, 50,
-                51, 52, 53, 54, 58, 60
-            ]
-        else:
-            wmparc_wm_structures = [
-            ]
-            wmparc_gm_structures = [
-                10, 11, 12, 13, 17, 18, 26, 28, 49, 50, 51,
-                52, 53, 54, 58, 60
-            ]
 
-        im = nibabel.load(ribbon_file)
-        ribbon_arr = im.get_fdata()
-        wmparc_arr = nibabel.load(wmparc_file).get_fdata()
+    im = nibabel.load(ribbon_file)
+    ribbon_arr = im.get_fdata()
+    wmparc_arr = nibabel.load(wmparc_file).get_fdata()
 
-        wm_mask_arr = np.logical_and(
-            np.logical_and(
+    wm_mask_arr = np.logical_and(
+        np.logical_and(
+            np.logical_or(
                 np.logical_or(
-                    np.logical_or(
-                        np.isin(ribbon_arr, ribbon_wm_structures),
-                        np.isin(wmparc_arr, wmparc_wm_structures)),
-                    np.isin(wmparc_arr, wmparc_cc_structures)),
-                np.logical_not(np.isin(wmparc_arr, wmparc_csf_structures))),
-            np.logical_not(np.isin(wmparc_arr, wmparc_gm_structures))
+                    np.isin(ribbon_arr, ribbon_wm_structures),
+                    np.isin(wmparc_arr, wmparc_wm_structures)),
+                np.isin(wmparc_arr, wmparc_cc_structures)),
+            np.logical_not(np.isin(wmparc_arr, wmparc_csf_structures))),
+        np.logical_not(np.isin(wmparc_arr, wmparc_gm_structures))
+    )
+    csf_mask_arr = np.isin(wmparc_arr, wmparc_csf_structures)
+    gm_mask_arr = np.logical_or(
+        np.isin(ribbon_arr, ribbon_gm_structures),
+        np.isin(wmparc_arr, wmparc_gm_structures)
+    )
+
+    wm_mask_arr = np.reshape(wm_mask_arr, ribbon_arr.shape)
+    gm_mask_arr = np.reshape(gm_mask_arr, ribbon_arr.shape)
+    csf_mask_arr = np.reshape(csf_mask_arr, ribbon_arr.shape)
+
+    brain_mask_arr = np.logical_or(
+        np.logical_or(wm_mask_arr, gm_mask_arr),
+        csf_mask_arr
+    )
+
+    for arr, out_file in ((wm_mask_arr, wm_mask_file),
+                          (gm_mask_arr, gm_mask_file),
+                          (csf_mask_arr, csf_mask_file),
+                          (brain_mask_arr, brain_mask_file)):
+        nibabel.save(
+            nibabel.Nifti1Image(
+                arr.astype(np.uint8),
+                im.affine,
+                dtype=np.uint8,
+            ),
+            out_file,
         )
-        csf_mask_arr = np.isin(wmparc_arr, wmparc_csf_structures)
-        gm_mask_arr = np.logical_or(
-            np.isin(ribbon_arr, ribbon_gm_structures),
-            np.isin(wmparc_arr, wmparc_gm_structures)
-        )
 
-        wm_mask_arr = np.reshape(wm_mask_arr, ribbon_arr.shape)
-        gm_mask_arr = np.reshape(gm_mask_arr, ribbon_arr.shape)
-        csf_mask_arr = np.reshape(csf_mask_arr, ribbon_arr.shape)
-
-        brain_mask_arr = np.logical_or(
-            np.logical_or(wm_mask_arr, gm_mask_arr),
-            csf_mask_arr
-        )
-
-        for arr, out_file in ((wm_mask_arr, wm_mask_file),
-                              (gm_mask_arr, gm_mask_file),
-                              (csf_mask_arr, csf_mask_file),
-                              (brain_mask_arr, brain_mask_file)):
-            nibabel.save(
-                nibabel.Nifti1Image(
-                    arr.astype(np.uint8),
-                    im.affine,
-                    dtype=np.uint8,
-                ),
-                out_file,
-            )
-
-    return (wm_mask_file, gm_mask_file, csf_mask_file, brain_mask_file)
+    return (
+        wm_mask_file,
+        gm_mask_file,
+        csf_mask_file,
+        brain_mask_file,
+    )
 
 
 @step(
@@ -1329,7 +1330,8 @@ def freesurfer_tissues(
 def nextbrain(
         t1_file: File,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Uses NextBrain probabilistic atlas of the human brain, to segment ~300
     distinct ROIs per hemisphere.

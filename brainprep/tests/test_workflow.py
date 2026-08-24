@@ -108,7 +108,7 @@ class TestGalleryExamples(unittest.TestCase):
             "plot_sbm.py"
         )
         env = self._test_example(script_path)
-        # self._test_interface_commands(env)
+        self._test_interface_commands(env)
 
     def test_vbm(self):
         script_path = (

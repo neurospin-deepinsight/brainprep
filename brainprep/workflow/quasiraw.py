@@ -197,7 +197,7 @@ def brainprep_quasiraw(
         entities,
         interpolation="trilinear" if quick else "spline",
     )
-    _, affine_transform_file = interfaces.affine(
+    _, affine_transform_file = interfaces.align(
         scaled_anatomical_file,
         lowres_template_file if quick else template_file,
         workspace_dir / "05-affine",
@@ -360,7 +360,7 @@ def brainprep_group_quasiraw(
     template_file = resource_dir / f"MNI152_{modality_}_1mm_brain.nii.gz"
     print_info(f"setting template file: {template_file}")
 
-    correlations_file = interfaces.mean_correlation(
+    correlations_file = interfaces.meancorr(
         output_dir / "subjects" / "sub-*" / "ses-*" / f"*_{modality}.nii.gz",
         template_file,
         output_dir,
@@ -375,7 +375,7 @@ def brainprep_group_quasiraw(
         suffix=f"_{modality}",
     )
 
-    pca_file = interfaces.incremental_pca(
+    pca_file = interfaces.pca(
         output_dir / "subjects" / "sub-*" / "ses-*" / f"*_{modality}.nii.gz",
         output_dir,
         batch_size=50,

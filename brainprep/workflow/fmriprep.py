@@ -199,7 +199,7 @@ def brainprep_fmriprep(
             f"The T1w file '{t1_file}' is not BIDS-compliant."
         )
 
-    rfmri_outputs, qc_file = interfaces.fmriprep_wf(
+    rfmri_outputs, qc_file = interfaces.fmriprep_workflow(
         t1_file,
         func_files,
         dataset_description_file,
@@ -227,7 +227,7 @@ def brainprep_fmriprep(
             if "run" not in entities:
                 entities["run"] = entities_["run"]
             connectivity_files.append(
-                interfaces.func_vol_connectivity(
+                interfaces.fmri_connectivity(
                     fmri_image_file,
                     mask_file,
                     confounds_file,

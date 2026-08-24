@@ -215,6 +215,7 @@ def generate_qc_report(
         following keys:
 
         - name : str - Title of the step.
+        - summary : str - A HTML string to be be displayed.
         - images : dict | None - A dictionary containing configurations for
           image plots. If provided, the dictionary must follow this specific
           schema.
@@ -235,8 +236,48 @@ def generate_qc_report(
 
     Notes
     -----
-    - Images are converted to base64 for inline embedding.
-    - Tables are rendered as HTML using `dataframe_to_html`.
+    Images are converted to base64 for inline embedding.
+
+    Tables are rendered as HTML using `dataframe_to_html`.
+
+    The `images` dictionary must follow this specific schema:
+
+    - "chart_name":
+        - "record": A list of strings representing the images to display.
+        - "overlays": A list of strings or None, representing the images to
+          show over the main images. This can also be None.
+        - "labels": A list of strings or None, representing the text labels
+          for each image. This can also be None.
+
+    The `carousels` dictionary must follow this specific schema:
+
+    - "chart_name":
+        - "record": A list of strings representing the images to include in
+          the carousel.
+        - "labels": A list of strings or None, representing the text labels
+          for each image. This can also be None.
+
+    The `tables` dictionary must follow this specific schema:
+
+    - "chart_name":
+        - "record": A list of DataFrames representing the tabular data to
+          include.
+        - "labels": A list of strings or None, representing the text labels
+          for each table. This can also be None.
+
+    The `scatters` dictionary must follow this specific schema:
+
+    - "chart_name":
+        - "record": A list of dictionaries representing the points in the
+          scatter plot. Each dictionary must contain the keys 'x', 'y', and
+          'img'.
+        - "x_label": A string representing the text label displayed along the
+          X-axis of the scatter plot.
+        - "y_label": A string representing the text label displayed along the
+          Y-axis of the scatter plot.
+        - "with_img": A boolean indicating whether to display images
+          associated with each point. If False, only the points will be
+          displayed.
 
     Examples
     --------
@@ -245,6 +286,8 @@ def generate_qc_report(
     >>>
     >>> data = [{
     ...     "name": "Step 1",
+    ...     "content": Path("/tmp/image1.png"),
+    ...     "overlay": Path("/tmp/image1_overlay.png"),
     ...     "tables": DataFrame({"A": [1, 2], "B": [3, 4]})
     ... }]
     >>> report = generate_qc_report(

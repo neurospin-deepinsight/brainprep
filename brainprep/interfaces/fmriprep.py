@@ -57,7 +57,7 @@ from ..utils import (
         SignatureHook(),
     ]
 )
-def fmriprep_wf(
+def fmriprep_workflow(
         t1_file: File,
         func_files: list[File],
         dataset_description_file: File,
@@ -278,7 +278,7 @@ def fmriprep_wf(
         SignatureHook(),
     ]
 )
-def func_vol_connectivity(
+def fmri_connectivity(
         fmri_rest_image_file: File,
         mask_file: File,
         counfounds_file: File,

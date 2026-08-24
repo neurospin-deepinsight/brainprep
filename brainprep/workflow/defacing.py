@@ -205,7 +205,7 @@ def brainprep_defacing(
         print_info(f"using T1w: {t1_file}")
         print_info(f"using defacing mask: {mask_t1_file}")
         aligned_anatomical_file = reoriented_anatomical_file
-        template_file, transform_file = interfaces.affine(
+        template_file, transform_file = interfaces.align(
             t1_file,
             reoriented_anatomical_file,
             workspace_dir / "03-deface",
@@ -234,7 +234,7 @@ def brainprep_defacing(
         entities,
         inv_mask2=True,
     )
-    correlation_file = interfaces.mean_correlation(
+    correlation_file = interfaces.meancorr(
         aligned_anatomical_file,
         template_file,
         output_dir,
@@ -401,7 +401,7 @@ def brainprep_group_defacing(
             f"Modality not supported: {modality}"
         )
 
-    correlations_file = interfaces.mean_correlation(
+    correlations_file = interfaces.meancorr(
         (
             output_dir /
             "subjects" /
@@ -423,7 +423,7 @@ def brainprep_group_defacing(
         suffix=f"_{modality}",
     )
 
-    overlap_file = interfaces.mask_overlap(
+    overlap_file = interfaces.maskoverlap(
         (
             output_dir /
             "subjects" /

@@ -79,7 +79,7 @@ def parse_defacing(
     if not workflow_dir.is_dir():
         return None
     if dryrun:
-        return config_file
+        return (config_file, )
 
     scatter_data = {}
     scaler = MinMaxScaler()
@@ -215,7 +215,7 @@ def parse_quasiraw(
     if not workflow_dir.is_dir():
         return None
     if dryrun:
-        return config_file
+        return (config_file, )
 
     scaler = MinMaxScaler()
     scatter_data = {}
@@ -266,7 +266,6 @@ def parse_quasiraw(
     return (config_file, )
 
 
-
 @step(
     hooks=[
         CoerceparamsHook(),
@@ -277,7 +276,7 @@ def parse_quasiraw(
         SignatureHook(),
     ]
 )
-def parse_quality_assurance(
+def parse_qa(
         data_dir: Directory,
         output_dir: Directory,
         dryrun: bool = False,
@@ -314,7 +313,7 @@ def parse_quality_assurance(
     if not workflow_dir.is_dir():
         return None
     if dryrun:
-        return config_file
+        return (config_file, )
 
     list_files = []
     for mod in ("bold", "dwi", "T1w", "T2w", "FLAIR"):

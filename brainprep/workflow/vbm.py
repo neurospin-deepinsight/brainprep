@@ -104,12 +104,12 @@ def brainprep_vbm(
             f"The T1w file '{t1_file}' is not BIDS-compliant."
         )
 
-    batch_file = interfaces.write_catbatch(
+    batch_file = interfaces.writebatch(
         [t1_file],
         output_dir.parent,
         [entities],
     )
-    gm_files, qc_files = interfaces.cat12vbm_wf(
+    gm_files, qc_files = interfaces.cat12vbm_workflow(
         [t1_file],
         batch_file,
         output_dir.parent,
@@ -210,13 +210,13 @@ def brainprep_longitudinal_vbm(
                 f"The T1w file '{path}' is not BIDS-compliant."
             )
 
-    batch_file = interfaces.write_catbatch(
+    batch_file = interfaces.writebatch(
         t1_files,
         output_dir.parent,
         entities,
         model_long=model,
     )
-    gm_files, qc_files = interfaces.cat12vbm_wf(
+    gm_files, qc_files = interfaces.cat12vbm_workflow(
         t1_files,
         batch_file,
         output_dir.parent,
@@ -373,7 +373,7 @@ def brainprep_group_vbm(
         output_dir,
     )
 
-    correlations_file = interfaces.mean_correlation(
+    correlations_file = interfaces.meancorr(
         output_dir / "subjects" / "sub-*" / "ses-*" / "mri" / "wm*_T1w.nii",
         darteltpm_file,
         output_dir,

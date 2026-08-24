@@ -127,7 +127,7 @@ def brainprep_sulcirec(
     workspace_dir.mkdir(parents=True, exist_ok=True)
     print_info(f"setting workspace directory: {workspace_dir}")
 
-    sulci_graphs_files, qc_file = interfaces.morphologist_wf(
+    sulci_graphs_files, qc_file = interfaces.morphologist_workflow(
         t1_file,
         output_dir,
         workspace_dir,

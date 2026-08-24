@@ -42,7 +42,8 @@ from ..typing import (
 def reorient(
         image_file: File,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Reorients a BIDS-compliant anatomical image using FSL's `fslreorient2std`.
 
@@ -89,7 +90,8 @@ def reorient(
 def deface(
         t1_file: File,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File | list[File]]]:
+        entities: dict,
+    ) -> tuple[list[str], tuple[File | list[File]]]:
     """
     Defaces a BIDS-compliant T1-weighted anatomical image using FSL's
     `fsl_deface`.
@@ -168,7 +170,8 @@ def applymask(
         image_file: File,
         mask_file: File,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Apply an isotropic resampling transformation to a BIDS-compliant image
     file using FSL's `fslmaths`.
@@ -221,7 +224,8 @@ def scale(
         scale: int,
         output_dir: Directory,
         entities: dict,
-        interpolation: str = "spline") -> tuple[list[str], tuple[File]]:
+        interpolation: str = "spline",
+    ) -> tuple[list[str], tuple[File]]:
     """
     Apply an isotropic resampling transformation to a BIDS-compliant image
     file using FSL's `flirt`.
@@ -279,13 +283,14 @@ def scale(
         SignatureHook(),
     ]
 )
-def affine(
+def align(
         anatomical_file: File,
         template_file: File,
         output_dir: Directory,
         entities: dict,
         rigid: bool = False,
-        quick: bool = False) -> tuple[list[str], tuple[File]]:
+        quick: bool = False,
+    ) -> tuple[list[str], tuple[File]]:
     """
     Affinely register a BIDS-compliant anatomical image to a template file
     using FSL's `flirt`.
@@ -364,7 +369,8 @@ def applyaffine(
         transform_file: File,
         output_dir: Directory,
         entities: dict,
-        interpolation: str = "spline") -> tuple[list[str], tuple[File]]:
+        interpolation: str = "spline",
+    ) -> tuple[list[str], tuple[File]]:
     """
     Apply an affine transformation to a BIDS-compliant image file using FSL's
     `flirt`.
@@ -421,12 +427,13 @@ def applyaffine(
         SignatureHook(),
     ]
 )
-def dti_fit(
+def dtifit(
         dwi_file: File,
         mask_file: File,
         workspace_dir: Directory,
         output_dir: Directory,
-        entities: dict) -> tuple[list[str], tuple[File]]:
+        entities: dict,
+    ) -> tuple[list[str], tuple[File]]:
     """
     DTI model fitting.
 

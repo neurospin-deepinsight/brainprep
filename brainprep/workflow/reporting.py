@@ -52,8 +52,8 @@ def brainprep_group_reporting(
     This function generates a quality control (QC) report for the BrainPrep
     workflows. It includes the following steps:
 
-    1) Generate a configuration file the follwing workflows: defacing,
-       quasi-raw.
+    1) Generate a configuration file the following workflows:
+       quality assurance, defacing, quasi-raw.
     2) Create a single HTML file regrouping the QC results.
 
     Parameters
@@ -70,6 +70,7 @@ def brainprep_group_reporting(
     -------
     Bunch
         A dictionary-like object containing:
+
         - html_file : File
             Path to the generated HTML report.
 
@@ -79,7 +80,17 @@ def brainprep_group_reporting(
 
     Examples
     --------
-    TODO
+    >>> from brainprep.config import Config
+    >>> from brainprep.workflow import brainprep_group_reporting
+    >>>
+    >>> with Config(dryrun=True, verbose=False):
+    ...     outputs = brainprep_group_reporting(
+    ...         output_dir="/tmp/dataset/derivatives",
+    ...     )
+    >>> outputs
+    Bunch(
+        html_file: PosixPath('...')
+    )
     """
     workspace_dir = output_dir / "derivatives" / "workspace"
     workspace_dir.mkdir(parents=True, exist_ok=True)
@@ -95,20 +106,9 @@ def brainprep_group_reporting(
         workspace_dir,
     )
 
-    qa_conf_file = interfaces.parse_quality_assurance(
+    qa_conf_file = interfaces.parse_qa(
         output_dir,
         workspace_dir,
-    )
-
-    report = generate_qc_report(
-        title="BrainPrep",
-        version=__version__,
-        date=datetime.now().strftime("%d.%m.%Y"),
-        data=[
-            qa_conf_file,
-            defacing_conf_file,
-            quasiraw_conf_file,
-        ],
     )
 
     html_file = (
@@ -116,9 +116,23 @@ def brainprep_group_reporting(
         "derivatives" /
         "reporting.html"
     )
-    report.save_as_html(html_file)
+    dryrun = not defacing_conf_file.is_file()
 
-    interfaces.htmlmin(html_file)
+    if not dryrun:
+        report = generate_qc_report(
+            title="BrainPrep",
+            version=__version__,
+            date=datetime.now().strftime("%d.%m.%Y"),
+            data=[
+                qa_conf_file,
+                defacing_conf_file,
+                quasiraw_conf_file,
+            ],
+        )
+
+        report.save_as_html(html_file)
+
+        interfaces.htmlmin(html_file)
 
     if not keep_intermediate:
         print_info(f"cleaning workspace directory: {workspace_dir}")

@@ -139,7 +139,7 @@ def brainprep_dmriprep(
 
     (dwi_preproc_file, wm_fod_file, tractogram_file, mask_file,
      connectome_file, affine_file, _warp_file,
-     invwarp_file) = interfaces.dwi_preproc(
+     invwarp_file) = interfaces.dwiprep(
         t1_file,
         dwi_files,
         workspace_dir,
@@ -147,14 +147,14 @@ def brainprep_dmriprep(
         entities,
     )
 
-    fa_file, md_file = interfaces.dti_fit(
+    fa_file, md_file = interfaces.dtifit(
         dwi_preproc_file,
         mask_file,
         workspace_dir,
         output_dir,
         entities,
     )
-    _config_file, ndi_file, fwf_file, odi_file = interfaces.noddi_fit(
+    _config_file, ndi_file, fwf_file, odi_file = interfaces.noddifit(
         dwi_preproc_file,
         mask_file,
         workspace_dir,
