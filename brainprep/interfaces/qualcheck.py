@@ -1085,7 +1085,8 @@ def mriqc_metrics(
         ]
     }
     for input_file, output_file in zip(
-            iqm_files, filter_iqm_files, strict=True):
+            iqm_files, filter_iqm_files, strict=True,
+        ):
 
         if not input_file.stem.startswith("group_"):
             raise ValueError(

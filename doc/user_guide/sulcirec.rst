@@ -1,7 +1,7 @@
 .. _sulcirec:
 
-Sulci Reconstruction and Identification
-=======================================
+Sulci Identification Workflow
+=============================
 
 .. image:: ../images/preproc-sulcirec.jpg
    :width: 50%
@@ -10,15 +10,16 @@ Sulci Reconstruction and Identification
 Introduction
 ------------
 
-Preprocessing of functional MRI (fMRI) data is a crucial step in transforming
-raw scanner outputs into signals that can be meaningfully interpreted and
-compared across individuals. Raw fMRI volumes contain a variety of
-artifacts and sources of variability—such as head motion, scanner drift,
-geometric distortions, and physiological noise—that can obscure the
-underlying neural activity of interest. A standardized preprocessing
-workflow addresses these issues by aligning images across time and space,
-correcting for distortions, removing nuisance signals, and generating
-anatomically and functionally consistent representations of the data.
+Preprocessing MRI data is a crucial step in transforming raw scanner outputs
+into signals that can be meaningfully interpreted and compared across
+individuals. This task is especially complex when studying the human brain
+folding patterns. Every person's folding pattern is unique, like a fingerprint.
+The primary challenge is that these folds (sulci) change shape, split, or
+merge drastically from one person to another. Successfully mapping these
+folds is of scientific and clinical interest; by precisely measuring their
+depth and width, doctors can spot early brain shrinking in diseases like
+Alzheimer's. Furthermore, accurate sulcal mapping helps scientists understand
+how the brain develops.
 
 Requirements
 ------------

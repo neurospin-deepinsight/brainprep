@@ -43,61 +43,68 @@ Description
 - **Tissue Segmentation**
   CAT12 :footcite:p:`gaser2024cat12vbm` performs an advanced segmentation of
   the brain into gray matter (GM), white matter (WM), and cerebrospinal fluid
-  (CSF). The tool performs: adaptive local segmentation (LAS) for improved
-  boundary detection, graph-cut refinement to sharpen tissue borders,
-  partial volume estimation to model voxels containing mixed tissue types,
-  white matter hyperintensity correction, and Markov Random Field smoothing to
-  reduce isolated misclassifications.
+  (CSF). The pipeline utilizes adaptive local segmentation (LAS) for enhanced
+  boundary detection, graph-cut refinement to sharpen tissue borders, partial
+  volume estimation to accurately model voxels containing mixed tissue types,
+  white matter hyperintensity correction, and Markov Random Field smoothing
+  to minimize isolated misclassifications.
 
 - **Spatial Normalization**
-  The segmented tissues are registered to a DARTEL template. Both forward and
-  inverse deformation fields are saved. These allow transforming data between
+  The segmented tissue maps are registered to an MNI-space template using a
+  high-dimensional Geodesic Shooting algorithm. Both forward and inverse
+  deformation fields are saved to enable seamless data transformation between
   native and template space.
 
 - **Modulation**
-  To preserve local tissue volumes after spatial normalization, CAT12 applies
-  modulation to the GM, WM, and CSF maps. This step ensures that voxel values
-  reflect regional volume rather than concentration.
+  To preserve local tissue volumes following spatial normalization, tissue
+  maps are adjusted using the Jacobian determinants of the deformation fields.
+  This modulation step ensures that the final voxel intensities reflect
+  regional tissue volume rather than tissue concentration.
 
 - **Resampling**
   All normalized images are resampled to 1.5 mm isotropic resolution.
 
 - **ROI-Based Morphometry**
-  Regional measures are extracted using a comprehensive set of atlases,
-  including: Neuromorphometrics, LPBA40, Hammers, AAL3, Julich Brain,
-  COBRA, Schaefer 100/200/400/600 parcels, Mori white‑matter atlas,
-  Anatomy toolbox. For each atlas, CAT12 computes regional volumes.
+  Regional volumetric and surface metrics are extracted using a comprehensive
+  suite of atlases, including Neuromorphometrics, LPBA40, Hammers, AAL3,
+  Julich Brain, COBRA, the Mori white‑matter atlas, and the Anatomy toolbox.
+  For surface-based parcellations, such as the Schaefer 100/200/400/600
+  parcels, CAT12 extracts regional cortical thickness and surface area
+  measures.
 
 **Longitudinal Processing Steps**
 
 - **Intra‑subject realignment**
-  All time points for a participant are rigidly aligned to each other to
-  remove differences caused by head position rather than true anatomical
-  change.
+  All time points for a participant are rigidly aligned to each other using
+  an inverse-consistent registration fluid dynamics model to remove spatial
+  differences caused by head position rather than true anatomical change.
 
 - **Creation of an unbiased within‑subject template**
-  CAT12 builds a subject‑specific anatomical template by averaging all time
-  points in a way that does not favor any single session. This template
-  serves as a stable reference for all subsequent processing.
+  CAT12 builds an unbiased subject‑specific anatomical template and a
+  customized Tissue Probability Map (TPM) by averaging all time points equally.
+  This template serves as a stable, session-independent reference for all
+  subsequent processing.
 
 - **Bias correction and intensity normalization**
-  Each time point is corrected for intensity inhomogeneity and normalized
-  relative to the subject‑specific template, reducing session‑to‑session
-  variability.
+  Each time point undergoes adaptive inhomogeneity correction and intensity
+  normalization relative to the subject‑specific template, significantly
+  reducing scanner noise and session‑to‑session signal variability.
 
 - **Longitudinal segmentation**
   GM, WM, and CSF are segmented using priors derived from the subject‑specific
   template. This improves tissue classification consistency across time points.
 
-- **Longitudinal DARTEL registration**
+- **Spatial Normalization**
   All time points are nonlinearly registered to the subject‑specific template,
-  then to the group template. This two‑stage approach increases sensitivity
-  to subtle structural changes.
+  which is then mapped to the MNI standard space using a high-dimensional
+  Geodesic Shooting algorithm. This two‑stage deformation strategy maximizes
+  sensitivity to subtle, longitudinal structural changes.
 
 - **Modulation**
   To preserve local tissue volumes after spatial normalization, CAT12 applies
-  modulation to the GM, WM, and CSF maps. This step ensures that voxel values
-  reflect regional volume rather than concentration.
+  modulation to the GM, and WM maps using the Jacobian determinants of the
+  deformation fields. This step ensures that the final voxel values reflect
+  regional tissue volume rather than concentration.
 
 - **Resampling**
   All normalized images are resampled to 1.5 mm isotropic resolution.

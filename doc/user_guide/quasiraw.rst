@@ -12,7 +12,8 @@ Introduction
 ------------
 
 Minimally preprocessed data are generated using a standardized sequence of
-lightweight processing steps applied to the raw T1-weighted (T1w) MRI images.
+lightweight processing steps applied to the raw T1-weighted (T1w), T2-weighted
+(T2w) or FLAIR MRI images.
 This workflow combines skull stripping, bias field correction, and spatial
 normalization using widely adopted neuroimaging tools. This minimal
 preprocessing pipeline ensures that the data are standardized and
@@ -25,7 +26,7 @@ Requirements
 +------------+--------------+
 | CPU        | RAM          |
 +============+==============+
-| 1          | 5 GB         |
+| 1          | 16 GB        |
 +------------+--------------+
 
 Description
@@ -46,7 +47,8 @@ Description
   Spatial alignment is carried out using FSL FLIRT
   :footcite:p:`jenkinson2001flirt` with a 9‑degree‑of‑freedom (DOF) affine
   transformation (translations, rotations, and scaling; no shearing). This step
-  registers the T1w image to the MNI template while preserving overall anatomy.
+  registers a T1w, T2w or FLAIR image to the MNI template while preserving
+  overall anatomy.
 
 **Quality Control**
 
@@ -56,8 +58,7 @@ Description
   outliers to be easily identified.
 
 - **Manual inspection**  
-  Following the correlation-based ranking, generated ``T1w`` images at the
-  lower end of the distribution are manually reviewed in-house. This step is
+  Generated ``T1w`` images are manually reviewed in-house. This step is
   performed using a PCA‑based reduction technique to detect the most obvious
   outliers, which are then removed.
 

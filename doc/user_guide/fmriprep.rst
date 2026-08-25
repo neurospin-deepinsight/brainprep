@@ -13,8 +13,8 @@ Introduction
 Preprocessing of functional MRI (fMRI) data is a crucial step in transforming
 raw scanner outputs into signals that can be meaningfully interpreted and
 compared across individuals. Raw fMRI volumes contain a variety of
-artifacts and sources of variability—such as head motion, scanner drift,
-geometric distortions, and physiological noise—that can obscure the
+artifacts and sources of variability - such as head motion, scanner drift,
+geometric distortions, and physiological noise - that can obscure the
 underlying neural activity of interest. A standardized preprocessing
 workflow addresses these issues by aligning images across time and space,
 correcting for distortions, removing nuisance signals, and generating
@@ -57,7 +57,7 @@ This analysis relies on fMRIPrep's pipeline :footcite:p:`esteban2019fmriprep`.
 - **Confounding factors**
   Several confounding time-series were calculated based on the preprocessed
   BOLD: framewise displacement (FD), DVARS and three region-wise global
-  signals. FD was computed using two formulations(absolute sum of
+  signals. FD was computed using two formulations (absolute sum of
   relative motions, relative root mean square displacement between affines).
   The three global signals are extracted within the CSF, the WM, and
   the whole-brain masks. Additionally, a set of physiological regressors were
@@ -84,7 +84,6 @@ This analysis relies on fMRIPrep's pipeline :footcite:p:`esteban2019fmriprep`.
   of voxels around the edge of the brain.
 
 - **Surface Preprocessings**
-  Surface-based preprocessing is enabled through the combination of
   Functional data are projected onto the subject's fsnative surfaces and then
   mapped to the fsLR surface space. CIFTI outputs at the 91k resolution are
   generating, producing dense time series suitable for surface-based analyses.
