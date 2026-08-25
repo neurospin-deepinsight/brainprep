@@ -190,7 +190,8 @@ def brainprep_fmriprep(
     )
     if not dataset_description_file.is_file():
         raise ValueError(
-            "A description file must be included in rawdata directory."
+            "A description file must be included in rawdata directory: "
+            f"{dataset_description_file}"
         )
 
     entities = kwargs.get("entities", {})

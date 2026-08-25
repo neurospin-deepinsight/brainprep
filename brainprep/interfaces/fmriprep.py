@@ -42,6 +42,7 @@ from ..typing import (
 )
 from ..utils import (
     print_warn,
+    sbref_from_file,
     sidecar_from_file,
 )
 
@@ -150,15 +151,31 @@ def fmriprep_workflow(
             [t1_file, *func_files],
             [anat_dir] + [func_dir] * len(func_files),
             strict=True):
+        if (target_dir / source_file.name).is_file():
+            print_warn(
+                "Skipping copy. Target directory already contains source "
+                f"data: {target_dir / source_file.name}"
+            )
+            continue
         sidecar_source_file = sidecar_from_file(source_file)
-        if not (target_dir / source_file.name).is_file():
+        sbref_source_file = sbref_from_file(source_file)
+        shutil.copy(
+            source_file,
+            target_dir / source_file.name,
+        )
+        shutil.copy(
+            sidecar_source_file,
+            target_dir / sidecar_source_file.name,
+        )
+        if sbref_source_file is not None:
+            sidecar_sbref_source_file = sidecar_from_file(sbref_source_file)
             shutil.copy(
-                source_file,
-                target_dir / source_file.name,
+                sbref_source_file,
+                target_dir / sbref_source_file.name,
             )
             shutil.copy(
-                sidecar_source_file,
-                target_dir / sidecar_source_file.name,
+                sidecar_sbref_source_file,
+                target_dir / sidecar_sbref_source_file.name,
             )
     if not (rawdata_dir / dataset_description_file.name).is_file():
         shutil.copy(
@@ -242,7 +259,8 @@ def fmriprep_workflow(
             "--fs-subjects-dir", str(work_freesurfer_dir),
             "--work-dir", str(work_tmp_dir),
             "--fs-no-resume",
-            "--force", "bbr", "syn-sdc",
+            "--force", "bbr",
+            "syn-sdc",
             "--no-msm",
             "--cifti-output", "91k",
             "--output-spaces",

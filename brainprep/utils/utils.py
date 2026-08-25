@@ -36,7 +36,8 @@ from .color import (
 
 def coerce_to_list(
         value: Any,
-        expected_type: type) -> Any:
+        expected_type: type,
+    ) -> Any:
     """
     Coerce a value into a list when the expected type annotation indicates
     a list or tuple.
@@ -77,7 +78,8 @@ def coerce_to_list(
 
 def coerce_to_path(
         value: Any,
-        expected_type: type) -> Any:
+        expected_type: type,
+    ) -> Any:
     """
     Recursively convert values to `pathlib.Path` based on expected type
     annotations.
@@ -125,7 +127,8 @@ def coerce_to_path(
 def parse_bids_keys(
         bids_path: File,
         full_path: bool = False,
-        check_run: bool = False) -> dict[str]:
+        check_run: bool = False,
+    ) -> dict[str]:
     """
     Parse BIDS entities and modality from a filename or path with validation.
 
@@ -146,11 +149,13 @@ def parse_bids_keys(
         The BIDS file to parse.
     full_path: bool
         If True, extract entities from the full input path rather than
-        only the filename. Default is False.
+        only the filename.
+        Default False.
     check_run: bool
         If True, checks whether the current run value appears more
         than once, assigns a UUID-style fallback if needed, and warns if even
-        that fallback is not unique. Default is False.
+        that fallback is not unique.
+        Default False.
 
     Returns
     -------
@@ -232,7 +237,8 @@ def parse_bids_keys(
 def check_run_fn(
         bids_path: File,
         entities: dict[str],
-        full_path: bool = False) -> bool:
+        full_path: bool = False,
+    ) -> bool:
     """
     Scan the folder containing a BIDS file and verify that the run entity
     associated with the file appears exactly once among all matching files.
@@ -246,7 +252,8 @@ def check_run_fn(
         modality.
     full_path : bool
         If True, extract entities from the full path instead of only the
-        filename. Default False.
+        filename.
+        Default False.
 
     Returns
     -------
@@ -287,7 +294,8 @@ def check_run_fn(
 
 
 def make_run_id(
-        filename: str) -> tuple[str, str]:
+        filename: str,
+    ) -> tuple[str, str]:
     """
     Generate a deterministic identifier and a 5-digit short code from a
     filename.
@@ -315,13 +323,13 @@ def make_run_id(
 
 
 def sidecar_from_file(
-        image_file: File) -> File:
+        image_file: File,
+    ) -> File:
     """
     Infers the corresponding JSON sidecar file for a given NIfTI image file.
 
     This function checks that the input file has a ``.nii.gz`` extension and
-    attempts to locate a sidecar ``.json`` file with the same base name. If
-    either condition fails, it raises a ValueError.
+    attempts to locate a sidecar ``.json`` file with the same base name.
 
     Parameters
     ----------
@@ -363,10 +371,63 @@ def sidecar_from_file(
     return sidecar_file
 
 
-def bvecbval_from_file(
-        image_file: File) -> tuple[File, File]:
+def sbref_from_file(
+        image_file: File,
+    ) -> File | None:
     """
-    Infers the corresponding .bvec and .bval files for a given dMRI NIfTI image
+    Infers the corresponding SBREFr file for a given BOLD NIfTI image file.
+
+    This function checks that the input file has a ``.nii.gz`` extension and
+    attempts to locate a SBREF ``_sbref`` file with the same base name. None is
+    returned if no SBREF file is found.
+
+    Parameters
+    ----------
+    image_file : File
+        The NIfTI image file for which to infer the SBREF file.
+
+    Returns
+    -------
+    sbref_file : File | None
+        Path to the inferred SBREF file.
+
+    Raises
+    ------
+    ValueError
+        If the input file does not have a `.nii.gz` extension.
+
+    Examples
+    --------
+    >>> from pathlib import Path
+    >>> from brainprep.utils import sbref_from_file
+    >>>
+    >>> image_file = Path("/tmp/sub-01_bold.nii.gz")
+    >>> sbref_file = Path("/tmp/sub-01_sbref.nii.gz")
+    >>> sbref_file.touch()
+    >>>
+    >>> sbref_from_file(image_file)
+    PosixPath('/tmp/sub-01_sbref.nii.gz')
+    """
+    if not str(image_file).endswith(".nii.gz"):
+        raise ValueError(
+            f"Input image file must be in NIIGZ format: {image_file}"
+        )
+    sbref_file = Path(
+        str(image_file).replace(
+            "_bold.nii.gz",
+            "_sbref.nii.gz",
+        )
+        )
+    if not sbref_file.is_file():
+        sbref_file = None
+    return sbref_file
+
+
+def bvecbval_from_file(
+        image_file: File,
+    ) -> tuple[File, File]:
+    """
+    Infers the corresponding .bvec and .bval files for a given DWI NIfTI image
     file.
 
     This function checks that the input file has a ``.nii.gz`` extension and
@@ -476,7 +537,8 @@ def find_stack_level() -> int:
 
 def find_first_occurrence(
         input_file: Path,
-        target: str) -> Path:
+        target: str,
+    ) -> Path:
     """
     Return the closest parent directory whose name matches `target`.
 
