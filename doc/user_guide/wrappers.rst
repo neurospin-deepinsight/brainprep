@@ -29,6 +29,9 @@ and expressive way to define interfaces.
 - Enables automatic metadata extraction
 - Supports consistent execution patterns
 
+For more implementation details, refer to the
+:mod:`API documentation <brainprep.decorators>`.
+
 Command-Line Wrappers
 ---------------------
 
@@ -47,7 +50,7 @@ to interact with external binaries, scripts, or utilities.
 
 A command-line wrapper returns:
 
-- A **command** or **list of commands** to be executed.
+- A **command** or a **list of commands** to be executed.
 - A **tuple of generated output paths**.
 
 Python Wrappers

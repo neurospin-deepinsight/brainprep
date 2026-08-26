@@ -40,13 +40,14 @@ from ..typing import (
         SignatureHook(),
     ]
 )
-def noddi_fit(
+def noddifit(
         dwi_file: File,
         mask_file: File,
         workspace_dir: Directory,
         output_dir: Directory,
         entities: dict,
-        dryrun: bool = False) -> tuple[File]:
+        dryrun: bool = False,
+    ) -> tuple[File]:
     """
     NODDI model fitting.
 
@@ -71,7 +72,8 @@ def noddi_fit(
     entities : dict
         A dictionary of parsed BIDS entities including modality.
     dryrun : bool
-        If True, skip actual computation and file writing. Default False.
+        If True, skip actual computation and file writing.
+        Default False.
 
     Returns
     -------

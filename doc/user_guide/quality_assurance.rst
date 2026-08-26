@@ -35,7 +35,7 @@ Description
 
 - **Image-quality metrics**
   MRIQC :footcite:p:`esteban2017mriqc` is used to automatically extract
-  image-quality metrics (IQMs) from structural (T1w, T2w), functional
+  image-quality metrics (IQMs) from structural (T1w, T2w, FLAIR), functional
   (BOLD), and diffusion (EPI) MRI scans. Its purpose is to detect artifacts,
   inconsistencies, and outliers without requiring manual inspection of every
   image.

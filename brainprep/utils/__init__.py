@@ -31,11 +31,13 @@ from .utils import (
     find_stack_level,
     make_run_id,
     parse_bids_keys,
+    sbref_from_file,
     sidecar_from_file,
 )
 
 __all__ = [
     "Bunch",
+    "bvecbval_from_file",
     "coerce_to_list",
     "coerce_to_path",
     "find_first_occurrence",
@@ -52,5 +54,6 @@ __all__ = [
     "print_subtitle",
     "print_title",
     "print_warn",
+    "sbref_from_file",
     "sidecar_from_file",
 ]

@@ -14,7 +14,7 @@ Surface-based morphometry (SBM) is a structural MRI analysis framework that
 focuses on the geometry of the cerebral cortex rather than on voxelwise tissue
 properties. Using T1w images, SBM reconstructs the white matter and pial
 surfaces, enabling precise measurement of cortical features such as thickness,
-surface area, curvature, and folding patterns. SBM provides offers improved
+surface area, curvature, and folding patterns. SBM offers improved
 sensitivity to subtle cortical differences relative to traditional
 voxel-based approaches. This makes SBM a widely used tool for studying
 neurodevelopment, aging, and disease‑related cortical alterations.
@@ -28,10 +28,10 @@ Requirements
 | 1          | 16 GB        |
 +------------+--------------+
 
-Using Nextflow requires 64 GB of memory and is therefore packaged separately
+Using Nextbrain requires 64 GB of memory and is therefore packaged separately
 within the subject‑level workflow.
 
-Running the workflow requires a CPU with **AVX** or **AVX2** support  
+Running the workflow requires a CPU with **AVX** or **AVX2** support.
 You can check this with::
 
     lscpu | grep -i avx
@@ -71,7 +71,7 @@ Description
 - **Euler score**
   We use the Euler number as an image-quality metric and retain only those
   with values greater than −217, following the recommendation of
-  :footcite:p:rosen2018. This filtering step ensures that images with
+  :footcite:p:`rosen2018`. This filtering step ensures that images with
   insufficient topological stability or degradation are flagged as low‑quality.
 
 Outputs

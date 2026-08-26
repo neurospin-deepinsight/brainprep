@@ -13,12 +13,14 @@ import unittest
 import runpy
 from pathlib import Path
 
+from brainprep.reporting import RSTReport
+
 
 class TestGalleryExamples(unittest.TestCase):
 
-    def setUp(self, test_interfaces=True):
-        self.test_interfaces = test_interfaces
+    def setUp(self):
         self.examples_dir = Path(__file__).parent.parent.parent / "examples"
+        self.report = RSTReport()
 
     @staticmethod
     def run_cmd(cmd):
@@ -31,24 +33,25 @@ class TestGalleryExamples(unittest.TestCase):
             )
             return None
         except subprocess.CalledProcessError as e:
-            return f"Command failed: {cmd}"
+            return f"Command failed: {' '.join(cmd)}"
+
+    def _test_example(self, script_path):
+        return runpy.run_path(str(script_path))
 
     def _test_interface_commands(self, env):
-        if not self.test_interfaces:
-            return
-
         outdir = Path(env["outdir"])
-        commands = []
+        commands, commands_files = [], []
         for commands_file in outdir.rglob("commands_*.rst"):
             commands.extend(
                 commands_file.read_text().splitlines()
             )
-        commands = [cmd.split(" ") for cmd in commands]
-        print(f"Parsed: {outdir}")
+            commands_files.append(f"\n  - {commands_file}")
+        commands = [[*cmd.split(" "), "--dryrun"] for cmd in commands]
+        print(f"Parsed: {''.join(commands_files)}")
         print(f"Interface commands: {len(commands)}")
 
         failures = []
-        with ProcessPoolExecutor(max_workers=50) as pool:
+        with ProcessPoolExecutor(max_workers=20) as pool:
             for msg in pool.map(TestGalleryExamples.run_cmd, commands):
                 if msg is not None:
                     failures.append(msg)
@@ -77,7 +80,7 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_quality_assurance.py"
         )
-        env = runpy.run_path(str(script_path))
+        env = self._test_example(script_path)
         self._test_interface_commands(env)
 
     def test_defacing(self):
@@ -86,8 +89,8 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_defacing.py"
         )
-        env = runpy.run_path(str(script_path))
-        # self._test_interface_commands(env)
+        env = self._test_example(script_path)
+        self._test_interface_commands(env)
 
     def test_quasiraw(self):
         script_path = (
@@ -95,8 +98,8 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_quasiraw.py"
         )
-        env = runpy.run_path(str(script_path))
-        # self._test_interface_commands(env)
+        env = self._test_example(script_path)
+        self._test_interface_commands(env)
 
     def test_sbm(self):
         script_path = (
@@ -104,8 +107,8 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_sbm.py"
         )
-        env = runpy.run_path(str(script_path))
-        # self._test_interface_commands(env)
+        env = self._test_example(script_path)
+        self._test_interface_commands(env)
 
     def test_vbm(self):
         script_path = (
@@ -113,8 +116,8 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_vbm.py"
         )
-        env = runpy.run_path(str(script_path))
-        # self._test_interface_commands(env)
+        env = self._test_example(script_path)
+        self._test_interface_commands(env)
 
     def test_fmriprep(self):
         script_path = (
@@ -122,8 +125,8 @@ class TestGalleryExamples(unittest.TestCase):
             "workflows" /
             "plot_fmriprep.py"
         )
-        env = runpy.run_path(str(script_path))
-        # self._test_interface_commands(env)
+        env = self._test_example(script_path)
+        self._test_interface_commands(env)
 
 
 if __name__ == "__main__":

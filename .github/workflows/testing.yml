@@ -5,7 +5,6 @@
 # .. code-block:: bash
 #
 #   $ nosetests --with-coverage --cover-package=brainprep --verbosity=2
-#     --with-doctest --doctest-options='+ELLIPSIS,+NORMALIZE_WHITESPACE'
 ###
 name: "testing[nosetests]"
 
@@ -48,7 +47,7 @@ jobs:
         python -m pip install --progress-bar off ".[ci]"
     - name: Run unit tests
       run: |
-        nosetests --with-coverage --cover-package=brainprep --verbosity=2 --with-doctest --doctest-options='+ELLIPSIS,+NORMALIZE_WHITESPACE'
+        nosetests --with-coverage --cover-package=brainprep --verbosity=2
     - name: Coveralls
       if: matrix.python-version == 3.12
       env:

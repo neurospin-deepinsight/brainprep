@@ -45,7 +45,7 @@ from ..utils import (
         SignatureHook(),
     ]
 )
-def morphologist_wf(
+def morphologist_workflow(
         t1_file: File,
         output_dir: Directory,
         workspace_dir: Directory,

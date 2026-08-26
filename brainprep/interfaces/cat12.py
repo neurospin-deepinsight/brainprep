@@ -54,11 +54,12 @@ from .utils import (
         SignatureHook(),
     ]
 )
-def cat12vbm_wf(
+def cat12vbm_workflow(
         t1_files: list[File],
         batch_file: File,
         output_dir: Directory,
-        entities: list[dict]) -> tuple[list[str], tuple[File | list[File]]]:
+        entities: list[dict],
+    ) -> tuple[list[str], tuple[File | list[File]]]:
     """
     Compute VBM prep-processing using CAT12.
 
@@ -131,12 +132,13 @@ def cat12vbm_wf(
         SignatureHook(),
     ]
 )
-def write_catbatch(
+def writebatch(
         t1_files: list[File],
         output_dir: Directory,
         entities: list[dict],
         model_long: int = 1,
-        dryrun: bool = False) -> tuple[File]:
+        dryrun: bool = False,
+    ) -> tuple[File]:
     """
     Generate CAT12 batch file.
 
@@ -151,9 +153,11 @@ def write_catbatch(
         image file.
     model_long : int
         Longitudinal model choice:1  short time (weeks), 2 long time (years)
-        between images sessions. Default 1.
+        between images sessions.
+        Default 1.
     dryrun : bool
-        If True, skip actual computation and file writing. Default False.
+        If True, skip actual computation and file writing.
+        Default False.
 
     Returns
     -------
@@ -244,7 +248,8 @@ def write_catbatch(
 )
 def cat12vbm_morphometry(
         output_dir: Directory,
-        dryrun: bool = False) -> list[File]:
+        dryrun: bool = False,
+    ) -> list[File]:
     """
     Extract ROI-based morphometry features and global tissue volumes from
     CAT12 VBM outputs.
@@ -261,7 +266,8 @@ def cat12vbm_morphometry(
     output_dir : Directory
         Working directory containing the outputs.
     dryrun : bool
-        If True, skip actual computation and file writing. Default False.
+        If True, skip actual computation and file writing.
+        Default False.
 
     Returns
     -------

@@ -41,12 +41,13 @@ from ..utils import (
         SignatureHook(),
     ]
 )
-def dwi_preproc(
+def dwiprep(
         t1_file: File,
         dwi_files: list[File],
         workspace_dir: Directory,
         output_dir: Directory,
-        entities: dict) -> tuple[list[list[str]], tuple[File]]:
+        entities: dict,
+    ) -> tuple[list[list[str]], tuple[File]]:
     """
     Preprocessed BIDS-compliant diffusion weighted image (DWI) using MrTrix3
     `mrtrix3_connectome` pipeline.

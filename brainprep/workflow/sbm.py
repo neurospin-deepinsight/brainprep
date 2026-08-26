@@ -42,10 +42,11 @@ from ..utils import (
             process="sbm",
             bids_file="t1_file",
             add_subjects=True,
-            container="neurospin/brainprep-sbm"
+            container="neurospin/brainprep-sbm",
         ),
         LogRuntimeHook(
-            title="Subject Level SBM"
+            title="Subject Level SBM",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -58,7 +59,8 @@ def brainprep_sbm(
         do_lgi: bool = False,
         wm_file: File | None = None,
         keep_intermediate: bool = False,
-        **kwargs: dict) -> Bunch:
+        **kwargs: dict,
+    ) -> Bunch:
     """
     SBM pre-processing.
 
@@ -85,14 +87,16 @@ def brainprep_sbm(
         Default 'sbm'.
     do_lgi : bool
         Perform the Local Gyrification Index (LGI) computation - requires
-        Matlab. Default False.
+        Matlab.
+        Default False.
     wm_file : File | None
         Path to the custom white matter mask - we assume `recon-all` has been
         run at least upto the 'wm.mgz' file creation. It has to be
         in the subject's FreeSurfer space (1mm iso + aligned with brain.mgz)
         with values in [0, 1] (i.e. probability of being white matter).
         For example, it can be the 'brain_pve_2.nii.gz' white matter
-        probability map created by FSL `fast`. Default None.
+        probability map created by FSL `fast`.
+        Default None.
 
         .. deprecated:: 1.0.0
 
@@ -103,7 +107,8 @@ def brainprep_sbm(
            studies. This parameter has no effect!
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
     **kwargs : dict
         entities: dict
             Dictionary of parsed BIDS entities.
@@ -227,38 +232,42 @@ def brainprep_sbm(
         entities,
         resume=False,
     )
-    interfaces.freesurfer_command_status(
+    interfaces.freesurfer_status(
         log_file,
         command="recon-all",
     )
     if do_lgi:
-        _, _ = interfaces.localgi(
+        _, _ = interfaces.reconall_localgi(
             output_dir,
             entities,
         )
-        interfaces.freesurfer_command_status(
+        interfaces.freesurfer_status(
             log_file,
             command="recon-all",
         )
-    left_reg_file, right_reg_file = interfaces.fsaveragesym_surfreg(
+    left_reg_file, right_reg_file, log_file = interfaces.reconall_surfreg(
         output_dir,
         entities,
     )
+    interfaces.freesurfer_status(
+        log_file,
+        command="xhemireg",
+    )
     (lh_thickness_file, rh_thickness_file, lh_curv_file, rh_curv_file,
      lh_area_file, rh_area_file, lh_pial_lgi_file, rh_pial_lgi_file,
-     lh_sulc_file, rh_sulc_file) = interfaces.fsaveragesym_projection(
+     lh_sulc_file, rh_sulc_file) = interfaces.reconall_projection(
         left_reg_file,
         right_reg_file,
         output_dir,
         entities,
     )
     (aparc_aseg_file, aparc_a2009s_aseg_file, aseg_file, wm_file,
-     rawavg_file, ribbon_file, brain_file) = interfaces.mgz_to_nii(
+     rawavg_file, ribbon_file, brain_file) = interfaces.convertmgz(
         output_dir,
         entities,
     )
     (wm_mask_file, gm_mask_file, csf_mask_file,
-     brain_mask_file) = interfaces.freesurfer_tissues(
+     brain_mask_file) = interfaces.reconall_tissues(
         workspace_dir,
         output_dir,
         entities,
@@ -331,10 +340,11 @@ def brainprep_sbm(
             bids_file="t1_files",
             add_subjects=True,
             longitudinal=True,
-            container="neurospin/brainprep-sbm"
+            container="neurospin/brainprep-sbm",
         ),
         LogRuntimeHook(
-            title="Longitudinal SBM"
+            title="Longitudinal SBM",
+            clear=True,
         ),
         SaveRuntimeHook(
             parent=True
@@ -346,7 +356,8 @@ def brainprep_longitudinal_sbm(
         t1_files: list[File],
         output_dir: Directory,
         keep_intermediate: bool = False,
-        **kwargs: dict) -> Bunch:
+        **kwargs: dict,
+    ) -> Bunch:
     """
     Longitudinal SBM preprocessing.
 
@@ -364,7 +375,8 @@ def brainprep_longitudinal_sbm(
         FreeSurfer working directory containing all the subjects.
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
     **kwargs : dict
         entities: list[dict]
             Dictionaries of parsed BIDS entities.
@@ -432,7 +444,7 @@ def brainprep_longitudinal_sbm(
         entities,
     )
     for log_file in [log_template_file, *log_files]:
-        interfaces.freesurfer_command_status(
+        interfaces.freesurfer_status(
             log_file,
             command="recon-all",
         )
@@ -496,10 +508,11 @@ def brainprep_longitudinal_sbm(
         CoerceparamsHook(),
         BidsHook(
             process="sbm",
-            container="neurospin/brainprep-sbm"
+            container="neurospin/brainprep-sbm",
         ),
         LogRuntimeHook(
-            title="Group Level SBM"
+            title="Group Level SBM",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -509,7 +522,8 @@ def brainprep_group_sbm(
         output_dir: Directory,
         euler_threshold: int = -217,
         longitudinal: bool = False,
-        keep_intermediate: bool = False) -> Bunch:
+        keep_intermediate: bool = False,
+    ) -> Bunch:
     """
     Group level SBM pre-processing.
 
@@ -530,12 +544,15 @@ def brainprep_group_sbm(
     output_dir : Directory
         FreeSurfer working directory containing all the subjects.
     euler_threshold : int
-        Quality control threshold on the Euler number. Default -217.
+        Quality control threshold on the Euler number.
+        Default -217.
     longitudinal : bool
-        If True, consider the longitudinal data as inputs. Default False.
+        If True, consider the longitudinal data as inputs.
+        Default False.
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
 
     Returns
     -------
@@ -593,12 +610,12 @@ def brainprep_group_sbm(
     workspace_dir.mkdir(parents=True, exist_ok=True)
     print_info(f"setting workspace directory: {workspace_dir}")
 
-    summary_files = interfaces.freesurfer_features_summary(
+    summary_files = interfaces.reconall_summary(
         workspace_dir,
         output_dir,
     )
     if not longitudinal:
-        euler_numbers_file = interfaces.euler_numbers(
+        euler_numbers_file = interfaces.eulernums(
             output_dir,
         )
         euler_numbers_histogram_file = interfaces.plot_histogram(

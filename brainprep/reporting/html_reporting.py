@@ -10,11 +10,15 @@
 Module that implements a HTML reporting tool.
 """
 
+import json
 import uuid
 from html import escape
 from pathlib import Path
 from typing import Self
 
+from ..typing import (
+    File,
+)
 from .utils import (
     dataframe_to_html,
     inject_with_jinja,
@@ -48,9 +52,11 @@ class HTMLReport:
     html : str
         The HTML content to be rendered.
     width : int
-        Width of the display area in pixels. Default 800.
+        Width of the display area in pixels.
+        Default 800.
     height : int
-        Height of the display area in pixels. Default 800.
+        Height of the display area in pixels.
+        Default 800.
 
     Examples
     --------
@@ -65,7 +71,8 @@ class HTMLReport:
             self,
             html: str,
             width: int = 800,
-            height: int = 800) -> None:
+            height: int = 800,
+        ) -> None:
         self.html = html
         self.width = width
         self.height = height
@@ -75,7 +82,8 @@ class HTMLReport:
     def resize(
             self,
             width: int,
-            height: int) -> Self:
+            height: int,
+        ) -> Self:
         """
         Resize the document displayed.
 
@@ -97,16 +105,19 @@ class HTMLReport:
     def get_iframe(
             self,
             width: int | None,
-            height: int | None) -> str:
+            height: int | None,
+        ) -> str:
         """
         Get the document wrapped in an inline frame.
 
         Parameters
         ----------
         width: int | None
-            Width of the inline frame. Default None.
+            Width of the inline frame.
+            Default None.
         height: int | None
-            Height of the inline frame. Default None.
+            Height of the inline frame.
+            Default None.
 
         Returns
         -------
@@ -145,7 +156,8 @@ class HTMLReport:
     def _repr_mimebundle_(
             self,
             include=None,
-            exclude=None) -> dict:
+            exclude=None,
+        ) -> dict:
         """
         Return html representation of the plot.
 
@@ -163,7 +175,8 @@ class HTMLReport:
 
     def save_as_html(
             self,
-            file_name: str) -> None:
+            file_name: str,
+        ) -> None:
         """
         Save the plot in an HTML file, that can later be opened in a browser.
 
@@ -177,10 +190,10 @@ class HTMLReport:
 
 def generate_qc_report(
         title: str,
-        docstring: str,
         version: str,
         date: str,
-        data: list[dict]) -> HTMLReport:
+        data: list[dict | File],
+    ) -> HTMLReport:
     """
     Generate a quality control (QC) report as an interactive HTML document.
 
@@ -192,19 +205,29 @@ def generate_qc_report(
     ----------
     title : str
         The title displayed at the top of the report.
-    docstring : str
-        A descriptive introduction or summary of the report's purpose.
     version : str
         Version identifier for the report or associated software.
     date : str
         Timestamp indicating when the report was generated.
-    data : list[dict]
-        A list of dictionaries, each representing a workflow step. Each
-        dictionary must contain the following keys:
-        - name (str): Title of the step.
-        - content (Path or list of Path): Image(s) to display.
-        - overlay (Path): Image(s) to show on hover.
-        - tables (DataFrame or list of DataFrame): Tabular data to include.
+    data : list[dict | File]
+        A list of dictionaries or JSON files containing dictionaries, each
+        representing a workflow step. Each dictionary must contain the
+        following keys:
+
+        - name : str - Title of the step.
+        - summary : str - A HTML string to be be displayed.
+        - images : dict | None - A dictionary containing configurations for
+          image plots. If provided, the dictionary must follow this specific
+          schema.
+        - carousels : dict | None - A dictionary containing configurations for
+          a carousel plots. If provided, the dictionary must follow this
+          specific schema.
+        - tables : dict | None - A dictionary containing configurations for
+          table plots. If provided, the dictionary must follow this specific
+          schema.
+        - scatters : dict | None - A dictionary containing configurations for
+          interactive scatter plots. If provided, the dictionary must follow
+          this specific schema.
 
     Returns
     -------
@@ -213,8 +236,48 @@ def generate_qc_report(
 
     Notes
     -----
-    - Images are converted to base64 for inline embedding.
-    - Tables are rendered as HTML using `dataframe_to_html`.
+    Images are converted to base64 for inline embedding.
+
+    Tables are rendered as HTML using `dataframe_to_html`.
+
+    The `images` dictionary must follow this specific schema:
+
+    - "chart_name":
+        - "record": A list of strings representing the images to display.
+        - "overlays": A list of strings or None, representing the images to
+          show over the main images. This can also be None.
+        - "labels": A list of strings or None, representing the text labels
+          for each image. This can also be None.
+
+    The `carousels` dictionary must follow this specific schema:
+
+    - "chart_name":
+        - "record": A list of strings representing the images to include in
+          the carousel.
+        - "labels": A list of strings or None, representing the text labels
+          for each image. This can also be None.
+
+    The `tables` dictionary must follow this specific schema:
+
+    - "chart_name":
+        - "record": A list of DataFrames representing the tabular data to
+          include.
+        - "labels": A list of strings or None, representing the text labels
+          for each table. This can also be None.
+
+    The `scatters` dictionary must follow this specific schema:
+
+    - "chart_name":
+        - "record": A list of dictionaries representing the points in the
+          scatter plot. Each dictionary must contain the keys 'x', 'y', and
+          'img'.
+        - "x_label": A string representing the text label displayed along the
+          X-axis of the scatter plot.
+        - "y_label": A string representing the text label displayed along the
+          Y-axis of the scatter plot.
+        - "with_img": A boolean indicating whether to display images
+          associated with each point. If False, only the points will be
+          displayed.
 
     Examples
     --------
@@ -238,48 +301,61 @@ def generate_qc_report(
     """
     template_path = Path(__file__).parent / "data" / "body.html"
     css_path = Path(__file__).parent / "data" / "style.css"
+
     with css_path.open(encoding="utf-8") as css_file:
         css = css_file.read()
     js_path = Path(__file__).parent / "data" / "script.js"
     with js_path.open(encoding="utf-8") as js_file:
         js = js_file.read()
-    unique_id = str(uuid.uuid4()).replace("-", "")
+
+    data = [
+        dict_or_file
+        if isinstance(dict_or_file, dict)
+        else json.load(dict_or_file.open())
+        for dict_or_file in data
+    ]
+
     for counter, item in enumerate(data):
         item["id"] = counter
-        content = item.get("content")
-        overlay = item.get("overlay")
-        tables = item.get("tables")
-        if content is not None:
-            if not isinstance(content, (tuple, list)):
-                content = [content]
-            item["content"] = [
-                png_image_to_base64(img) for img in content
-            ]
-        if overlay is not None:
-            if not isinstance(overlay, (tuple, list)):
-                overlay = [overlay]
-            item["overlay"] = [
-                png_image_to_base64(img) for img in overlay
-            ]
-        if tables is not None:
-            if not isinstance(tables, (tuple, list)):
-                tables = [tables]
-            item["tables"] = [
-                dataframe_to_html(
-                    tab,
-                    precision=2,
-                    header=True,
-                    index=False,
-                    sparsify=False,
-                ) for tab in tables
-            ]
+
+        if "images" in item:
+            for key in item["images"]:
+                item["images"][key]["record"] = [
+                    png_image_to_base64(img)
+                    for img in item["images"][key]["record"]
+                ]
+                if item["images"][key].get("overlays") is not None:
+                    item["images"][key]["overlays"] = [
+                        png_image_to_base64(img)
+                        if img is not None else None
+                        for img in item["images"][key]["overlays"]
+                    ]
+
+        if "carousels" in item:
+            for key in item["carousels"]:
+                item["carousels"][key]["record"] = [
+                    png_image_to_base64(img)
+                    for img in item["carousels"][key]["record"]
+                ]
+
+        if "tables" in item:
+            for key in item["tables"]:
+                item["tables"][key]["record"] = [
+                    dataframe_to_html(
+                        tab,
+                        precision=2,
+                        header=True,
+                        index=False,
+                        sparsify=False,
+                    ) for tab in item["tables"][key]["record"]
+                ]
+
     html = inject_with_jinja(
         template_file=template_path,
         css=css,
         js=js,
-        uuid=unique_id,
+        uuid=str(uuid.uuid4()).replace("-", ""),
         title=title,
-        docstring=docstring,
         version=version,
         date=date,
         workflows=data,

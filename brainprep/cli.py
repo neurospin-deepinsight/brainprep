@@ -203,6 +203,7 @@ def main():
         "subject-level-sulcirec": wf.brainprep_sulcirec,
         "group-level-sulcirec": wf.brainprep_group_sulcirec,
         "subject-level-dmriprep": wf.brainprep_dmriprep,
+        "group-level-reporting": wf.brainprep_group_reporting,
     }
     for key, fn in commands.items():
         commands[key] = make_wrapped(

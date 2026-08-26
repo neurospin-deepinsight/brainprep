@@ -14,6 +14,7 @@ import datetime
 import inspect
 import json
 import platform
+import pprint
 import time
 from collections.abc import Callable, Iterable
 from pathlib import Path
@@ -65,16 +66,6 @@ class Hook:
     ``before_call`` returns the inputs unchanged, and ``after_call`` returns
     the outputs unchanged.
 
-    Methods
-    -------
-    before_call(func, inputs)
-        Hook executed before the wrapped function is called.
-        Must return a dictionary of (possibly modified) inputs.
-
-    after_call(func, outputs)
-        Hook executed after the wrapped function returns.
-        Must return the (possibly modified) output value.
-
     Notes
     -----
     Subclasses may override one or both methods. If a method is not
@@ -87,14 +78,22 @@ class Hook:
             func: Callable,
             inputs: dict[str, Any],
         ) -> dict[str, Any]:
-        """Transform and inspect inputs before the function call."""
+        """
+        Hook executed before the wrapped function is called.
+        Transform and/or inspect inputs.
+        Must return a dictionary of (possibly modified) inputs.
+        """
         return inputs
 
     def after_call(
             self,
             outputs: Any,
         ) -> Any:
-        """Transform and inspect outputs after the function call."""
+        """
+        Hook executed after the wrapped function returns.
+        Transform and/or inspect outputs.
+        Must return the (possibly modified) output value.
+        """
         return outputs
 
 
@@ -283,10 +282,12 @@ class CommandLineWrapperHook(Hook):
             )
 
         if not is_list_str(command) and not is_list_list_str(command):
-            raise ValueError(
+            msg = (
                 "Invalid command format: expected a list of strings or a "
-                "list of list of string for multiple commands."
+                "list of list of string for multiple commands.\n"
             )
+            msg += pprint.pformat(command)
+            raise ValueError(msg)
         commands = [command] if is_list_str(command) else command
 
         for cmd in commands:
@@ -601,13 +602,16 @@ class OutputdirHook(Hook):
     ----------
     plotting : bool
         If True, add a ``figures`` upper level directory in the output
-        directory. Default False.
+        directory.
+        Default False.
     quality_check : bool
         If True, add a ``quality_check`` upper level directory in the output
-        directory. Default False.
+        directory.
+        Default False.
     morphometry : bool
         If True, add a ``morphometry`` upper level directory in the output
-        directory. Default False.
+        directory.
+        Default False.
 
     Examples
     --------
@@ -721,13 +725,19 @@ class LogRuntimeHook(Hook):
     Parameters
     ----------
     title : str | None
-        A title to display. Default None.
+        A title to display.
+        Default None.
+    clear : bool
+        If True, the `RSTReport` will be empty.
+        Default False.
     bunched : bool
-        Return a bunch object with a default 'outputs' key. Default True.
+        Return a bunch object with a default 'outputs' key.
+        Default True.
     parent : bool
         Indicates that at least one OutputdirHook parameter has been set to
         True. When enabled, the parent output directory is included in the
-        interface logging mechanism. Default False.
+        interface logging mechanism.
+        Default False.
 
     Notes
     -----
@@ -781,10 +791,12 @@ class LogRuntimeHook(Hook):
     def __init__(
             self,
             title: str | None = None,
+            clear: bool = False,
             bunched: bool = True,
             parent: bool = False,
         ) -> None:
         self.title = title
+        self.clear = clear
         self.bunched = bunched
         self.parent = parent
 
@@ -814,7 +826,7 @@ class LogRuntimeHook(Hook):
             comma-separated strings into lists.
         """
         report = RSTReport(
-            reloadable=True,
+            reloadable=not self.clear,
             increment=True,
         )
 

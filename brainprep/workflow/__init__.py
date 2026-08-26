@@ -29,6 +29,9 @@ from .quasiraw import (
     brainprep_group_quasiraw,
     brainprep_quasiraw,
 )
+from .reporting import (
+    brainprep_group_reporting,
+)
 from .sbm import (
     brainprep_group_sbm,
     brainprep_longitudinal_sbm,
@@ -51,6 +54,7 @@ __all__ = [
     "brainprep_group_fmriprep",
     "brainprep_group_quality_assurance",
     "brainprep_group_quasiraw",
+    "brainprep_group_reporting",
     "brainprep_group_sbm",
     "brainprep_group_sulcirec",
     "brainprep_group_vbm",

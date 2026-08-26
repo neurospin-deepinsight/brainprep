@@ -41,10 +41,11 @@ from ..utils import (
             process="fmriprep",
             bids_file="t1_file",
             add_subjects=True,
-            container="neurospin/brainprep-fmriprep"
+            container="neurospin/brainprep-fmriprep",
         ),
         LogRuntimeHook(
-            title="Subject Level fMRI PreProcessing"
+            title="Subject Level fMRI PreProcessing",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -56,7 +57,8 @@ def brainprep_fmriprep(
         freesurfer_dir: Directory,
         output_dir: Directory,
         keep_intermediate: bool = False,
-        **kwargs: dict) -> Bunch:
+        **kwargs: dict,
+    ) -> Bunch:
     """
     Subject level functional MRI pre-processing.
 
@@ -114,7 +116,8 @@ def brainprep_fmriprep(
         (i.e., the root of your dataset).
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
     **kwargs : dict
         entities: dict
             Dictionary of parsed BIDS entities.
@@ -187,7 +190,8 @@ def brainprep_fmriprep(
     )
     if not dataset_description_file.is_file():
         raise ValueError(
-            "A description file must be included in rawdata directory."
+            "A description file must be included in rawdata directory: "
+            f"{dataset_description_file}"
         )
 
     entities = kwargs.get("entities", {})
@@ -196,7 +200,7 @@ def brainprep_fmriprep(
             f"The T1w file '{t1_file}' is not BIDS-compliant."
         )
 
-    rfmri_outputs, qc_file = interfaces.fmriprep_wf(
+    rfmri_outputs, qc_file = interfaces.fmriprep_workflow(
         t1_file,
         func_files,
         dataset_description_file,
@@ -224,7 +228,7 @@ def brainprep_fmriprep(
             if "run" not in entities:
                 entities["run"] = entities_["run"]
             connectivity_files.append(
-                interfaces.func_vol_connectivity(
+                interfaces.fmri_connectivity(
                     fmri_image_file,
                     mask_file,
                     confounds_file,
@@ -261,10 +265,11 @@ def brainprep_fmriprep(
         CoerceparamsHook(),
         BidsHook(
             process="fmriprep",
-            container="neurospin/brainprep-fmriprep"
+            container="neurospin/brainprep-fmriprep",
         ),
         LogRuntimeHook(
-            title="Group Level fMRI PreProcessing"
+            title="Group Level fMRI PreProcessing",
+            clear=True,
         ),
         SaveRuntimeHook(),
         SignatureHook(),
@@ -275,7 +280,8 @@ def brainprep_group_fmriprep(
         fd_mean_threshold: float = 0.2,
         dvars_std_threshold: float = 1.5,
         entropy_threshold: float = 12,
-        keep_intermediate: bool = False) -> Bunch:
+        keep_intermediate: bool = False,
+    ) -> Bunch:
     """
     Group level functional MRI pre-processing.
 
@@ -307,7 +313,8 @@ def brainprep_group_fmriprep(
         Default 12.
     keep_intermediate : bool
         If True, retains intermediate results (i.e., the workspace); useful
-        for debugging. Default False.
+        for debugging.
+        Default False.
 
     Returns
     -------

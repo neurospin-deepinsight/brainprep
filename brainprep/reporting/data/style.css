@@ -440,8 +440,8 @@ a {
 .image {
   position: relative;
   height: auto;
-  width: 70%;
-  margin-left: 15%;
+  width: 60%;
+  margin-left: 20%;
 }
 
 .image .overlay {
@@ -467,7 +467,6 @@ a {
   overflow-y: scroll;
 }
 
-
 .btn {
   background-color: #3498db;
   color: white;
@@ -480,4 +479,104 @@ a {
 .btn:hover,
 .btn:focus {
   background-color: #2980b9;
+}
+
+.chart-section {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.canvas-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.canvas-element {
+    cursor: pointer;
+    display: block;
+}
+.image-viewer {
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px dashed #bbb;
+    min-height: 200px;
+    background: #f9f9f9;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.preview-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+.placeholder-text {
+    color: #666;
+}
+
+.nav-link {
+    color: #007bff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.popup {
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    display: none;
+    z-index: 1000;
+}
+
+.custom-details {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0;
+    margin: 10px;
+    position: relative;
+}
+
+.custom-summary {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.custom-summary::after {
+    content: "+";
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.custom-details[open] .custom-summary::after {
+    content: "-";
+}
+
+.custom-content {
+    padding: 10px;
+    background-color: #fff;
 }
