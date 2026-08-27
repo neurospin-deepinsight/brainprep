@@ -1,55 +1,40 @@
-[brainprep.workflow]
-subject-level-qa = "--image-files {!T1ws},{!T2ws},{!FLAIRs},{!dwis},{!bolds} --output-dir {outdir}"
-group-level-qa = "--modalities T1w,T1w,FLAIR,dwi,bold --output-dir {outdir}"
-subject-level-defacing = "--t1_file {T1w} --output-dir {outdir}"
-group-level-defacing = "--output-dir {outdir}"
-subject-level-quasiraw = "--anatomical_file {T1w} --output-dir {outdir}"
-group-level-quasiraw = "--output-dir {outdir}"
-subject-level-sbm = "--t1_file {T1w} --output-dir {outdir}"
-longitudinal-sbm = "--t1_files {T1ws} --model 1 --output-dir {outdir}"
-group-level-sbm = "--output-dir {outdir}"
-subject-level-vbm = "--t1_file {T1w} --output-dir {outdir}"
-longitudinal-vbm = "--t1_files {T1ws} --model 1 --output-dir {outdir}"
-group-level-vbm = "--output-dir {outdir}"
-subject-level-fmriprep = "--t1-file {T1w} --func-files {bolds} --freesurfer-dir {fsdir} --output-dir {outdir}"
-group-level-fmriprep = "--output-dir {outdir}"
-subject-level-sulcirec = "--t1-file {T1w} --output-dir {outdir}"
-group-level-sulcirec = "--output-dir {outdir}"
-
 [brainprep.mapping]
+ALL = [
+    "subject-level-qa --image-files {mod} --output-dir {outdir}",
+    "group-level-qa --modalities {mod_names} --output-dir {outdir}",
+]
 T1w = [
-    "subject-level-qa",
-    "group-level-qa",
-    "subject-level-defacing",
-    "group-level-defacing",
-    "subject-level-quasiraw",
-    "group-level-quasiraw",
-    "subject-level-sbm",
-    "longitudinal-sbm",
-    "group-level-sbm",
-    "subject-level-vbm",
-    "longitudinal-vbm",
-    "group-level-vbm",
-    "subject-level-sulcirec",
-    "group-level-sulcirec",
+    "subject-level-defacing --anatomical_file {T1w} --output-dir {outdir}",
+    "group-level-defacing --modality T1w --output-dir {outdir}",
+    "subject-level-quasiraw --anatomical_file {T1w} --output-dir {outdir}",
+    "group-level-quasiraw --modality T1w --output-dir {outdir}",
+    "subject-level-sbm --t1_file {T1w} --output-dir {outdir}",
+    "longitudinal-sbm --t1_files {T1ws} --model 1 --output-dir {outdir}",
+    "group-level-sbm --output-dir {outdir}",
+    "subject-level-vbm --t1_file {T1w} --output-dir {outdir}",
+    "longitudinal-vbm --t1_files {T1ws} --model 1 --output-dir {outdir}",
+    "group-level-vbm --output-dir {outdir}",
+    "subject-level-sulcirec --t1-file {T1w} --output-dir {outdir}",
+    "group-level-sulcirec --output-dir {outdir}",
 ]
 T2w = [
-    "subject-level-qa",
-    "group-level-qa",
-    "subject-level-quasiraw",
-    "group-level-quasiraw",
+     "subject-level-defacing --anatomical_file {T2w} --output-dir {outdir}",
+    "group-level-defacing --modality T2w --output-dir {outdir}",
+    "subject-level-quasiraw --anatomical_file {T2w} --output-dir {outdir}",
+    "group-level-quasiraw --modality T2w --output-dir {outdir}",
 ]
 FLAIR = [
-    "subject-level-qa",
-    "group-level-qa",
-    "subject-level-quasiraw",
-    "group-level-quasiraw",
+     "subject-level-defacing --anatomical_file {FLAIR} --output-dir {outdir}",
+    "group-level-defacing --modality FLAIR --output-dir {outdir}",
+    "subject-level-quasiraw --anatomical_file {FLAIR} --output-dir {outdir}",
+    "group-level-quasiraw --modality FLAIR --output-dir {outdir}",
 ]
-bold = [
-    "subject-level-qa",
-    "group-level-qa",
-    "subject-level-fmriprep",
-    "group-level-fmriprep",
+BOLD = [
+    "subject-level-fmriprep --t1-file {T1w} --func-files {bolds} --freesurfer-dir {fsdir} --output-dir {outdir}",
+    "group-level-fmriprep --output-dir {outdir}",
+]
+DWI = [
+    "subject-level-dmriprep --t1-file {T1w} --dwi-files {dwis} --output-dir {outdir}",
 ]
 
 [sbm.default]
@@ -103,3 +88,7 @@ backend = "oneshot"
 [vbm.group]
 n_cpus = 1
 memory = 5
+
+[dmriprep.default]
+n_cpus = 1
+memory = 32
