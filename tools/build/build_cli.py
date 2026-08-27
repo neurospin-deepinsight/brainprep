@@ -25,7 +25,6 @@ from brainprep import __version__ as version
 def build(
         working_dir: str | Path,
         bind_dir: str | Path,
-        partition: str,
         freesurfer_license_file: str | Path,
         dev: bool = False,
     ) -> None:
@@ -33,72 +32,47 @@ def build(
     Parse available Docker files and generate the associated build instructions
     (creation and test steps).
 
-    Two infrastructures are supported: ``ccc`` and ``slurm``.
-    To select one, use either ``<name>`` or ``<project>:<name>`` as the value
-    of the ``partition`` parameter.
-
     Parameters
     ----------
     working_dir : str | Path
         Directory where the generated instructions will be written.
     bind_dir : str | Path
-        Directory containing the data to be bound into the Docker environment.
-    partition : str
-        Name of the partition to use. Can be provided as ``<name>`` or
-        ``<project>:<name>`` depending on the infrastructure.
+        Directory containing the data to be bound into the Apptainer
+        environment.
     freesurfer_license_file : str | Path
         Path to the FreeSurfer license file required for container execution.
     dev : bool
         If True, overwrite the ``brainprep`` module inside the container image.
-        Default is False.
+        Default False.
     """
     cw_dir = Path(__file__).parent.resolve()
     working_dir = Path(working_dir)
-    hopla_dir = working_dir / f"v{version}" / "hopla"
-    home_dir = working_dir / f"v{version}" / "home"
+    workspace_dir = working_dir / f"v{version}" / "data"
+    home_dir = workspace_dir / "home"
     examples_dir = cw_dir.parent.parent / "examples"
-    for dir_ in (hopla_dir, home_dir):
-        dir_.mkdir(parents=True, exist_ok=True)
+    home_dir.mkdir(parents=True, exist_ok=True)
+    print(f"- Home direcotry: {home_dir}")
 
-    if ":" in partition:
-        infra = "ccc"
-        project_id, partition = partition.split(":")
-        image_extension = "sif"
-    else:
-        infra = "slurm"
-        project_id = None
-        image_extension = "tar"
+    build_images_main(
+        working_dir,
+    )
 
-    if infra == "slurm":
-        build_images_main(
-            working_dir,
-        )
     placeholder = "{workflow}"
-    if infra == "slurm":
-        image_parameters = f"--cleanenv --home {home_dir} --bind {bind_dir} "
-        if dev:
-            image_parameters += (
-                f"--bind {cw_dir.parent.parent / 'brainprep'}:"
-                "/opt/brainprep/.pixi/envs/default/lib/python3.12/site-packages/"
-                "brainprep "
-            )
-    elif infra == "ccc" and dev:
-        image_parameters = (
-            f"-v {cw_dir.parent.parent / 'brainprep'}:"
+    image_parameters = f"--cleanenv --home {home_dir} --bind {bind_dir}"
+    if dev:
+        image_parameters += (
+            f"--bind {cw_dir.parent.parent / 'brainprep'}:"
             "/opt/brainprep/.pixi/envs/default/lib/python3.12/site-packages/"
-            "brainprep "
+            "brainprep"
         )
-    else:
-        image_parameters = ""
 
     build_tests_main(
         examples_dir,
-        infra=infra,
         image_template=(
             working_dir /
             f"v{version}" /
             placeholder /
-            f"brainprep-{placeholder}-v{version}.{image_extension}"
+            f"brainprep-{placeholder}-v{version}.sif"
         ),
         save_template=(
             working_dir /
@@ -111,11 +85,8 @@ def build(
             f"v{version}" /
             placeholder
         ),
-        image_parameters=image_parameters,
-        hopla_dir=hopla_dir,
-        partition=partition,
         freesurfer_license_file=freesurfer_license_file,
-        project_id=project_id,
+        image_parameters=image_parameters,
     )
 
 
@@ -136,25 +107,21 @@ def main():
     Examples
     --------
     Build test instructions from the example scripts in the ``examples``
-    repository directory using the ``slurm`` infrastructure and a given
-    container image:
+    repository:
 
         python3 containers/build/build_cli.py build-tests \
             --examples-dir examples \
-            --infra slurm \
-            --image-template /tmp/brainprep-{workflow}-v2.0.0.sif \
-            --hopla-dir /tmp/hopla
+            --image-template /tmp/brainprep-{workflow}-v2.0.0.sif
 
-    Build image creation instructions in a given folder:
+    Build image creation instructions:
 
         python3 containers/build/build_cli.py build-images \
             --working-dir /tmp/build
 
-    Build image creation and test instructions in a given folder:
+    Build image creation and test instructions:
 
         python3 containers/build/build_cli.py build \
-            --working-dir /tmp/build \
-            --bind-dir /my/data/dir
+            --working-dir /tmp/build
     """
     fire.Fire({
         "build-tests": build_tests_main,

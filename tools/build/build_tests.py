@@ -13,26 +13,19 @@ infrastructure.
 
 import copy
 import io
-import json
 import runpy
 import shutil
 import sys
-import tomllib
-from datetime import datetime
 from pathlib import Path
 
 
 def main(
         examples_dir: str | Path,
-        infra: str,
         image_template: str,
-        hopla_dir: str | Path,
-        partition: str,
         freesurfer_license_file: str | Path,
-        project_id: str | None = None,
-        image_parameters: str | None = None,
         root_template: str | None = None,
         save_template: str | None = None,
+        image_parameters: str | None = None,
     ) -> None:
     """
     Execute examples scripts using ``hoplacli``.
@@ -47,34 +40,28 @@ def main(
     ----------
     examples_dir : str | Path
         Directory containing example Python scripts.
-    infra : str
-        Infrastructure identifier.
     image_template : str
         Path to the container or image file referenced in the generated config
         where `{workflow}` acts as a placeholder. The calling code replaces
         `{workflow}` with the name of the image being processed. Using a
         template allows the script to dynamically generate commands for
         different images without duplicating code.
-    hopla_dir: str | Path
-        Path to the hopla working directory.
-    partition : str
-        Name of the partition to use.
     freesurfer_license_file : str | Path
         Path to the FreesurFer license file.
-    project_id : str | None
-        Name of the project identifier. Default None.
-    image_parameters: str | None
-        Additional parameters passed to the container execution command.
-        Default None.
     root_template : str | None
         Path to the working directory where `{workflow}` acts as a placeholder.
         The calling code replaces `{workflow}` with the name of the image
         being processed. Defaults are directly defined in the
-        examples: ``datadir`` and ``outdir``. Default None.
-    save_template: str | None
+        examples: ``datadir`` and ``outdir``.
+        Default None.
+    save_template : str | None
         Path to the file where the testing commands are saved where
         `{workflow}` acts as a placeholder. The calling code replaces
-        `{workflow}` with the name of the image being processed. Default None.
+        `{workflow}` with the name of the image being processed.
+        Default None.
+    image_parameters: str | None
+        Additional parameters passed to the Apptainer container.
+        Default None.
 
     Raises
     ------
@@ -92,20 +79,17 @@ def main(
     """
     print(banner)
 
-    # Get configuration templates
-    cw_dir = Path(__file__).parent.resolve()
-    config_dir = cw_dir.parent / "resources"
-    config_file = config_dir / "hopla_config.toml"
-    config_template = config_file.read_text()
-    workflow_resource_file = config_dir / "workflows_config.toml"
-    with workflow_resource_file.open("rb") as of:
-        workflow_resource = tomllib.load(of)
-    image_parameters = image_parameters or ""
+    # Update container parameters
+    image_parameters += (
+        f"--bind {freesurfer_license_file}:/opt/freesurfer/license.txt "
+    )
 
     # Scan example scripts
+    cw_dir = Path(__file__).parent.resolve()
     examples_dir = Path(examples_dir)
     script_paths = examples_dir.glob("*/*.py")
-    hoplacli_commands = []
+    image_parameters = image_parameters or ""
+    commands = []
     start = 0
     for script_file in script_paths:
 
@@ -121,14 +105,13 @@ def main(
         sys.stdout = io.StringIO()
         env = runpy.run_path(str(script_file))
         sys.stdout = original_stdout
-        commands = env.get("commands", [])
-        if len(commands) == 0:
+        examples_commands = env.get("commands", [])
+        if len(examples_commands) == 0:
             print("- No command")
             continue
 
-        # Prepapre commands to execute code with hoplacli
-        print(f"- Execution: {len(commands)} steps")
-        confs = workflow_resource[workflow_name]
+        # Prepare commands to execute
+        print(f"- Execution: {len(examples_commands)} step(s)")
         if root_template is not None:
             datadir_orig = Path(env["datadir"])
             outdir_orig = Path(env["outdir"])
@@ -137,27 +120,34 @@ def main(
                     workflow="data",
                 )
             )
-            outdir = Path(
+            scriptdir = Path(
                 str(root_template).format(
                     workflow=workflow_name,
                 )
             )
+            outdir = datadir / "derivatives"
             print(f"- Copy data: {datadir_orig} -> {datadir}")
             shutil.copytree(datadir_orig, datadir, dirs_exist_ok=True)
         else:
             datadir = Path(env["datadir"])
+            scriptdir = datadir
             outdir = Path(env["outdir"])
+        print(f"- Data directory: {datadir}")
+        print(f"- Script directory: {scriptdir}")
+        print(f"- Output directory: {outdir}")
         outdir.mkdir(parents=True, exist_ok=True)
-        for idx, step_commands in enumerate(commands, start=1):
-            config_path = outdir / f"config_step{idx}.toml"
-            image_parameters_ = image_parameters
+        for idx, step_commands in enumerate(examples_commands, start=1):
+            run_file = scriptdir / f"run_{idx}.sh"
 
             # Format commands
             step_commands = [
                 [*cmd, "--no-color"]
                 for cmd in step_commands
             ]
-            step_commands_str = json.dumps(step_commands, indent=2)
+            step_commands_str = "\n".join([
+                " ".join(cmd_) + " &"
+                for cmd_ in step_commands
+            ])
             if root_template is not None:
                 step_commands_str = step_commands_str.replace(
                     str(datadir_orig),
@@ -167,52 +157,20 @@ def main(
                     str(outdir_orig),
                     str(datadir),
                 )
+            print(f"- Commands:\n {step_commands_str}")
 
-            # Fill template
-            image_file = str(image_template).format(
-                workflow=name.replace("plot_", ""),
+            # Write commands to file
+            bash_str = "#!/bin/bash\n\n"
+            bash_str += step_commands_str
+            bash_str += "\n\nwait"
+            with run_file.open("w") as of:
+                of.write(bash_str)
+
+            # Execute commands
+            commands.append(
+                f"apptainer {image_parameters} run {run_file}"
             )
-            workflow_type = step_commands[0][1].split("-")[0]
-            selected_conf = confs.get(workflow_type, confs["default"])
-            if selected_conf.get("freesurfer", False):
-                if infra == "ccc":
-                    image_parameters_ += (
-                        f"-v {freesurfer_license_file}:"
-                        "/opt/freesurfer/license.txt "
-                    )
-                else:
-                    image_parameters_ += (
-                        f"--bind {freesurfer_license_file}:"
-                        "/opt/freesurfer/license.txt "
-                    )
-            config_str = config_template.format(
-                name=f"{script_file.stem}-step{idx}",
-                operator="deamon",
-                date=str(datetime.now().date()),
-                commands=step_commands_str,
-                parameters=image_parameters_,
-                cluster=infra,
-                partition=partition,
-                n_cpus=selected_conf["n_cpus"],
-                memory=selected_conf["memory"],
-                image_file=image_file,
-                project_id=project_id,
-                backend=selected_conf.get("backend", "flux"),
-                hopla_dir=hopla_dir,
-            )
-
-            # Write config file
-            with config_path.open("w") as of:
-                of.write(config_str)
-
-            # Execute hoplacli command
-            hopla_cmd = [
-                "hoplacli",
-                "--config", str(config_path),
-                "--njobs", "10",
-            ]
-            hoplacli_commands.append(hopla_cmd)
-            print(f"- Command: {''.join(hopla_cmd)}")
+            print(f"- Command: {commands[-1]}")
 
         # Save generated testing commands
         if save_template is not None:
@@ -225,11 +183,9 @@ def main(
                 save_file.touch()
             with save_file.open("a") as of:
                 of.write(
-                    "\n".join(
-                        " ".join(cmd) for cmd in hoplacli_commands[start:]
-                    )
+                    "\n".join(commands[start:])
                 )
-            start = len(hoplacli_commands)
+            start = len(commands)
             print(f"- Generated build instructions: {save_file}")
 
     print(
@@ -254,7 +210,7 @@ def main(
 
 def merge(
         defaults: dict,
-        overrides: dict
+        overrides: dict,
     ) -> dict:
     """
     Recursively merge two dictionaries, applying overrides to defaults.

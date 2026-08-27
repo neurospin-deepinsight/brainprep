@@ -10,8 +10,6 @@
 Provide a command line interface to generate image build instructions.
 """
 
-import glob
-import os
 import shutil
 from pathlib import Path
 
