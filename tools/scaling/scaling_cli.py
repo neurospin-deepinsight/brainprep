@@ -310,7 +310,7 @@ def organize_longitudinal(
     """
     banner = r"""
     +----------------------------------+
-    |   Organize longitudianl data...  |
+    |   Organize longitudinal data...  |
     +----------------------------------+
     """
     print(banner)
@@ -482,7 +482,7 @@ def collect_config(
         else None
     )
     workflow_parameters = workflow_parameters.format_map(
-        SafeDict({"outdir": output_dir / "data"})
+        SafeDict({"outdir": working_dir / "data"})
     )
     print(f"- edited parameters: {workflow_parameters}")
 
@@ -497,7 +497,7 @@ def collect_config(
     if infra == "slurm":
         image_parameters = (
             f"--cleanenv --home {home_dir} --bind {bind_dir} "
-            f"--bind {output_dir} "
+            f"--bind {working_dir} "
         )
     else:
         image_parameters = ""
@@ -520,12 +520,16 @@ def collect_config(
             index=False,
         )
 
+    commands = f'"brainprep {workflow_id} {workflow_parameters}"'
+    if "group" in workflow_id:
+        commands = f"[[{commands}]]"
+
     config_template = config_file.read_text()
     config_str = config_template.format(
         name=workflow_name,
         operator="TO UPDATE",
         date=str(datetime.now().date()),
-        commands=f'"brainprep {workflow_id} {workflow_parameters}"',
+        commands=commands,
         parameters=image_parameters,
         cluster=infra,
         partition=partition,
@@ -632,7 +636,7 @@ def scan_configs(
         print("No cache files found. Parsing data.")
         selected = None
     else:
-        print("Multiple cache files found:")
+        print("Cache file(s) found:")
         for idx, path in enumerate(cache_files, 1):
             print(f"{idx}. {path.name}")
         choice = input(
@@ -650,10 +654,8 @@ def scan_configs(
     else:
         dfs = organize_bids_tab(tab_file=selected, with_hash=with_hash)
         htype = "md5"
-    long_dfs = organize_longitudinal(dfs, htype=htype)
-    print(long_dfs)
 
-    # Scan workflows
+    # get workflows
     workflows = workflow_resource["brainprep"]["workflow"]
     workflow_mapping = workflow_resource["brainprep"]["mapping"]
     known_workflows = [
@@ -672,6 +674,23 @@ def scan_configs(
                 f"Unknown workflow IDs: {', '.join(sorted(unknown))}. "
                 f"Valid workflows are: {', '.join(sorted(known_workflows))}"
             )
+
+    # parse longitudinal if needed
+    parse_long = any(["longitudinal" in workflow
+                      for workflow in allowed_workflows])
+    if parse_long:
+        long_dfs = organize_longitudinal(dfs, htype=htype)
+        print(long_dfs)
+    else:
+        banner = r"""
+    +----------------------------------+
+    |    Skip longitudinal parsing     |
+    +----------------------------------+
+        """
+        print(banner)
+        long_dfs = {}
+
+    # Scan workflows
     for workflow_id, workflow_parameters in workflows.items():
         if workflow_id not in allowed_workflows:
             print(f"\n-- skip: {workflow_id} --")
