@@ -6,7 +6,7 @@ channels = [
 platforms = ["linux-64"]
 
 [dependencies]
-morphologist = "==6.0.13"
+morphologist = "==6.0.19"
 
 [activation.env]
 LD_PRELOAD = "/opt/morphologist/.pixi/envs/default/mesalib/lib/libglapi.so.0:/opt/morphologist/.pixi/envs/default/mesalib/lib/libGL.so.1"

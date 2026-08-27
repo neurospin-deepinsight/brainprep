@@ -25,7 +25,6 @@ ENV PATH="/root/.pixi/bin:${PATH}"
 
 # Install: morphologist
 WORKDIR /opt/morphologist
-COPY headless.py /opt/morphologist/.pixi/envs/default/lib/python3.11/site-packages/soma/qt_gui/
 COPY pixi_morphologist.toml ./pixi.toml
 RUN pixi install
 RUN echo '#!/usr/bin/env bash' > /usr/local/bin/morphologist-wrapper \
