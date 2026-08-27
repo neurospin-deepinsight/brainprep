@@ -81,7 +81,7 @@ def main(
 
     # Update container parameters
     image_parameters += (
-        f"--bind {freesurfer_license_file}:/opt/freesurfer/license.txt "
+        f" --bind {freesurfer_license_file}:/opt/freesurfer/license.txt"
     )
 
     # Scan example scripts
@@ -138,14 +138,18 @@ def main(
         outdir.mkdir(parents=True, exist_ok=True)
         for idx, step_commands in enumerate(examples_commands, start=1):
             run_file = scriptdir / f"run_{idx}.sh"
+            image_file = str(image_template).format(
+                workflow=workflow_name,
+            )
 
             # Format commands
             step_commands = [
                 [*cmd, "--no-color"]
                 for cmd in step_commands
             ]
+            run_cmd = f"apptainer run {image_parameters} {image_file}"
             step_commands_str = "\n".join([
-                " ".join(cmd_) + " &"
+                f"{run_cmd} {' '.join(cmd_)}  &"
                 for cmd_ in step_commands
             ])
             if root_template is not None:
@@ -168,7 +172,7 @@ def main(
 
             # Execute commands
             commands.append(
-                f"apptainer {image_parameters} run {run_file}"
+                f". {run_file}"
             )
             print(f"- Command: {commands[-1]}")
 

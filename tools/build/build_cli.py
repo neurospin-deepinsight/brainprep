@@ -61,7 +61,7 @@ def build(
     image_parameters = f"--cleanenv --home {home_dir} --bind {bind_dir}"
     if dev:
         image_parameters += (
-            f"--bind {cw_dir.parent.parent / 'brainprep'}:"
+            f" --bind {cw_dir.parent.parent / 'brainprep'}:"
             "/opt/brainprep/.pixi/envs/default/lib/python3.12/site-packages/"
             "brainprep"
         )
